@@ -5,10 +5,7 @@
           "corejs": "3",
           "useBuiltIns": "usage"
           }],
-        "@babel/react",
-        {
-          "plugins" : ["@babel/plugin-proposal-class-properties"]
-        }
-
-    ]
+        "@babel/react"
+    ],
+    "plugins" : ["@babel/plugin-proposal-class-properties"]
 }
