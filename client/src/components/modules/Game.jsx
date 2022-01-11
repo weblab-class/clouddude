@@ -1,4 +1,5 @@
 import React from "react";
+
 import Phaser from "phaser";
 
 import "./Game.css";
