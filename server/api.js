@@ -18,7 +18,7 @@ const auth = require("./auth");
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
 
-//initialize socket
+// initialize socket
 const socketManager = require("./server-socket");
 
 router.post("/login", auth.login);
@@ -29,12 +29,14 @@ router.get("/whoami", (req, res) => {
     return res.send({});
   }
 
-  res.send(req.user);
+  return res.send(req.user);
 });
 
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
-  if (req.user) socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
+  if (req.user) {
+    socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
+  }
   res.send({});
 });
 
