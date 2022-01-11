@@ -1,0 +1,41 @@
+.title {
+    font-size: 125px;
+    color: blue;
+    font-weight: bold;  
+    animation-name: mainTitle;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+.body {
+    background-image: url("https://s3.amazonaws.com/gameartpartnersimagehost/wp-content/uploads/2019/08/Waterfall-background.jpg");
+    height: 92vh;
+    width: 100%;
+    animation-name: translate;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+   }
+
+
+@keyframes translate {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(10px);
+    }
+    50% {
+        transform: translateX(-10px);    }
+  }
+
+@keyframes mainTitle {
+    from {
+      color: red;
+    }
+    to {
+      color: white;
+    }
+    to {
+      color: blue;
+    }
+  }
