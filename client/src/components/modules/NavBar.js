@@ -25,7 +25,7 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
         <Link to="/about/" className="NavBar-link">
           About
         </Link>
-        <Link to="/play/" className="NavBar-link">
+        <Link to="/repository/" className="NavBar-link">
           Play
         </Link>
         <Link to="/leveleditor/" className="NavBar-link">
