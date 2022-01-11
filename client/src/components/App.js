@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Game from "./modules/Game";
 import LevelEditor from "./pages/LevelEditor";
 import Repository from "./pages/Repository";
+import NavBar from "./modules/NavBar";
 
 import "../utilities.css";
 
@@ -46,7 +47,7 @@ const App = () => {
 
   return (
     <>
-      {/* Add Navbar */}
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Router>
         <Skeleton
           path="/example"
