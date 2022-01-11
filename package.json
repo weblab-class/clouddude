@@ -4,7 +4,7 @@
   "description": "Made by Henry Heiberger, Harry Heiberger, and Ashar Farooq for the MIT WebLab competition during IAP 2022",
   "main": "server/server.js",
   "scripts": {
-    "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5000",
+    "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 4000",
     "start": "nodemon --ignore client/",
     "build": "webpack"
   },
