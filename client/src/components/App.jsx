@@ -45,6 +45,7 @@ const App = () => {
 
   return (
     <>
+      {/* Add Navbar */}
       <Router>
         <Skeleton path="/example" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <Play path="/game" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
@@ -54,6 +55,7 @@ const App = () => {
         <Home path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <NotFound default />
       </Router>
+      {/* Add Footer */}
     </>
   );
 };
