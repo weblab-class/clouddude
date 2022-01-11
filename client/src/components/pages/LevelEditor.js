@@ -5,12 +5,7 @@ import "../../utilities.css";
 import "./LevelEditor.css";
 
 const LevelEditor = () => {
-  return (
-    <div>
-      <Sidebar />
-      <Game />
-    </div>
-  );
+  return <div />;
 };
 
 export default LevelEditor;

@@ -54,7 +54,6 @@ const App = () => {
           handleLogout={handleLogout}
           userId={userId}
         />
-        <Game path="/game" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <LevelEditor
           path="/leveleditor"
           handleLogin={handleLogin}
@@ -73,6 +72,8 @@ const App = () => {
           handleLogout={handleLogout}
           userId={userId}
         />
+
+        <Game path="/play" />
         <Home path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <NotFound default />
       </Router>
