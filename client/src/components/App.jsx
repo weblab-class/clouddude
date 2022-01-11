@@ -5,6 +5,7 @@ import Skeleton from "./pages/Skeleton";
 import About from "./pages/About";
 import Play from "./pages/Play";
 import Home from "./pages/Home";
+import Game from "./modules/Game";
 import LevelEditor from "./pages/LevelEditor";
 import Repository from "./pages/Repository";
 
@@ -47,11 +48,31 @@ const App = () => {
     <>
       {/* Add Navbar */}
       <Router>
-        <Skeleton path="/example" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-        <Play path="/game" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-        <LevelEditor path="/leveleditor" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-        <Repository path="/repository" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-        <About path="/about" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <Skeleton
+          path="/example"
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          userId={userId}
+        />
+        <Game path="/game" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <LevelEditor
+          path="/leveleditor"
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          userId={userId}
+        />
+        <Repository
+          path="/repository"
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          userId={userId}
+        />
+        <About
+          path="/about"
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          userId={userId}
+        />
         <Home path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <NotFound default />
       </Router>
