@@ -11,6 +11,10 @@
   .NavBar-linkContainer {
     margin-left: var(--l);
   }
+
+  .NavBar-login {
+    padding-inline-start: 1050px;
+  }
   
   .NavBar-link,
   .NavBar-link:visited {

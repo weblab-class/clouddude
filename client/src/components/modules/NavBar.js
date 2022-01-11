@@ -15,7 +15,12 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
     <nav className="NavBar-container">
       <div className="NavBar-linkContainer u-inlineBlock">
         <Link to="/" className="NavBar-link">
-          Logo
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/68/Cliff_2D_Game_Platformer_Ground_Game_Asset.png"
+            width="50"
+            height="40"
+            alt="Platformer"
+          />
         </Link>
         <Link to="/about/" className="NavBar-link">
           About
@@ -27,7 +32,7 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
           Design
         </Link>
       </div>
-      <div className="NavBar-login u-inlineBlock">
+      <div className="u-inlineBlock NavBar-login">
         {userId ? (
           <GoogleLogout
             clientId={GOOGLE_CLIENT_ID}
