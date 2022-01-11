@@ -7,3 +7,8 @@ canvas {
   width: 1600px;
   height: 900px;
 }
+
+.Game-container {
+  background-color: var(--primary--dim);
+  flex: 3;
+}
