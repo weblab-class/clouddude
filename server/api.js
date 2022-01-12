@@ -8,6 +8,7 @@
 */
 
 const express = require("express");
+const connect = require("connect-ensure-login");
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -45,8 +46,26 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.post("/level", (req, res) => {
-  console.log("posting a level to server.");
+router.post("/level", connect.ensureLoggedIn(), (req, res) => {
+  const newLevel = new Level({
+    creator: "Creator",
+    name: req.body.name,
+    start: req.body.start,
+    exit: req.body.exit,
+    platforms: req.body.platforms,
+    decoration: req.body.decorations,
+    coins: req.body.coins,
+    obstacles: req.body.obstacles,
+    funness: req.body.funness,
+    difficulty: req.body.difficulty,
+  });
+
+  newLevel.save((err, level) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(`level ${level.name} published!`);
+  });
 });
 
 router.get("/levels", (req, res) => {
