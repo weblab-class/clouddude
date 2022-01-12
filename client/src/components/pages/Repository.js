@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { get } from "../../utilities";
 
 import SingleLevel from "../modules/SingleLevel";
 
@@ -63,7 +64,9 @@ const Repository = () => {
   const filter = () => {
     setShowModal(false);
     const query = { name: levelName, difficulty: levelDifficulty, funness: levelFunness };
-    console.log(query);
+    get('api/levels', query).then((res) => {
+      setLevels(res);
+    });
   };
 
   return (
