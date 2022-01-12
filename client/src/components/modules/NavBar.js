@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 import "./NavBar.css";
 
@@ -34,12 +35,15 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
       </div>
       <div className="u-inlineBlock NavBar-login">
         {userId ? (
-          <GoogleLogout
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Logout"
-            onLogoutSuccess={handleLogout}
-            onFailure={(err) => console.log(err)}
-          />
+          <>
+            <GoogleLogout
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Logout"
+              onLogoutSuccess={handleLogout}
+              onFailure={(err) => console.log(err)}
+            />
+            <AccountCircle />
+          </>
         ) : (
           <GoogleLogin
             clientId={GOOGLE_CLIENT_ID}
