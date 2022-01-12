@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
+import SearchIcon from "@material-ui/icons/Search";
 
 import { get } from "../../utilities";
 
@@ -64,28 +65,36 @@ const Repository = () => {
   ]);
 
   // in the beginning, get all levels
-  useEffect(() => {
-    const query = { name: '', difficulty: '', funness: '' };
-    get("/api/levels", query).then((levelObjects) => {
-      setLevels(levelObjects);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const query = { name: '', difficulty: '', funness: '' };
+  //   get("/api/levels", query).then((levelObjects) => {
+  //     setLevels(levelObjects);
+  //   });
+  // }, []);
 
   // filter the levels based on user input
   const filter = () => {
     setShowModal(false);
     const query = { name: levelName, difficulty: levelDifficulty, funness: levelFunness };
-    get('api/levels', query).then((res) => {
+    get("api/levels", query).then((res) => {
       setLevels(res);
     });
   };
 
   return (
-    <>
+    <div className="main-container">
       <Helmet>
         <title>Levels Repository</title>
       </Helmet>
-      <input onClick={() => setShowModal(true)} type="text" placeholder="Search" />
+      <h3>Levels Repository</h3>
+      <div className="input-group">
+        <div className="form-outline">
+          <input onClick={() => setShowModal(true)} placeholder="Search" type="search" id="form1" className="form-control" />
+        </div>
+        <button type="button" className="btn btn-primary">
+          <SearchIcon />
+        </button>
+      </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header>
           <Modal.Title>Search</Modal.Title>
@@ -139,7 +148,7 @@ const Repository = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

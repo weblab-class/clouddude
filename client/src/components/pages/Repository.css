@@ -3,3 +3,22 @@
     grid-template-columns: 1fr 1fr 1fr;
     padding-top: 5%;
 }
+
+.main-container {
+    padding: 50px 50px 50px 50px;
+    background-color: var(--primary--dim);
+}
+
+.search {
+    padding: 17px;
+    padding-left: 55px;
+    width: 200px;
+    border: 1px solid #f5f5f5;
+    font-size: 13px;
+    color: gray;
+    border-radius: 25px;
+    background: url("https://png.pngtree.com/background/20210710/original/pngtree-blue-old-paper-texture-background-picture-image_979755.jpg");
+    background-repeat: repeat;
+    background-position: center;
+    outline: 0;
+}

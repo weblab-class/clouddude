@@ -6,7 +6,7 @@ import "./About.css";
 
 const About = () => {
   return (
-    <>
+    <div className="main">
       <Helmet>
         <title>About</title>
       </Helmet>
@@ -29,7 +29,7 @@ const About = () => {
           webkitallowfullscreen="true"
         />
       </p>
-    </>
+    </div>
   );
 };
 
