@@ -111,7 +111,7 @@ const Repository = () => {
       <h3>Levels Repository</h3>
       <div className="input-group">
         <div>
-          <button onClick={() => setShowModal(true)} type="button" className="btn btn-primary">
+          <button onClick={() => setShowModal(true)} type="button" className="button btn btn-primary">
             <SearchIcon />
             Search for a Level
           </button>

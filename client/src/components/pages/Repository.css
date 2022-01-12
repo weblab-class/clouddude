@@ -6,6 +6,9 @@
     padding-top: 5%;
 }
 
+.button {
+    border-radius: 20px;
+}
 .main-container {
     padding: 50px 50px 50px 50px;
     background-color: var(--primary--dim);
