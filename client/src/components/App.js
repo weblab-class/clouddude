@@ -9,6 +9,7 @@ import Game from "./modules/Game";
 import LevelEditor from "./pages/LevelEditor";
 import Repository from "./pages/Repository";
 import NavBar from "./modules/NavBar";
+import Footer from "./modules/Footer";
 
 import "../utilities.css";
 
@@ -78,7 +79,7 @@ const App = () => {
         <Home path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <NotFound default />
       </Router>
-      {/* Add Footer */}
+      <Footer handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
     </>
   );
 };
