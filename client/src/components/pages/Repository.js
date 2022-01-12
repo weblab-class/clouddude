@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import SingleLevel from "../modules/SingleLevel";
+import { Link } from "@reach/router";
 
+import SingleLevel from "../modules/SingleLevel";
 import "../../utilities.css";
 import "./Repository.css";
 
@@ -94,6 +95,8 @@ const Repository = () => {
   ]);
 
   return (
+    <>
+    <Link to="/" className="NavBar-link"><input type="text" placeholder="Search" /></Link>
     <div className="level-container">
       {levels.map((level) => {
         return (
@@ -101,6 +104,7 @@ const Repository = () => {
         );
       })}
     </div>
+    </>
   );
 };
 
