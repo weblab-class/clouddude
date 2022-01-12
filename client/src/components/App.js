@@ -34,6 +34,7 @@ const App = () => {
 
   const handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
+    // setUserName(res.profileObj.name);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
@@ -48,7 +49,11 @@ const App = () => {
 
   return (
     <>
-      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <NavBar
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
+        userId={userId}
+      />
       <Router>
         <Skeleton
           path="/example"
