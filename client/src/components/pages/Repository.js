@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet";
 import SearchIcon from "@material-ui/icons/Search";
+import Slider from "@material-ui/core/Slider";
 
 import { get } from "../../utilities";
 
@@ -15,8 +16,8 @@ import "./Repository.css";
 const Repository = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const [levelDifficulty, setLevelDifficulty] = useState(0);
-  const [levelFunness, setLevelFunness] = useState(0);
+  const [levelDifficulty, setLevelDifficulty] = useState(50);
+  const [levelFunness, setLevelFunness] = useState(100);
   const [levelName, setLevelName] = useState("");
 
   const [levels, setLevels] = useState([
@@ -62,15 +63,36 @@ const Repository = () => {
       funness: 5,
       difficulty: 9,
     },
+    {
+      creator: "Me",
+      name: "Snow Coaster",
+      start: { x: 20, y: 20 },
+      exit: { x: 40, y: 45 },
+      platforms: [
+        { image: "img11", x: 25, y: 20 },
+        { image: "img22", x: 30, y: 30 },
+      ],
+      decoration: [{ frame: 35, x: 35, y: 35 }],
+      coins: [
+        { x: 11, y: 40 },
+        { x: 12, y: 41 },
+      ],
+      obstacles: [
+        { type: "obs11", x: 40, y: 20 },
+        { type: "obs22", x: 41, y: 21 },
+      ],
+      funness: 5,
+      difficulty: 9,
+    },
   ]);
 
   // in the beginning, get all levels
-  // useEffect(() => {
-  //   const query = { name: '', difficulty: '', funness: '' };
-  //   get("/api/levels", query).then((levelObjects) => {
-  //     setLevels(levelObjects);
-  //   });
-  // }, []);
+  useEffect(() => {
+    const query = { name: "", difficulty: "", funness: "" };
+    get("/api/levels", query).then((levelObjects) => {
+      setLevels(levelObjects);
+    });
+  }, []);
 
   // filter the levels based on user input
   const filter = () => {
@@ -88,12 +110,12 @@ const Repository = () => {
       </Helmet>
       <h3>Levels Repository</h3>
       <div className="input-group">
-        <div className="form-outline">
-          <input onClick={() => setShowModal(true)} placeholder="Search" type="search" id="form1" className="form-control" />
+        <div>
+          <button onClick={() => setShowModal(true)} type="button" className="btn btn-primary">
+            <SearchIcon />
+            Search for a Level
+          </button>
         </div>
-        <button type="button" className="btn btn-primary">
-          <SearchIcon />
-        </button>
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header>
@@ -108,24 +130,58 @@ const Repository = () => {
               <Form.Control
                 onChange={(event) => setLevelName(event.target.value)}
                 type="text"
-                placeholder="Name"
+                placeholder="Enter Name Keyword"
                 value={levelName}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="difficulty">
               <Form.Label>Difficulty</Form.Label>
-              <Form.Range
+              <Slider
+                onChange={(event, value) => setLevelDifficulty(Number(value))}
                 value={levelDifficulty}
-                onChange={(event) => setLevelDifficulty(Number(event.target.value))}
+                aria-valuetext="difficulty"
+                color="primary"
+                marks={[
+                  {
+                    value: 0,
+                    label: "0",
+                  },
+                  {
+                    value: 50,
+                    label: "50",
+                  },
+                  {
+                    value: 100,
+                    label: "100",
+                  },
+                ]}
+                valueLabelDisplay="on"
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="funness">
               <Form.Label>Funness</Form.Label>
-              <Form.Range
+              <Slider
+                onChange={(event, value) => setLevelFunness(Number(value))}
                 value={levelFunness}
-                onChange={(event) => setLevelFunness(Number(event.target.value))}
+                aria-valuetext="funness"
+                color="primary"
+                marks={[
+                  {
+                    value: 0,
+                    label: "0",
+                  },
+                  {
+                    value: 50,
+                    label: "50",
+                  },
+                  {
+                    value: 100,
+                    label: "100",
+                  },
+                ]}
+                valueLabelDisplay="on"
               />
             </Form.Group>
           </Form>
