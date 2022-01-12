@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import Game from "../modules/Game";
 import LevelData from "../modules/LevelData";
 
@@ -19,11 +20,17 @@ const LevelEditor = () => {
     ],
     decoration: [{ frame: 27, x: 27, y: 27 }],
     coins: [{ x: 27, y: 27 }],
-    obstacles: [{ type: "something", x: 27, y: 27 }, { type: "something", x: 27, y: 27 }],
+    obstacles: [
+      { type: "something", x: 27, y: 27 },
+      { type: "something", x: 27, y: 27 },
+    ],
   };
 
   return (
     <div className="LevelEditor-container">
+      <Helmet>
+        <title>Level Designer</title>
+      </Helmet>
       <EditorSidebar setsetTool={setCurrentTool} />
       {/* Tries to save a level after collecting info like name/difficulty with other data props */}
       <LevelData

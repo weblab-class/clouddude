@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Helmet } from 'react-helmet';
+
 import { get } from "../../utilities";
 
 import SingleLevel from "../modules/SingleLevel";
@@ -80,6 +82,9 @@ const Repository = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Levels Repository</title>
+      </Helmet>
       <input onClick={() => setShowModal(true)} type="text" placeholder="Search" />
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header>

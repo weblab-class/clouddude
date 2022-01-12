@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@reach/router";
 import Button from "react-bootstrap/Button";
+import { Helmet } from 'react-helmet';
 
 import "../../utilities.css";
 import "./Home.css";
@@ -8,6 +9,9 @@ import "./Home.css";
 const Home = () => {
   return (
     <div className="body">
+      <Helmet>
+          <title>Home</title>
+      </Helmet>
       <center>
         <h1 className="title">PLATFORMER</h1>
         <Link to="/repository/" className="NavBar-link">

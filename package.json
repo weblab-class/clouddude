@@ -37,6 +37,7 @@
     "react-bootstrap": "^2.1.0",
     "react-dom": "^16.14.0",
     "react-google-login": "^5.2.1",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
