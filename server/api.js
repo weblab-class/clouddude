@@ -11,6 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
+const Level = require("./models/level");
 
 // import authentication library
 const auth = require("./auth");
@@ -43,6 +44,14 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+
+router.post("/level", (req, res) => {
+  console.log("posting a level to server.");
+});
+
+router.get("/levels", (req, res) => {
+  console.log("getting all filered levels if any filering is involved.");
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
