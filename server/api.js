@@ -69,7 +69,15 @@ router.post("/level", connect.ensureLoggedIn(), (req, res) => {
 });
 
 router.get("/levels", (req, res) => {
-  console.log("getting all filered levels if any filering is involved.");
+  Level.find(
+    { name: req.query.name, difficulty: req.query.difficulty, funness: req.query.funness },
+    (err, levels) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.send(levels);
+    }
+  );
 });
 
 // anything else falls to this "not found" case
