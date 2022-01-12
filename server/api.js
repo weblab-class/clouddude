@@ -46,6 +46,7 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
+// posting a new level
 router.post("/level", auth.ensureLoggedIn, (req, res) => {
   const newLevel = new Level({
     creator: "Creator",
@@ -62,19 +63,32 @@ router.post("/level", auth.ensureLoggedIn, (req, res) => {
 
   newLevel.save().then((level) => {
     console.log("level from backend: ", level);
+    res.send(level);
   });
 });
 
+// getting all or filtered levels
 router.get("/levels", (req, res) => {
-  Level.find(
-    { name: req.query.name, difficulty: req.query.difficulty, funness: req.query.funness },
-    (err, levels) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      return res.send(levels);
+  let actualQuery;
+  if (
+    req.query.name.length === 0
+    && req.query.difficulty.length === 0
+    && req.query.funness.length === 0
+  ) {
+    actualQuery = {};
+  } else {
+    actualQuery = {
+      name: req.query.name,
+      difficulty: req.query.difficulty,
+      funness: req.query.funness,
+    };
+  }
+  Level.find(actualQuery, (err, levels) => {
+    if (err) {
+      return res.status(500).send(err);
     }
-  );
+    return res.send(levels);
+  });
 });
 
 // anything else falls to this "not found" case

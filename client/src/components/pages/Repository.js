@@ -61,6 +61,15 @@ const Repository = () => {
     },
   ]);
 
+  // in the beginning, get all levels
+  useEffect(() => {
+    const query = { name: '', difficulty: '', funness: '' };
+    get("/api/levels", query).then((levelObjects) => {
+      setLevels(levelObjects);
+    });
+  }, []);
+
+  // filter the levels based on user input
   const filter = () => {
     setShowModal(false);
     const query = { name: levelName, difficulty: levelDifficulty, funness: levelFunness };

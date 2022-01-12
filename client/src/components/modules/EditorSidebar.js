@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import "../../utilities.css";
 import "./EditorSidebar.css";
 
-const EditorSidebar = ({ setDifficulty, setFunness, setName }) => {
+const EditorSidebar = () => {
   return <div className="EditorSidebar-container">Editor Side Bar</div>;
 };
 
