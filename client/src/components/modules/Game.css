@@ -9,6 +9,8 @@ canvas {
 }
 
 .Game-container {
-  background-color: var(--primary--dim);
-  flex: 3;
+  flex: 4;
+  margin: var(--m);
+  justify-self: center;
+  min-height: 80vh;
 }

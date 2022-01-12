@@ -1,5 +1,5 @@
-/* eslint-disable */ 
- 
+/* eslint-disable */
+
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -9,9 +9,7 @@ import { post } from "../../utilities";
 
 import "./LevelData.css";
 
-const LevelData = ({
-  start, exit, platforms, decoration, coins, obstacles
-}) => {
+const LevelData = ({ start, exit, platforms, decoration, coins, obstacles }) => {
   const [name, setName] = useState("");
   const [funnes, setFunness] = useState(0);
   const [difficulty, setDifficulty] = useState(0);
@@ -28,13 +26,13 @@ const LevelData = ({
       funness: funnes,
       difficulty: difficulty,
     };
-    post('/api/level', body).then((level) => {
-      console.log("level from frontend",level);
+    post("/api/level", body).then((level) => {
+      console.log("level from frontend", level);
     });
   };
 
   return (
-    <div>
+    <div className="LevelData-container">
       <Form>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>

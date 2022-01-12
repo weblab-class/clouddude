@@ -67,6 +67,11 @@ form {
   font-weight: 600;
 }
 
+.u-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
 .u-textCenter {
   text-align: center;
 }

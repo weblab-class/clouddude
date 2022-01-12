@@ -1,4 +1,18 @@
+body {
+  overflow: hidden;
+}
+
 .LevelEditor-container {
   display: flex;
   flex-flow: row nowrap;
+  background-color: var(--primary--dim);
+}
+
+.LevelEditor-editTools {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1;
+  margin: var(--m) var(--s) var(--m) var(--m);
+  padding: var(--s);
+  background-color: var(--white);
 }

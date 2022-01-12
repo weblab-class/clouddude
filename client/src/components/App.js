@@ -49,11 +49,7 @@ const App = () => {
 
   return (
     <>
-      <NavBar
-        handleLogin={handleLogin}
-        handleLogout={handleLogout}
-        userId={userId}
-      />
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Router>
         <Skeleton
           path="/example"
@@ -84,7 +80,12 @@ const App = () => {
         <Home path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <NotFound default />
       </Router>
-      <Footer handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <Footer
+        className="fixed-bottom"
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
+        userId={userId}
+      />
     </>
   );
 };
