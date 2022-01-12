@@ -5,6 +5,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import "./NavBar.css";
 
@@ -15,9 +18,15 @@ import "./NavBar.css";
 const GOOGLE_CLIENT_ID = "31388373258-ev9tadag8nhjb35r6pv3v1jfq7n7qrtg.apps.googleusercontent.com";
 
 const NavBar = ({
-  handleLogin, handleLogout, userId
+  handleLogin, handleLogout, userId, publishedLevels, levelsWon, userName, setUserName
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileModal, setProfileModal] = useState(false);
+
+  const handleProfile = () => {
+    setMenuOpen(false);
+    setProfileModal(true);
+  };
 
   return (
     <nav className="NavBar-container">
@@ -52,10 +61,10 @@ const NavBar = ({
             >
               <AccountCircle />
             </IconButton>
-            <p>{userId.slice(0, 5)}</p>
+            <p>{userName}</p>
             <div>
               <Menu open={menuOpen} keepMounted>
-                <MenuItem onClick={() => setMenuOpen(false)}>Profile/Close</MenuItem>
+                <MenuItem onClick={handleProfile}>My Profile</MenuItem>
                 <MenuItem onClick={() => setMenuOpen(false)}>
                   <GoogleLogout
                     clientId={GOOGLE_CLIENT_ID}
@@ -65,6 +74,50 @@ const NavBar = ({
                   />
                 </MenuItem>
               </Menu>
+            </div>
+            <div>
+              <Modal show={profileModal} onHide={() => setProfileModal(false)}>
+                <Modal.Header>
+                  <Modal.Title>My Profile</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Form.Group className="mb-3" controlId="name">
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control
+                        onChange={(event) => setUserName(event.target.value)}
+                        type="text"
+                        placeholder="Edit Name"
+                        value={userName}
+                      />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="difficulty">
+                      <Form.Label>
+                        Published Levels:
+                        {' '}
+                        {publishedLevels}
+                      </Form.Label>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="funness">
+                      <Form.Label>
+                        Levels Won:
+                        {' '}
+                        {levelsWon}
+                      </Form.Label>
+                    </Form.Group>
+                  </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => setProfileModal(false)}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={() => setProfileModal(false)}>
+                    Save
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
         ) : (

@@ -22,22 +22,24 @@ import { get, post } from "../utilities";
  */
 const App = () => {
   const [userId, setUserId] = useState(undefined);
+  const [name, setName] = useState("User");
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
+        setName(user.name);
       }
     });
   }, []);
 
   const handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
-    // setUserName(res.profileObj.name);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
+      setName(user.name);
       post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -49,7 +51,15 @@ const App = () => {
 
   return (
     <>
-      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <NavBar
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
+        userId={userId}
+        publishedLevels="hardcorded 30"
+        levelsWon="hardcorded 20"
+        userName={name}
+        setUserName={setName}
+      />
       <Router>
         <Skeleton
           path="/example"
