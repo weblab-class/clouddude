@@ -76,19 +76,25 @@ router.get("/levels", (req, res) => {
     && req.query.funness.length === 0
   ) {
     actualQuery = {};
+    Level.find(actualQuery, (err, levels) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.send(levels);
+    });
   } else {
     actualQuery = {
-      name: req.query.name,
-      difficulty: req.query.difficulty,
-      funness: req.query.funness,
+      name: { $regex: req.query.name },
+      difficulty: { $gte: req.query.difficulty - 10, $lte: req.query.difficulty + 10 },
+      funness: { $gte: req.query.funness - 10, $lte: req.query.funness + 10 },
     };
+    Level.findMany(actualQuery, (err, levels) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.send(levels);
+    });
   }
-  Level.find(actualQuery, (err, levels) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    return res.send(levels);
-  });
 });
 
 // anything else falls to this "not found" case

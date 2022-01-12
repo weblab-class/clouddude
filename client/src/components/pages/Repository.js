@@ -117,7 +117,7 @@ const Repository = () => {
               <Form.Label>Difficulty</Form.Label>
               <Form.Range
                 value={levelDifficulty}
-                onChange={(event) => setLevelDifficulty(event.target.value)}
+                onChange={(event) => setLevelDifficulty(Number(event.target.value))}
               />
             </Form.Group>
 
@@ -125,7 +125,7 @@ const Repository = () => {
               <Form.Label>Funness</Form.Label>
               <Form.Range
                 value={levelFunness}
-                onChange={(event) => setLevelFunness(event.target.value)}
+                onChange={(event) => setLevelFunness(Number(event.target.value))}
               />
             </Form.Group>
           </Form>
