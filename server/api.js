@@ -46,25 +46,22 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.post("/level", connect.ensureLoggedIn(), (req, res) => {
+router.post("/level", auth.ensureLoggedIn, (req, res) => {
   const newLevel = new Level({
     creator: "Creator",
     name: req.body.name,
     start: req.body.start,
     exit: req.body.exit,
     platforms: req.body.platforms,
-    decoration: req.body.decorations,
+    decoration: req.body.decoration,
     coins: req.body.coins,
     obstacles: req.body.obstacles,
     funness: req.body.funness,
     difficulty: req.body.difficulty,
   });
 
-  newLevel.save((err, level) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    return res.send(`level ${level.name} published!`);
+  newLevel.save().then((level) => {
+    console.log("level from backend: ", level);
   });
 });
 
