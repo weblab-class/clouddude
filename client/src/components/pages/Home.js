@@ -16,6 +16,12 @@ const Home = () => {
         <Link to="/leveleditor/" className="NavBar-link">
           <Button variant="primary">Design A Level</Button>
         </Link>
+        <p />
+        <p />
+        <h2 className="subtitle">
+          A web game where YOU can create levels with obstacles and platforms with the goal of going
+          from point A and point B.
+        </h2>
       </center>
     </div>
   );

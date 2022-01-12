@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import SingleLevel from "../modules/SingleLevel";
 
 import "../../utilities.css";
 import "./Repository.css";
@@ -54,10 +55,7 @@ const Repository = () => {
       {levels.map((level) => {
         return (
           <div className="level-container">
-            <div className="level-name">{level.name}</div>
-            <div className="level-creator">{level.creator}</div>
-            <div className="level-funness">{level.funness}</div>
-            <div className="level-difficulty">{level.difficulty}</div>
+            <SingleLevel />
           </div>
         );
       })}

@@ -16,6 +16,14 @@
     animation-iteration-count: infinite;
    }
 
+.subtitle {
+    font-size: 25px;
+    color: rgb(82, 0, 0);
+    font-weight: bold;
+    animation-name: subTitle;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
 
 @keyframes translate {
     0% {
@@ -37,5 +45,11 @@
     }
     to {
       color: blue;
+    }
+  }
+
+  @keyframes subTitle {
+    50% {
+      transform: scale(0.5);
     }
   }
