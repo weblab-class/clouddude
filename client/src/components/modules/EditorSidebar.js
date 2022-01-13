@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LevelData from "../modules/LevelData";
+import LevelData from "./LevelData";
 import EditTool from "./EditTool";
 
 import "../../utilities.css";
