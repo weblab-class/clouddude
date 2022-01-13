@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet";
 import SearchIcon from "@material-ui/icons/Search";
 import Slider from "@material-ui/core/Slider";
+import { v4 as uuidv4 } from 'uuid';
 
 import { get } from "../../utilities";
 
@@ -198,7 +199,7 @@ const Repository = () => {
       <div className="level-container">
         {levels.map((level) => {
           return (
-            <div key={level._id}>
+            <div key={uuidv4()}>
               <SingleLevel level={level} />
             </div>
           );
