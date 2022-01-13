@@ -6,6 +6,7 @@ import "../../utilities.css";
 import "./EditorSidebar.css";
 
 const EditorSidebar = ({ setCurrentTool, currentTool, hoverTag }) => {
+  const [levelData, setLevelData] = useState({});
   const fakeLevelData = {
     start: { x: 27, y: 27 },
     exit: { x: 27, y: 27 },
@@ -20,10 +21,6 @@ const EditorSidebar = ({ setCurrentTool, currentTool, hoverTag }) => {
       { type: "something", x: 27, y: 27 },
     ],
   };
-
-  useEffect(() => {
-    console.log(currentTool);
-  }, [currentTool]);
 
   return (
     <div className="EditorSidebar-container">

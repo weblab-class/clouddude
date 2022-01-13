@@ -18,3 +18,7 @@
 .EditTool-unselected {
   background-color: var(--grey);
 }
+
+.EditTool-unselected:hover {
+  background-color: var(--medgrey);
+}
