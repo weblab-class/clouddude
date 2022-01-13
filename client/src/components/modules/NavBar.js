@@ -20,6 +20,7 @@ const GOOGLE_CLIENT_ID = "31388373258-ev9tadag8nhjb35r6pv3v1jfq7n7qrtg.apps.goog
 
 const NavBar = ({ handleLogin, handleLogout, userId }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [profileModal, setProfileModal] = useState(false);
   const [newName, setNewName] = useState("");
   const [userName, setUserName] = useState("");
@@ -29,6 +30,11 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
   const handleProfile = () => {
     setMenuOpen(false);
     setProfileModal(true);
+  };
+
+  const iconClick = (event) => {
+    setMenuOpen(true);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleSubmit = () => {
@@ -71,21 +77,21 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
           Design
         </Link>
       </div>
-      <div className="u-inlineBlock NavBar-login">
+      <div className="u-inlineBlock">
         {userId ? (
           <div>
             <IconButton
               edge="end"
-              aria-label="urrent user"
+              aria-label="current user"
               aria-haspopup="true"
-              onClick={() => setMenuOpen(true)}
+              onClick={iconClick}
               color="inherit"
             >
               <AccountCircle />
             </IconButton>
             <p>{userName}</p>
             <div>
-              <Menu open={menuOpen} keepMounted>
+              <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
                 <MenuItem onClick={handleProfile}>My Profile</MenuItem>
                 <MenuItem onClick={() => setMenuOpen(false)}>
                   <GoogleLogout
@@ -116,17 +122,17 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
 
                     <Form.Group className="mb-3" controlId="difficulty">
                       <Form.Label>
-                        Published Levels:
-                        {' '}
-                        {publishedLevels}
+                      Published Levels:
+                      {' '}
+                      {publishedLevels}
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                          Levels Won:
-                          {' '}
-                          {levelsWon}
+                      Levels Won:
+                      {' '}
+                      {levelsWon}
                       </Form.Label>
                     </Form.Group>
                   </Form>
