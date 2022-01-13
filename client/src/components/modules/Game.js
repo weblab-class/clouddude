@@ -4,6 +4,12 @@ import Phaser from "phaser";
 import "./Game.css";
 
 const Game = () => {
+  function responsivelyResize() {
+    const gameId = document.getElementById("game");
+    gameId.style.width = "80%";
+    gameId.style.height = "80%";
+  }
+
   function preload() {
     this.load.setBaseURL("http://labs.phaser.io");
 
@@ -32,12 +38,16 @@ const Game = () => {
     emitter.startFollow(logo);
   }
 
+  function update() {
+    responsivelyResize();
+  }
+
   useEffect(() => {
     const canvas = document.getElementById("game");
     console.log(`Canvas name: ${canvas} ${canvas.innerHTML}`);
     const config = {
-      width: "100%",
-      height: "100%",
+      width: 1600,
+      height: 900,
       type: Phaser.CANVAS,
       canvas,
       physics: {
@@ -46,9 +56,19 @@ const Game = () => {
           gravity: { y: 200 },
         },
       },
+      scale: {
+        mode: Phaser.Scale.FIT,
+      },
       scene: {
         preload,
         create,
+        update,
+      },
+      callbacks: {
+        postBoot: (settings) => {
+          settings.canvas.style.width = "80%";
+          settings.canvas.style.height = "80%";
+        },
       },
     };
     const game = new Phaser.Game(config);
