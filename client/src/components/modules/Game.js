@@ -23,12 +23,15 @@ const Game = () => {
     logo.setCollideWorldBounds(true);
   }
 
+  function responsivelyResize() {
+    const gameId = document.getElementById("game");
+    gameId.style.width = "80%";
+    gameId.style.height = "80%";
+  }
+
   function update() {
-    (() => {
-      const gameId = document.getElementById("game");
-      gameId.style.width = "80%";
-      gameId.style.height = "80%";
-    })(); // run function
+    // Resize game to fit window
+    responsivelyResize();
   }
 
   const game = {
