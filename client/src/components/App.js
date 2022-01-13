@@ -12,6 +12,7 @@ import NavBar from "./modules/NavBar";
 import Footer from "./modules/Footer";
 
 import "../utilities.css";
+import "./App.css";
 
 import { socket } from "../client-socket";
 

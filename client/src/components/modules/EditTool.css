@@ -1,5 +1,5 @@
 .EditTool-container {
-  background-color: var(--white);
+  background-color: var(--gray);
   flex: 1;
   border-radius: 25%;
   padding: var(--s);

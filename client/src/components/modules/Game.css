@@ -9,8 +9,8 @@ canvas {
 }
 
 .Game-container {
-  flex: 4;
+  flex: 5;
   margin: var(--m);
   justify-self: center;
-  min-height: 80vh;
+  height: 100%;
 }
