@@ -121,19 +121,11 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="difficulty">
-                      <Form.Label>
-                      Published Levels:
-                      {' '}
-                      {publishedLevels}
-                      </Form.Label>
+                      <Form.Label>Published Levels: {publishedLevels}</Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
-                      <Form.Label>
-                      Levels Won:
-                      {' '}
-                      {levelsWon}
-                      </Form.Label>
+                      <Form.Label>Levels Won: {levelsWon}</Form.Label>
                     </Form.Group>
                   </Form>
                 </Modal.Body>
