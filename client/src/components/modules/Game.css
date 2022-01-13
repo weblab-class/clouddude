@@ -1,5 +1,8 @@
 canvas {
   margin: 0 auto;
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
 }
 
 #gameContainer {

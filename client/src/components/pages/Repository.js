@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet";
 import SearchIcon from "@material-ui/icons/Search";
 import Slider from "@material-ui/core/Slider";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import { get } from "../../utilities";
 
@@ -112,7 +112,11 @@ const Repository = () => {
       <h3>Levels Repository</h3>
       <div className="input-group">
         <div>
-          <button onClick={() => setShowModal(true)} type="button" className="button btn btn-primary">
+          <button
+            onClick={() => setShowModal(true)}
+            type="button"
+            className="button btn btn-primary"
+          >
             <SearchIcon />
             Search for a Level
           </button>

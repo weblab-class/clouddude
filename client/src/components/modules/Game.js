@@ -16,26 +16,24 @@ const Game = () => {
   function create() {
     this.add.image(400, 300, "sky");
 
-    const particles = this.add.particles("red");
-
-    const emitter = particles.createEmitter({
-      speed: 100,
-      scale: { start: 1, end: 0 },
-      blendMode: "ADD",
-    });
-
     const logo = this.physics.add.image(400, 100, "logo");
 
     logo.setVelocity(100, 200);
     logo.setBounce(1, 1);
     logo.setCollideWorldBounds(true);
+  }
 
-    emitter.startFollow(logo);
+  function update() {
+    (() => {
+      const gameId = document.getElementById("game");
+      gameId.style.width = "80%";
+      gameId.style.height = "80%";
+    })(); // run function
   }
 
   const game = {
-    width: "100%",
-    height: "100%",
+    width: 1600,
+    height: 900,
     type: Phaser.AUTO,
     physics: {
       default: "arcade",
@@ -43,13 +41,27 @@ const Game = () => {
         gravity: { y: 200 },
       },
     },
+    scale: {
+      mode: Phaser.Scale.FIT,
+    },
     scene: {
       preload,
       create,
+      update,
+    },
+    callbacks: {
+      postBoot: (settings) => {
+        settings.canvas.style.width = "80%";
+        settings.canvas.style.height = "80%";
+      },
     },
   };
   const initialize = true;
-  return <IonPhaser className="Game-container" game={game} initialize={initialize} />;
+  return (
+    <div id="game">
+      <IonPhaser className="Game-container" game={game} initialize={initialize} />;
+    </div>
+  );
 };
 
 export default Game;
