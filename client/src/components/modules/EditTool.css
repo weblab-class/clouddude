@@ -1,7 +1,20 @@
 .EditTool-container {
-  background-color: var(--gray);
-  flex: 1;
+  flex: 1 30%;
   border-radius: 25%;
   padding: var(--s);
+  position: relative;
   margin: var(--s);
+  width: 4vw;
+  height: 4vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.EditTool-selected {
+  background-color: var(--darkgrey);
+}
+
+.EditTool-unselected {
+  background-color: var(--grey);
 }

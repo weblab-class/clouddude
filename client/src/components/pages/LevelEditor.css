@@ -2,6 +2,8 @@
   display: flex;
   flex-flow: row nowrap;
   background-color: var(--primary--dim);
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .LevelEditor-sidebar {
@@ -11,4 +13,5 @@
   margin: var(--m) var(--s) var(--m) var(--m);
   padding: var(--s);
   background-color: var(--white);
+  min-width: 20%;
 }

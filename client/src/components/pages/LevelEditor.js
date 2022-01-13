@@ -8,7 +8,7 @@ import "../../utilities.css";
 import "./LevelEditor.css";
 
 const LevelEditor = () => {
-  const [currentTool, setCurrentTool] = useState(null);
+  const [currentTool, setCurrentTool] = useState("none");
   const [levelData, setLevelData] = useState({});
 
   return (
@@ -17,7 +17,11 @@ const LevelEditor = () => {
         <title>Level Designer</title>
       </Helmet>
       <div className="LevelEditor-sidebar">
-        <EditorSidebar className="LevelEditor-sidebar" setsetTool={setCurrentTool} />
+        <EditorSidebar
+          currentTool={currentTool}
+          className="LevelEditor-sidebar"
+          setCurrentTool={setCurrentTool}
+        />
       </div>
       <Game className="LevelEditor-game" />
     </div>

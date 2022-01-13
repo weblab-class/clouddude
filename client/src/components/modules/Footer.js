@@ -5,11 +5,9 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <>
-      <div className="footer-container">
-        <center>&copy; 2022 Platformer: Ashar Farooq, Harry Heiberger, Henry Heiberger</center>
-      </div>
-    </>
+    <div className="footer-container">
+      <center>&copy; 2022 Platformer: Ashar Farooq, Harry Heiberger, Henry Heiberger</center>
+    </div>
   );
 };
 

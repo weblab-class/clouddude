@@ -3,8 +3,9 @@
   padding: 2px;
   margin-top: 0;
   border-top: 1px solid #e0e0e0;
-  position: absolute;
+  position: block;
   bottom: 0px;
   text-align: center;
   width: 100%;
+  flex: none;
 }

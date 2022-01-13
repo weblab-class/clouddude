@@ -1,19 +1,12 @@
-canvas {
-  margin: 0 auto;
-  width: 80%;
-  height: 80%;
-  object-fit: contain;
-}
-
-#gameContainer {
-  margin: auto;
-  width: 1600px;
-  height: 900px;
-}
-
 .Game-container {
-  flex: 5;
+  flex: 6;
   margin: var(--m);
   justify-self: center;
+  align-self: center;
+  width: 100%;
   height: 100%;
+  object-fit: contain;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }

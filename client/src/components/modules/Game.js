@@ -66,15 +66,19 @@ const Game = () => {
       },
       callbacks: {
         postBoot: (settings) => {
-          settings.canvas.style.width = "80%";
-          settings.canvas.style.height = "80%";
+          settings.canvas.style.width = "100%";
+          settings.canvas.style.height = "100%";
         },
       },
     };
     const game = new Phaser.Game(config);
   }, []);
 
-  return <canvas id="game" className="Game-container" />;
+  return (
+    <div className="Game-container">
+      <canvas id="game" />
+    </div>
+  );
 };
 
 export default Game;
