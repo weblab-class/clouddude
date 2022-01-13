@@ -55,10 +55,9 @@ const App = () => {
         handleLogin={handleLogin}
         handleLogout={handleLogout}
         userId={userId}
-        publishedLevels="hardcorded 30"
-        levelsWon="hardcorded 20"
-        userName={name}
-        setUserName={setName}
+        // publishedLevels="hardcorded 30"
+        // levelsWon="hardcorded 20"
+        // userName={name}
       />
       <Router>
         <Skeleton

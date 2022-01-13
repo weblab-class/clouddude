@@ -97,6 +97,18 @@ router.get("/levels", (req, res) => {
   }
 });
 
+// changing user data
+router.post("/user", auth.ensureLoggedIn, (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.body.user._id },
+    { $set: { name: req.body.user.name } },
+    () => {
+      console.log("user from backend: ", req.body.user);
+      res.send(req.body.user);
+    }
+  );
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);

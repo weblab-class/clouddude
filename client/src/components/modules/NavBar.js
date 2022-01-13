@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import "./NavBar.css";
+import { post, get } from "../../utilities";
 
 /**
  * The navigation bar at the top of all pages.
@@ -17,16 +18,37 @@ import "./NavBar.css";
 
 const GOOGLE_CLIENT_ID = "31388373258-ev9tadag8nhjb35r6pv3v1jfq7n7qrtg.apps.googleusercontent.com";
 
-const NavBar = ({
-  handleLogin, handleLogout, userId, publishedLevels, levelsWon, userName, setUserName
-}) => {
+const NavBar = ({ handleLogin, handleLogout, userId }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
+  const [newName, setNewName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [publishedLevels, setPublishedLevels] = useState(30);
+  const [levelsWon, setLevelsWon] = useState(20);
 
   const handleProfile = () => {
     setMenuOpen(false);
     setProfileModal(true);
   };
+
+  const handleSubmit = () => {
+    setProfileModal(false);
+    const body = { user: { name: newName, _id: userId } };
+    post("/api/user", body).then((user) => {
+      setUserName(user.name);
+    });
+  };
+
+  useEffect(() => {
+    get("/api/whoami").then((user) => {
+      if (user._id) {
+        setUserName(user.name);
+        setNewName(user.name);
+        setLevelsWon(27);
+        setPublishedLevels(28);
+      }
+    });
+  }, [userId]);
 
   return (
     <nav className="NavBar-container">
@@ -85,10 +107,10 @@ const NavBar = ({
                     <Form.Group className="mb-3" controlId="name">
                       <Form.Label>Name</Form.Label>
                       <Form.Control
-                        onChange={(event) => setUserName(event.target.value)}
+                        onChange={(event) => setNewName(event.target.value)}
                         type="text"
                         placeholder="Edit Name"
-                        value={userName}
+                        value={newName}
                       />
                     </Form.Group>
 
@@ -102,9 +124,9 @@ const NavBar = ({
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        Levels Won:
-                        {' '}
-                        {levelsWon}
+                          Levels Won:
+                          {' '}
+                          {levelsWon}
                       </Form.Label>
                     </Form.Group>
                   </Form>
@@ -113,7 +135,7 @@ const NavBar = ({
                   <Button variant="secondary" onClick={() => setProfileModal(false)}>
                     Close
                   </Button>
-                  <Button variant="primary" onClick={() => setProfileModal(false)}>
+                  <Button variant="primary" onClick={handleSubmit}>
                     Save
                   </Button>
                 </Modal.Footer>
