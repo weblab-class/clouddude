@@ -1,14 +1,10 @@
-body {
-  overflow: hidden;
-}
-
 .LevelEditor-container {
   display: flex;
   flex-flow: row nowrap;
   background-color: var(--primary--dim);
 }
 
-.LevelEditor-editTools {
+.LevelEditor-sidebar {
   display: flex;
   flex-flow: column nowrap;
   flex: 1;

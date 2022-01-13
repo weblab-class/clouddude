@@ -16,7 +16,7 @@ const LevelEditor = () => {
       <Helmet>
         <title>Level Designer</title>
       </Helmet>
-      <div className="LevelEditor-editTools">
+      <div className="LevelEditor-sidebar">
         <EditorSidebar className="LevelEditor-sidebar" setsetTool={setCurrentTool} />
       </div>
       <Game className="LevelEditor-game" />

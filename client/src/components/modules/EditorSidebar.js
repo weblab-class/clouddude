@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import LevelData from "../modules/LevelData";
-import Form from "react-bootstrap/Form";
+import LevelData from "./LevelData";
+import EditTool from "./EditTool";
 
 import "../../utilities.css";
 import "./EditorSidebar.css";
@@ -23,10 +23,16 @@ const EditorSidebar = () => {
 
   return (
     <div className="EditorSidebar-container">
-      Tool Containers here
+      <div className="EditorSidebar-tools">
+        <EditTool />
+        <EditTool />
+        <EditTool />
+        <EditTool />
+        <EditTool />
+      </div>
       {/* Tries to save a level after collecting info like name/difficulty with other data props */}
       <LevelData
-        className="LevelEditor-LevelData"
+        className="EditorSidebar-LevelData"
         start={fakeLevelData.start}
         exit={fakeLevelData.exit}
         platforms={fakeLevelData.platforms}

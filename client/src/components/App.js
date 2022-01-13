@@ -12,6 +12,7 @@ import NavBar from "./modules/NavBar";
 import Footer from "./modules/Footer";
 
 import "../utilities.css";
+import "./App.css";
 
 import { socket } from "../client-socket";
 
@@ -50,8 +51,9 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className="App-Site">
       <NavBar
+        className="App-Navbar"
         handleLogin={handleLogin}
         handleLogout={handleLogout}
         userId={userId}
@@ -67,26 +69,35 @@ const App = () => {
           userId={userId}
         />
         <LevelEditor
+          className="App-LevelEditor"
           path="/leveleditor"
           handleLogin={handleLogin}
           handleLogout={handleLogout}
           userId={userId}
         />
         <Repository
+          className="App-Repository"
           path="/repository"
           handleLogin={handleLogin}
           handleLogout={handleLogout}
           userId={userId}
         />
         <About
+          className="App-About"
           path="/about"
           handleLogin={handleLogin}
           handleLogout={handleLogout}
           userId={userId}
         />
 
-        <Game path="/play" />
-        <Home path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <Game className="App-Game" path="/play" />
+        <Home
+          className="App-Home"
+          path="/"
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          userId={userId}
+        />
         <NotFound default />
       </Router>
       <Footer
@@ -95,7 +106,7 @@ const App = () => {
         handleLogout={handleLogout}
         userId={userId}
       />
-    </>
+    </div>
   );
 };
 

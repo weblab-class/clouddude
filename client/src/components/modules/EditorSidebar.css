@@ -1,0 +1,4 @@
+.EditorSidebar-tools {
+  display: flex;
+  flex-flow: row wrap;
+}
