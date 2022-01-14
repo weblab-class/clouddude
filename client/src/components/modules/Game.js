@@ -82,6 +82,9 @@ const Game = ({ editLevel, currentTool, levelData }) => {
   useEffect(() => {
     const canvas = document.getElementById("game");
     canvas.addEventListener("click", editLevel);
+    return () => {
+      canvas.removeEventListener("click", editLevel);
+    };
   }, [currentTool, editLevel]);
 
   return (

@@ -30,7 +30,7 @@ const LevelEditor = ({ userState }) => {
     });
   }, [userState]);
 
-  // Processes clicks on game Canvas to update
+  // Updates level based on Canvas click
   const editLevel = useCallback(
     (event) => {
       const clickPoint = { x: event.offsetX, y: event.offsetY };
@@ -40,13 +40,14 @@ const LevelEditor = ({ userState }) => {
       //const gridPoint = clickPointToGridPoint(clickPoint);
       const gridPoint = { x: 10, y: 10 };
       console.log(clickPoint);
-      console.log(currentTool);
       if (currentTool === "start") {
         setLevelData({ ...levelData, start: gridPoint });
       } else if (currentTool === "exit") {
         setLevelData({ ...levelData, exit: gridPoint });
       } else if (currentTool === "platform") {
         setLevelData({ ...levelData, platforms: [...levelData.platforms, gridPoint] });
+      } else if (currentTool === "coin") {
+        setLevelData({ ...levelData, coins: [...levelData.coins, gridPoint] });
       }
     },
     [currentTool, levelData]
