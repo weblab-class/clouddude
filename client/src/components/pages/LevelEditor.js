@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import Game from "../modules/Game";
+import { get } from "../../utilities";
 
 import EditorSidebar from "../modules/EditorSidebar";
 
@@ -22,14 +23,12 @@ const LevelEditor = ({ userState }) => {
     difficulty: undefined,
   });
 
-  /*
   // Update creator on user change
   useEffect(() => {
     get("/api/whoami").then((user) => {
       setLevelData({ ...levelData, creator: user.name });
     });
   }, [userState]);
-*/
 
   // Processes clicks on game Canvas to update
   const editLevel = useCallback(
@@ -66,7 +65,13 @@ const LevelEditor = ({ userState }) => {
           levelData={levelData}
         />
       </div>
-      <Game setLevelData={setLevelData} editLevel={editLevel} className="LevelEditor-game" />
+      <Game
+        setLevelData={setLevelData}
+        editLevel={editLevel}
+        currentTool={currentTool}
+        levelData={levelData}
+        className="LevelEditor-game"
+      />
     </div>
   );
 };

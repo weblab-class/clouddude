@@ -3,7 +3,7 @@ import Phaser from "phaser";
 import test from "../../../dist/images/Block_Blue.png";
 import "./Game.css";
 
-const Game = ({ editLevel }) => {
+const Game = ({ editLevel, currentTool, levelData }) => {
   function responsivelyResize() {
     const gameId = document.getElementById("game");
     //gameId.style.width = "80%";
@@ -49,7 +49,6 @@ const Game = ({ editLevel }) => {
   useEffect(() => {
     const canvas = document.getElementById("game");
     //canvas.addEventListener("click", editLevel);
-    console.log(`Canvas name: ${canvas} ${canvas.innerHTML}`);
     const config = {
       width: 1600,
       height: 900,
@@ -79,9 +78,15 @@ const Game = ({ editLevel }) => {
     const game = new Phaser.Game(config);
   }, []);
 
+  // Update click listener for current tool
+  useEffect(() => {
+    const canvas = document.getElementById("game");
+    canvas.addEventListener("click", editLevel);
+  }, [currentTool, editLevel]);
+
   return (
     <div className="Game-container">
-      <canvas onClick={editLevel} id="game" />
+      <canvas id="game" />
     </div>
   );
 };
