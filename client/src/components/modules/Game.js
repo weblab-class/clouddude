@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import Phaser from "phaser";
 import "./Game.css";
 
-const Game = () => {
+const Game = ({ editLevel, currentTool, levelData }) => {
   function responsivelyResize() {
     const gameId = document.getElementById("game");
-    gameId.style.width = "80%";
-    gameId.style.height = "80%";
+    //gameId.style.width = "80%";
+    //gameId.style.height = "80%";
   }
 
   function preload() {
@@ -92,7 +92,7 @@ const Game = () => {
 
   useEffect(() => {
     const canvas = document.getElementById("game");
-    console.log(`Canvas name: ${canvas} ${canvas.innerHTML}`);
+    //canvas.addEventListener("click", editLevel);
     const config = {
       width: 1600,
       height: 900,
@@ -121,6 +121,12 @@ const Game = () => {
     };
     const game = new Phaser.Game(config);
   }, []);
+
+  // Update click listener for current tool
+  useEffect(() => {
+    const canvas = document.getElementById("game");
+    canvas.addEventListener("click", editLevel);
+  }, [currentTool, editLevel]);
 
   return (
     <div className="Game-container">
