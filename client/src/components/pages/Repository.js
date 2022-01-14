@@ -31,7 +31,6 @@ const Repository = () => {
         { image: "img1", x: 25, y: 20 },
         { image: "img2", x: 30, y: 30 },
       ],
-      decoration: [{ frame: 35, x: 35, y: 35 }],
       coins: [
         { x: 11, y: 40 },
         { x: 12, y: 41 },
@@ -52,7 +51,6 @@ const Repository = () => {
         { image: "img11", x: 25, y: 20 },
         { image: "img22", x: 30, y: 30 },
       ],
-      decoration: [{ frame: 35, x: 35, y: 35 }],
       coins: [
         { x: 11, y: 40 },
         { x: 12, y: 41 },

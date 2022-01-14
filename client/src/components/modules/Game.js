@@ -3,11 +3,11 @@ import Phaser from "phaser";
 import test from "../../../dist/images/Block_Blue.png";
 import "./Game.css";
 
-const Game = () => {
+const Game = ({ editLevel }) => {
   function responsivelyResize() {
     const gameId = document.getElementById("game");
-    gameId.style.width = "80%";
-    gameId.style.height = "80%";
+    //gameId.style.width = "80%";
+    //gameId.style.height = "80%";
   }
 
   function preload() {
@@ -48,6 +48,7 @@ const Game = () => {
 
   useEffect(() => {
     const canvas = document.getElementById("game");
+    canvas.addEventListener("click", editLevel);
     console.log(`Canvas name: ${canvas} ${canvas.innerHTML}`);
     const config = {
       width: 1600,
@@ -80,7 +81,7 @@ const Game = () => {
 
   return (
     <div className="Game-container">
-      <canvas id="game" />
+      <canvas onClick={editLevel} id="game" />
     </div>
   );
 };

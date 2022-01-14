@@ -17,6 +17,7 @@ import "./App.css";
 import { socket } from "../client-socket";
 
 import { get, post } from "../utilities";
+import PermissionDenied from "./pages/PermissionDenied";
 
 /**
  * Define the "App" component
@@ -24,6 +25,7 @@ import { get, post } from "../utilities";
 const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [name, setName] = useState("User");
+  const [userState, setUser] = useState(undefined);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -31,6 +33,7 @@ const App = () => {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
         setName(user.name);
+        setUser(user);
       }
     });
   }, []);
@@ -50,6 +53,26 @@ const App = () => {
     post("/api/logout");
   };
 
+  const denied = (
+    <PermissionDenied
+      path="/leveleditor"
+      handleLogin={handleLogin}
+      handleLogout={handleLogout}
+      userId={userId}
+      userState={userState}
+    />
+  );
+  const editor = (
+    <LevelEditor
+      className="App-LevelEditor"
+      path="/leveleditor"
+      handleLogin={handleLogin}
+      handleLogout={handleLogout}
+      userId={userId}
+      userState={userState}
+    />
+  );
+
   return (
     <div className="App-Site">
       <NavBar
@@ -57,6 +80,7 @@ const App = () => {
         handleLogin={handleLogin}
         handleLogout={handleLogout}
         userId={userId}
+        userState={userState}
         // publishedLevels="hardcorded 30"
         // levelsWon="hardcorded 20"
         // userName={name}
@@ -67,20 +91,16 @@ const App = () => {
           handleLogin={handleLogin}
           handleLogout={handleLogout}
           userId={userId}
+          userState={userState}
         />
-        <LevelEditor
-          className="App-LevelEditor"
-          path="/leveleditor"
-          handleLogin={handleLogin}
-          handleLogout={handleLogout}
-          userId={userId}
-        />
+        {userId ? editor : denied}
         <Repository
           className="App-Repository"
           path="/repository"
           handleLogin={handleLogin}
           handleLogout={handleLogout}
           userId={userId}
+          userState={userState}
         />
         <About
           className="App-About"
@@ -88,15 +108,17 @@ const App = () => {
           handleLogin={handleLogin}
           handleLogout={handleLogout}
           userId={userId}
+          userState={userState}
         />
 
-        <Game className="App-Game" path="/play" />
+        <Game className="App-Game" userState={userState} path="/play" />
         <Home
           className="App-Home"
           path="/"
           handleLogin={handleLogin}
           handleLogout={handleLogout}
           userId={userId}
+          userState={userState}
         />
         <NotFound default />
       </Router>
@@ -105,6 +127,7 @@ const App = () => {
         handleLogin={handleLogin}
         handleLogout={handleLogout}
         userId={userId}
+        user={userState}
       />
     </div>
   );

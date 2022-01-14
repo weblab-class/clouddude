@@ -5,29 +5,20 @@ import EditTool from "./EditTool";
 import "../../utilities.css";
 import "./EditorSidebar.css";
 
-const EditorSidebar = ({ setCurrentTool, currentTool, hoverTag }) => {
-  const [levelData, setLevelData] = useState({});
-  const fakeLevelData = {
-    start: { x: 27, y: 27 },
-    exit: { x: 27, y: 27 },
-    platforms: [
-      { image: "img1", x: 27, y: 27 },
-      { image: "img2", x: 27, y: 27 },
-    ],
-    decoration: [{ frame: 27, x: 27, y: 27 }],
-    coins: [{ x: 27, y: 27 }],
-    obstacles: [
-      { type: "something", x: 27, y: 27 },
-      { type: "something", x: 27, y: 27 },
-    ],
-  };
-
+const EditorSidebar = ({ setCurrentTool, currentTool, levelData }) => {
   return (
     <div className="EditorSidebar-container">
+      {console.log(currentTool)}
+      {console.log(levelData)}
       <div className="EditorSidebar-tools">
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name1" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name2" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name3" img="" />
+        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="start" img="" />
+        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="exit" img="" />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="platform"
+          img=""
+        />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name4" img="" />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name5" img="" />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name6" img="" />
