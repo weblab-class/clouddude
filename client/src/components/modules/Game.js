@@ -9,8 +9,8 @@ const Game = ({ editLevel, currentTool, levelData }) => {
 
   function responsivelyResize() {
     const gameId = document.getElementById("game");
-    // gameId.style.width = "80%";
-    // gameId.style.height = "80%";
+    gameId.style.width = "100%";
+    gameId.style.height = "100%";
   }
 
   function preload() {
