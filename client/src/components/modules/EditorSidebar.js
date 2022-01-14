@@ -6,6 +6,7 @@ import "../../utilities.css";
 import "./EditorSidebar.css";
 
 const EditorSidebar = ({ setCurrentTool, currentTool, levelData }) => {
+  const fakeLevelData = {};
   return (
     <div className="EditorSidebar-container">
       {console.log(currentTool)}

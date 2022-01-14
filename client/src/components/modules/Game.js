@@ -48,7 +48,7 @@ const Game = ({ editLevel }) => {
 
   useEffect(() => {
     const canvas = document.getElementById("game");
-    canvas.addEventListener("click", editLevel);
+    //canvas.addEventListener("click", editLevel);
     console.log(`Canvas name: ${canvas} ${canvas.innerHTML}`);
     const config = {
       width: 1600,
