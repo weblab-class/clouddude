@@ -3,10 +3,14 @@ import Phaser from "phaser";
 import "./Game.css";
 
 const Game = ({ editLevel, currentTool, levelData }) => {
+  // Global configuration constants
+  let movementControls;
+  let player;
+
   function responsivelyResize() {
     const gameId = document.getElementById("game");
-    //gameId.style.width = "80%";
-    //gameId.style.height = "80%";
+    // gameId.style.width = "80%";
+    // gameId.style.height = "80%";
   }
 
   function preload() {
@@ -38,8 +42,11 @@ const Game = ({ editLevel, currentTool, levelData }) => {
 
     // Create Player
     player = this.physics.add.sprite(100, 450, "player");
-    player.setCollideWorldBounds(true);
 
+    // Initialize keyboard control
+    movementControls = this.input.keyboard.createCursorKeys();
+
+    // Initialize Player Animations
     this.anims.create({
       key: "left",
       frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
@@ -84,15 +91,39 @@ const Game = ({ editLevel, currentTool, levelData }) => {
     for (const platform of fakePlatformData) {
       platforms.create(platform.x, platform.y, "grass");
     }
+
+    // Handle collisions
+    this.physics.add.collider(player, platforms);
   }
 
   function update() {
+    // Responsively updates screen size
     responsivelyResize();
+
+    // Handles Keyboard Input
+
+    if (movementControls.left.isDown) {
+      player.setVelocityX(-160);
+
+      player.anims.play("left", true);
+    } else if (movementControls.right.isDown) {
+      player.setVelocityX(160);
+
+      player.anims.play("right", true);
+    } else {
+      player.setVelocityX(0);
+
+      player.anims.play("turn");
+    }
+
+    if (movementControls.up.isDown && player.body.touching.down) {
+      player.setVelocityY(-300);
+    }
   }
 
   useEffect(() => {
     const canvas = document.getElementById("game");
-    //canvas.addEventListener("click", editLevel);
+    // canvas.addEventListener("click", editLevel);
     const config = {
       width: 1600,
       height: 900,
@@ -101,7 +132,7 @@ const Game = ({ editLevel, currentTool, levelData }) => {
       physics: {
         default: "arcade",
         arcade: {
-          gravity: { y: 300 },
+          gravity: { y: 600 },
         },
       },
       scale: {
