@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Phaser from "phaser";
-import test from "../../../dist/images/Block_Blue.png";
 import "./Game.css";
 
 const Game = () => {
@@ -11,35 +10,80 @@ const Game = () => {
   }
 
   function preload() {
-    this.load.image("sky", "http://labs.phaser.io/assets/skies/space3.png");
-    this.load.image("logo", "http://labs.phaser.io/assets/sprites/phaser3-logo.png");
-    this.load.image("red", "http://labs.phaser.io/assets/particles/red.png");
+    // Loads Assets
+    this.load.setBaseURL("https://www.dl.dropboxusercontent.com/s/");
+    this.load.image("background", "gskpd4bi27lzg1t/waterfall.png?dl=0");
+    this.load.image("grass", "8430hxmrkdolsuo/grass.png?dl=0");
+    this.load.image("spike", "ktzdki013ci8izz/spikes.png?dl=0");
+    this.load.spritesheet("coin", "lka0ez1lu8ui3dd/coin.png?dl=0", {
+      frameWidth: 50,
+      frameHeight: 50,
+    });
+    this.load.spritesheet("player", "ube5tzlgdeawxk9/pinkguy.png?dl=0", {
+      frameWidth: 32,
+      frameHeight: 48,
+    });
 
-    //Harry, here is the simplest way to load assets
-    //For adding spritesheets or audiosprites:
-    //https://supernapie.com/blog/loading-assets-as-data-uri-in-phaser-3/
-    this.textures.addBase64("test", test);
+    // Use the below for adding local files:
+    // import test from "../../../dist/images/Block_Blue.png";
+    // this.textures.addBase64("test", test);
+    //
+    // For adding spritesheets or audiosprites:
+    // https://supernapie.com/blog/loading-assets-as-data-uri-in-phaser-3/
   }
 
   function create() {
-    this.add.image(400, 300, "sky");
-    this.add.image(400, 300, "test");
+    // Create background
+    this.add.image(800, 450, "background");
 
-    const particles = this.add.particles("red");
+    // Create Player
+    player = this.physics.add.sprite(100, 450, "player");
+    player.setCollideWorldBounds(true);
 
-    const emitter = particles.createEmitter({
-      speed: 100,
-      scale: { start: 1, end: 0 },
-      blendMode: "ADD",
+    this.anims.create({
+      key: "left",
+      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1,
     });
 
-    const logo = this.physics.add.image(400, 100, "logo");
+    this.anims.create({
+      key: "turn",
+      frames: [{ key: "player", frame: 4 }],
+      frameRate: 20,
+    });
 
-    logo.setVelocity(100, 200);
-    logo.setBounce(1, 1);
-    logo.setCollideWorldBounds(true);
+    this.anims.create({
+      key: "right",
+      frames: this.anims.generateFrameNumbers("player", { start: 5, end: 8 }),
+      frameRate: 10,
+      repeat: -1,
+    });
 
-    emitter.startFollow(logo);
+    // Create platforms
+    const fakePlatformData = [
+      { x: 25, y: 875 },
+      { x: 75, y: 875 },
+      { x: 125, y: 875 },
+      { x: 175, y: 875 },
+      { x: 225, y: 875 },
+      { x: 275, y: 875 },
+      { x: 1275, y: 875 },
+      { x: 1225, y: 875 },
+      { x: 1575, y: 875 },
+      { x: 1525, y: 875 },
+      { x: 1475, y: 875 },
+      { x: 1425, y: 875 },
+      { x: 1375, y: 875 },
+      { x: 1325, y: 875 },
+      { x: 1275, y: 875 },
+      { x: 1225, y: 875 },
+    ];
+
+    const platforms = this.physics.add.staticGroup();
+    for (const platform of fakePlatformData) {
+      platforms.create(platform.x, platform.y, "grass");
+    }
   }
 
   function update() {
@@ -57,7 +101,7 @@ const Game = () => {
       physics: {
         default: "arcade",
         arcade: {
-          gravity: { y: 200 },
+          gravity: { y: 300 },
         },
       },
       scale: {
