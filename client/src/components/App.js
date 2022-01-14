@@ -5,7 +5,6 @@ import Skeleton from "./pages/Skeleton";
 import About from "./pages/About";
 import Play from "./pages/Play";
 import Home from "./pages/Home";
-import Game from "./modules/Game";
 import LevelEditor from "./pages/LevelEditor";
 import Repository from "./pages/Repository";
 import NavBar from "./modules/NavBar";
@@ -111,7 +110,7 @@ const App = () => {
           userState={userState}
         />
 
-        <Game className="App-Game" userState={userState} path="/play" />
+        <Play className="App-Game" userState={userState} path="/play" />
         <Home
           className="App-Home"
           path="/"
