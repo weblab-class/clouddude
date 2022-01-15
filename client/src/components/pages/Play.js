@@ -9,7 +9,7 @@ const Play = (userState) => {
       <Helmet>
         <title>Play!</title>
       </Helmet>
-      <Game className="Play-game" userState={userState} />
+      <Game className="Play-game" isEditing={false} userState={userState} />
     </div>
   );
 };

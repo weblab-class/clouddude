@@ -11,16 +11,19 @@ import "./LevelEditor.css";
 const LevelEditor = ({ userState }) => {
   // Maintains tool currently selected in editor
   const [currentTool, setCurrentTool] = useState("none");
+
   // Initialize empty level
   const [levelData, setLevelData] = useState({
     creator: undefined,
+    name: undefined,
+    description: undefined,
     start: { x: undefined, y: undefined },
     exit: { x: undefined, y: undefined },
     platforms: [],
     coins: [],
     obstacles: [],
-    funness: undefined,
-    difficulty: undefined,
+    funness: 0,
+    difficulty: 0,
   });
 
   // Update creator on user change
@@ -64,6 +67,7 @@ const LevelEditor = ({ userState }) => {
           className="LevelEditor-sidebar"
           setCurrentTool={setCurrentTool}
           levelData={levelData}
+          setLevelData={setLevelData}
         />
       </div>
       <Game
@@ -71,6 +75,7 @@ const LevelEditor = ({ userState }) => {
         editLevel={editLevel}
         currentTool={currentTool}
         levelData={levelData}
+        isEditing
         className="LevelEditor-game"
       />
     </div>

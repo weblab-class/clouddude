@@ -5,7 +5,7 @@ import EditTool from "./EditTool";
 import "../../utilities.css";
 import "./EditorSidebar.css";
 
-const EditorSidebar = ({ setCurrentTool, currentTool, levelData }) => {
+const EditorSidebar = ({ setCurrentTool, currentTool, levelData, setLevelData }) => {
   return (
     <div className="EditorSidebar-container">
       <div className="EditorSidebar-tools">
@@ -24,11 +24,8 @@ const EditorSidebar = ({ setCurrentTool, currentTool, levelData }) => {
       {/* Tries to save a level after collecting info like name/difficulty with other data props */}
       <LevelData
         className="EditorSidebar-LevelData"
-        start={levelData.start}
-        exit={levelData.exit}
-        platforms={levelData.platforms}
-        obstacles={levelData.obstacles}
-        coins={levelData.coins}
+        setLevelData={setLevelData}
+        levelData={levelData}
       />
     </div>
   );
