@@ -19,6 +19,7 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
     this.load.image("backgroundGrid", "uon4lq9g70ygcf7/waterfallGrid.png?dl=0");
     this.load.image("grass", "8430hxmrkdolsuo/grass.png?dl=0");
     this.load.image("spike", "ktzdki013ci8izz/spikes.png?dl=0");
+    this.load.image("grid", "hidf43mavg0i8xt/gridSquare.png?dl=0");
     this.load.spritesheet("coin", "lka0ez1lu8ui3dd/coin.png?dl=0", {
       frameWidth: 50,
       frameHeight: 50,
@@ -39,7 +40,8 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
   function create() {
     // Create background
     if (isEditing) {
-      this.add.image(800, 450, "backgroundGrid");
+      //this.add.image(800, 450, "backgroundGrid");
+      this.add.image(800, 450, "background");
     } else {
       this.add.image(800, 450, "background");
     }
@@ -181,8 +183,29 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
       null,
       this
     );
+
+    const group = this.add.group();
+
+    group.createMultiple({
+      key: "grid",
+      frameQuantity: 576,
+    });
+
+    Phaser.Actions.GridAlign(group.getChildren(), {
+      width: 32,
+      height: 18,
+      cellWidth: 50,
+      cellHeight: 50,
+      x: 25,
+      y: 25,
+    });
+    Phaser.Actions.SetHitArea(group.getChildren());
   }
 
+  function inputTest(pointer, gameObject) {
+    console.log(pointer.x);
+    console.log(gameObject);
+  }
   function update() {
     // Responsively updates screen size
     responsivelyResize();
@@ -255,6 +278,7 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
     const game = new Phaser.Game(config);
   }, []);
 
+  /*
   // Update click listener for current tool
   useEffect(() => {
     const canvas = document.getElementById("game");
@@ -263,6 +287,7 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
       canvas.removeEventListener("click", editLevel);
     };
   }, [currentTool, editLevel]);
+  */
 
   return (
     <div className="Game-container">

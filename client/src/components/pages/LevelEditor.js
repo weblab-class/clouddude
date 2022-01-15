@@ -43,14 +43,21 @@ const LevelEditor = ({ userState }) => {
       //const gridPoint = clickPointToGridPoint(clickPoint);
       const gridPoint = { x: 10, y: 10 };
       console.log(clickPoint);
+      console.log(`Width: ${canvas.cellWidth} Height:${canvas.cellheight}`);
       if (currentTool === "start") {
         setLevelData({ ...levelData, start: gridPoint });
       } else if (currentTool === "exit") {
         setLevelData({ ...levelData, exit: gridPoint });
       } else if (currentTool === "platform") {
-        setLevelData({ ...levelData, platforms: [...levelData.platforms, gridPoint] });
+        setLevelData({
+          ...levelData,
+          platforms: [...levelData.platforms, { ...gridPoint, type: "grass" }],
+        });
       } else if (currentTool === "coin") {
-        setLevelData({ ...levelData, coins: [...levelData.coins, gridPoint] });
+        setLevelData({
+          ...levelData,
+          coins: [...levelData.coins, { ...gridPoint, type: "spinCoin" }],
+        });
       }
     },
     [currentTool, levelData]
@@ -76,6 +83,7 @@ const LevelEditor = ({ userState }) => {
         currentTool={currentTool}
         levelData={levelData}
         isEditing
+        activeLevel={levelData}
         className="LevelEditor-game"
       />
     </div>
