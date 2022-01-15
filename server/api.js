@@ -49,12 +49,11 @@ router.post("/initsocket", (req, res) => {
 // posting a new level
 router.post("/level", auth.ensureLoggedIn, (req, res) => {
   const newLevel = new Level({
-    creator: "Creator",
+    creator: req.body.creator,
     name: req.body.name,
     start: req.body.start,
     exit: req.body.exit,
     platforms: req.body.platforms,
-    decoration: req.body.decoration,
     coins: req.body.coins,
     obstacles: req.body.obstacles,
     funness: req.body.funness,
@@ -71,9 +70,9 @@ router.post("/level", auth.ensureLoggedIn, (req, res) => {
 router.get("/levels", (req, res) => {
   let actualQuery;
   if (
-    req.query.name.length === 0
-    && req.query.difficulty.length === 0
-    && req.query.funness.length === 0
+    req.query.name.length === 0 &&
+    req.query.difficulty.length === 0 &&
+    req.query.funness.length === 0
   ) {
     actualQuery = {};
     Level.find(actualQuery, (err, levels) => {
@@ -99,14 +98,10 @@ router.get("/levels", (req, res) => {
 
 // changing user data
 router.post("/user", auth.ensureLoggedIn, (req, res) => {
-  User.findOneAndUpdate(
-    { _id: req.body.user._id },
-    { $set: { name: req.body.user.name } },
-    () => {
-      console.log("user from backend: ", req.body.user);
-      res.send(req.body.user);
-    }
-  );
+  User.findOneAndUpdate({ _id: req.body.user._id }, { $set: { name: req.body.user.name } }, () => {
+    console.log("user from backend: ", req.body.user);
+    res.send(req.body.user);
+  });
 });
 
 // anything else falls to this "not found" case

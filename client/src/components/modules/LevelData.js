@@ -20,6 +20,10 @@ const LevelData = ({ levelData, setLevelData }) => {
     }); */
   }, [levelData]);
 
+  useEffect(() => {
+    console.log(levelData);
+  }, [levelData]);
+
   return (
     <div className="LevelData-container">
       <Form>
@@ -84,10 +88,27 @@ const LevelData = ({ levelData, setLevelData }) => {
           />
         </Form.Group>
       </Form>
-
-      <Button variant="primary" onClick={addLevel}>
-        Save Level
-      </Button>
+      <div className="LevelData-buttonContainer">
+        <Button className="LevelData-button" variant="primary" onClick={addLevel}>
+          Save Level
+        </Button>
+        <Button
+          className="LevelData-button"
+          variant="primary"
+          onClick={() =>
+            setLevelData({
+              ...levelData,
+              start: { x: undefined, y: undefined },
+              exit: { x: undefined, y: undefined },
+              platforms: [],
+              coins: [],
+              obstacles: [],
+            })
+          }
+        >
+          Clear Level
+        </Button>
+      </div>
     </div>
   );
 };

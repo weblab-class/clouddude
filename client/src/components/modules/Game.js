@@ -86,6 +86,7 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
     this.load.image("backgroundGrid", "uon4lq9g70ygcf7/waterfallGrid.png?dl=0");
     this.load.image("grass", "8430hxmrkdolsuo/grass.png?dl=0");
     this.load.image("spike", "7a8tzts1xzvl4v3/spikes.png?dl=0");
+    this.load.image("grid", "hidf43mavg0i8xt/gridSquare.png?dl=0");
     this.load.spritesheet("coin", "lka0ez1lu8ui3dd/coin.png?dl=0", {
       frameWidth: 50,
       frameHeight: 50,
@@ -215,6 +216,26 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
     });
     gameOverCaption.setOrigin(0.5, 0.5);
     gameOverCaption.visible = false;
+
+    // Create Level editor grid
+    if (isEditing) {
+      const grid = this.add.group();
+
+      grid.createMultiple({
+        key: "grid",
+        frameQuantity: 576,
+      });
+
+      Phaser.Actions.GridAlign(grid.getChildren(), {
+        width: 32,
+        height: 18,
+        cellWidth: 50,
+        cellHeight: 50,
+        x: 25,
+        y: 25,
+      });
+      Phaser.Actions.SetHitArea(grid.getChildren());
+    }
 
     // Handle platform collisions
     this.physics.add.collider(player, platforms);

@@ -1,0 +1,10 @@
+.LevelData-buttonContainer {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.LevelData-button {
+  margin: var(--s);
+}
