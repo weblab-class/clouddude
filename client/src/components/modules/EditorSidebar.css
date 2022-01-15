@@ -3,3 +3,9 @@
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
+
+.EditorSidebar-message {
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}

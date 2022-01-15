@@ -10,10 +10,28 @@ import { post } from "../../utilities";
 
 import "./LevelData.css";
 
-const LevelData = ({ levelData, setLevelData }) => {
+const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
   //Posts the level on submission
   const addLevel = useCallback(() => {
     console.log(levelData);
+    if (levelData.name === "") {
+      setMessage("Name is Required");
+      return;
+    }
+    if (levelData.description === "") {
+      setMessage("Description is Required");
+      return;
+    } else {
+      setMessage("Submitted Successfully");
+      setLevelData({
+        ...levelData,
+        start: { x: undefined, y: undefined },
+        exit: { x: undefined, y: undefined },
+        platforms: [],
+        coins: [],
+        obstacles: [],
+      });
+    }
     /*
     post("/api/level", levelData).then((level) => {
       console.log("level from frontend", level);
@@ -35,6 +53,17 @@ const LevelData = ({ levelData, setLevelData }) => {
             }}
             type="text"
             placeholder="Enter Level Name"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            onChange={(event) => {
+              setLevelData({ ...levelData, description: event.target.value });
+            }}
+            type="text"
+            placeholder="Enter Description"
           />
         </Form.Group>
 
