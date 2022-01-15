@@ -85,7 +85,7 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
     this.load.image("background", "gskpd4bi27lzg1t/waterfall.png?dl=0");
     this.load.image("backgroundGrid", "uon4lq9g70ygcf7/waterfallGrid.png?dl=0");
     this.load.image("grass", "8430hxmrkdolsuo/grass.png?dl=0");
-    this.load.image("spike", "ktzdki013ci8izz/spikes.png?dl=0");
+    this.load.image("spike", "7a8tzts1xzvl4v3/spikes.png?dl=0");
     this.load.spritesheet("coin", "lka0ez1lu8ui3dd/coin.png?dl=0", {
       frameWidth: 50,
       frameHeight: 50,
@@ -177,6 +177,15 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
       }
     }
 
+    // Create obstacles
+    const spikes = this.physics.add.staticGroup();
+
+    for (const obstacle of sampleData.obstacles) {
+      if (obstacle.type === "spike") {
+        spikes.create(obstacle.x, obstacle.y, "spike");
+      }
+    }
+
     // Create Game Over Text
     gameOverText = this.add.text(800, 300, "Level Failed", {
       fontSize: "150px",
@@ -192,6 +201,7 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
     gameOverText.setOrigin(0.5, 0.5);
     gameOverText.visible = false;
 
+    // Create restart caption
     gameOverCaption = this.add.text(800, 420, "Press 'r' to Restart", {
       fontSize: "70px",
       fill: "#00ff00",
@@ -209,6 +219,30 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
 
+    // Handle spike collisions
+    this.physics.add.overlap(
+      player,
+      spikes,
+      function (player, spike) {
+        isOver = true;
+        player.setTintFill(0xff0000);
+        this.tweens.add({
+          targets: player,
+          y: player.y - 100,
+          angle: -90,
+          alpha: 0,
+          duration: 1000,
+          ease: "Cubic.easeOut",
+          callbackScope: this,
+          onComplete() {
+            gameOver();
+          },
+        });
+      },
+      null,
+      this
+    );
+
     // Handle coin collection
     this.physics.add.overlap(
       player,
@@ -224,7 +258,6 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
           onComplete() {
             coins.killAndHide(coin);
             coins.remove(coin);
-            gameOver();
           },
         });
       },
@@ -259,6 +292,7 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
   }
 
   function responsivelyResize() {
+    // Resize game to fit available space
     const gameId = document.getElementById("game");
     gameId.style.width = "100%";
     gameId.style.height = "100%";
