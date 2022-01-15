@@ -25,7 +25,7 @@ const Repository = ({ setActiveLevel }) => {
 
   // in the beginning, get all levels
   useEffect(() => {
-    const query = { name: "", difficulty: "", funness: "" };
+    const query = { type: "all" };
     get("/api/levels", query).then((levelObjects) => {
       setLevels(levelObjects);
     });
@@ -38,8 +38,9 @@ const Repository = ({ setActiveLevel }) => {
       name: levelName,
       difficulty: Number(levelDifficulty),
       funness: Number(levelFunness),
+      type: "filter"
     };
-    get("api/levels", query).then((res) => {
+    get("/api/levels", query).then((res) => {
       setLevels(res);
     });
   };

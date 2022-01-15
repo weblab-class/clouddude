@@ -70,11 +70,7 @@ router.post("/level", auth.ensureLoggedIn, (req, res) => {
 // getting all or filtered levels
 router.get("/levels", (req, res) => {
   let actualQuery;
-  if (
-    req.query.name.length === 0 &&
-    req.query.difficulty.length === 0 &&
-    req.query.funness.length === 0
-  ) {
+  if (req.query.type === "all") {
     actualQuery = {};
     Level.find(actualQuery, (err, levels) => {
       if (err) {
@@ -88,8 +84,7 @@ router.get("/levels", (req, res) => {
       difficulty: { $gte: req.query.difficulty - 10, $lte: req.query.difficulty + 10 },
       funness: { $gte: req.query.funness - 10, $lte: req.query.funness + 10 },
     };
-    console.log(`actualQuery: ${actualQuery}`);
-    Level.findMany(actualQuery, (err, levels) => {
+    Level.find(actualQuery, (err, levels) => {
       if (err) {
         return res.status(500).send(err);
       }
