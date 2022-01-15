@@ -89,7 +89,6 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
             >
               <AccountCircle />
             </IconButton>
-            <p>{userName}</p>
             <div>
               <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
                 <MenuItem onClick={handleProfile}>My Profile</MenuItem>
@@ -106,7 +105,10 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
             <div>
               <Modal show={profileModal} onHide={() => setProfileModal(false)}>
                 <Modal.Header>
-                  <Modal.Title>My Profile</Modal.Title>
+                  <Modal.Title>
+                    {userName}
+                    's Profile
+                  </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <Form>
@@ -121,11 +123,19 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="difficulty">
-                      <Form.Label>Published Levels: {publishedLevels}</Form.Label>
+                      <Form.Label>
+Published Levels:
+{' '}
+{publishedLevels}
+                      </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
-                      <Form.Label>Levels Won: {levelsWon}</Form.Label>
+                      <Form.Label>
+Levels Won:
+{' '}
+{levelsWon}
+                      </Form.Label>
                     </Form.Group>
                   </Form>
                 </Modal.Body>
@@ -142,12 +152,12 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
           </div>
         ) : (
           <div className="login">
-          <GoogleLogin
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={handleLogin}
-            onFailure={(err) => console.log(err)}
-          />
+            <GoogleLogin
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={handleLogin}
+              onFailure={(err) => console.log(err)}
+            />
           </div>
         )}
       </div>
