@@ -36,6 +36,13 @@ const LevelEditor = ({ userState }) => {
     });
   }, [userState]);
 
+  // Update message on tool switch
+  useEffect(() => {
+    if (message !== "Design Your Level!") {
+      setMessage("Design Your Level!");
+    }
+  }, [currentTool]);
+
   // Updates level based on Canvas click
   const editLevel = useCallback(
     (gridPoint) => {

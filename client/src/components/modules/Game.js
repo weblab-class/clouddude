@@ -231,7 +231,7 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
         key: "grid",
         name: "grid",
         frameQuantity: 576,
-        hitArea: new Phaser.Geom.Rectangle(1, 1, 49, 49),
+        hitArea: new Phaser.Geom.Rectangle(0, 0, 50, 50),
         hitAreaCallback: Phaser.Geom.Rectangle.Contains,
       });
 

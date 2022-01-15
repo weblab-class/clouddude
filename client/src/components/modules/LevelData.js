@@ -50,6 +50,9 @@ const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
           <Form.Control
             onChange={(event) => {
               setLevelData({ ...levelData, name: event.target.value });
+              if (message !== "Design Your Level!") {
+                setMessage("Design Your Level!");
+              }
             }}
             type="text"
             placeholder="Enter Level Name"
@@ -61,6 +64,9 @@ const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
           <Form.Control
             onChange={(event) => {
               setLevelData({ ...levelData, description: event.target.value });
+              if (message !== "Design Your Level!") {
+                setMessage("Design Your Level!");
+              }
             }}
             type="text"
             placeholder="Enter Description"
@@ -70,7 +76,12 @@ const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
         <Form.Group className="mb-3" controlId="difficulty">
           <Form.Label>Difficulty</Form.Label>
           <Slider
-            onChange={(event, value) => setLevelData({ ...levelData, difficulty: Number(value) })}
+            onChange={(event, value) => {
+              setLevelData({ ...levelData, difficulty: Number(value) });
+              if (message !== "Design Your Level!") {
+                setMessage("Design Your Level!");
+              }
+            }}
             aria-valuetext="difficulty"
             value={levelData.difficulty}
             color="primary"
@@ -95,7 +106,12 @@ const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
         <Form.Group className="mb-3" controlId="funness">
           <Form.Label>Funness</Form.Label>
           <Slider
-            onChange={(event, value) => setLevelData({ ...levelData, funness: Number(value) })}
+            onChange={(event, value) => {
+              setLevelData({ ...levelData, funness: Number(value) });
+              if (message !== "Design Your Level!") {
+                setMessage("Design Your Level!");
+              }
+            }}
             aria-valuetext="funnes"
             value={levelData.funness}
             color="primary"
@@ -124,7 +140,7 @@ const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
         <Button
           className="LevelData-button"
           variant="primary"
-          onClick={() =>
+          onClick={() => {
             setLevelData({
               ...levelData,
               start: { x: undefined, y: undefined },
@@ -132,8 +148,9 @@ const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
               platforms: [],
               coins: [],
               obstacles: [],
-            })
-          }
+            });
+            setMessage("Level Cleared!");
+          }}
         >
           Clear Level
         </Button>
