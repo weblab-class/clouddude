@@ -25,6 +25,7 @@ const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [name, setName] = useState("User");
   const [userState, setUser] = useState(undefined);
+  const [activeLevel, setActiveLevel] = useState(undefined);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -68,6 +69,7 @@ const App = () => {
       handleLogin={handleLogin}
       handleLogout={handleLogout}
       userId={userId}
+      setActiveLevel={setActiveLevel}
       userState={userState}
     />
   );
@@ -100,6 +102,8 @@ const App = () => {
           handleLogout={handleLogout}
           userId={userId}
           userState={userState}
+          activeLevel={activeLevel}
+          setActiveLevel={setActiveLevel}
         />
         <About
           className="App-About"
@@ -110,7 +114,7 @@ const App = () => {
           userState={userState}
         />
 
-        <Play className="App-Game" userState={userState} path="/play" />
+        <Play className="App-Game" activeLevel={activeLevel} userState={userState} path="/play" />
         <Home
           className="App-Home"
           path="/"
