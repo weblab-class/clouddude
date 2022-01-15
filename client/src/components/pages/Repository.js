@@ -14,76 +14,14 @@ import SingleLevel from "../modules/SingleLevel";
 import "../../utilities.css";
 import "./Repository.css";
 
-const Repository = ({setActiveLevel}) => {
+const Repository = ({ setActiveLevel }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const [levelDifficulty, setLevelDifficulty] = useState(50);
-  const [levelFunness, setLevelFunness] = useState(100);
+  const [levelDifficulty, setLevelDifficulty] = useState(0);
+  const [levelFunness, setLevelFunness] = useState(0);
   const [levelName, setLevelName] = useState("");
 
-  const [levels, setLevels] = useState([
-    {
-      creator: "Bob",
-      name: "Twisted",
-      start: { x: 20, y: 20 },
-      exit: { x: 40, y: 45 },
-      platforms: [
-        { image: "img1", x: 25, y: 20 },
-        { image: "img2", x: 30, y: 30 },
-      ],
-      coins: [
-        { x: 11, y: 40 },
-        { x: 12, y: 41 },
-      ],
-      obstacles: [
-        { type: "obs1", x: 40, y: 20 },
-        { type: "obs2", x: 41, y: 21 },
-      ],
-      funness: 9,
-      difficulty: 4,
-    },
-    {
-      creator: "Foo",
-      name: "Roller Coaster",
-      start: { x: 20, y: 20 },
-      exit: { x: 40, y: 45 },
-      platforms: [
-        { image: "img11", x: 25, y: 20 },
-        { image: "img22", x: 30, y: 30 },
-      ],
-      coins: [
-        { x: 11, y: 40 },
-        { x: 12, y: 41 },
-      ],
-      obstacles: [
-        { type: "obs11", x: 40, y: 20 },
-        { type: "obs22", x: 41, y: 21 },
-      ],
-      funness: 5,
-      difficulty: 9,
-    },
-    {
-      creator: "Me",
-      name: "Snow Coaster",
-      start: { x: 20, y: 20 },
-      exit: { x: 40, y: 45 },
-      platforms: [
-        { image: "img11", x: 25, y: 20 },
-        { image: "img22", x: 30, y: 30 },
-      ],
-      decoration: [{ frame: 35, x: 35, y: 35 }],
-      coins: [
-        { x: 11, y: 40 },
-        { x: 12, y: 41 },
-      ],
-      obstacles: [
-        { type: "obs11", x: 40, y: 20 },
-        { type: "obs22", x: 41, y: 21 },
-      ],
-      funness: 5,
-      difficulty: 9,
-    },
-  ]);
+  const [levels, setLevels] = useState([]);
 
   // in the beginning, get all levels
   useEffect(() => {
@@ -96,7 +34,11 @@ const Repository = ({setActiveLevel}) => {
   // filter the levels based on user input
   const filter = () => {
     setShowModal(false);
-    const query = { name: levelName, difficulty: levelDifficulty, funness: levelFunness };
+    const query = {
+      name: levelName,
+      difficulty: Number(levelDifficulty),
+      funness: Number(levelFunness),
+    };
     get("api/levels", query).then((res) => {
       setLevels(res);
     });

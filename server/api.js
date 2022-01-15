@@ -88,6 +88,7 @@ router.get("/levels", (req, res) => {
       difficulty: { $gte: req.query.difficulty - 10, $lte: req.query.difficulty + 10 },
       funness: { $gte: req.query.funness - 10, $lte: req.query.funness + 10 },
     };
+    console.log(`actualQuery: ${actualQuery}`);
     Level.findMany(actualQuery, (err, levels) => {
       if (err) {
         return res.status(500).send(err);
