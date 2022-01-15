@@ -1,0 +1,8 @@
+.Play-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary--dim);
+  padding: var(--s);
+  max-height: 90%;
+}
