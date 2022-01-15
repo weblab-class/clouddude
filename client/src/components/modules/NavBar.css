@@ -27,3 +27,9 @@
 .NavBar-link + .NavBar-link {
   margin-left: var(--m);
 }
+
+.login {
+  position:absolute;
+  top: 5px;
+  right: 5px;
+}

@@ -1,0 +1,11 @@
+.main-container {
+    background-color: var(--primary--dim);
+}
+
+.main-error {
+    color: red;
+}
+
+.err-message {
+    color:darkred
+}

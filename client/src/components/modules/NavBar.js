@@ -79,7 +79,7 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
       </div>
       <div className="u-inlineBlock">
         {userId ? (
-          <div>
+          <div className="login">
             <IconButton
               edge="end"
               aria-label="current user"
@@ -141,12 +141,14 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
             </div>
           </div>
         ) : (
+          <div className="login">
           <GoogleLogin
             clientId={GOOGLE_CLIENT_ID}
             buttonText="Login"
             onSuccess={handleLogin}
             onFailure={(err) => console.log(err)}
           />
+          </div>
         )}
       </div>
     </nav>
