@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
-import Phaser from "phaser";
+import Phaser, { NONE } from "phaser";
 import "./Game.css";
 
-const Game = ({ editLevel, currentTool, levelData }) => {
+const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
   // Global configuration constants
+  const gameWon = false;
+
+  // Global control variables
   let movementControls;
   let player;
-
-  function responsivelyResize() {
-    const gameId = document.getElementById("game");
-    gameId.style.width = "100%";
-    gameId.style.height = "100%";
-  }
+  let gameOverText;
+  let gameOverCaption;
 
   function preload() {
     // Loads Assets
     this.load.setBaseURL("https://www.dl.dropboxusercontent.com/s/");
     this.load.image("background", "gskpd4bi27lzg1t/waterfall.png?dl=0");
+    this.load.image("backgroundGrid", "uon4lq9g70ygcf7/waterfallGrid.png?dl=0");
     this.load.image("grass", "8430hxmrkdolsuo/grass.png?dl=0");
     this.load.image("spike", "ktzdki013ci8izz/spikes.png?dl=0");
     this.load.spritesheet("coin", "lka0ez1lu8ui3dd/coin.png?dl=0", {
@@ -38,7 +38,11 @@ const Game = ({ editLevel, currentTool, levelData }) => {
 
   function create() {
     // Create background
-    this.add.image(800, 450, "background");
+    if (isEditing) {
+      this.add.image(800, 450, "backgroundGrid");
+    } else {
+      this.add.image(800, 450, "background");
+    }
 
     // Create Player
     player = this.physics.add.sprite(100, 450, "player");
@@ -124,6 +128,35 @@ const Game = ({ editLevel, currentTool, levelData }) => {
       coins.add(newCoin);
     }
 
+    // Create Game Over Text
+    const gameOverText = this.add.text(800, 300, "Level Failed", {
+      fontSize: "150px",
+      fill: "#00ff00",
+      strokeThickness: 11,
+      shadow: {
+        offsetX: 4,
+        offsetY: 2,
+        fill: false,
+        stroke: true,
+      },
+    });
+    gameOverText.setOrigin(0.5, 0.5);
+    gameOverText.visible = false;
+
+    const gameOverCaption = this.add.text(800, 420, "Press 'r' to Restart", {
+      fontSize: "70px",
+      fill: "#00ff00",
+      strokeThickness: 8,
+      shadow: {
+        offsetX: 4,
+        offsetY: 2,
+        fill: false,
+        stroke: true,
+      },
+    });
+    gameOverCaption.setOrigin(0.5, 0.5);
+    gameOverText.visible = false;
+
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
 
@@ -172,6 +205,21 @@ const Game = ({ editLevel, currentTool, levelData }) => {
 
     if (movementControls.up.isDown && player.body.touching.down) {
       player.setVelocityY(-300);
+    }
+  }
+
+  function responsivelyResize() {
+    const gameId = document.getElementById("game");
+    gameId.style.width = "100%";
+    gameId.style.height = "100%";
+  }
+
+  function gameOver() {
+    if (gameWon === true) {
+      // Do stuff
+    } else {
+      gameOverText.visible = true;
+      gameOverCaption.visble = true;
     }
   }
 
