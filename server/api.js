@@ -79,11 +79,22 @@ router.get("/levels", (req, res) => {
       return res.send(levels);
     });
   } else {
-    actualQuery = {
-      name: { $regex: req.query.name },
-      difficulty: { $gte: req.query.difficulty - 10, $lte: req.query.difficulty + 10 },
-      funness: { $gte: req.query.funness - 10, $lte: req.query.funness + 10 },
-    };
+    console.log("req.query.name: ", req.query.name.length);
+    console.log("req.query.difficulty: ", req.query.difficulty.length);
+    console.log("req.query.funness: ", req.query.funness.length);
+    if (
+      req.query.name.length === 0
+      && Number(req.query.difficulty) === 0
+      && Number(req.query.funness) === 0
+    ) {
+      actualQuery = {};
+    } else {
+      actualQuery = {
+        name: { $regex: req.query.name },
+        difficulty: { $gte: req.query.difficulty - 10, $lte: req.query.difficulty + 10 },
+        funness: { $gte: req.query.funness - 10, $lte: req.query.funness + 10 },
+      };
+    }
     Level.find(actualQuery, (err, levels) => {
       if (err) {
         return res.status(500).send(err);
