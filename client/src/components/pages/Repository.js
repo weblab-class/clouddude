@@ -14,7 +14,7 @@ import SingleLevel from "../modules/SingleLevel";
 import "../../utilities.css";
 import "./Repository.css";
 
-const Repository = () => {
+const Repository = ({setActiveLevel}) => {
   const [showModal, setShowModal] = useState(false);
 
   const [levelDifficulty, setLevelDifficulty] = useState(50);
@@ -86,12 +86,12 @@ const Repository = () => {
   ]);
 
   // in the beginning, get all levels
-  useEffect(() => {
-    const query = { name: "", difficulty: "", funness: "" };
-    get("/api/levels", query).then((levelObjects) => {
-      setLevels(levelObjects);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const query = { name: "", difficulty: "", funness: "" };
+  //   get("/api/levels", query).then((levelObjects) => {
+  //     setLevels(levelObjects);
+  //   });
+  // }, []);
 
   // filter the levels based on user input
   const filter = () => {
@@ -202,7 +202,7 @@ const Repository = () => {
         {levels.map((level) => {
           return (
             <div key={uuidv4()}>
-              <SingleLevel level={level} />
+              <SingleLevel level={level} setActiveLevel={setActiveLevel} />
             </div>
           );
         })}
