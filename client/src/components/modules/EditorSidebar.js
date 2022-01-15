@@ -5,9 +5,17 @@ import EditTool from "./EditTool";
 import "../../utilities.css";
 import "./EditorSidebar.css";
 
-const EditorSidebar = ({ setCurrentTool, currentTool, levelData, setLevelData }) => {
+const EditorSidebar = ({
+  setCurrentTool,
+  currentTool,
+  levelData,
+  setLevelData,
+  message,
+  setMessage,
+}) => {
   return (
     <div className="EditorSidebar-container">
+      <div className="EditorSidebar-message">{message}</div>
       <div className="EditorSidebar-tools">
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="start" img="" />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="exit" img="" />
@@ -26,6 +34,8 @@ const EditorSidebar = ({ setCurrentTool, currentTool, levelData, setLevelData })
         className="EditorSidebar-LevelData"
         setLevelData={setLevelData}
         levelData={levelData}
+        message={message}
+        setMessage={setMessage}
       />
     </div>
   );

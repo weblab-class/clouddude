@@ -12,11 +12,14 @@ const LevelEditor = ({ userState }) => {
   // Maintains tool currently selected in editor
   const [currentTool, setCurrentTool] = useState("none");
 
+  // String to communicate messages to user
+  const [message, setMessage] = useState("Design Your Level!");
+
   // Initialize empty level
   const [levelData, setLevelData] = useState({
     creator: undefined,
-    name: undefined,
-    description: undefined,
+    name: "",
+    description: "",
     start: { x: undefined, y: undefined },
     exit: { x: undefined, y: undefined },
     platforms: [],
@@ -33,11 +36,22 @@ const LevelEditor = ({ userState }) => {
     });
   }, [userState]);
 
+  // Update message on tool switch
+  useEffect(() => {
+    if (message !== "Design Your Level!") {
+      setMessage("Design Your Level!");
+    }
+  }, [currentTool]);
+
   // Updates level based on Canvas click
   const editLevel = useCallback(
     (gridPoint) => {
       console.log(gridPoint);
       console.log(currentTool);
+      if (message !== "Design Your Level!") {
+        setMessage("Design Your Level!");
+      }
+
       if (gridPoint.x === undefined || gridPoint.y === undefined) {
         return;
       }
@@ -57,7 +71,7 @@ const LevelEditor = ({ userState }) => {
         });
       }
     },
-    [currentTool, levelData]
+    [currentTool, levelData, message]
   );
 
   return (
@@ -72,9 +86,13 @@ const LevelEditor = ({ userState }) => {
           setCurrentTool={setCurrentTool}
           levelData={levelData}
           setLevelData={setLevelData}
+          message={message}
+          setMessage={setMessage}
         />
       </div>
       <Game
+        message={message}
+        setMessage={setMessage}
         setLevelData={setLevelData}
         editLevel={editLevel}
         currentTool={currentTool}

@@ -10,10 +10,28 @@ import { post } from "../../utilities";
 
 import "./LevelData.css";
 
-const LevelData = ({ levelData, setLevelData }) => {
+const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
   //Posts the level on submission
   const addLevel = useCallback(() => {
     console.log(levelData);
+    if (levelData.name === "") {
+      setMessage("Name is Required");
+      return;
+    }
+    if (levelData.description === "") {
+      setMessage("Description is Required");
+      return;
+    } else {
+      setMessage("Submitted Successfully");
+      setLevelData({
+        ...levelData,
+        start: { x: undefined, y: undefined },
+        exit: { x: undefined, y: undefined },
+        platforms: [],
+        coins: [],
+        obstacles: [],
+      });
+    }
     /*
     post("/api/level", levelData).then((level) => {
       console.log("level from frontend", level);
@@ -32,16 +50,38 @@ const LevelData = ({ levelData, setLevelData }) => {
           <Form.Control
             onChange={(event) => {
               setLevelData({ ...levelData, name: event.target.value });
+              if (message !== "Design Your Level!") {
+                setMessage("Design Your Level!");
+              }
             }}
             type="text"
             placeholder="Enter Level Name"
           />
         </Form.Group>
 
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            onChange={(event) => {
+              setLevelData({ ...levelData, description: event.target.value });
+              if (message !== "Design Your Level!") {
+                setMessage("Design Your Level!");
+              }
+            }}
+            type="text"
+            placeholder="Enter Description"
+          />
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="difficulty">
           <Form.Label>Difficulty</Form.Label>
           <Slider
-            onChange={(event, value) => setLevelData({ ...levelData, difficulty: Number(value) })}
+            onChange={(event, value) => {
+              setLevelData({ ...levelData, difficulty: Number(value) });
+              if (message !== "Design Your Level!") {
+                setMessage("Design Your Level!");
+              }
+            }}
             aria-valuetext="difficulty"
             value={levelData.difficulty}
             color="primary"
@@ -66,7 +106,12 @@ const LevelData = ({ levelData, setLevelData }) => {
         <Form.Group className="mb-3" controlId="funness">
           <Form.Label>Funness</Form.Label>
           <Slider
-            onChange={(event, value) => setLevelData({ ...levelData, funness: Number(value) })}
+            onChange={(event, value) => {
+              setLevelData({ ...levelData, funness: Number(value) });
+              if (message !== "Design Your Level!") {
+                setMessage("Design Your Level!");
+              }
+            }}
             aria-valuetext="funnes"
             value={levelData.funness}
             color="primary"
@@ -95,7 +140,7 @@ const LevelData = ({ levelData, setLevelData }) => {
         <Button
           className="LevelData-button"
           variant="primary"
-          onClick={() =>
+          onClick={() => {
             setLevelData({
               ...levelData,
               start: { x: undefined, y: undefined },
@@ -103,8 +148,9 @@ const LevelData = ({ levelData, setLevelData }) => {
               platforms: [],
               coins: [],
               obstacles: [],
-            })
-          }
+            });
+            setMessage("Level Cleared!");
+          }}
         >
           Clear Level
         </Button>
