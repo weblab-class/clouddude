@@ -2,15 +2,82 @@ import React, { useEffect } from "react";
 import Phaser, { NONE } from "phaser";
 import "./Game.css";
 
-const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
+const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
   // Global configuration constants
   const gameWon = false;
+  let isOver = false;
 
   // Global control variables
+  let game;
   let movementControls;
   let player;
+
   let gameOverText;
   let gameOverCaption;
+  let restartKey;
+
+  const sampleData = {
+    start: { x: 100, y: 450 },
+    exit: { x: 1525, y: 825 },
+    platforms: [
+      { type: "grass", x: 25, y: 875 },
+      { type: "grass", x: 75, y: 875 },
+      { type: "grass", x: 175, y: 875 },
+      { type: "grass", x: 125, y: 875 },
+      { type: "grass", x: 225, y: 875 },
+      { type: "grass", x: 275, y: 875 },
+      { type: "grass", x: 325, y: 875 },
+      { type: "grass", x: 375, y: 875 },
+      { type: "grass", x: 425, y: 875 },
+      { type: "grass", x: 1275, y: 875 },
+      { type: "grass", x: 1225, y: 875 },
+      { type: "grass", x: 1575, y: 875 },
+      { type: "grass", x: 1525, y: 875 },
+      { type: "grass", x: 1475, y: 875 },
+      { type: "grass", x: 1425, y: 875 },
+      { type: "grass", x: 1375, y: 875 },
+      { type: "grass", x: 1325, y: 875 },
+      { type: "grass", x: 1275, y: 875 },
+      { type: "grass", x: 1225, y: 875 },
+    ],
+    coins: [
+      { type: "spinCoin", x: 175, y: 825 },
+      { type: "spinCoin", x: 225, y: 825 },
+    ],
+    obstacles: [{ type: "spike", x: 275, y: 825 }],
+  };
+
+  useEffect(() => {
+    const canvas = document.getElementById("game");
+    // canvas.addEventListener("click", editLevel);
+    const config = {
+      width: 1600,
+      height: 900,
+      type: Phaser.CANVAS,
+      canvas,
+      physics: {
+        default: "arcade",
+        arcade: {
+          gravity: { y: 600 },
+        },
+      },
+      scale: {
+        mode: Phaser.Scale.FIT,
+      },
+      scene: {
+        preload,
+        create,
+        update,
+      },
+      callbacks: {
+        postBoot: (settings) => {
+          settings.canvas.style.width = "100%";
+          settings.canvas.style.height = "100%";
+        },
+      },
+    };
+    game = new Phaser.Game(config);
+  }, []);
 
   function preload() {
     // Loads Assets
@@ -49,6 +116,11 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
 
     // Initialize keyboard control
     movementControls = this.input.keyboard.createCursorKeys();
+    restartKey = this.input.keyboard.addKey("R");
+    restartKey.on("down", () => {
+      this.scene.restart();
+      isOver = false;
+    });
 
     // Initialize Player Animations
     this.anims.create({
@@ -84,52 +156,29 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
     });
 
     // Create platforms
-    const fakePlatformData = [
-      { x: 25, y: 875 },
-      { x: 75, y: 875 },
-      { x: 125, y: 875 },
-      { x: 175, y: 875 },
-      { x: 225, y: 875 },
-      { x: 275, y: 875 },
-      { x: 325, y: 875 },
-      { x: 375, y: 875 },
-      { x: 425, y: 875 },
-      { x: 1275, y: 875 },
-      { x: 1225, y: 875 },
-      { x: 1575, y: 875 },
-      { x: 1525, y: 875 },
-      { x: 1475, y: 875 },
-      { x: 1425, y: 875 },
-      { x: 1375, y: 875 },
-      { x: 1325, y: 875 },
-      { x: 1275, y: 875 },
-      { x: 1225, y: 875 },
-    ];
-
     const platforms = this.physics.add.staticGroup();
-    for (const platform of fakePlatformData) {
-      platforms.create(platform.x, platform.y, "grass");
+
+    for (const platform of sampleData.platforms) {
+      if (platform.type === "grass") {
+        platforms.create(platform.x, platform.y, "grass");
+      }
     }
 
     // Create coins
-    const fakeCoinData = [
-      { x: 175, y: 825 },
-      { x: 225, y: 825 },
-      { x: 275, y: 825 },
-    ];
-
     const coins = this.add.group();
 
-    for (const coin of fakeCoinData) {
-      const newCoin = this.physics.add.sprite(coin.x, coin.y, "coin");
-      newCoin.anims.play("spin");
-      newCoin.setImmovable(true);
-      newCoin.body.setAllowGravity(false);
-      coins.add(newCoin);
+    for (const coin of sampleData.coins) {
+      if (coin.type === "spinCoin") {
+        const newCoin = this.physics.add.sprite(coin.x, coin.y, "coin");
+        newCoin.anims.play("spin");
+        newCoin.setImmovable(true);
+        newCoin.body.setAllowGravity(false);
+        coins.add(newCoin);
+      }
     }
 
     // Create Game Over Text
-    const gameOverText = this.add.text(800, 300, "Level Failed", {
+    gameOverText = this.add.text(800, 300, "Level Failed", {
       fontSize: "150px",
       fill: "#00ff00",
       strokeThickness: 11,
@@ -143,7 +192,7 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
     gameOverText.setOrigin(0.5, 0.5);
     gameOverText.visible = false;
 
-    const gameOverCaption = this.add.text(800, 420, "Press 'r' to Restart", {
+    gameOverCaption = this.add.text(800, 420, "Press 'r' to Restart", {
       fontSize: "70px",
       fill: "#00ff00",
       strokeThickness: 8,
@@ -155,7 +204,7 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
       },
     });
     gameOverCaption.setOrigin(0.5, 0.5);
-    gameOverText.visible = false;
+    gameOverCaption.visible = false;
 
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
@@ -175,6 +224,7 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
           onComplete() {
             coins.killAndHide(coin);
             coins.remove(coin);
+            gameOver();
           },
         });
       },
@@ -189,11 +239,11 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
 
     // Handles Keyboard Input
 
-    if (movementControls.left.isDown) {
+    if (movementControls.left.isDown && !isOver) {
       player.setVelocityX(-160);
 
       player.anims.play("left", true);
-    } else if (movementControls.right.isDown) {
+    } else if (movementControls.right.isDown && !isOver) {
       player.setVelocityX(160);
 
       player.anims.play("right", true);
@@ -203,7 +253,7 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
       player.anims.play("turn");
     }
 
-    if (movementControls.up.isDown && player.body.touching.down) {
+    if (movementControls.up.isDown && player.body.touching.down && !isOver) {
       player.setVelocityY(-300);
     }
   }
@@ -215,45 +265,15 @@ const Game = ({ editLevel, currentTool, levelData, isEditing }) => {
   }
 
   function gameOver() {
+    isOver = true;
+    player.setActive(false).setVisible(false);
     if (gameWon === true) {
       // Do stuff
     } else {
       gameOverText.visible = true;
-      gameOverCaption.visble = true;
+      gameOverCaption.visible = true;
     }
   }
-
-  useEffect(() => {
-    const canvas = document.getElementById("game");
-    // canvas.addEventListener("click", editLevel);
-    const config = {
-      width: 1600,
-      height: 900,
-      type: Phaser.CANVAS,
-      canvas,
-      physics: {
-        default: "arcade",
-        arcade: {
-          gravity: { y: 600 },
-        },
-      },
-      scale: {
-        mode: Phaser.Scale.FIT,
-      },
-      scene: {
-        preload,
-        create,
-        update,
-      },
-      callbacks: {
-        postBoot: (settings) => {
-          settings.canvas.style.width = "100%";
-          settings.canvas.style.height = "100%";
-        },
-      },
-    };
-    const game = new Phaser.Game(config);
-  }, []);
 
   // Update click listener for current tool
   useEffect(() => {
