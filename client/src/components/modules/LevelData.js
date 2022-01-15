@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Slider from "@material-ui/core/Slider";
@@ -10,27 +10,15 @@ import { post } from "../../utilities";
 
 import "./LevelData.css";
 
-const LevelData = ({ start, exit, platforms, decoration, coins, obstacles }) => {
-  const [name, setName] = useState("");
-  const [funnes, setFunness] = useState(100);
-  const [difficulty, setDifficulty] = useState(50);
-
-  const addLevel = () => {
-    const body = {
-      name: name,
-      start: start,
-      exit: exit,
-      platforms: platforms,
-      decoration: decoration,
-      coins: coins,
-      obstacles: obstacles,
-      funness: funnes,
-      difficulty: difficulty,
-    };
-    post("/api/level", body).then((level) => {
+const LevelData = ({ levelData, setLevelData }) => {
+  //Posts the level on submission
+  const addLevel = useCallback(() => {
+    console.log(levelData);
+    /*
+    post("/api/level", levelData).then((level) => {
       console.log("level from frontend", level);
-    });
-  };
+    }); */
+  }, [levelData]);
 
   return (
     <div className="LevelData-container">
@@ -38,7 +26,9 @@ const LevelData = ({ start, exit, platforms, decoration, coins, obstacles }) => 
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) => {
+              setLevelData({ ...levelData, name: event.target.value });
+            }}
             type="text"
             placeholder="Enter Level Name"
           />
@@ -47,9 +37,9 @@ const LevelData = ({ start, exit, platforms, decoration, coins, obstacles }) => 
         <Form.Group className="mb-3" controlId="difficulty">
           <Form.Label>Difficulty</Form.Label>
           <Slider
-            onChange={(event, value) => setDifficulty(Number(value))}
-            value={difficulty}
+            onChange={(event, value) => setLevelData({ ...levelData, difficulty: Number(value) })}
             aria-valuetext="difficulty"
+            value={levelData.difficulty}
             color="primary"
             marks={[
               {
@@ -72,9 +62,9 @@ const LevelData = ({ start, exit, platforms, decoration, coins, obstacles }) => 
         <Form.Group className="mb-3" controlId="funness">
           <Form.Label>Funness</Form.Label>
           <Slider
-            onChange={(event, value) => setFunness(Number(value))}
-            value={funnes}
+            onChange={(event, value) => setLevelData({ ...levelData, funness: Number(value) })}
             aria-valuetext="funnes"
+            value={levelData.funness}
             color="primary"
             marks={[
               {

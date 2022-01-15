@@ -4,6 +4,7 @@ const LevelSchema = new mongoose.Schema({
   // _id : String
   creator: String,
   name: String,
+  description: String,
   start: { x: Number, y: Number },
   exit: { x: Number, y: Number },
   platforms: [{ x: Number, y: Number }],
