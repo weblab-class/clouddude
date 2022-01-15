@@ -61,6 +61,7 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
         default: "arcade",
         arcade: {
           gravity: { y: 600 },
+          debug: true,
         },
       },
       scale: {
@@ -185,7 +186,10 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
 
     for (const obstacle of sampleData.obstacles) {
       if (obstacle.type === "spike") {
-        spikes.create(obstacle.x, obstacle.y, "spike");
+        const spike = spikes.create(obstacle.x, obstacle.y, "spike");
+        spike.setScale(1.0, 0.75);
+        spike.y += 6.25;
+        spike.refreshBody();
       }
     }
 
