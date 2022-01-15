@@ -9,8 +9,8 @@ const Game = ({ editLevel, currentTool, levelData }) => {
 
   function responsivelyResize() {
     const gameId = document.getElementById("game");
-    // gameId.style.width = "80%";
-    // gameId.style.height = "80%";
+    gameId.style.width = "100%";
+    gameId.style.height = "100%";
   }
 
   function preload() {
@@ -67,6 +67,18 @@ const Game = ({ editLevel, currentTool, levelData }) => {
       repeat: -1,
     });
 
+    // Initialize Coin Animation
+    this.anims.create({
+      key: "spin",
+      frames: this.anims.generateFrameNumbers("coin", {
+        start: 0,
+        end: 7,
+      }),
+      frameRate: 15,
+      yoyo: true,
+      repeat: -1,
+    });
+
     // Create platforms
     const fakePlatformData = [
       { x: 25, y: 875 },
@@ -75,6 +87,9 @@ const Game = ({ editLevel, currentTool, levelData }) => {
       { x: 175, y: 875 },
       { x: 225, y: 875 },
       { x: 275, y: 875 },
+      { x: 325, y: 875 },
+      { x: 375, y: 875 },
+      { x: 425, y: 875 },
       { x: 1275, y: 875 },
       { x: 1225, y: 875 },
       { x: 1575, y: 875 },
@@ -92,8 +107,47 @@ const Game = ({ editLevel, currentTool, levelData }) => {
       platforms.create(platform.x, platform.y, "grass");
     }
 
-    // Handle collisions
+    // Create coins
+    const fakeCoinData = [
+      { x: 175, y: 825 },
+      { x: 225, y: 825 },
+      { x: 275, y: 825 },
+    ];
+
+    const coins = this.add.group();
+
+    for (const coin of fakeCoinData) {
+      const newCoin = this.physics.add.sprite(coin.x, coin.y, "coin");
+      newCoin.anims.play("spin");
+      newCoin.setImmovable(true);
+      newCoin.body.setAllowGravity(false);
+      coins.add(newCoin);
+    }
+
+    // Handle platform collisions
     this.physics.add.collider(player, platforms);
+
+    // Handle coin collection
+    this.physics.add.overlap(
+      player,
+      coins,
+      function (player, coin) {
+        this.tweens.add({
+          targets: coin,
+          y: coin.y - 100,
+          alpha: 0,
+          duration: 800,
+          ease: "Cubic.easeOut",
+          callbackScope: this,
+          onComplete() {
+            coins.killAndHide(coin);
+            coins.remove(coin);
+          },
+        });
+      },
+      null,
+      this
+    );
   }
 
   function update() {
