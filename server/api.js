@@ -51,13 +51,14 @@ router.post("/level", auth.ensureLoggedIn, (req, res) => {
   const newLevel = new Level({
     creator: req.body.creator,
     name: req.body.name,
+    description: req.body.description,
     start: req.body.start,
     exit: req.body.exit,
     platforms: req.body.platforms,
     coins: req.body.coins,
     obstacles: req.body.obstacles,
-    funness: req.body.funness,
-    difficulty: req.body.difficulty,
+    funness: Number(req.body.funness),
+    difficulty: Number(req.body.difficulty),
   });
 
   newLevel.save().then((level) => {

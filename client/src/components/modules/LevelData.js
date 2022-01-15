@@ -32,11 +32,11 @@ const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
         obstacles: [],
       });
     }
-    /*
+
     post("/api/level", levelData).then((level) => {
       console.log("level from frontend", level);
-    }); */
-  }, [levelData]);
+    }); 
+  });
 
   useEffect(() => {
     console.log(levelData);
