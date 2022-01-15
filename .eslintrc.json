@@ -32,6 +32,7 @@
         "prefer-template": 0,
         "react/jsx-indent": 0,
         "react/jsx-filename-extension": 0,
-        "no-use-before-define": 0
+        "no-use-before-define": 0,
+        "react/no-this-in-sfc": 0
     }
 }

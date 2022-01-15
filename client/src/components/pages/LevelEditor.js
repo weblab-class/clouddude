@@ -35,15 +35,12 @@ const LevelEditor = ({ userState }) => {
 
   // Updates level based on Canvas click
   const editLevel = useCallback(
-    (event) => {
-      const clickPoint = { x: event.offsetX, y: event.offsetY };
-      if (clickPoint.x === undefined || clickPoint.y === undefined) {
+    (gridPoint) => {
+      console.log(gridPoint);
+      console.log(currentTool);
+      if (gridPoint.x === undefined || gridPoint.y === undefined) {
         return;
       }
-      //const gridPoint = clickPointToGridPoint(clickPoint);
-      const gridPoint = { x: 10, y: 10 };
-      console.log(clickPoint);
-      console.log(`Width: ${canvas.cellWidth} Height:${canvas.cellheight}`);
       if (currentTool === "start") {
         setLevelData({ ...levelData, start: gridPoint });
       } else if (currentTool === "exit") {

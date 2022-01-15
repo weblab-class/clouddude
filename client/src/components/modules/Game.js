@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Phaser, { NONE } from "phaser";
 import "./Game.css";
 
 const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
+  const [gridPoint, setGridPoint] = useState({ x: undefined, y: undefined });
+
   // Global configuration constants
   const gameWon = false;
   let isOver = false;
@@ -227,7 +229,10 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
 
       grid.createMultiple({
         key: "grid",
+        name: "grid",
         frameQuantity: 576,
+        hitArea: new Phaser.Geom.Rectangle(1, 1, 49, 49),
+        hitAreaCallback: Phaser.Geom.Rectangle.Contains,
       });
 
       Phaser.Actions.GridAlign(grid.getChildren(), {
@@ -238,8 +243,9 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
         x: 25,
         y: 25,
       });
-      Phaser.Actions.SetHitArea(grid.getChildren());
     }
+
+    this.input.on("gameobjectdown", clickCallback);
 
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
@@ -291,6 +297,14 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
     );
   }
 
+  const clickCallback = (pointer, gameObject) => {
+    setGridPoint({ x: gameObject.x, y: gameObject.y });
+  };
+
+  useEffect(() => {
+    editLevel(gridPoint);
+  }, [gridPoint]);
+
   function update() {
     // Responsively updates screen size
     responsivelyResize();
@@ -334,14 +348,16 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
     }
   }
 
+  /*
   // Update click listener for current tool
   useEffect(() => {
-    const canvas = document.getElementById("game");
-    canvas.addEventListener("click", editLevel);
+    console.log(test);
+    savedInput.on("gameobjectdown", clickCallback);
     return () => {
-      canvas.removeEventListener("click", editLevel);
+      savedInput.off("gameobjectdown", clickCallback);
     };
   }, [currentTool, editLevel]);
+  */
 
   return (
     <div className="Game-container">
