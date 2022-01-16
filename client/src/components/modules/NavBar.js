@@ -18,14 +18,20 @@ import { post, get } from "../../utilities";
 
 const GOOGLE_CLIENT_ID = "31388373258-ev9tadag8nhjb35r6pv3v1jfq7n7qrtg.apps.googleusercontent.com";
 
-const NavBar = ({ handleLogin, handleLogout, userId }) => {
+const NavBar = ({
+  handleLogin,
+  handleLogout,
+  userId,
+  publishedLevels,
+  setPublishedLevels,
+  levelsWon,
+  setLevelsWon,
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [profileModal, setProfileModal] = useState(false);
   const [newName, setNewName] = useState("");
   const [userName, setUserName] = useState("");
-  const [publishedLevels, setPublishedLevels] = useState(30);
-  const [levelsWon, setLevelsWon] = useState(20);
 
   const handleProfile = () => {
     setMenuOpen(false);
@@ -50,8 +56,8 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
       if (user._id) {
         setUserName(user.name);
         setNewName(user.name);
-        setLevelsWon(27);
-        setPublishedLevels(28);
+        setLevelsWon(user.levelsWon);
+        setPublishedLevels(user.levelsPublished);
       }
     });
   }, [userId]);
@@ -123,19 +129,11 @@ const NavBar = ({ handleLogin, handleLogout, userId }) => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="difficulty">
-                      <Form.Label>
-Published Levels:
-{' '}
-{publishedLevels}
-                      </Form.Label>
+                      <Form.Label>Published Levels: {publishedLevels}</Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
-                      <Form.Label>
-Levels Won:
-{' '}
-{levelsWon}
-                      </Form.Label>
+                      <Form.Label>Levels Won: {levelsWon}</Form.Label>
                     </Form.Group>
                   </Form>
                 </Modal.Body>

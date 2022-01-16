@@ -105,12 +105,28 @@ router.get("/levels", (req, res) => {
   }
 });
 
-// changing user data
+// changing user name
 router.post("/user", auth.ensureLoggedIn, (req, res) => {
   User.findOneAndUpdate({ _id: req.body.user._id }, { $set: { name: req.body.user.name } }, () => {
     console.log("user from backend: ", req.body.user);
     res.send(req.body.user);
   });
+});
+
+// changing user profile(currently just levels published)
+router.post("/profile", auth.ensureLoggedIn, (req, res) => {
+  const newLevelsPublished = Number(req.body.user.levelsPublished) + 1;
+  User.findOneAndUpdate(
+    { _id: req.body.user._id },
+    { $set: { levelsPublished: newLevelsPublished } },
+    () => {
+      const newUser = {
+        levelsWon: 0,
+        levelsPublished: newLevelsPublished,
+      };
+      res.send(newUser);
+    }
+  );
 });
 
 // anything else falls to this "not found" case
