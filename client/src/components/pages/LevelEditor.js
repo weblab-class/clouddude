@@ -7,6 +7,7 @@ import EditorSidebar from "../modules/EditorSidebar";
 
 import "../../utilities.css";
 import "./LevelEditor.css";
+
 const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId }) => {
   // Maintains tool currently selected in editor
   const [currentTool, setCurrentTool] = useState("none");
@@ -68,6 +69,11 @@ const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId })
           ...levelData,
           coins: [...levelData.coins, { ...gridPoint, type: "spinCoin" }],
         });
+      } else if (currentTool === "spike") {
+        setLevelData({
+          ...levelData,
+          obstacles: [...levelData.obstacles, { ...gridPoint, type: "spike" }],
+        });
       }
     },
     [currentTool, levelData, message]
@@ -111,8 +117,8 @@ export default LevelEditor;
 
 // Converts clickPoint to location in game's coordinate system
 const clickPointToGridPoint = (clickPoint, canvas = 0, puzzle = 0) => {
-  const width = canvas.width;
-  const height = canvas.height;
+  const { width } = canvas;
+  const { height } = canvas;
   const rowCount = puzzle.rows;
   const columnCount = puzzle.columns;
   const cellWidth = width / columnCount;

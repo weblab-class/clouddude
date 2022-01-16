@@ -14,7 +14,7 @@ const EditorSidebar = ({
   setMessage,
   publishedLevels,
   setPublishedLevels,
-  userId
+  userId,
 }) => {
   return (
     <div className="EditorSidebar-container">
@@ -29,7 +29,7 @@ const EditorSidebar = ({
           img=""
         />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="coin" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name5" img="" />
+        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="spike" img="" />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name6" img="" />
       </div>
       <LevelData
