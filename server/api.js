@@ -115,7 +115,7 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
 
 // changing user profile(either number of published levels or levels won)
 router.post("/profile", auth.ensureLoggedIn, (req, res) => {
-  if (req.body.user.levelsPublished) {
+  if (typeof req.body.user.levelsPublished !== "undefined") {
     const newLevelsPublished = Number(req.body.user.levelsPublished) + 1;
     User.findOneAndUpdate(
       { _id: req.body.user._id },
