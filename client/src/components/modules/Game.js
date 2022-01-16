@@ -15,16 +15,19 @@ const Game = ({
   const [gridPoint, setGridPoint] = useState({ x: undefined, y: undefined });
 
   // Global configuration constants
-  const gameWon = false;
+  let gameWon = false;
   let isOver = false;
 
   // Global control variables
   let game;
   let movementControls;
   let player;
+  let door;
 
   let gameOverText;
   let gameOverCaption;
+  let gameWonText;
+  let gameWonCaption;
   let restartKey;
 
   // Handle level data gathering
@@ -96,6 +99,10 @@ const Game = ({
       frameWidth: 50,
       frameHeight: 50,
     });
+    this.load.spritesheet("door", "54mjlshl2ibwxp0/door.png?dl=0", {
+      frameWidth: 50,
+      frameHeight: 50,
+    });
     this.load.spritesheet("player", "ube5tzlgdeawxk9/pinkguy.png?dl=0", {
       frameWidth: 32,
       frameHeight: 48,
@@ -122,7 +129,7 @@ const Game = ({
       this.add.image(800, 450, "background");
     }
 
-    // Create Player
+    // Create player
     player = this.physics.add.sprite(getActiveLevel().start.x, getActiveLevel().start.y, "player");
 
     // Initialize keyboard control
@@ -133,7 +140,7 @@ const Game = ({
       isOver = false;
     });
 
-    // Initialize Player Animations
+    // Initialize player animations
     this.anims.create({
       key: "left",
       frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
@@ -154,7 +161,7 @@ const Game = ({
       repeat: -1,
     });
 
-    // Initialize Coin Animation
+    // Initialize coin animation
     this.anims.create({
       key: "spin",
       frames: this.anims.generateFrameNumbers("coin", {
@@ -165,6 +172,11 @@ const Game = ({
       yoyo: true,
       repeat: -1,
     });
+
+    // Create door
+    door = this.physics.add.sprite(getActiveLevel().exit.x, getActiveLevel().exit.y, "door");
+    door.setImmovable(true);
+    door.body.setAllowGravity(false);
 
     // Create platforms
     const platforms = this.physics.add.staticGroup();
@@ -230,6 +242,36 @@ const Game = ({
     gameOverCaption.setOrigin(0.5, 0.5);
     gameOverCaption.visible = false;
 
+    // Create Game Won Text
+    gameWonText = this.add.text(800, 300, "Level Won", {
+      fontSize: "150px",
+      fill: "#00ff00",
+      strokeThickness: 11,
+      shadow: {
+        offsetX: 4,
+        offsetY: 2,
+        fill: false,
+        stroke: true,
+      },
+    });
+    gameWonText.setOrigin(0.5, 0.5);
+    gameWonText.visible = false;
+
+    // Create restart caption
+    gameWonCaption = this.add.text(800, 420, "Press 'r' to Restart", {
+      fontSize: "70px",
+      fill: "#00ff00",
+      strokeThickness: 8,
+      shadow: {
+        offsetX: 4,
+        offsetY: 2,
+        fill: false,
+        stroke: true,
+      },
+    });
+    gameWonCaption.setOrigin(0.5, 0.5);
+    gameWonCaption.visible = false;
+
     // Create Level editor grid
     if (isEditing) {
       const grid = this.add.group();
@@ -254,6 +296,7 @@ const Game = ({
         setGridPoint({ x: gameObject.x, y: gameObject.y });
         setTimeout(() => {
           this.scene.restart();
+          isOver = false;
         }, 15);
       });
 
@@ -266,6 +309,13 @@ const Game = ({
 
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
+
+    // Handle door collisions
+    this.physics.add.overlap(player, door, (player, door) => {
+      door.setFrame(1);
+      gameWon = true;
+      gameOver();
+    });
 
     // Handle spike collisions
     this.physics.add.overlap(
@@ -360,13 +410,16 @@ const Game = ({
     isOver = true;
     player.setActive(false).setVisible(false);
     if (gameWon === true) {
-      // Do stuff
+      console.log("winer");
+      gameWonText.visible = true;
+      gameWonCaption.visible = true;
 
-      // update the number of levels won since user just won
-      const body = { user: { levelsWon, _id: userId } };
-      post("/api/profile", body).then((user) => {
-        setLevelsWon(user.levelsWon);
-      });
+      if (!isEditing) {
+        const body = { user: { levelsWon, _id: userId } };
+        post("/api/profile", body).then((user) => {
+          setLevelsWon(user.levelsWon);
+        });
+      }
     } else {
       gameOverText.visible = true;
       gameOverCaption.visible = true;
