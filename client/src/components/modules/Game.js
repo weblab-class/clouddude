@@ -27,37 +27,7 @@ const Game = ({
   let gameOverCaption;
   let restartKey;
 
-  const sampleData = {
-    start: { x: 100, y: 450 },
-    exit: { x: 1525, y: 825 },
-    platforms: [
-      { type: "grass", x: 25, y: 875 },
-      { type: "grass", x: 75, y: 875 },
-      { type: "grass", x: 175, y: 875 },
-      { type: "grass", x: 125, y: 875 },
-      { type: "grass", x: 225, y: 875 },
-      { type: "grass", x: 275, y: 875 },
-      { type: "grass", x: 325, y: 875 },
-      { type: "grass", x: 375, y: 875 },
-      { type: "grass", x: 425, y: 875 },
-      { type: "grass", x: 1275, y: 875 },
-      { type: "grass", x: 1225, y: 875 },
-      { type: "grass", x: 1575, y: 875 },
-      { type: "grass", x: 1525, y: 875 },
-      { type: "grass", x: 1475, y: 875 },
-      { type: "grass", x: 1425, y: 875 },
-      { type: "grass", x: 1375, y: 875 },
-      { type: "grass", x: 1325, y: 875 },
-      { type: "grass", x: 1275, y: 875 },
-      { type: "grass", x: 1225, y: 875 },
-    ],
-    coins: [
-      { type: "spinCoin", x: 175, y: 825 },
-      { type: "spinCoin", x: 225, y: 825 },
-    ],
-    obstacles: [{ type: "spike", x: 275, y: 825 }],
-  };
-
+  // Handle level data gathering
   const getCurrentTool = () => {
     return document.getElementById("currentToolHolder").value;
   };
@@ -282,6 +252,9 @@ const Game = ({
       Phaser.Actions.SetHitArea(grid.getChildren());
       this.input.on("gameobjectdown", (pointer, gameObject) => {
         setGridPoint({ x: gameObject.x, y: gameObject.y });
+        setTimeout(() => {
+          this.scene.restart();
+        }, 15);
       });
 
       /*
@@ -346,7 +319,9 @@ const Game = ({
   };
 
   useEffect(() => {
-    editLevel(gridPoint);
+    if (isEditing) {
+      editLevel(gridPoint);
+    }
   }, [gridPoint]);
 
   function update() {
