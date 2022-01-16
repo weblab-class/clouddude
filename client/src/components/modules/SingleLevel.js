@@ -19,7 +19,7 @@ const SingleLevel = ({ level, setActiveLevel }) => {
           <Card.Subtitle className="mb-2 text-muted">{level.creator}</Card.Subtitle>
 
           <Card.Text>{level.description}</Card.Text>
-          <Link to="/leveleditor/">
+          <Link to="/play/">
             <Button onClick={() => setActiveLevel(level)} variant="primary">
               Play
             </Button>
