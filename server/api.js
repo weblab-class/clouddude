@@ -69,9 +69,8 @@ router.post("/level", auth.ensureLoggedIn, (req, res) => {
 
 // getting all or filtered levels
 router.get("/levels", (req, res) => {
-  let actualQuery;
+  const actualQuery = {};
   if (req.query.type === "all") {
-    actualQuery = {};
     Level.find(actualQuery, (err, levels) => {
       if (err) {
         return res.status(500).send(err);
@@ -79,22 +78,22 @@ router.get("/levels", (req, res) => {
       return res.send(levels);
     });
   } else {
-    console.log("req.query.name: ", req.query.name.length);
-    console.log("req.query.difficulty: ", req.query.difficulty.length);
-    console.log("req.query.funness: ", req.query.funness.length);
-    if (
-      req.query.name.length === 0
-      && req.query.userName.length === 0
-      && Number(req.query.difficulty) === 0
-      && Number(req.query.funness) === 0
-    ) {
-      actualQuery = {};
-    } else {
-      actualQuery = {
-        name: { $regex: req.query.name },
-        creator: { $regex: req.query.userName },
-        difficulty: { $gte: req.query.difficulty - 10, $lte: req.query.difficulty + 10 },
-        funness: { $gte: req.query.funness - 10, $lte: req.query.funness + 10 },
+    if (req.query.name.length !== 0) {
+      actualQuery.name = { $regex: req.query.name };
+    }
+    if (req.query.userName.length !== 0) {
+      actualQuery.creator = { $regex: req.query.userName };
+    }
+    if (Number(req.query.difficulty) !== 0) {
+      actualQuery.difficulty = {
+        $gte: Number(req.query.difficulty) - 10,
+        $lte: Number(req.query.difficulty) + 10,
+      };
+    }
+    if (Number(req.query.funness) !== 0) {
+      actualQuery.funness = {
+        $gte: Number(req.query.funness) - 10,
+        $lte: Number(req.query.funness) + 10,
       };
     }
     Level.find(actualQuery, (err, levels) => {
