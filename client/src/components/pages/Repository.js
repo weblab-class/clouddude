@@ -20,6 +20,7 @@ const Repository = ({ setActiveLevel }) => {
   const [levelDifficulty, setLevelDifficulty] = useState(0);
   const [levelFunness, setLevelFunness] = useState(0);
   const [levelName, setLevelName] = useState("");
+  const [creatorName, setCreatorName] = useState("");
 
   const [levels, setLevels] = useState([]);
 
@@ -36,6 +37,7 @@ const Repository = ({ setActiveLevel }) => {
     setShowModal(false);
     const query = {
       name: levelName,
+      userName: creatorName,
       difficulty: Number(levelDifficulty),
       funness: Number(levelFunness),
       type: "filter"
@@ -72,12 +74,22 @@ const Repository = ({ setActiveLevel }) => {
 
           <Form>
             <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>Level Name</Form.Label>
               <Form.Control
                 onChange={(event) => setLevelName(event.target.value)}
                 type="text"
-                placeholder="Enter Name Keyword"
+                placeholder="Enter Level Name Keyword"
                 value={levelName}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Creator Name</Form.Label>
+              <Form.Control
+                onChange={(event) => setCreatorName(event.target.value)}
+                type="text"
+                placeholder="Enter Creator Name Keyword"
+                value={creatorName}
               />
             </Form.Group>
 

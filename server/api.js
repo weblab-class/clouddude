@@ -84,6 +84,7 @@ router.get("/levels", (req, res) => {
     console.log("req.query.funness: ", req.query.funness.length);
     if (
       req.query.name.length === 0
+      && req.query.userName.length === 0
       && Number(req.query.difficulty) === 0
       && Number(req.query.funness) === 0
     ) {
@@ -91,6 +92,7 @@ router.get("/levels", (req, res) => {
     } else {
       actualQuery = {
         name: { $regex: req.query.name },
+        creator: { $regex: req.query.userName },
         difficulty: { $gte: req.query.difficulty - 10, $lte: req.query.difficulty + 10 },
         funness: { $gte: req.query.funness - 10, $lte: req.query.funness + 10 },
       };
