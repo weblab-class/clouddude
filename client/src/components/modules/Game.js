@@ -58,6 +58,23 @@ const Game = ({
     obstacles: [{ type: "spike", x: 275, y: 825 }],
   };
 
+  const getCurrentTool = () => {
+    return document.getElementById("currentToolHolder").value;
+  };
+
+  const getActiveLevel = () => {
+    return document.getElementById("currentLevelHolder").value;
+  };
+
+  useEffect(() => {
+    document.getElementById("currentToolHolder").value = currentTool;
+  }, [currentTool]);
+
+  useEffect(() => {
+    document.getElementById("currentLevelHolder").value = activeLevel;
+  }, [activeLevel]);
+
+  // Setup game
   useEffect(() => {
     const container = document.getElementById("game-container");
     const canvas = document.getElementById("game");
@@ -123,6 +140,11 @@ const Game = ({
   }
 
   function create() {
+    // Establish restart function
+    const restartGame = () => {
+      this.scene.restart();
+    };
+
     // Create background
     if (isEditing) {
       this.add.image(800, 450, "backgroundGrid");
@@ -131,13 +153,13 @@ const Game = ({
     }
 
     // Create Player
-    player = this.physics.add.sprite(100, 450, "player");
+    player = this.physics.add.sprite(getActiveLevel().start.x, getActiveLevel().start.y, "player");
 
     // Initialize keyboard control
     movementControls = this.input.keyboard.createCursorKeys();
     restartKey = this.input.keyboard.addKey("R");
     restartKey.on("down", () => {
-      this.scene.restart();
+      restartGame();
       isOver = false;
     });
 
@@ -177,7 +199,7 @@ const Game = ({
     // Create platforms
     const platforms = this.physics.add.staticGroup();
 
-    for (const platform of sampleData.platforms) {
+    for (const platform of getActiveLevel().platforms) {
       if (platform.type === "grass") {
         platforms.create(platform.x, platform.y, "grass");
       }
@@ -186,7 +208,7 @@ const Game = ({
     // Create coins
     const coins = this.add.group();
 
-    for (const coin of sampleData.coins) {
+    for (const coin of getActiveLevel().coins) {
       if (coin.type === "spinCoin") {
         const newCoin = this.physics.add.sprite(coin.x, coin.y, "coin");
         newCoin.anims.play("spin");
@@ -199,7 +221,7 @@ const Game = ({
     // Create obstacles
     const spikes = this.physics.add.staticGroup();
 
-    for (const obstacle of sampleData.obstacles) {
+    for (const obstacle of getActiveLevel().obstacles) {
       if (obstacle.type === "spike") {
         const spike = spikes.create(obstacle.x, obstacle.y, "spike");
         spike.setScale(1.0, 0.75);
@@ -258,7 +280,10 @@ const Game = ({
       });
 
       Phaser.Actions.SetHitArea(grid.getChildren());
-      this.input.on("gameobjectdown", clickCallback);
+      this.input.on("gameobjectdown", (pointer, gameObject) => {
+        setGridPoint({ x: gameObject.x, y: gameObject.y });
+      });
+
       /*
       grid.getChildren().forEach((element) => {
         element.setInteractive();
@@ -351,9 +376,9 @@ const Game = ({
 
   function responsivelyResize() {
     // Resize game to fit available space
-    //const gameId = document.getElementById("game-container");
-    //gameId.style.width = "100%";
-    //gameId.style.height = "100%";
+    // const gameId = document.getElementById("game-container");
+    // gameId.style.width = "100%";
+    // gameId.style.height = "100%";
   }
 
   function gameOver() {
@@ -384,7 +409,13 @@ const Game = ({
   }, [currentTool, editLevel]);
   */
 
-  return <div id="game-container" className="Game-container" />;
+  return (
+    <div>
+      <div id="game-container" className="Game-container" />
+      <div id="currentToolHolder" value={currentTool} />
+      <div id="currentLevelHolder" value={activeLevel} />
+    </div>
+  );
 };
 
 export default Game;
