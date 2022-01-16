@@ -51,13 +51,14 @@ router.post("/level", auth.ensureLoggedIn, (req, res) => {
   const newLevel = new Level({
     creator: req.body.creator,
     name: req.body.name,
+    description: req.body.description,
     start: req.body.start,
     exit: req.body.exit,
     platforms: req.body.platforms,
     coins: req.body.coins,
     obstacles: req.body.obstacles,
-    funness: req.body.funness,
-    difficulty: req.body.difficulty,
+    funness: Number(req.body.funness),
+    difficulty: Number(req.body.difficulty),
   });
 
   newLevel.save().then((level) => {
@@ -68,13 +69,8 @@ router.post("/level", auth.ensureLoggedIn, (req, res) => {
 
 // getting all or filtered levels
 router.get("/levels", (req, res) => {
-  let actualQuery;
-  if (
-    req.query.name.length === 0 &&
-    req.query.difficulty.length === 0 &&
-    req.query.funness.length === 0
-  ) {
-    actualQuery = {};
+  const actualQuery = {};
+  if (req.query.type === "all") {
     Level.find(actualQuery, (err, levels) => {
       if (err) {
         return res.status(500).send(err);
@@ -82,12 +78,25 @@ router.get("/levels", (req, res) => {
       return res.send(levels);
     });
   } else {
-    actualQuery = {
-      name: { $regex: req.query.name },
-      difficulty: { $gte: req.query.difficulty - 10, $lte: req.query.difficulty + 10 },
-      funness: { $gte: req.query.funness - 10, $lte: req.query.funness + 10 },
-    };
-    Level.findMany(actualQuery, (err, levels) => {
+    if (req.query.name.length !== 0) {
+      actualQuery.name = { $regex: req.query.name };
+    }
+    if (req.query.userName.length !== 0) {
+      actualQuery.creator = { $regex: req.query.userName };
+    }
+    if (Number(req.query.difficulty) !== 100) {
+      actualQuery.difficulty = {
+        $gte: Number(req.query.difficulty) - 10,
+        $lte: Number(req.query.difficulty) + 10,
+      };
+    }
+    if (Number(req.query.funness) !== 100) {
+      actualQuery.funness = {
+        $gte: Number(req.query.funness) - 10,
+        $lte: Number(req.query.funness) + 10,
+      };
+    }
+    Level.find(actualQuery, (err, levels) => {
       if (err) {
         return res.status(500).send(err);
       }
@@ -96,12 +105,41 @@ router.get("/levels", (req, res) => {
   }
 });
 
-// changing user data
+// changing user name
 router.post("/user", auth.ensureLoggedIn, (req, res) => {
   User.findOneAndUpdate({ _id: req.body.user._id }, { $set: { name: req.body.user.name } }, () => {
     console.log("user from backend: ", req.body.user);
     res.send(req.body.user);
   });
+});
+
+// changing user profile(either number of published levels or levels won)
+router.post("/profile", auth.ensureLoggedIn, (req, res) => {
+  if (typeof req.body.user.levelsPublished !== "undefined") {
+    const newLevelsPublished = Number(req.body.user.levelsPublished) + 1;
+    User.findOneAndUpdate(
+      { _id: req.body.user._id },
+      { $set: { levelsPublished: newLevelsPublished } },
+      () => {
+        const newUser = {
+          levelsPublished: newLevelsPublished,
+        };
+        res.send(newUser);
+      }
+    );
+  } else {
+    const newLevelsWon = Number(req.body.user.levelsWon) + 1;
+    User.findOneAndUpdate(
+      { _id: req.body.user._id },
+      { $set: { levelsWon: newLevelsWon } },
+      () => {
+        const newUser = {
+          levelsWon: newLevelsWon,
+        };
+        res.send(newUser);
+      }
+    );
+  }
 });
 
 // anything else falls to this "not found" case

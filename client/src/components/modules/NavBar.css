@@ -30,6 +30,10 @@
 
 .login {
   position:absolute;
-  top: 5px;
-  right: 5px;
+  top: 1%;
+  right: 2%;
+}
+
+.profile {
+  display: inline-block;
 }

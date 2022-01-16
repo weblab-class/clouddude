@@ -10,10 +10,9 @@ import { post } from "../../utilities";
 
 import "./LevelData.css";
 
-const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
-  //Posts the level on submission
+const LevelData = ({ userId, levelData, setLevelData, message, setMessage,publishedLevels,setPublishedLevels }) => {
+  //Posts the level on submission and updates the number of published levels
   const addLevel = useCallback(() => {
-    console.log(levelData);
     if (levelData.name === "") {
       setMessage("Name is Required");
       return;
@@ -32,11 +31,16 @@ const LevelData = ({ levelData, setLevelData, message, setMessage }) => {
         obstacles: [],
       });
     }
-    /*
+
     post("/api/level", levelData).then((level) => {
       console.log("level from frontend", level);
-    }); */
-  }, [levelData]);
+    }); 
+
+    const body = { user: { levelsPublished: publishedLevels, _id: userId } };
+    post("/api/profile", body).then((user) => {
+      setPublishedLevels(user.levelsPublished);
+    });   
+  });
 
   useEffect(() => {
     console.log(levelData);

@@ -26,6 +26,8 @@ const App = () => {
   const [name, setName] = useState("User");
   const [userState, setUser] = useState(undefined);
   const [activeLevel, setActiveLevel] = useState(undefined);
+  const [publishedLevels, setPublishedLevels] = useState(0);
+  const [levelsWon, setLevelsWon] = useState(0);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -71,6 +73,8 @@ const App = () => {
       userId={userId}
       setActiveLevel={setActiveLevel}
       userState={userState}
+      publishedLevels={publishedLevels}
+      setPublishedLevels={setPublishedLevels}
     />
   );
 
@@ -82,9 +86,10 @@ const App = () => {
         handleLogout={handleLogout}
         userId={userId}
         userState={userState}
-        // publishedLevels="hardcorded 30"
-        // levelsWon="hardcorded 20"
-        // userName={name}
+        publishedLevels={publishedLevels}
+        setPublishedLevels={setPublishedLevels}
+        levelsWon={levelsWon}
+        setLevelsWon={setLevelsWon}
       />
       <Router>
         <Skeleton
@@ -114,7 +119,15 @@ const App = () => {
           userState={userState}
         />
 
-        <Play className="App-Game" activeLevel={activeLevel} userState={userState} path="/play" />
+        <Play
+          className="App-Game"
+          levelsWon={levelsWon}
+          setLevelsWon={setLevelsWon}
+          activeLevel={activeLevel}
+          userState={userState}
+          userId={userId}
+          path="/play"
+        />
         <Home
           className="App-Home"
           path="/"

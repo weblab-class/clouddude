@@ -12,6 +12,9 @@ const EditorSidebar = ({
   setLevelData,
   message,
   setMessage,
+  publishedLevels,
+  setPublishedLevels,
+  userId
 }) => {
   return (
     <div className="EditorSidebar-container">
@@ -29,13 +32,15 @@ const EditorSidebar = ({
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name5" img="" />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name6" img="" />
       </div>
-      {/* Tries to save a level after collecting info like name/difficulty with other data props */}
       <LevelData
         className="EditorSidebar-LevelData"
         setLevelData={setLevelData}
         levelData={levelData}
         message={message}
         setMessage={setMessage}
+        publishedLevels={publishedLevels}
+        setPublishedLevels={setPublishedLevels}
+        userId={userId}
       />
     </div>
   );

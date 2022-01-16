@@ -7,8 +7,7 @@ import EditorSidebar from "../modules/EditorSidebar";
 
 import "../../utilities.css";
 import "./LevelEditor.css";
-
-const LevelEditor = ({ userState }) => {
+const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId }) => {
   // Maintains tool currently selected in editor
   const [currentTool, setCurrentTool] = useState("none");
 
@@ -88,6 +87,9 @@ const LevelEditor = ({ userState }) => {
           setLevelData={setLevelData}
           message={message}
           setMessage={setMessage}
+          publishedLevels={publishedLevels}
+          setPublishedLevels={setPublishedLevels}
+          userId={userId}
         />
       </div>
       <Game
