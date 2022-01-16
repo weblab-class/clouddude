@@ -113,20 +113,33 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
-// changing user profile(currently just levels published)
+// changing user profile(either number of published levels or levels won)
 router.post("/profile", auth.ensureLoggedIn, (req, res) => {
-  const newLevelsPublished = Number(req.body.user.levelsPublished) + 1;
-  User.findOneAndUpdate(
-    { _id: req.body.user._id },
-    { $set: { levelsPublished: newLevelsPublished } },
-    () => {
-      const newUser = {
-        levelsWon: 0,
-        levelsPublished: newLevelsPublished,
-      };
-      res.send(newUser);
-    }
-  );
+  if (req.body.user.levelsPublished) {
+    const newLevelsPublished = Number(req.body.user.levelsPublished) + 1;
+    User.findOneAndUpdate(
+      { _id: req.body.user._id },
+      { $set: { levelsPublished: newLevelsPublished } },
+      () => {
+        const newUser = {
+          levelsPublished: newLevelsPublished,
+        };
+        res.send(newUser);
+      }
+    );
+  } else {
+    const newLevelsWon = Number(req.body.user.levelsWon) + 1;
+    User.findOneAndUpdate(
+      { _id: req.body.user._id },
+      { $set: { levelsWon: newLevelsWon } },
+      () => {
+        const newUser = {
+          levelsWon: newLevelsWon,
+        };
+        res.send(newUser);
+      }
+    );
+  }
 });
 
 // anything else falls to this "not found" case

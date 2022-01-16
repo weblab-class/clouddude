@@ -119,7 +119,15 @@ const App = () => {
           userState={userState}
         />
 
-        <Play className="App-Game" activeLevel={activeLevel} userState={userState} path="/play" />
+        <Play
+          className="App-Game"
+          levelsWon={levelsWon}
+          setLevelsWon={setLevelsWon}
+          activeLevel={activeLevel}
+          userState={userState}
+          userId={userId}
+          path="/play"
+        />
         <Home
           className="App-Home"
           path="/"

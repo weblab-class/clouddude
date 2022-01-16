@@ -3,7 +3,9 @@ import { Helmet } from "react-helmet";
 import Game from "../modules/Game";
 import "./Play.css";
 
-const Play = ({ userState, activeLevel }) => {
+const Play = ({
+  userState, activeLevel, levelsWon, setLevelsWon, userId
+}) => {
   return (
     <div className="Play-container">
       <Helmet>
@@ -14,6 +16,9 @@ const Play = ({ userState, activeLevel }) => {
         activeLevel={activeLevel}
         isEditing={false}
         userState={userState}
+        levelsWon={levelsWon}
+        setLevelsWon={setLevelsWon}
+        userId={userId}
       />
     </div>
   );

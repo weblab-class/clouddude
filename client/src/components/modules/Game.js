@@ -1,8 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Phaser, { NONE } from "phaser";
 import "./Game.css";
+import { post } from "../../utilities";
 
-const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
+const Game = ({
+  editLevel,
+  currentTool,
+  activeLevel,
+  isEditing,
+  levelsWon,
+  setLevelsWon,
+  userId,
+}) => {
   const [gridPoint, setGridPoint] = useState({ x: undefined, y: undefined });
 
   // Global configuration constants
@@ -342,6 +351,12 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
     player.setActive(false).setVisible(false);
     if (gameWon === true) {
       // Do stuff
+
+      // update the number of levels won since user just won
+      const body = { user: { levelsWon, _id: userId } };
+      post("/api/profile", body).then((user) => {
+        setLevelsWon(user.levelsWon);
+      });
     } else {
       gameOverText.visible = true;
       gameOverCaption.visible = true;
