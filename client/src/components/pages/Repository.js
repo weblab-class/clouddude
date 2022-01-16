@@ -17,8 +17,8 @@ import "./Repository.css";
 const Repository = ({ setActiveLevel }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const [levelDifficulty, setLevelDifficulty] = useState(0);
-  const [levelFunness, setLevelFunness] = useState(0);
+  const [levelDifficulty, setLevelDifficulty] = useState(100);
+  const [levelFunness, setLevelFunness] = useState(100);
   const [levelName, setLevelName] = useState("");
   const [creatorName, setCreatorName] = useState("");
 
@@ -40,7 +40,7 @@ const Repository = ({ setActiveLevel }) => {
       userName: creatorName,
       difficulty: Number(levelDifficulty),
       funness: Number(levelFunness),
-      type: "filter"
+      type: "filter",
     };
     get("/api/levels", query).then((res) => {
       setLevels(res);
@@ -111,7 +111,7 @@ const Repository = ({ setActiveLevel }) => {
                   },
                   {
                     value: 100,
-                    label: "100",
+                    label: "N/A",
                   },
                 ]}
                 valueLabelDisplay="on"
@@ -136,7 +136,7 @@ const Repository = ({ setActiveLevel }) => {
                   },
                   {
                     value: 100,
-                    label: "100",
+                    label: "N/A",
                   },
                 ]}
                 valueLabelDisplay="on"
