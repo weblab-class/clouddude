@@ -50,13 +50,19 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
   };
 
   useEffect(() => {
+    const container = document.getElementById("game-container");
     const canvas = document.getElementById("game");
-    // canvas.addEventListener("click", editLevel);
     const config = {
       width: 1600,
       height: 900,
-      type: Phaser.CANVAS,
-      canvas,
+      type: Phaser.WEBGL,
+      parent: container,
+      autoFocus: true,
+      input: {
+        keyboard: {
+          capture: [37, 38, 39, 40],
+        },
+      },
       physics: {
         default: "arcade",
         arcade: {
@@ -231,8 +237,6 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
         key: "grid",
         name: "grid",
         frameQuantity: 576,
-        hitArea: new Phaser.Geom.Rectangle(0, 0, 50, 50),
-        hitAreaCallback: Phaser.Geom.Rectangle.Contains,
       });
 
       Phaser.Actions.GridAlign(grid.getChildren(), {
@@ -243,9 +247,15 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
         x: 25,
         y: 25,
       });
-    }
 
-    this.input.on("gameobjectdown", clickCallback);
+      Phaser.Actions.SetHitArea(grid.getChildren());
+      this.input.on("gameobjectdown", clickCallback);
+      /*
+      grid.getChildren().forEach((element) => {
+        element.setInteractive();
+        //element.on("pointerdown", this.onLevelIconDown.bind(this, element));
+      */
+    }
 
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
@@ -332,9 +342,9 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
 
   function responsivelyResize() {
     // Resize game to fit available space
-    const gameId = document.getElementById("game");
-    gameId.style.width = "100%";
-    gameId.style.height = "100%";
+    //const gameId = document.getElementById("game-container");
+    //gameId.style.width = "100%";
+    //gameId.style.height = "100%";
   }
 
   function gameOver() {
@@ -359,11 +369,7 @@ const Game = ({ editLevel, currentTool, activeLevel, isEditing }) => {
   }, [currentTool, editLevel]);
   */
 
-  return (
-    <div className="Game-container">
-      <canvas id="game" />
-    </div>
-  );
+  return <div id="game-container" className="Game-container" />;
 };
 
 export default Game;
