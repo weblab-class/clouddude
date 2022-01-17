@@ -104,12 +104,12 @@ app.use((err, req, res, next) => {
 });
 
 // hardcode port to 3000 for now
-const port = process.env.YOUR_PORT || process.env.PORT || 3000;
-const serverHost = process.env.YOUR_HOST || "0.0.0.0";
+// const port = process.env.PORT || 3000;
+// const serverHost = process.env.YOUR_HOST || "0.0.0.0";
 
 const server = http.Server(app);
 socketManager.init(server);
 
-server.listen(port, serverHost, () => {
-  console.log(`Server running on port: ${port}`);
+server.listen(process.env.PORT || 3000, () => {
+  console.log(`Server running on port ${process.env.PORT || 3000}`);
 });
