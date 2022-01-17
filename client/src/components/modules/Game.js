@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Phaser, { NONE } from "phaser";
+import Key from "./keyboard";
 import "./Game.css";
 import { post } from "../../utilities";
 
@@ -117,11 +118,6 @@ const Game = ({
   }
 
   function create() {
-    // Establish restart function
-    const restartGame = () => {
-      this.scene.restart();
-    };
-
     // Create background
     if (isEditing) {
       this.add.image(800, 450, "backgroundGrid");
@@ -131,14 +127,6 @@ const Game = ({
 
     // Create player
     player = this.physics.add.sprite(getActiveLevel().start.x, getActiveLevel().start.y, "player");
-
-    // Initialize keyboard control
-    movementControls = this.input.keyboard.createCursorKeys();
-    restartKey = this.input.keyboard.addKey("R");
-    restartKey.on("down", () => {
-      restartGame();
-      isOver = false;
-    });
 
     // Initialize player animations
     this.anims.create({
@@ -297,6 +285,7 @@ const Game = ({
         setTimeout(() => {
           this.scene.restart();
           isOver = false;
+          gameWon = false;
         }, 15);
       });
 
@@ -329,7 +318,7 @@ const Game = ({
           y: player.y - 100,
           angle: -90,
           alpha: 0,
-          duration: 1000,
+          duration: 800,
           ease: "Cubic.easeOut",
           callbackScope: this,
           onComplete() {
@@ -380,11 +369,11 @@ const Game = ({
 
     // Handles Keyboard Input
 
-    if (movementControls.left.isDown && !isOver) {
+    if (Key.isDown(Key.LEFT) && !isOver) {
       player.setVelocityX(-160);
 
       player.anims.play("left", true);
-    } else if (movementControls.right.isDown && !isOver) {
+    } else if (Key.isDown(Key.RIGHT) && !isOver) {
       player.setVelocityX(160);
 
       player.anims.play("right", true);
@@ -394,8 +383,13 @@ const Game = ({
       player.anims.play("turn");
     }
 
-    if (movementControls.up.isDown && player.body.touching.down && !isOver) {
+    if (Key.isDown(Key.UP) && player.body.touching.down && !isOver) {
       player.setVelocityY(-300);
+    }
+
+    if (Key.isDown(Key.R)) {
+      this.scene.restart();
+      isOver = false;
     }
   }
 
