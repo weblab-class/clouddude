@@ -11,6 +11,12 @@
   overflow-block: hidden;
 }
 
+canvas {
+  width: 95%;
+  height: 100%;
+  object-fit: contain;
+}
+
 #game {
   flex: 1;
 }

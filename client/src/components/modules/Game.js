@@ -87,7 +87,7 @@ const Game = ({
       },
       callbacks: {
         postBoot: (settings) => {
-          settings.canvas.style.width = "100%";
+          settings.canvas.style.width = "95%";
           settings.canvas.style.height = "100%";
         },
       },
@@ -434,9 +434,10 @@ const Game = ({
 
   function responsivelyResize() {
     // Resize game to fit available space
-    // const gameId = document.getElementById("game-container");
-    // gameId.style.width = "100%";
-    // gameId.style.height = "100%";
+    const gameId = document.getElementsByTagName("canvas");
+    console.log(gameId.style);
+    gameId[0].style.width = "95%";
+    gameId[0].style.height = "100%";
   }
 
   function gameOver() {
