@@ -318,9 +318,9 @@ const Game = ({
           fallingCollider.body.enable = false;
           this.tweens.add({
             targets: fallingCollider,
-            y: fallingCollider.y - 100,
+            y: fallingCollider.y + 100,
             alpha: 0,
-            duration: 800,
+            duration: 1300,
             ease: "Cubic.easeOut",
             callbackScope: this,
             onComplete() {
