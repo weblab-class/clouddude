@@ -74,6 +74,11 @@ const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId })
           ...levelData,
           obstacles: [...levelData.obstacles, { ...gridPoint, type: "spike" }],
         });
+      } else if (currentTool === "falling") {
+        setLevelData({
+          ...levelData,
+          platforms: [...levelData.platforms, { ...gridPoint, type: "falling" }],
+        });
       }
     },
     [currentTool, levelData, message]

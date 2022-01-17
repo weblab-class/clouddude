@@ -30,7 +30,7 @@ const EditorSidebar = ({
         />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="coin" img="" />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="spike" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="name6" img="" />
+        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="falling" img="" />
       </div>
       <LevelData
         className="EditorSidebar-LevelData"

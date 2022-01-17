@@ -31,6 +31,13 @@ const Game = ({
   let gameWonCaption;
   let restartKey;
 
+  // Establish timeout promise
+  function later(delay) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, delay);
+    });
+  }
+
   // Handle level data gathering
   const getCurrentTool = () => {
     return document.getElementById("currentToolHolder").value;
@@ -96,6 +103,7 @@ const Game = ({
     this.load.image("grass", "8430hxmrkdolsuo/grass.png?dl=0");
     this.load.image("spike", "7a8tzts1xzvl4v3/spikes.png?dl=0");
     this.load.image("grid", "hidf43mavg0i8xt/gridSquare.png?dl=0");
+    this.load.image("falling", "4m7buvvtqk7z4ks/Falling.png?dl=0");
     this.load.spritesheet("coin", "lka0ez1lu8ui3dd/coin.png?dl=0", {
       frameWidth: 50,
       frameHeight: 50,
@@ -168,10 +176,14 @@ const Game = ({
 
     // Create platforms
     const platforms = this.physics.add.staticGroup();
+    const falling = this.physics.add.staticGroup();
 
     for (const platform of getActiveLevel().platforms) {
       if (platform.type === "grass") {
         platforms.create(platform.x, platform.y, "grass");
+      }
+      if (platform.type === "falling") {
+        falling.create(platform.x, platform.y, "falling");
       }
     }
 
@@ -298,10 +310,33 @@ const Game = ({
 
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
+    this.physics.add.collider(
+      player,
+      falling,
+      function (player, fallingCollider) {
+        later(300).then(() => {
+          fallingCollider.body.enable = false;
+          this.tweens.add({
+            targets: fallingCollider,
+            y: fallingCollider.y - 100,
+            alpha: 0,
+            duration: 800,
+            ease: "Cubic.easeOut",
+            callbackScope: this,
+            onComplete() {
+              falling.killAndHide(fallingCollider);
+              falling.remove(fallingCollider);
+            },
+          });
+        });
+      },
+      null,
+      this
+    );
 
     // Handle door collisions
-    this.physics.add.overlap(player, door, (player, door) => {
-      door.setFrame(1);
+    this.physics.add.overlap(player, door, (playerCollider, doorCollider) => {
+      doorCollider.setFrame(1);
       gameWon = true;
       gameOver();
     });
