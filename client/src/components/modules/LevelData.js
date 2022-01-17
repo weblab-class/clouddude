@@ -10,7 +10,15 @@ import { post } from "../../utilities";
 
 import "./LevelData.css";
 
-const LevelData = ({ userId, levelData, setLevelData, message, setMessage,publishedLevels,setPublishedLevels }) => {
+const LevelData = ({
+  userId,
+  levelData,
+  setLevelData,
+  message,
+  setMessage,
+  publishedLevels,
+  setPublishedLevels,
+}) => {
   //Posts the level on submission and updates the number of published levels
   const addLevel = useCallback(() => {
     if (levelData.name === "") {
@@ -34,12 +42,12 @@ const LevelData = ({ userId, levelData, setLevelData, message, setMessage,publis
 
     post("/api/level", levelData).then((level) => {
       console.log("level from frontend", level);
-    }); 
+    });
 
     const body = { user: { levelsPublished: publishedLevels, _id: userId } };
     post("/api/profile", body).then((user) => {
       setPublishedLevels(user.levelsPublished);
-    });   
+    });
   });
 
   useEffect(() => {
@@ -147,13 +155,31 @@ const LevelData = ({ userId, levelData, setLevelData, message, setMessage,publis
           onClick={() => {
             setLevelData({
               ...levelData,
-              start: { x: undefined, y: undefined },
-              exit: { x: undefined, y: undefined },
+              start: { x: 25, y: 25 },
+              exit: { x: 1575, y: 875 },
               platforms: [],
               coins: [],
               obstacles: [],
             });
             setMessage("Level Cleared!");
+            setTimeout(() => {
+              document.dispatchEvent(
+                new KeyboardEvent("keydown", {
+                  key: "r",
+                  keyCode: 82,
+                  bubbles: true,
+                })
+              );
+            }, 15);
+            setTimeout(() => {
+              document.dispatchEvent(
+                new KeyboardEvent("keyup", {
+                  key: "r",
+                  keyCode: 82,
+                  bubbles: true,
+                })
+              );
+            }, 50);
           }}
         >
           Clear Level

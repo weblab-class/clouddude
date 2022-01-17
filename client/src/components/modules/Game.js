@@ -383,13 +383,17 @@ const Game = ({
       player.anims.play("turn");
     }
 
-    if (Key.isDown(Key.UP) && player.body.touching.down && !isOver) {
+    if (Key.isDown(Key.UP) && player.body.blocked.down && !isOver) {
       player.setVelocityY(-300);
     }
 
     if (Key.isDown(Key.R)) {
       this.scene.restart();
       isOver = false;
+    }
+
+    if (player.y > 900) {
+      gameOver();
     }
   }
 
