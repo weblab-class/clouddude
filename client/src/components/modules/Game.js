@@ -78,7 +78,7 @@ const Game = ({
       height: 900,
       type: Phaser.WEBGL,
       parent: container,
-      autoFocus: true,
+      autoFocus: false,
       input: {
         keyboard: {
           capture: [37, 38, 39, 40],
