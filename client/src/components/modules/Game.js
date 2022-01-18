@@ -140,6 +140,11 @@ const Game = ({
   }
 
   function create() {
+    // Create restart function
+    const restart = () => {
+      this.scene.restart();
+    };
+
     // Create background
     if (isEditing) {
       this.add.image(800, 450, "backgroundGrid");
@@ -328,10 +333,9 @@ const Game = ({
       resizeTimeout = setTimeout(() => {
         // Reload game on resize
         reloadGame();
+        restart();
       }, 100);
-      later(2000).then(() => {
-        this.scene.restart();
-      });
+      console.log("restarted");
     };
 
     // Handle platform collisions
