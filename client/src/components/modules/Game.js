@@ -140,6 +140,11 @@ const Game = ({
   }
 
   function create() {
+    // Create restart function
+    const restart = () => {
+      this.scene.restart();
+    };
+
     // Create background
     if (isEditing) {
       this.add.image(800, 450, "backgroundGrid");
@@ -328,10 +333,29 @@ const Game = ({
       resizeTimeout = setTimeout(() => {
         // Reload game on resize
         reloadGame();
+        restart();
+
+        later(200).then(() => {
+          setTimeout(() => {
+            document.dispatchEvent(
+              new KeyboardEvent("keydown", {
+                key: "r",
+                keyCode: 82,
+                bubbles: true,
+              })
+            );
+          }, 15);
+          setTimeout(() => {
+            document.dispatchEvent(
+              new KeyboardEvent("keyup", {
+                key: "r",
+                keyCode: 82,
+                bubbles: true,
+              })
+            );
+          }, 50);
+        });
       }, 100);
-      later(2000).then(() => {
-        this.scene.restart();
-      });
     };
 
     // Handle platform collisions
@@ -469,7 +493,6 @@ const Game = ({
     isOver = true;
     player.setActive(false).setVisible(false);
     if (gameWon === true) {
-      console.log("winer");
       gameWonText.visible = true;
       gameWonCaption.visible = true;
 
