@@ -14,6 +14,7 @@ const Game = ({
   userId,
 }) => {
   const [gridPoint, setGridPoint] = useState({ x: undefined, y: undefined });
+  const [test, setTest] = useState(0);
 
   // Global configuration constants
   let gameWon = false;
@@ -24,6 +25,8 @@ const Game = ({
   let movementControls;
   let player;
   let door;
+  let config;
+  let resizeTimeout;
 
   let gameOverText;
   let gameOverCaption;
@@ -57,6 +60,17 @@ const Game = ({
 
   // Setup game
   useEffect(() => {
+    reloadGame();
+  }, [test]);
+
+  function reloadGame() {
+    // If game is already created, restart it
+    if (game) {
+      game.destroy();
+      const canvas = document.getElementsByTagName("canvas");
+      canvas[0].remove();
+    }
+    // Creates new game
     const container = document.getElementById("game-container");
     const canvas = document.getElementById("game");
     const config = {
@@ -93,7 +107,7 @@ const Game = ({
       },
     };
     game = new Phaser.Game(config);
-  }, []);
+  }
 
   function preload() {
     // Loads Assets
@@ -307,6 +321,18 @@ const Game = ({
         //element.on("pointerdown", this.onLevelIconDown.bind(this, element));
       */
     }
+
+    // Enables responsive resizing
+    window.onresize = function () {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        // Reload game on resize
+        reloadGame();
+      }, 100);
+      later(2000).then(() => {
+        this.scene.restart();
+      });
+    };
 
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
