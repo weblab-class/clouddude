@@ -1,3 +1,4 @@
+/*
 let io;
 
 const userToSocketMap = {}; // maps user ID to socket object
@@ -46,3 +47,4 @@ module.exports = {
   getSocketFromSocketID: getSocketFromSocketID,
   getIo: () => io,
 };
+*/
