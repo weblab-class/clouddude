@@ -38,6 +38,25 @@ const LevelData = ({
         coins: [],
         obstacles: [],
       });
+      setTimeout(() => {
+        document.dispatchEvent(
+          new KeyboardEvent("keydown", {
+            key: "r",
+            keyCode: 82,
+            bubbles: true,
+          })
+        );
+      }, 15);
+
+      setTimeout(() => {
+        document.dispatchEvent(
+          new KeyboardEvent("keyup", {
+            key: "r",
+            keyCode: 82,
+            bubbles: true,
+          })
+        );
+      }, 50);
     }
 
     post("/api/level", levelData).then((level) => {
