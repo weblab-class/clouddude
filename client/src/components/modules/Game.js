@@ -78,7 +78,7 @@ const Game = ({
       height: 900,
       type: Phaser.WEBGL,
       parent: container,
-      autoFocus: false,
+      autoFocus: true,
       input: {
         keyboard: {
           capture: [37, 38, 39, 40],
@@ -88,7 +88,7 @@ const Game = ({
         default: "arcade",
         arcade: {
           gravity: { y: 600 },
-          debug: true,
+          debug: false,
         },
       },
       scale: {
