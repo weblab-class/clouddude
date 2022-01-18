@@ -86,7 +86,7 @@ const LevelData = ({
               }
             }}
             type="text"
-            placeholder="Enter Level Name"
+            placeholder="Level Name"
           />
         </Form.Group>
 
@@ -100,7 +100,7 @@ const LevelData = ({
               }
             }}
             type="text"
-            placeholder="Enter Description"
+            placeholder="Description"
           />
         </Form.Group>
 

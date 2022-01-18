@@ -1,3 +1,7 @@
+.EditorSidebar-container {
+  padding: var(--s);
+}
+
 .EditorSidebar-tools {
   display: flex;
   flex-flow: row wrap;
