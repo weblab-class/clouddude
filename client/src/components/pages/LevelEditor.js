@@ -79,6 +79,34 @@ const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId })
           ...levelData,
           platforms: [...levelData.platforms, { ...gridPoint, type: "falling" }],
         });
+      } else if (currentTool === "delete") {
+        const levelDataCopy = { ...levelData };
+
+        // Checks if deletion is platform
+        for (let i = 0; i < levelData.platforms.length; i++) {
+          const platformToCheck = levelData.platforms[i];
+          if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
+            levelDataCopy.platforms.splice(i, 1);
+          }
+        }
+
+        // Checks if deletion is coin
+        for (let i = 0; i < levelData.coins.length; i++) {
+          const platformToCheck = levelData.coins[i];
+          if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
+            levelDataCopy.coins.splice(i, 1);
+          }
+        }
+
+        // Checks if deletion is obstacle
+        for (let i = 0; i < levelData.obstacles.length; i++) {
+          const platformToCheck = levelData.obstacles[i];
+          if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
+            levelDataCopy.obstacles.splice(i, 1);
+          }
+        }
+
+        setLevelData(levelDataCopy);
       }
     },
     [currentTool, levelData, message]
