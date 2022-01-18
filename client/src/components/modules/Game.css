@@ -8,9 +8,21 @@
   display: flex;
   align-content: center;
   justify-content: center;
-  overflow-block: hidden;
+  max-height: 100vh;
+}
+
+canvas {
+  max-height: 84vh;
 }
 
 #game {
   flex: 1;
+}
+
+#currentToolHolder {
+  display: hidden;
+}
+
+#currentLevelHolder {
+  display: hidden;
 }

@@ -520,8 +520,7 @@ const Game = ({
   */
 
   return (
-    <div>
-      <div id="game-container" className="Game-container" />
+    <div id="game-container" className="Game-container">
       <div id="currentToolHolder" value={currentTool} />
       <div id="currentLevelHolder" value={activeLevel} />
     </div>

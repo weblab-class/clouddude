@@ -91,53 +91,55 @@ const App = () => {
         levelsWon={levelsWon}
         setLevelsWon={setLevelsWon}
       />
-      <Router>
-        <Skeleton
-          path="/example"
-          handleLogin={handleLogin}
-          handleLogout={handleLogout}
-          userId={userId}
-          userState={userState}
-        />
-        {userId ? editor : denied}
-        <Repository
-          className="App-Repository"
-          path="/repository"
-          handleLogin={handleLogin}
-          handleLogout={handleLogout}
-          userId={userId}
-          userState={userState}
-          activeLevel={activeLevel}
-          setActiveLevel={setActiveLevel}
-        />
-        <About
-          className="App-About"
-          path="/about"
-          handleLogin={handleLogin}
-          handleLogout={handleLogout}
-          userId={userId}
-          userState={userState}
-        />
+      <div className="App-body">
+        <Router>
+          <Skeleton
+            path="/example"
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+            userId={userId}
+            userState={userState}
+          />
+          {userId ? editor : denied}
+          <Repository
+            className="App-Repository"
+            path="/repository"
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+            userId={userId}
+            userState={userState}
+            activeLevel={activeLevel}
+            setActiveLevel={setActiveLevel}
+          />
+          <About
+            className="App-About"
+            path="/about"
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+            userId={userId}
+            userState={userState}
+          />
 
-        <Play
-          className="App-Game"
-          levelsWon={levelsWon}
-          setLevelsWon={setLevelsWon}
-          activeLevel={activeLevel}
-          userState={userState}
-          userId={userId}
-          path="/play"
-        />
-        <Home
-          className="App-Home"
-          path="/"
-          handleLogin={handleLogin}
-          handleLogout={handleLogout}
-          userId={userId}
-          userState={userState}
-        />
-        <NotFound default />
-      </Router>
+          <Play
+            className="App-Game"
+            levelsWon={levelsWon}
+            setLevelsWon={setLevelsWon}
+            activeLevel={activeLevel}
+            userState={userState}
+            userId={userId}
+            path="/play"
+          />
+          <Home
+            className="App-Home"
+            path="/"
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+            userId={userId}
+            userState={userState}
+          />
+          <NotFound default />
+        </Router>
+      </div>
       <Footer
         className="fixed-bottom"
         handleLogin={handleLogin}

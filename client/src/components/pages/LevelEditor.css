@@ -1,9 +1,6 @@
 .LevelEditor-container {
   display: flex;
   flex-flow: row nowrap;
-  background-color: var(--primary--dim);
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 .LevelEditor-sidebar {
