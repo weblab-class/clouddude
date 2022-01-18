@@ -36,7 +36,7 @@ const auth = require("./auth");
 // }
 
 // socket stuff
-const socketManager = require("./server-socket");
+// const socketManager = require("./server-socket");  Uncomment this if we need sockets
 
 // Server configuration below
 const mongoConnectionURL = process.env.MONGO_SRV;
@@ -109,7 +109,7 @@ const port = process.env.YOUR_PORT || process.env.PORT || 3000;
 const serverHost = process.env.YOUR_HOST || "0.0.0.0";
 
 const server = http.Server(app);
-socketManager.init(server);
+// socketManager.init(server); Uncomment this if we need sockets
 
 server.listen(port, serverHost, () => {
   console.log(`Server running on port: ${port}`);
