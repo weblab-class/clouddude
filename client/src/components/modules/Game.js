@@ -334,8 +334,28 @@ const Game = ({
         // Reload game on resize
         reloadGame();
         restart();
+
+        later(200).then(() => {
+          setTimeout(() => {
+            document.dispatchEvent(
+              new KeyboardEvent("keydown", {
+                key: "r",
+                keyCode: 82,
+                bubbles: true,
+              })
+            );
+          }, 15);
+          setTimeout(() => {
+            document.dispatchEvent(
+              new KeyboardEvent("keyup", {
+                key: "r",
+                keyCode: 82,
+                bubbles: true,
+              })
+            );
+          }, 50);
+        });
       }, 100);
-      console.log("restarted");
     };
 
     // Handle platform collisions
@@ -473,7 +493,6 @@ const Game = ({
     isOver = true;
     player.setActive(false).setVisible(false);
     if (gameWon === true) {
-      console.log("winer");
       gameWonText.visible = true;
       gameWonCaption.visible = true;
 
