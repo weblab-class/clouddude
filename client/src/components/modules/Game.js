@@ -88,7 +88,7 @@ const Game = ({
         default: "arcade",
         arcade: {
           gravity: { y: 600 },
-          debug: false,
+          debug: true,
         },
       },
       scale: {
@@ -154,6 +154,7 @@ const Game = ({
 
     // Create player
     player = this.physics.add.sprite(getActiveLevel().start.x, getActiveLevel().start.y, "player");
+    player.body.setSize(20, 40, 8, 8);
 
     // Initialize player animations
     this.anims.create({
@@ -215,6 +216,7 @@ const Game = ({
         newCoin.anims.play("spin");
         newCoin.setImmovable(true);
         newCoin.body.setAllowGravity(false);
+        newCoin.body.setCircle(20, 5, 5);
         coins.add(newCoin);
       }
     }
