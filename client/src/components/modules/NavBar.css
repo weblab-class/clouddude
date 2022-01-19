@@ -16,8 +16,9 @@
 .NavBar-link,
 .NavBar-link:visited {
   color: var(--white);
-  opacity: 0.6;
+  opacity: 1;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .NavBar-link:hover {
@@ -29,7 +30,7 @@
 }
 
 .login {
-  position:absolute;
+  position: absolute;
   top: 1%;
   right: 2%;
 }

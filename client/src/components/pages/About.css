@@ -1,46 +1,50 @@
 .main {
-    background-color: var(--primary--dim);
+  background-color: var(--primary--dim);
+  color: var(--medgrey);
 }
 
 .main-idea {
-    color: blue;
-    animation-name: mainIdea;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    text-align: center;
+  color: var(--white);
+  animation-name: mainIdea;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  text-align: center;
 }
 
 .link,
 .link:visited {
-  color: brown;
+  color: var(--accent--bright);
   opacity: 0.5;
   text-decoration: none;
 }
 
 .main-container-about {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 10px;
-    row-gap: 2em;
-    padding-top: 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 2em;
+  padding-top: 5%;
 }
 
 .arrow {
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 20px solid var(--primary--dim);
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30%;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid var(--primary--dim);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30%;
 }
 
 @keyframes mainIdea {
-    from {
-      color: blue;
-    }
-    to {
-      color: darkblue;
-    }
+  0% {
+    color: var(--primary);
   }
+  50% {
+    color: white;
+  }
+  100% {
+    color: var(--primary);
+  }
+}
