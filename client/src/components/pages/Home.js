@@ -29,7 +29,7 @@ const Home = () => {
     camera.position.z = 5;
 
     const loader = new THREE.TextureLoader();
-    loader.load("https://i.imgur.com/jLT3xWC.png", (texture) => {
+    loader.load("https://i.imgur.com/51ieg5J.png", (texture) => {
       scene.background = texture;
 
       // Handle Resize
