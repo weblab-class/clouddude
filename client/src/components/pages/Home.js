@@ -53,7 +53,7 @@ const Home = () => {
     const cloud = loader.load(`https://i.imgur.com/1AjUWpI.png`);
     const particleMaterial = new THREE.PointsMaterial({
       color: 0xffffff,
-      size: 1,
+      size: 3,
       map: cloud,
       blending: THREE.AdditiveBlending,
       transparent: true,
