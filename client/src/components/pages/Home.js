@@ -33,13 +33,20 @@ const Home = () => {
       scene.background = texture;
 
       // Handle Resize
-      const targetAspect = window.innerWidth / window.innerHeight;
-      const imageAspect = 1600 / 900;
-      const factor = imageAspect / targetAspect;
-      scene.background.offset.x = factor > 1 ? (1 - 1 / factor) / 2 : 0;
-      scene.background.repeat.x = factor > 1 ? 1 / factor : 1;
-      scene.background.offset.y = factor > 1 ? 0 : (1 - factor) / 2;
-      scene.background.repeat.y = factor > 1 ? 1 : factor;
+      const canvasSize = window.innerWidth / window.innerHeight;
+      const backgroundSize = 1600 / 900;
+      const resizeFactor = backgroundSize / canvasSize;
+      if (resizeFactor > 1) {
+        scene.background.offset.x = (1 - 1 / resizeFactor) / 2;
+        scene.background.repeat.x = 1 / resizeFactor;
+        scene.background.offset.y = 0;
+        scene.background.repeat.y = 1;
+      } else {
+        scene.background.offset.x = 0;
+        scene.background.repeat.x = 1;
+        scene.background.offset.y = (1 - resizeFactor) / 2;
+        scene.background.repeat.y = resizeFactor;
+      }
     });
 
     function animate() {
@@ -55,13 +62,20 @@ const Home = () => {
 
     function onWindowResize() {
       // Handle background resize
-      const targetAspect = window.innerWidth / window.innerHeight;
-      const imageAspect = 1600 / 900;
-      const factor = imageAspect / targetAspect;
-      scene.background.offset.x = factor > 1 ? (1 - 1 / factor) / 2 : 0;
-      scene.background.repeat.x = factor > 1 ? 1 / factor : 1;
-      scene.background.offset.y = factor > 1 ? 0 : (1 - factor) / 2;
-      scene.background.repeat.y = factor > 1 ? 1 : factor;
+      const canvasSize = window.innerWidth / window.innerHeight;
+      const backgroundSize = 1600 / 900;
+      const resizeFactor = backgroundSize / canvasSize;
+      if (resizeFactor > 1) {
+        scene.background.offset.x = (1 - 1 / resizeFactor) / 2;
+        scene.background.repeat.x = 1 / resizeFactor;
+        scene.background.offset.y = 0;
+        scene.background.repeat.y = 1;
+      } else {
+        scene.background.offset.x = 0;
+        scene.background.repeat.x = 1;
+        scene.background.offset.y = (1 - resizeFactor) / 2;
+        scene.background.repeat.y = resizeFactor;
+      }
 
       // Handle canvas resize
       camera.aspect = window.innerWidth / window.innerHeight;
