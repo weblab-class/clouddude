@@ -28,6 +28,20 @@ const Home = () => {
 
     camera.position.z = 5;
 
+    const loader = new THREE.TextureLoader();
+    loader.load("https://i.imgur.com/jLT3xWC.png", (texture) => {
+      scene.background = texture;
+
+      // Handle Resize
+      const targetAspect = window.innerWidth / window.innerHeight;
+      const imageAspect = 1600 / 900;
+      const factor = imageAspect / targetAspect;
+      scene.background.offset.x = factor > 1 ? (1 - 1 / factor) / 2 : 0;
+      scene.background.repeat.x = factor > 1 ? 1 / factor : 1;
+      scene.background.offset.y = factor > 1 ? 0 : (1 - factor) / 2;
+      scene.background.repeat.y = factor > 1 ? 1 : factor;
+    });
+
     function animate() {
       requestAnimationFrame(animate);
 
@@ -40,6 +54,16 @@ const Home = () => {
     window.addEventListener("resize", onWindowResize, false);
 
     function onWindowResize() {
+      // Handle background resize
+      const targetAspect = window.innerWidth / window.innerHeight;
+      const imageAspect = 1600 / 900;
+      const factor = imageAspect / targetAspect;
+      scene.background.offset.x = factor > 1 ? (1 - 1 / factor) / 2 : 0;
+      scene.background.repeat.x = factor > 1 ? 1 / factor : 1;
+      scene.background.offset.y = factor > 1 ? 0 : (1 - factor) / 2;
+      scene.background.repeat.y = factor > 1 ? 1 : factor;
+
+      // Handle canvas resize
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
