@@ -1,11 +1,15 @@
 .footer-container {
-  background-color: #fafafa;
-  padding: 2px;
+  background-color: var(--primary);
+  padding: var(--m) 0 var(--s) 0;
   margin-top: 0;
-  border-top: 1px solid #e0e0e0;
-  position: block;
-  bottom: 0px;
+  /*border-top: 1px solid var(--primary--dim);*/
+  color: var(--white);
+  font-weight: bold;
+  position: static;
+  bottom: 0;
   text-align: center;
   width: 100%;
-  flex: none;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }

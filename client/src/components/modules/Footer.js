@@ -6,7 +6,10 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <div className="footer-container">
-      <center>&copy; 2022 Platformer: Ashar Farooq, Harry Heiberger, Henry Heiberger</center>
+      <center>
+        &copy; 2022 Platformer <br /> Designed in January 2022 by Ashar Farooq MIT'23, Harry
+        Heiberger MIT'24, Henry Heiberger MIT'24
+      </center>
     </div>
   );
 };
