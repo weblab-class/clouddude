@@ -121,6 +121,11 @@ const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId })
           ...levelData,
           obstacles: [...levelData.obstacles, { ...gridPoint, type: "spinner" }],
         });
+      } else if (currentTool === "spider" && !objectInSpot) {
+        setLevelData({
+          ...levelData,
+          obstacles: [...levelData.obstacles, { ...gridPoint, type: "spider" }],
+        });
       } else if (currentTool === "delete") {
         const levelDataCopy = { ...levelData };
 

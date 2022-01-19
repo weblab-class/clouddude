@@ -136,6 +136,10 @@ const Game = ({
       frameWidth: 50,
       frameHeight: 50,
     });
+    this.load.spritesheet("spider", "ygw0v8x3lqa9s7v/spider.png?dl=0", {
+      frameWidth: 46,
+      frameHeight: 34,
+    });
 
     // Use the below for adding local files:
     // import test from "../../../dist/images/Block_Blue.png";
@@ -183,11 +187,29 @@ const Game = ({
       repeat: -1,
     });
 
+    // Initialzie spinner amnimations
     this.anims.create({
       key: "spinnerRoll",
       frames: this.anims.generateFrameNumbers("spinner", { start: 0, end: 1 }),
       frameRate: 10,
       repeat: -1,
+    });
+
+    // Initialize spider animations
+    this.anims.create({
+      key: "spiderWalk",
+      frames: this.anims.generateFrameNumbers("spider", { start: 0, end: 2 }),
+      frameRate: 8,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "spiderDie",
+      frames: this.anims.generateFrameNumbers("spider", {
+        frames: [0, 4, 0, 4, 0, 4, 0, 4, 3, 3, 3, 3, 3, 3],
+      }),
+      frameRate: 12,
+      repeat: 0,
     });
 
     // Initialize coin animation
@@ -245,14 +267,19 @@ const Game = ({
         spike.setScale(1.0, 0.75);
         spike.y += 6.25;
         spike.refreshBody();
-      }
-      if (obstacle.type === "spinner") {
+      } else if (obstacle.type === "spinner") {
         const spinner = this.physics.add.sprite(obstacle.x, obstacle.y, "spinner");
         spinner.body.allowGravity = false;
-        spinner.body.setCircle(20, 5, 5);
+        spinner.body.setCircle(23, 1, 2);
         spinner.setVelocityX(100);
         spinner.anims.play("spinnerRoll", true);
         spinners.add(spinner);
+      } else if (obstacle.type === "spider") {
+        const spider = this.physics.add.sprite(obstacle.x, obstacle.y, "spider");
+        spider.setScale(0.8, 0.9);
+        spider.setVelocityX(100);
+        spider.anims.play("spiderWalk");
+        spiders.add(spider);
       }
     }
 
@@ -409,6 +436,31 @@ const Game = ({
       this
     );
 
+    this.physics.add.collider(spiders, platforms);
+    this.physics.add.collider(
+      spiders,
+      falling,
+      function (spiders, fallingCollider) {
+        later(300).then(() => {
+          fallingCollider.body.enable = false;
+          this.tweens.add({
+            targets: fallingCollider,
+            y: fallingCollider.y + 100,
+            alpha: 0,
+            duration: 1300,
+            ease: "Cubic.easeOut",
+            callbackScope: this,
+            onComplete() {
+              falling.killAndHide(fallingCollider);
+              falling.remove(fallingCollider);
+            },
+          });
+        });
+      },
+      null,
+      this
+    );
+
     this.physics.add.collider(spinners, platforms);
     this.physics.add.collider(spinners, spinners);
     this.physics.add.collider(
@@ -465,6 +517,24 @@ const Game = ({
       null,
       this
     );
+    this.physics.add.overlap(
+      spiders,
+      spikes,
+      (spider, spike) => {
+        if (spider.body.velocity.y > 0) {
+          spider.anims.play("spiderDie");
+          later(2000).then(() => {
+            spiders.killAndHide(spider);
+            spiders.remove(spider);
+          });
+        } else {
+          const spiderCurrentVelocity = spider.body.velocity.x;
+          spider.setVelocityX(-spiderCurrentVelocity);
+        }
+      },
+      null,
+      this
+    );
 
     // Handle spinner collisions
     this.physics.add.overlap(
@@ -485,6 +555,41 @@ const Game = ({
             gameOver();
           },
         });
+      },
+      null,
+      this
+    );
+
+    // Handles spider collisions
+    this.physics.add.collider(
+      player,
+      spiders,
+      function (player, spider) {
+        if (spider.body.touching.up) {
+          player.setVelocityY(200);
+          spider.disableBody(false, false);
+          spider.setVelocityX(0);
+          spider.anims.play("spiderDie");
+          later(2000).then(() => {
+            spiders.killAndHide(spider);
+            spiders.remove(spider);
+          });
+        } else if (isOver === false) {
+          isOver = true;
+          player.setTintFill(0xff0000);
+          this.tweens.add({
+            targets: player,
+            y: player.y - 100,
+            angle: -90,
+            alpha: 0,
+            duration: 800,
+            ease: "Cubic.easeOut",
+            callbackScope: this,
+            onComplete() {
+              gameOver();
+            },
+          });
+        }
       },
       null,
       this
@@ -558,6 +663,20 @@ const Game = ({
         spinner.setVelocityX(-100);
       } else if (spinner.body.touching.left) {
         spinner.setVelocityX(100);
+      }
+    });
+
+    // Handles spider control
+    Phaser.Actions.Call(spiders.getChildren(), (spider) => {
+      if (!spider.body.blocked.down && spider.body.velocity.x !== 0) {
+        const spiderCurrentVelocity = spider.body.velocity.x;
+        spider.setVelocityX(-spiderCurrentVelocity);
+
+        if (spider.body.velocity.x > 0) {
+          spider.flipX = true;
+        } else if (spider.body.velocity.x < 0) {
+          spider.flipX = false;
+        }
       }
     });
 
