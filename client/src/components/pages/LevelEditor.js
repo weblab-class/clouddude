@@ -48,62 +48,88 @@ const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId })
     (gridPoint) => {
       console.log(gridPoint);
       console.log(currentTool);
+
+      // Resets message
       if (message !== "Design Your Level!") {
         setMessage("Design Your Level!");
       }
 
+      // Skips if gridpoint is undefined
       if (gridPoint.x === undefined || gridPoint.y === undefined) {
         return;
       }
+
+      // Checks if something is already in grid square
+      let spotContainsItem = false;
+      let objectInSpot;
+      let indexOfSpot;
+
+      for (let i = 0; i < levelData.platforms.length; i++) {
+        const platformToCheck = levelData.platforms[i];
+        if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
+          spotContainsItem = true;
+          objectInSpot = "platform";
+          indexOfSpot = i;
+        }
+      }
+
+      for (let i = 0; i < levelData.coins.length; i++) {
+        const platformToCheck = levelData.coins[i];
+        if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
+          spotContainsItem = true;
+          objectInSpot = "coin";
+          indexOfSpot = i;
+        }
+      }
+
+      for (let i = 0; i < levelData.obstacles.length; i++) {
+        const platformToCheck = levelData.obstacles[i];
+        if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
+          spotContainsItem = true;
+          objectInSpot = "obstacle";
+          indexOfSpot = i;
+        }
+      }
+
+      // Applies tool to grid square
       if (currentTool === "start") {
         setLevelData({ ...levelData, start: gridPoint });
       } else if (currentTool === "exit") {
         setLevelData({ ...levelData, exit: gridPoint });
-      } else if (currentTool === "platform") {
+      } else if (currentTool === "platform" && !objectInSpot) {
         setLevelData({
           ...levelData,
           platforms: [...levelData.platforms, { ...gridPoint, type: "grass" }],
         });
-      } else if (currentTool === "coin") {
+      } else if (currentTool === "coin" && !objectInSpot) {
         setLevelData({
           ...levelData,
           coins: [...levelData.coins, { ...gridPoint, type: "spinCoin" }],
         });
-      } else if (currentTool === "spike") {
+      } else if (currentTool === "spike" && !objectInSpot) {
         setLevelData({
           ...levelData,
           obstacles: [...levelData.obstacles, { ...gridPoint, type: "spike" }],
         });
-      } else if (currentTool === "falling") {
+      } else if (currentTool === "falling" && !objectInSpot) {
         setLevelData({
           ...levelData,
           platforms: [...levelData.platforms, { ...gridPoint, type: "falling" }],
         });
+      } else if (currentTool === "spinner" && !objectInSpot) {
+        setLevelData({
+          ...levelData,
+          obstacles: [...levelData.obstacles, { ...gridPoint, type: "spinner" }],
+        });
       } else if (currentTool === "delete") {
         const levelDataCopy = { ...levelData };
 
-        // Checks if deletion is platform
-        for (let i = 0; i < levelData.platforms.length; i++) {
-          const platformToCheck = levelData.platforms[i];
-          if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
-            levelDataCopy.platforms.splice(i, 1);
-          }
-        }
-
-        // Checks if deletion is coin
-        for (let i = 0; i < levelData.coins.length; i++) {
-          const platformToCheck = levelData.coins[i];
-          if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
-            levelDataCopy.coins.splice(i, 1);
-          }
-        }
-
-        // Checks if deletion is obstacle
-        for (let i = 0; i < levelData.obstacles.length; i++) {
-          const platformToCheck = levelData.obstacles[i];
-          if (platformToCheck.x === gridPoint.x && platformToCheck.y === gridPoint.y) {
-            levelDataCopy.obstacles.splice(i, 1);
-          }
+        if (objectInSpot === "platform") {
+          levelDataCopy.platforms.splice(indexOfSpot, 1);
+        } else if (objectInSpot === "coin") {
+          levelDataCopy.coins.splice(indexOfSpot, 1);
+        } else if (objectInSpot === "obstacle") {
+          levelDataCopy.obstacles.splice(indexOfSpot, 1);
         }
 
         setLevelData(levelDataCopy);
@@ -147,35 +173,3 @@ const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId })
 };
 
 export default LevelEditor;
-
-// Converts clickPoint to location in game's coordinate system
-const clickPointToGridPoint = (clickPoint, canvas = 0, puzzle = 0) => {
-  const { width } = canvas;
-  const { height } = canvas;
-  const rowCount = puzzle.rows;
-  const columnCount = puzzle.columns;
-  const cellWidth = width / columnCount;
-  const cellheight = height / rowCount;
-  let cellX = -1;
-  let cellY = -1;
-
-  // Determine X
-  for (let x = 0; x <= columnCount + 1; x++) {
-    const canvasX = (x - 1) * cellWidth;
-    if (canvasX > clickPoint.x) {
-      cellX = x - 1;
-      break;
-    }
-  }
-
-  // Determine Y
-  for (let y = 0; y <= rowCount + 1; y++) {
-    const canvasY = (y - 1) * cellheight;
-    if (canvasY > clickPoint.y) {
-      cellY = y - 1;
-      break;
-    }
-  }
-
-  return { row: cellY, column: cellX };
-};

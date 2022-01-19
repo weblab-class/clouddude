@@ -24,6 +24,8 @@ const Game = ({
   let game;
   let movementControls;
   let player;
+  let spinners;
+  let spiders;
   let door;
   let config;
   let resizeTimeout;
@@ -130,6 +132,10 @@ const Game = ({
       frameWidth: 32,
       frameHeight: 48,
     });
+    this.load.spritesheet("spinner", "89fxf5er8yycdoi/spinner.png?dl=0", {
+      frameWidth: 50,
+      frameHeight: 50,
+    });
 
     // Use the below for adding local files:
     // import test from "../../../dist/images/Block_Blue.png";
@@ -154,6 +160,7 @@ const Game = ({
 
     // Create player
     player = this.physics.add.sprite(getActiveLevel().start.x, getActiveLevel().start.y, "player");
+    player.body.setSize(20, 40, 8, 8);
 
     // Initialize player animations
     this.anims.create({
@@ -172,6 +179,13 @@ const Game = ({
     this.anims.create({
       key: "right",
       frames: this.anims.generateFrameNumbers("player", { start: 5, end: 8 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "spinnerRoll",
+      frames: this.anims.generateFrameNumbers("spinner", { start: 0, end: 1 }),
       frameRate: 10,
       repeat: -1,
     });
@@ -215,12 +229,15 @@ const Game = ({
         newCoin.anims.play("spin");
         newCoin.setImmovable(true);
         newCoin.body.setAllowGravity(false);
+        newCoin.body.setCircle(20, 5, 5);
         coins.add(newCoin);
       }
     }
 
     // Create obstacles
     const spikes = this.physics.add.staticGroup();
+    spinners = this.add.group();
+    spiders = this.add.group();
 
     for (const obstacle of getActiveLevel().obstacles) {
       if (obstacle.type === "spike") {
@@ -228,6 +245,14 @@ const Game = ({
         spike.setScale(1.0, 0.75);
         spike.y += 6.25;
         spike.refreshBody();
+      }
+      if (obstacle.type === "spinner") {
+        const spinner = this.physics.add.sprite(obstacle.x, obstacle.y, "spinner");
+        spinner.body.allowGravity = false;
+        spinner.body.setCircle(20, 5, 5);
+        spinner.setVelocityX(100);
+        spinner.anims.play("spinnerRoll", true);
+        spinners.add(spinner);
       }
     }
 
@@ -384,6 +409,32 @@ const Game = ({
       this
     );
 
+    this.physics.add.collider(spinners, platforms);
+    this.physics.add.collider(spinners, spinners);
+    this.physics.add.collider(
+      spinners,
+      falling,
+      function (spinner, fallingCollider) {
+        later(300).then(() => {
+          fallingCollider.body.enable = false;
+          this.tweens.add({
+            targets: fallingCollider,
+            y: fallingCollider.y + 100,
+            alpha: 0,
+            duration: 1300,
+            ease: "Cubic.easeOut",
+            callbackScope: this,
+            onComplete() {
+              falling.killAndHide(fallingCollider);
+              falling.remove(fallingCollider);
+            },
+          });
+        });
+      },
+      null,
+      this
+    );
+
     // Handle door collisions
     this.physics.add.overlap(player, door, (playerCollider, doorCollider) => {
       doorCollider.setFrame(1);
@@ -396,6 +447,30 @@ const Game = ({
       player,
       spikes,
       function (player, spike) {
+        isOver = true;
+        player.setTintFill(0xff0000);
+        this.tweens.add({
+          targets: player,
+          y: player.y - 100,
+          angle: -90,
+          alpha: 0,
+          duration: 800,
+          ease: "Cubic.easeOut",
+          callbackScope: this,
+          onComplete() {
+            gameOver();
+          },
+        });
+      },
+      null,
+      this
+    );
+
+    // Handle spinner collisions
+    this.physics.add.overlap(
+      player,
+      spinners,
+      function (player, spinner) {
         isOver = true;
         player.setTintFill(0xff0000);
         this.tweens.add({
@@ -476,6 +551,17 @@ const Game = ({
       this.scene.restart();
       isOver = false;
     }
+
+    // Handles spinner control
+    Phaser.Actions.Call(spinners.getChildren(), (spinner) => {
+      if (spinner.body.touching.right) {
+        spinner.setVelocityX(-100);
+      } else if (spinner.body.touching.left) {
+        spinner.setVelocityX(100);
+      }
+    });
+
+    // Handles players falling out of the map
 
     if (player.y > 900) {
       gameOver();
