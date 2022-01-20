@@ -140,11 +140,11 @@ const Home = () => {
       targetY = mouseY * 0.001;
       const deltaY = Math.abs(targetY - lastTargetY) < 0.1 ? targetY - lastTargetY : 0;
       const deltaX = Math.abs(targetX - lastTargetX) < 0.1 ? targetX - lastTargetX : 0;
-      particleSystem.rotation.x += 50 * elapsedTime * deltaY;
-      particleSystem.rotation.x %= 360;
-      particleSystem.rotation.y += 50 * elapsedTime * deltaX;
-      particleSystem.rotation.y %= 360;
-      particleSystem.position.z += 10 * elapsedTime * deltaY;
+      //particleSystem.rotation.x += 50 * elapsedTime * deltaY;
+      //particleSystem.rotation.x %= 360;
+      //particleSystem.rotation.y += 50 * elapsedTime * deltaX;
+      //particleSystem.rotation.y %= 360;
+      //particleSystem.position.z += 10 * elapsedTime * deltaY;
 
       // Render
       renderer.render(scene, camera);

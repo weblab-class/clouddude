@@ -19,7 +19,6 @@ const About = () => {
 
       <ul>
         <li>
-          {" "}
           <span className="u-bold">Level</span>: This consists of a collection of obstacles and
           platforms that the user must navigate through to reach a goal. The level design consists
           of choosing the locations of various objects. The canvas on which a level is edited and
