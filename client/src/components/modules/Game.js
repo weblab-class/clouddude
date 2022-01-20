@@ -495,10 +495,12 @@ const Game = ({
     });
 
     // Handle spike collisions
+    this.physics.add.collider(spinners, spikes);
     this.physics.add.overlap(
       player,
       spikes,
       function (player, spike) {
+        player.disableBody(false, false);
         isOver = true;
         player.setTintFill(0xff0000);
         this.tweens.add({
@@ -517,11 +519,12 @@ const Game = ({
       null,
       this
     );
-    this.physics.add.overlap(
+    this.physics.add.collider(
       spiders,
       spikes,
       (spider, spike) => {
-        if (spider.body.velocity.y > 0) {
+        if (spike.body.touching.up && spider.body.touching.down) {
+          spider.disableBody(false, false);
           spider.anims.play("spiderDie");
           later(2000).then(() => {
             spiders.killAndHide(spider);
@@ -541,6 +544,7 @@ const Game = ({
       player,
       spinners,
       function (player, spinner) {
+        player.disableBody(false, false);
         isOver = true;
         player.setTintFill(0xff0000);
         this.tweens.add({
@@ -559,6 +563,21 @@ const Game = ({
       null,
       this
     );
+    this.physics.add.overlap(
+      spiders,
+      spinners,
+      (spider, spinner) => {
+        spider.disableBody(false, false);
+        spider.setVelocityX(0);
+        spider.anims.play("spiderDie");
+        later(2000).then(() => {
+          spiders.killAndHide(spider);
+          spiders.remove(spider);
+        });
+      },
+      null,
+      this
+    );
 
     // Handles spider collisions
     this.physics.add.collider(
@@ -566,7 +585,7 @@ const Game = ({
       spiders,
       function (player, spider) {
         if (spider.body.touching.up) {
-          player.setVelocityY(200);
+          player.setVelocityY(-200);
           spider.disableBody(false, false);
           spider.setVelocityX(0);
           spider.anims.play("spiderDie");
@@ -576,6 +595,7 @@ const Game = ({
           });
         } else if (isOver === false) {
           isOver = true;
+          player.disableBody(false, false);
           player.setTintFill(0xff0000);
           this.tweens.add({
             targets: player,
@@ -668,15 +688,24 @@ const Game = ({
 
     // Handles spider control
     Phaser.Actions.Call(spiders.getChildren(), (spider) => {
+      // Reflects spiders at end of platform
       if (!spider.body.blocked.down && spider.body.velocity.x !== 0) {
         const spiderCurrentVelocity = spider.body.velocity.x;
         spider.setVelocityX(-spiderCurrentVelocity);
+      }
 
-        if (spider.body.velocity.x > 0) {
-          spider.flipX = true;
-        } else if (spider.body.velocity.x < 0) {
-          spider.flipX = false;
-        }
+      // Reflects spiders on wall impacts
+      if (spider.body.touching.right) {
+        spider.setVelocityX(-100);
+      } else if (spider.body.touching.left) {
+        spider.setVelocityX(100);
+      }
+
+      // Controls spider direction
+      if (spider.body.velocity.x > 0) {
+        spider.flipX = true;
+      } else if (spider.body.velocity.x < 0) {
+        spider.flipX = false;
       }
     });
 
