@@ -25,7 +25,18 @@ const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [name, setName] = useState("User");
   const [userState, setUser] = useState(undefined);
-  const [activeLevel, setActiveLevel] = useState(undefined);
+  const [activeLevel, setActiveLevel] = useState({
+    creator: undefined,
+    name: "",
+    description: "",
+    start: { x: 25, y: 25 },
+    exit: { x: 1575, y: 875 },
+    platforms: [],
+    coins: [],
+    obstacles: [],
+    funness: 0,
+    difficulty: 0,
+  });
   const [publishedLevels, setPublishedLevels] = useState(0);
   const [levelsWon, setLevelsWon] = useState(0);
 

@@ -74,7 +74,5 @@
   position: absolute;
   align-self: center;
   justify-content: center;
-  animation-name: translate;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;
+  flex: 1;
 }

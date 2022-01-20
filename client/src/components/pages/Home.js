@@ -166,7 +166,7 @@ const Home = () => {
             <title>Home</title>
           </Helmet>
           <center className="Home-centered">
-            <h1 className="title">PLATFORMER</h1>
+            <h1 className="title">CloudDude</h1>
             <Link to="/repository/" className="NavBar-link">
               <Button variant="primary">Play A Level</Button>
             </Link>
@@ -175,10 +175,7 @@ const Home = () => {
             </Link>
             <p />
             <p />
-            <h2 className="subtitle">
-              A web game where YOU can create levels with obstacles and platforms with the goal of
-              going from point A and point B.
-            </h2>
+            <h2 className="subtitle">Help CloudDude repair and navigate the Cloudverse!</h2>
           </center>
         </div>
       </div>

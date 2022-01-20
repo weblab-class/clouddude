@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className="footer-container">
       <center>
-        &copy; 2022 Platformer <br /> Designed in January 2022 by Ashar Farooq MIT'23, Harry
+        &copy; 2022 CloudDude <br /> Designed in January 2022 by Ashar Farooq MIT'23, Harry
         Heiberger MIT'24, Henry Heiberger MIT'24
       </center>
     </div>

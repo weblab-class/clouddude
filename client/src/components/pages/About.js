@@ -11,11 +11,12 @@ const About = () => {
         <title>About</title>
       </Helmet>
       <h2 className="main-idea">
-        Platformer is a web game where users can create and share levels with obstacles and
-        platforms with the goal of getting from point A and point B.
+        The Cloudverse is damaged and only CloudDude can fix it! Help CloudDude navigate the
+        ever-expanding Cloudverse through a vast collection of user-created levels and use your
+        imagination to create your own levels to help him repair it.
       </h2>
 
-      <p>The game consists of several key features: </p>
+      <p>CloudDude consists of several key features: </p>
 
       <ul>
         <li>
@@ -33,8 +34,8 @@ const About = () => {
           !{" "}
         </li>
         <li>
-          <span className="u-bold">Repository of Levels</span>: This is a collection of levels that
-          are created by other users. In other words, you can not only create new levels of the
+          <span className="u-bold">Cloudverse</span>: The Cloudverse is a vast repository of levels
+          created by other users. In other words, you can not only create new levels of the
           Platformer, but also share what you have created with the community at large FOR FREE
           INSTANTLY! You will be able to filter through the levels by their difficulty, a funness
           score, and also by their name. To check out the levels created by people like you, try out{" "}
@@ -55,7 +56,7 @@ const About = () => {
           </a>
           <p />
           <p />
-          <h3 className="main-idea">What do you get out of the Platformer?</h3>
+          <h3 className="main-idea">Why CloudDude?</h3>
           <span>
             <span className="u-bold">Imagination</span> |{" "}
           </span>
