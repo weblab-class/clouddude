@@ -25,6 +25,10 @@ const Key = {
   RIGHT: 39,
   DOWN: 40,
   R: 82,
+  A: 65,
+  D: 68,
+  W: 87,
+  S: 83,
 
   // Checks if keyCode is currently pressed
   isDown(keyCode) {

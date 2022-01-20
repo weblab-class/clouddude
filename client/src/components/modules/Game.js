@@ -654,11 +654,11 @@ const Game = ({
 
     // Handles Keyboard Input
 
-    if (Key.isDown(Key.LEFT) && !isOver) {
+    if ((Key.isDown(Key.LEFT) || Key.isDown(Key.A)) && !isOver) {
       player.setVelocityX(-160);
 
       player.anims.play("left", true);
-    } else if (Key.isDown(Key.RIGHT) && !isOver) {
+    } else if ((Key.isDown(Key.RIGHT) || Key.isDown(Key.D)) && !isOver) {
       player.setVelocityX(160);
 
       player.anims.play("right", true);
@@ -668,7 +668,7 @@ const Game = ({
       player.anims.play("turn");
     }
 
-    if (Key.isDown(Key.UP) && player.body.blocked.down && !isOver) {
+    if ((Key.isDown(Key.UP) || Key.isDown(Key.W)) && player.body.blocked.down && !isOver) {
       player.setVelocityY(-300);
     }
 
