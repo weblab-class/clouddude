@@ -153,11 +153,15 @@ const Repository = ({ setActiveLevel }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className="level-container">
+      <div className="Repository-container">
         {levels.map((level) => {
           return (
             <div key={uuidv4()}>
-              <SingleLevel level={level} setActiveLevel={setActiveLevel} />
+              <SingleLevel
+                className="Repository-item"
+                level={level}
+                setActiveLevel={setActiveLevel}
+              />
             </div>
           );
         })}

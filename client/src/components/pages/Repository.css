@@ -1,9 +1,13 @@
-.level-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
-  row-gap: 2em;
-  padding-top: 5%;
+.Repository-container {
+  display: inline-flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin: var(--l);
+  gap: var(--l);
+}
+
+.Repository-item {
+  flex: 1;
 }
 
 .button {

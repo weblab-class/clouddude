@@ -1,5 +1,5 @@
 {
-  "name": "betabrowsersplatformer",
+  "name": "CloudDude",
   "version": "1.0.0",
   "description": "Made by Henry Heiberger, Harry Heiberger, and Ashar Farooq for the MIT WebLab competition during IAP 2022",
   "main": "server/server.js",
