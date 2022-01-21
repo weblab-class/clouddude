@@ -674,6 +674,7 @@ const Game = ({
 
     if (Key.isDown(Key.R)) {
       this.scene.restart();
+      gameWon = false;
       isOver = false;
     }
 

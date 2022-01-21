@@ -57,7 +57,7 @@ const App = () => {
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
       setName(user.name);
-      //post("/api/initsocket", { socketid: socket.id });
+      // post("/api/initsocket", { socketid: socket.id });
     });
   };
 
@@ -91,6 +91,7 @@ const App = () => {
 
   return (
     <div className="App-Site">
+      <audio src="https://www.dropbox.com/s/ud0p5cxdlolnk39/backgroundMusic.mp3?raw=1" autoPlay />
       <NavBar
         className="App-Navbar"
         handleLogin={handleLogin}
