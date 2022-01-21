@@ -14,6 +14,7 @@ const EditorSidebar = ({
   setMessage,
   publishedLevels,
   setPublishedLevels,
+  setActiveLevel,
   userId,
 }) => {
   return (
@@ -44,6 +45,7 @@ const EditorSidebar = ({
         setMessage={setMessage}
         publishedLevels={publishedLevels}
         setPublishedLevels={setPublishedLevels}
+        setActiveLevel={setActiveLevel}
         userId={userId}
       />
     </div>

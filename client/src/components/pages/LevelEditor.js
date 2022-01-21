@@ -8,7 +8,13 @@ import EditorSidebar from "../modules/EditorSidebar";
 import "../../utilities.css";
 import "./LevelEditor.css";
 
-const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId }) => {
+const LevelEditor = ({
+  userState,
+  publishedLevels,
+  setPublishedLevels,
+  userId,
+  setActiveLevel,
+}) => {
   // Maintains tool currently selected in editor
   const [currentTool, setCurrentTool] = useState("none");
 
@@ -159,6 +165,7 @@ const LevelEditor = ({ userState, publishedLevels, setPublishedLevels, userId })
           setMessage={setMessage}
           publishedLevels={publishedLevels}
           setPublishedLevels={setPublishedLevels}
+          setActiveLevel={setActiveLevel}
           userId={userId}
         />
       </div>
