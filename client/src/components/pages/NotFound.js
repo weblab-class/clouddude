@@ -1,7 +1,8 @@
 import React from "react";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
 const NotFound = () => {
+  document.body.style.overflow = "hidden";
   return (
     <div>
       <Helmet>

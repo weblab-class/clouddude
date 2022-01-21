@@ -45,7 +45,6 @@ const Home = () => {
           pos[i] *= 2;
         }
       }
-      console.log(pos);
       return pos;
     }
     const particleGeometry = new THREE.BufferGeometry();
@@ -156,7 +155,7 @@ const Home = () => {
     };
     animate();
   }, []);
-
+  document.body.style.overflow = "hidden";
   return (
     <>
       <canvas id="home-canvas" className="body" />
@@ -168,10 +167,14 @@ const Home = () => {
           <center className="Home-centered">
             <h1 className="title">CloudDude</h1>
             <Link to="/repository/" className="NavBar-link">
-              <Button variant="primary">Play A Level</Button>
+              <Button className="Home-button" variant="primary">
+                Play A Level
+              </Button>
             </Link>
             <Link to="/leveleditor/" className="NavBar-link">
-              <Button variant="primary">Design A Level</Button>
+              <Button className="Home-button" variant="primary">
+                Design A Level
+              </Button>
             </Link>
             <p />
             <p />

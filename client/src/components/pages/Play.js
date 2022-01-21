@@ -3,9 +3,8 @@ import { Helmet } from "react-helmet";
 import Game from "../modules/Game";
 import "./Play.css";
 
-const Play = ({
-  userState, activeLevel, levelsWon, setLevelsWon, userId
-}) => {
+const Play = ({ userState, activeLevel, levelsWon, setLevelsWon, userId }) => {
+  document.body.style.overflow = "hidden";
   return (
     <div className="Play-container">
       <Helmet>

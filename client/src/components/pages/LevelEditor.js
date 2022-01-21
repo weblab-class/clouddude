@@ -148,7 +148,7 @@ const LevelEditor = ({
     },
     [currentTool, levelData, message]
   );
-
+  document.body.style.overflow = "auto";
   return (
     <div className="LevelEditor-container">
       <Helmet>

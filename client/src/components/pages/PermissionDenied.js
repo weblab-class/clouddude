@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import "./PermissionDenied.css";
 
 const PermissionDenied = () => {
+  document.body.style.overflow = "hidden";
   return (
     <div className="main-container">
       <Helmet>

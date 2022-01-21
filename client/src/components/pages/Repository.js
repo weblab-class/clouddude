@@ -47,6 +47,7 @@ const Repository = ({ setActiveLevel }) => {
     });
   };
 
+  document.body.style.overflow = "auto";
   return (
     <div className="main-container">
       <Helmet>
