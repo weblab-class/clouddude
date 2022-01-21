@@ -78,82 +78,80 @@ const NavBar = ({
           Design
         </Link>
       </div>
-      <div className="u-inlineBlock">
-        {userId ? (
-          <div className="login">
-            <IconButton
-              edge="end"
-              aria-label="current user"
-              aria-haspopup="true"
-              onClick={iconClick}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            <div>
-              <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
-                <MenuItem onClick={handleProfile}>My Profile</MenuItem>
-                <MenuItem onClick={() => setMenuOpen(false)}>
-                  <GoogleLogout
-                    clientId={GOOGLE_CLIENT_ID}
-                    buttonText="Logout"
-                    onLogoutSuccess={handleLogout}
-                    onFailure={(err) => console.log(err)}
-                  />
-                </MenuItem>
-              </Menu>
-            </div>
-            <div>
-              <Modal show={profileModal} onHide={() => setProfileModal(false)}>
-                <Modal.Header>
-                  <Modal.Title>
-                    {userName}
-                    's Profile
-                  </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Form>
-                    <Form.Group className="mb-3" controlId="name">
-                      <Form.Label>Name</Form.Label>
-                      <Form.Control
-                        onChange={(event) => setNewName(event.target.value)}
-                        type="text"
-                        placeholder="Edit Name"
-                        value={newName}
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="difficulty">
-                      <Form.Label>Published Levels: {publishedLevels}</Form.Label>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="funness">
-                      <Form.Label>Levels Won: {levelsWon}</Form.Label>
-                    </Form.Group>
-                  </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={() => setProfileModal(false)}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handleSubmit}>
-                    Save
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            </div>
+      {userId ? (
+        <div className="login">
+          <IconButton
+            edge="end"
+            aria-label="current user"
+            aria-haspopup="true"
+            onClick={iconClick}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <div>
+            <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
+              <MenuItem onClick={handleProfile}>My Profile</MenuItem>
+              <MenuItem onClick={() => setMenuOpen(false)}>
+                <GoogleLogout
+                  clientId={GOOGLE_CLIENT_ID}
+                  buttonText="Logout"
+                  onLogoutSuccess={handleLogout}
+                  onFailure={(err) => console.log(err)}
+                />
+              </MenuItem>
+            </Menu>
           </div>
-        ) : (
-          <div className="login">
-            <GoogleLogin
-              clientId={GOOGLE_CLIENT_ID}
-              buttonText="Login"
-              onSuccess={handleLogin}
-              onFailure={(err) => console.log(err)}
-            />
+          <div>
+            <Modal show={profileModal} onHide={() => setProfileModal(false)}>
+              <Modal.Header>
+                <Modal.Title>
+                  {userName}
+                  's Profile
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form>
+                  <Form.Group className="mb-3" controlId="name">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      onChange={(event) => setNewName(event.target.value)}
+                      type="text"
+                      placeholder="Edit Name"
+                      value={newName}
+                    />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="difficulty">
+                    <Form.Label>Published Levels: {publishedLevels}</Form.Label>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="funness">
+                    <Form.Label>Levels Won: {levelsWon}</Form.Label>
+                  </Form.Group>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setProfileModal(false)}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleSubmit}>
+                  Save
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="login">
+          <GoogleLogin
+            clientId={GOOGLE_CLIENT_ID}
+            buttonText="Login"
+            onSuccess={handleLogin}
+            onFailure={(err) => console.log(err)}
+          />
+        </div>
+      )}
     </nav>
   );
 };

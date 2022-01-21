@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Slider from "@material-ui/core/Slider";
+import { navigate } from "@reach/router";
 
 import "../../utilities.css";
 import { post } from "../../utilities";
@@ -18,9 +19,10 @@ const LevelData = ({
   setMessage,
   publishedLevels,
   setPublishedLevels,
+  setActiveLevel,
 }) => {
   //Posts the level on submission and updates the number of published levels
-  const addLevel = useCallback(() => {
+  const addLevel = useCallback(async () => {
     if (levelData.name === "") {
       setMessage("Name is Required");
       return;
@@ -30,6 +32,7 @@ const LevelData = ({
       return;
     } else {
       setMessage("Submitted Successfully");
+      setActiveLevel({ ...levelData });
       setLevelData({
         ...levelData,
         start: { x: undefined, y: undefined },
@@ -38,25 +41,7 @@ const LevelData = ({
         coins: [],
         obstacles: [],
       });
-      setTimeout(() => {
-        document.dispatchEvent(
-          new KeyboardEvent("keydown", {
-            key: "r",
-            keyCode: 82,
-            bubbles: true,
-          })
-        );
-      }, 15);
-
-      setTimeout(() => {
-        document.dispatchEvent(
-          new KeyboardEvent("keyup", {
-            key: "r",
-            keyCode: 82,
-            bubbles: true,
-          })
-        );
-      }, 50);
+      await navigate("/play");
     }
 
     post("/api/level", levelData).then((level) => {

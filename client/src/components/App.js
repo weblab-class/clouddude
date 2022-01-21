@@ -24,6 +24,7 @@ import PermissionDenied from "./pages/PermissionDenied";
 const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [name, setName] = useState("User");
+  const [image, setImage] = useState(undefined);
   const [userState, setUser] = useState(undefined);
   const [activeLevel, setActiveLevel] = useState({
     creator: undefined,
@@ -53,10 +54,12 @@ const App = () => {
 
   const handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
+    console.log(`Pictured as ${res.profileObj.imageUrl}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
       setName(user.name);
+      setImage(user.picture);
       //post("/api/initsocket", { socketid: socket.id });
     });
   };
