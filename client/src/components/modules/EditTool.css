@@ -1,7 +1,6 @@
 .EditTool-container {
-  flex: 1 30%;
+  flex: 1 1 1;
   border-radius: 25%;
-  padding: var(--s);
   position: relative;
   margin: var(--s);
   width: 4vw;

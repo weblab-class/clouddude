@@ -61,7 +61,7 @@ const LevelData = ({
   return (
     <div className="LevelData-container">
       <Form>
-        <Form.Group className="mb-3" controlId="name">
+        <Form.Group className="mb-2" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
             onChange={(event) => {
@@ -75,7 +75,7 @@ const LevelData = ({
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="name">
+        <Form.Group className="mb-2" controlId="name">
           <Form.Label>Description</Form.Label>
           <Form.Control
             onChange={(event) => {
@@ -88,66 +88,69 @@ const LevelData = ({
             placeholder="Description"
           />
         </Form.Group>
+        <div className="LevelData-sliderContainer">
+          <Form.Group className="" controlId="difficulty">
+            <Form.Label>Difficulty</Form.Label>
+            <Slider
+              className="LevelData-slider  mt-4"
+              onChange={(event, value) => {
+                setLevelData({ ...levelData, difficulty: Number(value) });
+                if (message !== "Design Your Level!") {
+                  setMessage("Design Your Level!");
+                }
+              }}
+              aria-valuetext="difficulty"
+              value={levelData.difficulty}
+              color="primary"
+              marks={[
+                {
+                  value: 0,
+                  label: "0",
+                },
+                {
+                  value: 50,
+                  label: "50",
+                },
+                {
+                  value: 100,
+                  label: "100",
+                },
+              ]}
+              valueLabelDisplay="on"
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="difficulty">
-          <Form.Label>Difficulty</Form.Label>
-          <Slider
-            onChange={(event, value) => {
-              setLevelData({ ...levelData, difficulty: Number(value) });
-              if (message !== "Design Your Level!") {
-                setMessage("Design Your Level!");
-              }
-            }}
-            aria-valuetext="difficulty"
-            value={levelData.difficulty}
-            color="primary"
-            marks={[
-              {
-                value: 0,
-                label: "0",
-              },
-              {
-                value: 50,
-                label: "50",
-              },
-              {
-                value: 100,
-                label: "100",
-              },
-            ]}
-            valueLabelDisplay="on"
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="funness">
-          <Form.Label>Funness</Form.Label>
-          <Slider
-            onChange={(event, value) => {
-              setLevelData({ ...levelData, funness: Number(value) });
-              if (message !== "Design Your Level!") {
-                setMessage("Design Your Level!");
-              }
-            }}
-            aria-valuetext="funnes"
-            value={levelData.funness}
-            color="primary"
-            marks={[
-              {
-                value: 0,
-                label: "0",
-              },
-              {
-                value: 50,
-                label: "50",
-              },
-              {
-                value: 100,
-                label: "100",
-              },
-            ]}
-            valueLabelDisplay="on"
-          />
-        </Form.Group>
+          <Form.Group className="LevelData-slider" controlId="funness">
+            <Form.Label>Funness</Form.Label>
+            <Slider
+              className="LevelData-slider mt-4"
+              onChange={(event, value) => {
+                setLevelData({ ...levelData, funness: Number(value) });
+                if (message !== "Design Your Level!") {
+                  setMessage("Design Your Level!");
+                }
+              }}
+              aria-valuetext="funnes"
+              value={levelData.funness}
+              color="primary"
+              marks={[
+                {
+                  value: 0,
+                  label: "0",
+                },
+                {
+                  value: 50,
+                  label: "50",
+                },
+                {
+                  value: 100,
+                  label: "100",
+                },
+              ]}
+              valueLabelDisplay="on"
+            />
+          </Form.Group>
+        </div>
       </Form>
       <div className="LevelData-buttonContainer">
         <Button className="LevelData-button" variant="primary" onClick={addLevel}>

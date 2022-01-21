@@ -20,7 +20,11 @@ const SingleLevel = ({ level, setActiveLevel }) => {
 
           <Card.Text>{level.description}</Card.Text>
           <Link to="/play/">
-            <Button onClick={() => setActiveLevel(level)} variant="primary">
+            <Button
+              onClick={() => setActiveLevel(level)}
+              className="Repository-button"
+              variant="primary"
+            >
               Play
             </Button>
           </Link>
