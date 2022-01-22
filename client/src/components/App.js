@@ -42,7 +42,6 @@ const App = () => {
   const [levelsWon, setLevelsWon] = useState(0);
   const [levelsPlayed, setLevelsPlayed] = useState(0);
 
-
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
@@ -59,10 +58,14 @@ const App = () => {
     console.log(`Pictured as ${res.profileObj.imageUrl}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
-      setUserId(user._id);
-      setName(user.name);
-      setImage(user.picture);
-      // post("/api/initsocket", { socketid: socket.id });
+      if (user.message) {
+        alert("invalid username");
+      } else {
+        setUserId(user._id);
+        setName(user.name);
+        setImage(user.picture);
+        // post("/api/initsocket", { socketid: socket.id });
+      }
     });
   };
 
