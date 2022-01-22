@@ -79,10 +79,10 @@ router.get("/levels", (req, res) => {
     });
   } else {
     if (req.query.name.length !== 0) {
-      actualQuery.name = { $regex: req.query.name };
+      actualQuery.name = { $regex: req.query.name, $options: "i" };
     }
     if (req.query.userName.length !== 0) {
-      actualQuery.creator = { $regex: req.query.userName };
+      actualQuery.creator = { $regex: req.query.userName, $options: "i" };
     }
     if (Number(req.query.difficulty) !== 100) {
       actualQuery.difficulty = {
@@ -129,16 +129,12 @@ router.post("/profile", auth.ensureLoggedIn, (req, res) => {
     );
   } else {
     const newLevelsWon = Number(req.body.user.levelsWon) + 1;
-    User.findOneAndUpdate(
-      { _id: req.body.user._id },
-      { $set: { levelsWon: newLevelsWon } },
-      () => {
-        const newUser = {
-          levelsWon: newLevelsWon,
-        };
-        res.send(newUser);
-      }
-    );
+    User.findOneAndUpdate({ _id: req.body.user._id }, { $set: { levelsWon: newLevelsWon } }, () => {
+      const newUser = {
+        levelsWon: newLevelsWon,
+      };
+      res.send(newUser);
+    });
   }
 });
 

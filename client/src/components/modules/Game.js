@@ -29,6 +29,8 @@ const Game = ({
   let door;
   let config;
   let resizeTimeout;
+  let jump;
+  let jumpFlag = true;
 
   let gameOverText;
   let gameOverCaption;
@@ -85,6 +87,8 @@ const Game = ({
       }
     }
     // Creates new game
+    gameWon = false;
+    isOver = false;
     const container = document.getElementById("game-container");
     const canvas = document.getElementById("game");
     const config = {
@@ -153,6 +157,10 @@ const Game = ({
       frameHeight: 34,
     });
 
+    this.load.audio("jump", "7oi01wjujjamkry/jump.wav?raw=1");
+    this.load.audio("coin", "maqua4unxcmsc3b/coin.wav?raw=1");
+    this.load.audio("damage", "paeeehazuv0jun8/stomp.wav?raw=1");
+
     // Use the below for adding local files:
     // import test from "../../../dist/images/Block_Blue.png";
     // this.textures.addBase64("test", test);
@@ -180,6 +188,9 @@ const Game = ({
     // Create player
     player = this.physics.add.sprite(getActiveLevel().start.x, getActiveLevel().start.y, "player");
     player.body.setSize(20, 40, 8, 8);
+
+    // Initialize jump audio
+    jump = this.sound.add("jump");
 
     // Initialize player animations
     this.anims.create({
@@ -551,6 +562,7 @@ const Game = ({
       spikes,
       function (player, spike) {
         player.disableBody(false, false);
+        this.sound.play("damage");
         isOver = true;
         player.setTintFill(0xff0000);
         this.tweens.add({
@@ -575,6 +587,7 @@ const Game = ({
       (spider, spike) => {
         if (spike.body.touching.up && spider.body.touching.down) {
           spider.disableBody(false, false);
+          this.sound.play("damage");
           spider.anims.play("spiderDie");
           later(2000).then(() => {
             spiders.killAndHide(spider);
@@ -594,6 +607,7 @@ const Game = ({
       player,
       spinners,
       function (player, spinner) {
+        this.sound.play("damage");
         player.disableBody(false, false);
         isOver = true;
         player.setTintFill(0xff0000);
@@ -617,6 +631,7 @@ const Game = ({
       spiders,
       spinners,
       (spider, spinner) => {
+        this.sound.play("damage");
         spider.disableBody(false, false);
         spider.setVelocityX(0);
         spider.anims.play("spiderDie");
@@ -635,6 +650,7 @@ const Game = ({
       spiders,
       function (player, spider) {
         if (spider.body.touching.up) {
+          this.sound.play("damage");
           player.setVelocityY(-200);
           spider.disableBody(false, false);
           spider.setVelocityX(0);
@@ -644,6 +660,7 @@ const Game = ({
             spiders.remove(spider);
           });
         } else if (isOver === false) {
+          this.sound.play("damage");
           isOver = true;
           player.disableBody(false, false);
           player.setTintFill(0xff0000);
@@ -670,6 +687,8 @@ const Game = ({
       player,
       coins,
       function (player, coin) {
+        coin.disableBody(false, false);
+        this.sound.play("coin");
         this.tweens.add({
           targets: coin,
           y: coin.y - 100,
@@ -719,7 +738,15 @@ const Game = ({
     }
 
     if ((Key.isDown(Key.UP) || Key.isDown(Key.W)) && player.body.blocked.down && !isOver) {
+      if (jumpFlag) {
+        jump.play();
+        jumpFlag = false;
+      }
       player.setVelocityY(-300);
+    }
+
+    if (!player.body.blocked.down) {
+      jumpFlag = true;
     }
 
     if (Key.isDown(Key.R)) {

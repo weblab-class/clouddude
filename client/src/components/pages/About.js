@@ -30,7 +30,7 @@ const About = () => {
           locations. These levels are created and imaged by YOU, the user! Furthermore, you as the
           architect of this level can select how fun you think the level is in addition to giving it
           a name plus other attributes! To get started with creating your own level, try out the{" "}
-          <a className="link" href="http://localhost:4000/leveleditor/">
+          <a className="link" href="https://clouddude.herokuapp.com/leveleditor/">
             level editor
           </a>
           !{" "}
@@ -41,7 +41,7 @@ const About = () => {
           Platformer, but also share what you have created with the community at large FOR FREE
           INSTANTLY! You will be able to filter through the levels by their difficulty, a funness
           score, and also by their name. To check out the levels created by people like you, try out{" "}
-          <a className="link" href="http://localhost:4000/repository/">
+          <a className="link" href="https://clouddude.herokuapp.com/repository/">
             Levels Repository
           </a>
           !
