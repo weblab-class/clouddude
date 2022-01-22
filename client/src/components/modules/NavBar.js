@@ -26,6 +26,8 @@ const NavBar = ({
   setPublishedLevels,
   levelsWon,
   setLevelsWon,
+  levelsPlayed,
+  setLevelsPlayed,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -72,6 +74,7 @@ const NavBar = ({
         setNewName(user.name);
         setLevelsWon(user.levelsWon);
         setPublishedLevels(user.levelsPublished);
+        setLevelsPlayed(user.levelsPlayed);
       }
     });
   }, [userId]);
@@ -143,6 +146,10 @@ const NavBar = ({
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>Levels Won: {levelsWon}</Form.Label>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="funness">
+                      <Form.Label>Levels Played: {levelsPlayed}</Form.Label>
                     </Form.Group>
                   </Form>
                 </Modal.Body>

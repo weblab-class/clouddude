@@ -114,7 +114,7 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
-// changing user profile(either number of published levels or levels won)
+// changing user profile(either number of published levels, levels won, or levels played)
 router.post("/profile", auth.ensureLoggedIn, (req, res) => {
   if (typeof req.body.user.levelsPublished !== "undefined") {
     const newLevelsPublished = Number(req.body.user.levelsPublished) + 1;
@@ -128,7 +128,7 @@ router.post("/profile", auth.ensureLoggedIn, (req, res) => {
         res.send(newUser);
       }
     );
-  } else {
+  } else if (typeof req.body.user.levelsWon !== "undefined") {
     const newLevelsWon = Number(req.body.user.levelsWon) + 1;
     User.findOneAndUpdate({ _id: req.body.user._id }, { $set: { levelsWon: newLevelsWon } }, () => {
       const newUser = {
@@ -136,6 +136,18 @@ router.post("/profile", auth.ensureLoggedIn, (req, res) => {
       };
       res.send(newUser);
     });
+  } else {
+    const newLevelsPlayed = Number(req.body.user.levelsPlayed) + 1;
+    User.findOneAndUpdate(
+      { _id: req.body.user._id },
+      { $set: { levelsPlayed: newLevelsPlayed } },
+      () => {
+        const newUser = {
+          levelsPlayed: newLevelsPlayed,
+        };
+        res.send(newUser);
+      }
+    );
   }
 });
 

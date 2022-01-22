@@ -25,7 +25,6 @@ function getOrCreateUser(user) {
     let allNames;
     User.find({ name: user.name }).then((names) => {
       allNames = names;
-      console.log("names: ", names);
       if (allNames.length !== 0) {
         throw new Error("Username already exists! Pleae choose another account!");
       }
@@ -37,6 +36,7 @@ function getOrCreateUser(user) {
       picture: user.imageUrl,
       levelsWon: 0,
       levelsPublished: 0,
+      levelsPlayed: 0
     });
 
     return newUser.save();

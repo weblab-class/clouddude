@@ -40,6 +40,8 @@ const App = () => {
   });
   const [publishedLevels, setPublishedLevels] = useState(0);
   const [levelsWon, setLevelsWon] = useState(0);
+  const [levelsPlayed, setLevelsPlayed] = useState(0);
+
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -110,6 +112,8 @@ const App = () => {
         setPublishedLevels={setPublishedLevels}
         levelsWon={levelsWon}
         setLevelsWon={setLevelsWon}
+        setLevelsPlayed={setLevelsPlayed}
+        levelsPlayed={levelsPlayed}
       />
       <div className="App-body">
         <Router>
@@ -144,6 +148,8 @@ const App = () => {
             className="App-Game"
             levelsWon={levelsWon}
             setLevelsWon={setLevelsWon}
+            setLevelsPlayed={setLevelsPlayed}
+            levelsPlayed={levelsPlayed}
             activeLevel={activeLevel}
             userState={userState}
             userId={userId}
