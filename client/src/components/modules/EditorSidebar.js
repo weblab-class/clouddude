@@ -27,22 +27,56 @@ const EditorSidebar = ({
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
           name="start"
+          img="https://i.imgur.com/lfAyDl6.png"
+        />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="exit"
           img="https://i.imgur.com/tTmmxis.png"
         />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="exit" img="" />
         <EditTool
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
           name="platform"
-          img=""
+          img="https://dl.dropboxusercontent.com/s/8430hxmrkdolsuo/grass.png?dl=0"
         />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="coin" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="spike" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="falling" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="delete" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="spinner" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="spider" img="" />
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="tool 8" img="" />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="coin"
+          img="https://i.imgur.com/eTNmgCf.png"
+        />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="spike"
+          img="https://dl.dropboxusercontent.com/s/7a8tzts1xzvl4v3/spikes.png?dl=0"
+        />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="falling"
+          img="https://i.imgur.com/jh2X6dc.png"
+        />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="delete"
+          img="https://i.imgur.com/sX8VgWy.png"
+        />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="spinner"
+          img="https://i.imgur.com/sUdhdbm.png"
+        />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="spider"
+          img="https://i.imgur.com/6vm977B.png"
+        />
       </div>
       <LevelData
         className="EditorSidebar-LevelData"
