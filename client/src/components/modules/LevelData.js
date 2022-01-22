@@ -40,6 +40,7 @@ const LevelData = ({
         platforms: [],
         coins: [],
         obstacles: [],
+        gravity: { x: 0, y: 600 },
       });
       await navigate("/play");
     }

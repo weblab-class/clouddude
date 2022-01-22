@@ -24,7 +24,7 @@ const LevelSchema = new mongoose.Schema({
   platforms: [mongoose.Schema.Types.Mixed],
   coins: [mongoose.Schema.Types.Mixed],
   obstacles: [mongoose.Schema.Types.Mixed],
-  gravity: Number,
+  gravity: { x: Number, y: Number },
   funness: Number,
   difficulty: Number,
 });

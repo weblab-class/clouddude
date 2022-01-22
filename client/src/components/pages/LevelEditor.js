@@ -33,7 +33,7 @@ const LevelEditor = ({
     platforms: [],
     coins: [],
     obstacles: [],
-    gravity: 600,
+    gravity: { x: 0, y: 600 },
     funness: 0,
     difficulty: 0,
   });

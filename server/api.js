@@ -57,6 +57,7 @@ router.post("/level", auth.ensureLoggedIn, (req, res) => {
     platforms: req.body.platforms,
     coins: req.body.coins,
     obstacles: req.body.obstacles,
+    gravity: req.body.gravity,
     funness: Number(req.body.funness),
     difficulty: Number(req.body.difficulty),
   });
@@ -129,16 +130,12 @@ router.post("/profile", auth.ensureLoggedIn, (req, res) => {
     );
   } else {
     const newLevelsWon = Number(req.body.user.levelsWon) + 1;
-    User.findOneAndUpdate(
-      { _id: req.body.user._id },
-      { $set: { levelsWon: newLevelsWon } },
-      () => {
-        const newUser = {
-          levelsWon: newLevelsWon,
-        };
-        res.send(newUser);
-      }
-    );
+    User.findOneAndUpdate({ _id: req.body.user._id }, { $set: { levelsWon: newLevelsWon } }, () => {
+      const newUser = {
+        levelsWon: newLevelsWon,
+      };
+      res.send(newUser);
+    });
   }
 });
 

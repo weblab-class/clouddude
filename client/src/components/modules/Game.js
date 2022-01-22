@@ -183,7 +183,8 @@ const Game = ({
     }
 
     // Set world gravity
-    this.physics.world.gravity.y = getActiveLevel().gravity;
+    this.physics.world.gravity.x = getActiveLevel().gravity.x;
+    this.physics.world.gravity.y = getActiveLevel().gravity.y;
 
     // Create player
     player = this.physics.add.sprite(getActiveLevel().start.x, getActiveLevel().start.y, "player");
