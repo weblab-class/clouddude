@@ -5,11 +5,10 @@ import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet";
 import SearchIcon from "@material-ui/icons/Search";
 import Slider from "@material-ui/core/Slider";
-import { v4 as uuidv4 } from "uuid";
 
 import { get } from "../../utilities";
 
-import SingleLevel from "../modules/SingleLevel";
+import Pagination from "../modules/Pagination";
 
 import "../../utilities.css";
 import "./Repository.css";
@@ -158,19 +157,8 @@ const Repository = ({ setActiveLevel }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div className="Repository-container">
-        {levels.map((level) => {
-          return (
-            <div key={uuidv4()}>
-              <SingleLevel
-                className="Repository-item"
-                level={level}
-                setActiveLevel={setActiveLevel}
-              />
-            </div>
-          );
-        })}
-      </div>
+
+      <Pagination itemsPerPage={4} levels={levels} setActiveLevel={setActiveLevel} />
     </div>
   );
 };
