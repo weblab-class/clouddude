@@ -11,6 +11,8 @@ const Game = ({
   isEditing,
   levelsWon,
   setLevelsWon,
+  setLevelsPlayed,
+  levelsPlayed,
   userId,
 }) => {
   const [gridPoint, setGridPoint] = useState({ x: undefined, y: undefined });
@@ -76,6 +78,14 @@ const Game = ({
   useEffect(() => {
     reloadGame();
   }, [test]);
+
+  // increment levels played
+  useEffect(() => {
+    const body = { user: { levelsPlayed, _id: userId } };
+    post("/api/profile", body).then((user) => {
+      setLevelsPlayed(user.levelsPlayed);
+    });
+  }, []);
 
   function reloadGame() {
     // If game is already created, restart it

@@ -5,6 +5,7 @@ const UserSchema = new mongoose.Schema({
   googleid: String,
   levelsWon: Number,
   levelsPublished: Number,
+  levelsPlayed: Number,
   picture: String,
 });
 

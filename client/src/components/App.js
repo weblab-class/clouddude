@@ -26,6 +26,7 @@ const App = () => {
   const [name, setName] = useState("User");
   const [image, setImage] = useState(undefined);
   const [userState, setUser] = useState(undefined);
+  const [invalidAlert, setInvalidAlert] = useState(false);
   const [activeLevel, setActiveLevel] = useState({
     creator: undefined,
     name: "",
@@ -40,6 +41,7 @@ const App = () => {
   });
   const [publishedLevels, setPublishedLevels] = useState(0);
   const [levelsWon, setLevelsWon] = useState(0);
+  const [levelsPlayed, setLevelsPlayed] = useState(0);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -57,10 +59,14 @@ const App = () => {
     console.log(`Pictured as ${res.profileObj.imageUrl}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
-      setUserId(user._id);
-      setName(user.name);
-      setImage(user.picture);
-      // post("/api/initsocket", { socketid: socket.id });
+      if (user.message) {
+        setInvalidAlert(true);
+      } else {
+        setUserId(user._id);
+        setName(user.name);
+        setImage(user.picture);
+        // post("/api/initsocket", { socketid: socket.id });
+      }
     });
   };
 
@@ -110,6 +116,10 @@ const App = () => {
         setPublishedLevels={setPublishedLevels}
         levelsWon={levelsWon}
         setLevelsWon={setLevelsWon}
+        setLevelsPlayed={setLevelsPlayed}
+        levelsPlayed={levelsPlayed}
+        invalidAlert={invalidAlert}
+        setInvalidAlert={setInvalidAlert}
       />
       <div className="App-body">
         <Router>
@@ -144,6 +154,8 @@ const App = () => {
             className="App-Game"
             levelsWon={levelsWon}
             setLevelsWon={setLevelsWon}
+            setLevelsPlayed={setLevelsPlayed}
+            levelsPlayed={levelsPlayed}
             activeLevel={activeLevel}
             userState={userState}
             userId={userId}

@@ -22,14 +22,7 @@ function getOrCreateUser(user) {
   return User.findOne({ googleid: user.sub }).then((existingUser) => {
     if (existingUser) return existingUser;
 
-    let allNames;
-    User.find({ name: user.name }).then((names) => {
-      allNames = names;
-      console.log("names: ", names);
-      if (allNames.length !== 0) {
-        throw new Error("Username already exists! Pleae choose another account!");
-      }
-    });
+    User.collection.createIndex({ name: 1 }, { unique: true });
 
     const newUser = new User({
       name: user.name,
@@ -37,6 +30,7 @@ function getOrCreateUser(user) {
       picture: user.imageUrl,
       levelsWon: 0,
       levelsPublished: 0,
+      levelsPlayed: 0,
     });
 
     return newUser.save();
@@ -53,7 +47,16 @@ function login(req, res) {
     })
     .catch((err) => {
       console.log(`Failed to log in: ${err}`);
-      res.status(401).send({ err });
+
+      // Username already exists
+      if (err.code === 11000) {
+        res.send({
+          err,
+          message: "Usename already exists! Please try again with a different account!",
+        });
+      } else {
+        res.send({ err });
+      }
     });
 }
 

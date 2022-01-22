@@ -26,6 +26,10 @@ const NavBar = ({
   setPublishedLevels,
   levelsWon,
   setLevelsWon,
+  levelsPlayed,
+  setLevelsPlayed,
+  invalidAlert,
+  setInvalidAlert,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -72,6 +76,7 @@ const NavBar = ({
         setNewName(user.name);
         setLevelsWon(user.levelsWon);
         setPublishedLevels(user.levelsPublished);
+        setLevelsPlayed(user.levelsPlayed);
       }
     });
   }, [userId]);
@@ -93,6 +98,21 @@ const NavBar = ({
             Design
           </Link>
         </div>
+
+        <Modal show={invalidAlert}>
+          <Modal.Header>
+            <Modal.Title><div className="invalid">Invalid Username</div></Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Your username already exists! Please log in with a different account.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setInvalidAlert(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         {userId ? (
           <div className="login">
             <IconButton
@@ -143,6 +163,10 @@ const NavBar = ({
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>Levels Won: {levelsWon}</Form.Label>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="funness">
+                      <Form.Label>Levels Played: {levelsPlayed}</Form.Label>
                     </Form.Group>
                   </Form>
                 </Modal.Body>
