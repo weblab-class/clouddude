@@ -5,6 +5,8 @@ import "../../utilities.css";
 import "./About.css";
 
 const About = () => {
+  document.body.style.overflow = "auto";
+
   return (
     <div className="main">
       <Helmet>

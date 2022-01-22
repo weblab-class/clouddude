@@ -7,8 +7,7 @@
   display: flex;
   flex-flow: column nowrap;
   flex: 1;
-  margin: var(--m) var(--s) var(--m) var(--m);
-  padding: var(--s);
+  margin: var(--m) 0 var(--m) var(--m);
   background-color: var(--white);
-  min-width: 20%;
+  min-width: 185px;
 }

@@ -1,5 +1,5 @@
 .Game-container {
-  flex: 6;
+  flex: 4;
   margin: var(--m);
   justify-self: center;
   align-self: center;

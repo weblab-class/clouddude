@@ -1,10 +1,26 @@
 .LevelData-buttonContainer {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: center;
   justify-content: space-evenly;
 }
 
 .LevelData-button {
   margin: var(--s);
+}
+
+.LevelData-sliderContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+}
+
+LevelData-slider {
+  flex: 1;
+  gap: var(--m);
+}
+
+Form {
+  padding: 0;
+  margin: 0;
 }

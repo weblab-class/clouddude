@@ -45,19 +45,29 @@ const Game = ({
 
   // Handle level data gathering
   const getCurrentTool = () => {
-    return document.getElementById("currentToolHolder").value;
+    if (document.getElementById("currentToolHolder") !== undefined) {
+      return document.getElementById("currentToolHolder").value;
+    }
+    return undefined;
   };
 
   const getActiveLevel = () => {
-    return document.getElementById("currentLevelHolder").value;
+    if (document.getElementById("currentLevelHolder") !== undefined) {
+      return document.getElementById("currentLevelHolder").value;
+    }
+    return undefined;
   };
 
   useEffect(() => {
-    document.getElementById("currentToolHolder").value = currentTool;
+    if (document.getElementById("currentToolHolder") !== undefined) {
+      document.getElementById("currentToolHolder").value = currentTool;
+    }
   }, [currentTool]);
 
   useEffect(() => {
-    document.getElementById("currentLevelHolder").value = activeLevel;
+    if (document.getElementById("currentLevelHolder") !== undefined) {
+      document.getElementById("currentLevelHolder").value = activeLevel;
+    }
   }, [activeLevel]);
 
   // Setup game
@@ -70,7 +80,9 @@ const Game = ({
     if (game) {
       game.destroy();
       const canvas = document.getElementsByTagName("canvas");
-      canvas[0].remove();
+      if (canvas !== undefined) {
+        canvas[0].remove();
+      }
     }
     // Creates new game
     const container = document.getElementById("game-container");
@@ -383,7 +395,7 @@ const Game = ({
     }
 
     // Enables responsive resizing
-    window.onresize = function () {
+    window.onresize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         // Reload game on resize

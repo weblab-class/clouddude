@@ -47,18 +47,19 @@ const Repository = ({ setActiveLevel }) => {
     });
   };
 
+  document.body.style.overflow = "auto";
   return (
     <div className="main-container">
       <Helmet>
-        <title>Levels Repository</title>
+        <title>Cloudverse</title>
       </Helmet>
-      <h3>Levels Repository</h3>
+      <h3 className="Repository-title">Cloudverse</h3>
       <div className="input-group">
         <div>
           <button
             onClick={() => setShowModal(true)}
             type="button"
-            className="button btn btn-primary"
+            className="button btn btn-primary Repository-button"
           >
             <SearchIcon />
             Search for a Level
@@ -145,10 +146,14 @@ const Repository = ({ setActiveLevel }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+          <Button
+            variant="secondary"
+            className="Repository-button"
+            onClick={() => setShowModal(false)}
+          >
             Close
           </Button>
-          <Button variant="primary" onClick={filter}>
+          <Button variant="primary" className="Repository-button" onClick={filter}>
             Search
           </Button>
         </Modal.Footer>

@@ -1,3 +1,8 @@
+.Repository-title {
+  color: var(--white);
+  font-weight: bold;
+}
+
 .Repository-container {
   display: flex;
   flex-flow: row wrap;
@@ -16,6 +21,15 @@
 }
 .main-container {
   padding: 50px 50px 50px 50px;
+}
+
+.Repository-button,
+.Repository-button:hover,
+.Repository-button:active,
+.Repository-button:focus,
+.Repository-button:visited {
+  background-color: var(--primary);
+  border: 1.5px solid var(--primary);
 }
 
 .search {

@@ -1,6 +1,7 @@
 .title {
   font-size: 125px;
   color: var(--primary);
+  -webkit-text-stroke: 2px var(--primary);
   font-weight: bold;
   animation-name: mainTitle;
   animation-duration: 8s;
@@ -10,6 +11,7 @@
 .subtitle {
   font-size: 25px;
   color: var(--white);
+  -webkit-text-stroke: 1.5px var(--primary);
   font-weight: bold;
   animation-name: subTitle;
   animation-duration: 4s;
@@ -54,6 +56,15 @@
   width: 100%;
   display: flex;
   z-index: 2;
+}
+
+.Home-button,
+.Home-button:hover,
+.Home-button:active,
+.Home-button:focus,
+.Home-button:visited {
+  background-color: var(--primary--dim);
+  border: 1.5px solid var(--primary);
 }
 
 #home-content {
