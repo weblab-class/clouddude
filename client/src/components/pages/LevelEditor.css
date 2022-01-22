@@ -13,4 +13,5 @@
   min-width: 185px;
   color: var(--white);
   font-weight: bold;
+  border-radius: 5%;
 }
