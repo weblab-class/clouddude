@@ -2,7 +2,6 @@
   display: flex;
   flex-flow: row nowrap;
   min-height: 83vh;
-  color: var(--white);
 }
 
 .LevelEditor-sidebar {
@@ -10,6 +9,8 @@
   flex-flow: column nowrap;
   flex: 1;
   margin: var(--m) 0 var(--m) var(--m);
-  background-color: var(--white);
+  background-color: var(--primary);
   min-width: 185px;
+  color: var(--white);
+  font-weight: bold;
 }

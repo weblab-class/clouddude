@@ -120,7 +120,7 @@ const LevelData = ({
             <Form.Group className="LevelData-slider" controlId="difficulty">
               <Form.Label>Difficulty</Form.Label>
               <Slider
-                className="LevelData-sliderbar  mt-4"
+                className="LevelData-sliderbar"
                 onChange={(event, value) => {
                   setLevelData({ ...levelData, difficulty: Number(value) });
                   if (message !== "Design Your Level!") {
@@ -130,28 +130,15 @@ const LevelData = ({
                 aria-valuetext="difficulty"
                 value={levelData.difficulty}
                 color="primary"
-                marks={[
-                  {
-                    value: 0,
-                    label: "0",
-                  },
-                  {
-                    value: 50,
-                    label: "50",
-                  },
-                  {
-                    value: 100,
-                    label: "100",
-                  },
-                ]}
-                valueLabelDisplay="on"
+                marks={[]}
+                valueLabelDisplay="off"
               />
             </Form.Group>
 
             <Form.Group className="LevelData-slider" controlId="funness">
               <Form.Label>Funness</Form.Label>
               <Slider
-                className="LevelData-sliderbar mt-4"
+                className="LevelData-sliderbar"
                 onChange={(event, value) => {
                   setLevelData({ ...levelData, funness: Number(value) });
                   if (message !== "Design Your Level!") {
@@ -161,21 +148,8 @@ const LevelData = ({
                 aria-valuetext="funnes"
                 value={levelData.funness}
                 color="primary"
-                marks={[
-                  {
-                    value: 0,
-                    label: "0",
-                  },
-                  {
-                    value: 50,
-                    label: "50",
-                  },
-                  {
-                    value: 100,
-                    label: "100",
-                  },
-                ]}
-                valueLabelDisplay="on"
+                marks={[]}
+                valueLabelDisplay="off"
               />
             </Form.Group>
           </div>
