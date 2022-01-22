@@ -117,36 +117,76 @@ const LevelData = ({
             valueLabelDisplay="on"
           /> */}
           <div className="LevelData-sliderContainer">
-            <Form.Group className="LevelData-slider" controlId="difficulty">
-              <Form.Label>Difficulty</Form.Label>
+            <Form.Group className="LevelData-slider" controlId="X-Gravity">
+              <Form.Label>X-Gravity</Form.Label>
               <Slider
                 className="LevelData-sliderbar"
                 onChange={(event, value) => {
-                  setLevelData({ ...levelData, difficulty: Number(value) });
-                  if (message !== "Design Your Level!") {
-                    setMessage("Design Your Level!");
-                  }
+                  setLevelData({
+                    ...levelData,
+                    gravity: { x: (Number(value) / 100) * 10000, y: levelData.gravity.y },
+                  });
+                  setTimeout(() => {
+                    document.dispatchEvent(
+                      new KeyboardEvent("keydown", {
+                        key: "r",
+                        keyCode: 82,
+                        bubbles: true,
+                      })
+                    );
+                  }, 15);
+                  setTimeout(() => {
+                    document.dispatchEvent(
+                      new KeyboardEvent("keyup", {
+                        key: "r",
+                        keyCode: 82,
+                        bubbles: true,
+                      })
+                    );
+                  }, 50);
                 }}
                 aria-valuetext="difficulty"
-                value={levelData.difficulty}
+                min={-200}
+                max={200}
+                value={Math.round((levelData.gravity.x / 10000) * 100)}
                 color="primary"
                 marks={[]}
                 valueLabelDisplay="off"
               />
             </Form.Group>
 
-            <Form.Group className="LevelData-slider" controlId="funness">
-              <Form.Label>Funness</Form.Label>
+            <Form.Group className="LevelData-slider" controlId="Y-Gravity">
+              <Form.Label>Y-Gravity</Form.Label>
               <Slider
                 className="LevelData-sliderbar"
                 onChange={(event, value) => {
-                  setLevelData({ ...levelData, funness: Number(value) });
-                  if (message !== "Design Your Level!") {
-                    setMessage("Design Your Level!");
-                  }
+                  setLevelData({
+                    ...levelData,
+                    gravity: { x: levelData.gravity.x, y: (Number(value) / 100) * 600 },
+                  });
+                  setTimeout(() => {
+                    document.dispatchEvent(
+                      new KeyboardEvent("keydown", {
+                        key: "r",
+                        keyCode: 82,
+                        bubbles: true,
+                      })
+                    );
+                  }, 15);
+                  setTimeout(() => {
+                    document.dispatchEvent(
+                      new KeyboardEvent("keyup", {
+                        key: "r",
+                        keyCode: 82,
+                        bubbles: true,
+                      })
+                    );
+                  }, 50);
                 }}
                 aria-valuetext="funnes"
-                value={levelData.funness}
+                min={-200}
+                max={200}
+                value={Math.round((levelData.gravity.y / 600) * 100)}
                 color="primary"
                 marks={[]}
                 valueLabelDisplay="off"
