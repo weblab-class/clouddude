@@ -95,7 +95,12 @@ const App = () => {
 
   return (
     <div className="App-Site">
-      <audio src="https://www.dropbox.com/s/ud0p5cxdlolnk39/backgroundMusic.mp3?raw=1" autoPlay />
+      <audio autoPlay loop>
+        <source
+          src="https://www.dropbox.com/s/ud0p5cxdlolnk39/backgroundMusic.mp3?raw=1"
+          type="audio/wav"
+        />
+      </audio>
       <NavBar
         className="App-Navbar"
         handleLogin={handleLogin}
