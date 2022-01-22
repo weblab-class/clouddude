@@ -1,3 +1,7 @@
+.LevelData-container {
+  color: black;
+}
+
 .LevelData-buttonContainer {
   display: flex;
   flex-flow: row nowrap;

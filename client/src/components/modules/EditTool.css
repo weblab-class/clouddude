@@ -3,6 +3,7 @@
   border-radius: 25%;
   position: relative;
   margin: var(--s);
+  padding: var(--s);
   width: 4vw;
   height: 4vw;
   display: flex;
@@ -20,4 +21,12 @@
 
 .EditTool-unselected:hover {
   background-color: var(--primary--dim);
+}
+
+.EditTool-container img {
+  flex-shrink: 0;
+  height: 80%;
+  width: 80%;
+  align-self: center;
+  justify-self: center;
 }
