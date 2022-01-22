@@ -26,6 +26,7 @@ const App = () => {
   const [name, setName] = useState("User");
   const [image, setImage] = useState(undefined);
   const [userState, setUser] = useState(undefined);
+  const [invalidAlert, setInvalidAlert] = useState(false);
   const [activeLevel, setActiveLevel] = useState({
     creator: undefined,
     name: "",
@@ -59,7 +60,7 @@ const App = () => {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       if (user.message) {
-        alert("invalid username");
+        setInvalidAlert(true);
       } else {
         setUserId(user._id);
         setName(user.name);
@@ -117,6 +118,8 @@ const App = () => {
         setLevelsWon={setLevelsWon}
         setLevelsPlayed={setLevelsPlayed}
         levelsPlayed={levelsPlayed}
+        invalidAlert={invalidAlert}
+        setInvalidAlert={setInvalidAlert}
       />
       <div className="App-body">
         <Router>

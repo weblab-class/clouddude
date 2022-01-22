@@ -28,6 +28,8 @@ const NavBar = ({
   setLevelsWon,
   levelsPlayed,
   setLevelsPlayed,
+  invalidAlert,
+  setInvalidAlert,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -96,6 +98,21 @@ const NavBar = ({
             Design
           </Link>
         </div>
+
+        <Modal show={invalidAlert}>
+          <Modal.Header>
+            <Modal.Title><div className="invalid">Invalid Username</div></Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Your username already exists! Please log in with a different account.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setInvalidAlert(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         {userId ? (
           <div className="login">
             <IconButton
