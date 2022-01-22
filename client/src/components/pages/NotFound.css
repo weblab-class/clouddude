@@ -1,0 +1,11 @@
+.NotFound-container {
+  background-color: var(--primary--dim);
+  padding: var(--m);
+  min-height: 83vh;
+  color: var(--white);
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+}

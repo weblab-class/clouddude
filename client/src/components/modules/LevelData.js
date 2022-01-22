@@ -89,10 +89,10 @@ const LevelData = ({
           />
         </Form.Group>
         <div className="LevelData-sliderContainer">
-          <Form.Group className="" controlId="difficulty">
+          <Form.Group className="LevelData-slider" controlId="difficulty">
             <Form.Label>Difficulty</Form.Label>
             <Slider
-              className="LevelData-slider  mt-4"
+              className="LevelData-sliderbar  mt-4"
               onChange={(event, value) => {
                 setLevelData({ ...levelData, difficulty: Number(value) });
                 if (message !== "Design Your Level!") {
@@ -123,7 +123,7 @@ const LevelData = ({
           <Form.Group className="LevelData-slider" controlId="funness">
             <Form.Label>Funness</Form.Label>
             <Slider
-              className="LevelData-slider mt-4"
+              className="LevelData-sliderbar mt-4"
               onChange={(event, value) => {
                 setLevelData({ ...levelData, funness: Number(value) });
                 if (message !== "Design Your Level!") {

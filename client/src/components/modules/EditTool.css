@@ -11,13 +11,13 @@
 }
 
 .EditTool-selected {
-  background-color: var(--darkgrey);
+  background-color: var(--primary);
 }
 
 .EditTool-unselected {
-  background-color: var(--grey);
+  background-color: var(--primary--dim--dim);
 }
 
 .EditTool-unselected:hover {
-  background-color: var(--medgrey);
+  background-color: var(--primary--dim);
 }
