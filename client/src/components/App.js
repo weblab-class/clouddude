@@ -59,7 +59,6 @@ const App = () => {
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
       setName(user.name);
-      git;
       setImage(user.picture);
       // post("/api/initsocket", { socketid: socket.id });
     });
