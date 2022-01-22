@@ -16,7 +16,7 @@ const EditTool = ({ setCurrentTool, currentTool, name, img }) => {
           : "EditTool-container EditTool-unselected"
       }
     >
-      {name}
+      <img src={img} alt={name} />
     </div>
   );
 };

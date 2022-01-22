@@ -23,7 +23,12 @@ const EditorSidebar = ({
     <div className="EditorSidebar-container">
       <div className="EditorSidebar-message">{message}</div>
       <div className="EditorSidebar-tools">
-        <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="start" img="" />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="start"
+          img="https://i.imgur.com/tTmmxis.png"
+        />
         <EditTool setCurrentTool={setCurrentTool} currentTool={currentTool} name="exit" img="" />
         <EditTool
           setCurrentTool={setCurrentTool}

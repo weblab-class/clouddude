@@ -3,6 +3,7 @@
   border-radius: 25%;
   position: relative;
   margin: var(--s);
+  padding: var(--s);
   width: 4vw;
   height: 4vw;
   display: flex;
@@ -11,13 +12,21 @@
 }
 
 .EditTool-selected {
-  background-color: var(--darkgrey);
+  background-color: var(--primary);
 }
 
 .EditTool-unselected {
-  background-color: var(--grey);
+  background-color: var(--primary--dim--dim);
 }
 
 .EditTool-unselected:hover {
-  background-color: var(--medgrey);
+  background-color: var(--primary--dim);
+}
+
+.EditTool-container img {
+  flex-shrink: 0;
+  height: 80%;
+  width: 80%;
+  align-self: center;
+  justify-self: center;
 }

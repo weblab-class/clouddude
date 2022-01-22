@@ -1,3 +1,7 @@
+.LevelData-container {
+  color: black;
+}
+
 .LevelData-buttonContainer {
   display: flex;
   flex-flow: row nowrap;
@@ -9,18 +13,26 @@
   margin: var(--s);
 }
 
+.LevelData-button:hover {
+  opacity: 75%;
+}
+
+.LevelData-button,
+.LevelData-button:hover,
+.LevelData-button:active,
+.LevelData-button:focus,
+.LevelData-button:visited {
+  background-color: var(--primary--dim);
+  border: 1.5px solid var(--primary--dim);
+}
+
 .LevelData-sliderContainer {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
+  color: black;
 }
 
-LevelData-slider {
-  flex: 1;
-  gap: var(--m);
-}
-
-Form {
-  padding: 0;
-  margin: 0;
+.LevelData-slider {
+  width: 35%;
 }
