@@ -18,6 +18,8 @@ const LevelEditor = ({
   // Maintains tool currently selected in editor
   const [currentTool, setCurrentTool] = useState("none");
 
+  // Maintains gravity of
+
   // String to communicate messages to user
   const [message, setMessage] = useState("Design Your Level!");
 
@@ -31,6 +33,7 @@ const LevelEditor = ({
     platforms: [],
     coins: [],
     obstacles: [],
+    gravity: 600,
     funness: 0,
     difficulty: 0,
   });

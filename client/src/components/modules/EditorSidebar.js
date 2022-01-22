@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import Slider from "@material-ui/core/Slider";
 import LevelData from "./LevelData";
 import EditTool from "./EditTool";
 

@@ -61,7 +61,60 @@ const LevelData = ({
   return (
     <div className="LevelData-container">
       <Form>
-        <Form.Group className="mb-2" controlId="name">
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>Gravity</Form.Label>
+          <Slider
+            onChange={(event, value) => {
+              setLevelData({ ...levelData, gravity: (Number(value) / 100) * 600 });
+              setTimeout(() => {
+                document.dispatchEvent(
+                  new KeyboardEvent("keydown", {
+                    key: "r",
+                    keyCode: 82,
+                    bubbles: true,
+                  })
+                );
+              }, 15);
+              setTimeout(() => {
+                document.dispatchEvent(
+                  new KeyboardEvent("keyup", {
+                    key: "r",
+                    keyCode: 82,
+                    bubbles: true,
+                  })
+                );
+              }, 50);
+            }}
+            aria-valuetext="gravity"
+            value={Math.round((levelData.gravity / 600) * 100)}
+            color="primary"
+            min={-100}
+            max={300}
+            marks={[
+              {
+                value: -100,
+                label: "-100",
+              },
+              {
+                value: 0,
+                label: "0",
+              },
+              {
+                value: 100,
+                label: "100",
+              },
+              {
+                value: 200,
+                label: "200",
+              },
+              {
+                value: 300,
+                label: "300",
+              },
+            ]}
+            valueLabelDisplay="on"
+          />
+          <Form.Group className="mb-2" controlId="name"></Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control
             onChange={(event) => {
