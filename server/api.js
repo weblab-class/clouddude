@@ -85,10 +85,6 @@ router.get("/levels", (req, res) => {
         res.send(levels);
       });
     } else if (sorting === "name") {
-      // Level.aggregate([{ $sort: { name: 1 } }]).then((levels) => {
-      //   res.send(levels);
-      // });
-
       Level.aggregate([
         {
           $project: {
@@ -154,7 +150,7 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
 });
 
 // changing user profile(either number of published levels, levels won, or levels played)
-router.post("/profile", auth.ensureLoggedIn, (req, res) => {
+router.post("/profile", (req, res) => {
   if (typeof req.body.user.levelsPublished !== "undefined") {
     const newLevelsPublished = Number(req.body.user.levelsPublished) + 1;
     User.findOneAndUpdate(
@@ -175,7 +171,7 @@ router.post("/profile", auth.ensureLoggedIn, (req, res) => {
       };
       res.send(newUser);
     });
-  } else {
+  } else if (typeof req.body.user.levelsPlayed !== "undefined") {
     const newLevelsPlayed = Number(req.body.user.levelsPlayed) + 1;
     User.findOneAndUpdate(
       { _id: req.body.user._id },
@@ -187,6 +183,8 @@ router.post("/profile", auth.ensureLoggedIn, (req, res) => {
         res.send(newUser);
       }
     );
+  } else {
+    res.send({ msg: "not logged in" });
   }
 });
 
