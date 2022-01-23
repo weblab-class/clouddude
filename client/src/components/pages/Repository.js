@@ -20,6 +20,7 @@ const Repository = ({ setActiveLevel }) => {
   const [levelFunness, setLevelFunness] = useState(100);
   const [levelName, setLevelName] = useState("");
   const [creatorName, setCreatorName] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
   const [levels, setLevels] = useState([]);
 
@@ -30,6 +31,14 @@ const Repository = ({ setActiveLevel }) => {
       setLevels(levelObjects);
     });
   }, []);
+
+  // sorting by name, difficulty, and funness
+  useEffect(() => {
+    const query = { type: "sort", sortBy };
+    get("/api/levels", query).then((levelObjects) => {
+      setLevels(levelObjects);
+    });
+  }, [sortBy]);
 
   // filter the levels based on user input
   const filter = () => {
@@ -53,8 +62,8 @@ const Repository = ({ setActiveLevel }) => {
         <title>Cloudverse</title>
       </Helmet>
       <h3 className="Repository-title">Cloudverse</h3>
-      <div className="input-group">
-        <div>
+      <div>
+        <div className="input-group">
           <button
             onClick={() => setShowModal(true)}
             type="button"
@@ -63,6 +72,39 @@ const Repository = ({ setActiveLevel }) => {
             <SearchIcon />
             Search for a Level
           </button>
+        </div>
+        <p />
+        <p className="or">or</p>
+        <div>
+          <h3>Sort By:</h3>
+          <Form>
+            <div key="inline-radio" className="mb-3">
+              <Form.Check
+                onClick={() => setSortBy("name")}
+                inline
+                label="Name"
+                name="group1"
+                type="radio"
+                id="inline-radio-1"
+              />
+              <Form.Check
+                inline
+                label="Difficulty"
+                name="group1"
+                type="radio"
+                id="inline-radio-2"
+                onClick={() => setSortBy("difficulty")}
+              />
+              <Form.Check
+                onClick={() => setSortBy("funness")}
+                inline
+                label="Funness"
+                name="group1"
+                type="radio"
+                id="inline-radio-3"
+              />
+            </div>
+          </Form>
         </div>
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>

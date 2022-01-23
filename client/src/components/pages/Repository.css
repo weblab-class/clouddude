@@ -45,3 +45,12 @@
   background-position: center;
   outline: 0;
 }
+
+.filtering {
+  display: flex;
+  justify-content: space-between;
+}
+
+.or {
+  margin-left: 5vw;
+}

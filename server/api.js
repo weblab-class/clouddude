@@ -78,6 +78,21 @@ router.get("/levels", (req, res) => {
       }
       return res.send(levels);
     });
+  } else if (req.query.type === "sort") {
+    const sorting = req.query.sortBy;
+    if (sorting === "funness") {
+      Level.aggregate([{ $sort: { funness: -1 } }]).then((levels) => {
+        res.send(levels);
+      });
+    } else if (sorting === "name") {
+      Level.aggregate([{ $sort: { name: 1 } }]).then((levels) => {
+        res.send(levels);
+      });
+    } else {
+      Level.aggregate([{ $sort: { difficulty: 1 } }]).then((levels) => {
+        res.send(levels);
+      });
+    }
   } else {
     if (req.query.name.length !== 0) {
       actualQuery.name = { $regex: req.query.name, $options: "i" };
@@ -91,12 +106,14 @@ router.get("/levels", (req, res) => {
         $lte: Number(req.query.difficulty) + 10,
       };
     }
+
     if (Number(req.query.funness) !== 100) {
       actualQuery.funness = {
         $gte: Number(req.query.funness) - 10,
         $lte: Number(req.query.funness) + 10,
       };
     }
+
     Level.find(actualQuery, (err, levels) => {
       if (err) {
         return res.status(500).send(err);
