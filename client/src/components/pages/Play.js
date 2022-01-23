@@ -40,6 +40,7 @@ const Play = ({
           setLevelDifficulty={setLevelDifficulty}
           levelFunness={levelFunness}
           setLevelFunness={setLevelFunness}
+          activeLevel={activeLevel}
         />
       </div>
   );

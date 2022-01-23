@@ -3,12 +3,30 @@ import StarRatings from "react-star-ratings";
 import { post } from "../../utilities";
 
 const PlayInfo = ({
-  levelDifficulty, setLevelDifficulty, levelFunness, setLevelFunness
+  levelDifficulty,
+  setLevelDifficulty,
+  levelFunness,
+  setLevelFunness,
+  activeLevel,
 }) => {
+  const [userMessage, setUserMessage] = useState("");
+
+  useEffect(() => {
+    setUserMessage("");
+  }, []);
+
   const handleUpdate = () => {
-    const body = { message: "update", levelDifficulty, levelFunness };
-    post("/api/level", body).then((updatedLevel) => {
-      console.log("updating difficulty and funness levels", updatedLevel);
+    const levelId = activeLevel._id;
+    const body = {
+      message: "update",
+      levelDifficulty,
+      levelFunness,
+      levelId,
+    };
+    post("/api/level", body).then(() => {
+      setUserMessage("Thanks for the feedback!");
+      setLevelDifficulty(0);
+      setLevelFunness(0);
     });
   };
 
@@ -43,6 +61,7 @@ const PlayInfo = ({
       <button type="submit" onClick={handleUpdate} className="btn btn-secondary">
         Submit Rating
       </button>
+      <p>{userMessage}</p>
     </div>
   );
 };

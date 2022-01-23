@@ -48,10 +48,14 @@ router.post("/initsocket", (req, res) => {
 
 // posting or updating a new level
 router.post("/level", (req, res) => {
-  console.log("req.body", req.body);
   if (req.body.message === "update") {
-    console.log("getting here");
-    // need to update difficulty and funness levels
+    Level.updateOne(
+      { _id: req.body.levelId },
+      { $set: { difficulty: req.body.levelDifficulty, funness: req.body.levelFunness } },
+      () => {
+        res.send({ message: "updating funness and difficulty" });
+      }
+    );
   } else {
     const newLevel = new Level({
       creator: req.body.creator,
