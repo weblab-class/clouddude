@@ -30,6 +30,7 @@ const NavBar = ({
   setLevelsPlayed,
   invalidAlert,
   setInvalidAlert,
+  image,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -101,7 +102,9 @@ const NavBar = ({
 
         <Modal show={invalidAlert}>
           <Modal.Header>
-            <Modal.Title><div className="invalid">Invalid Username</div></Modal.Title>
+            <Modal.Title>
+              <div className="invalid">Invalid Username</div>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             Your username already exists! Please log in with a different account.
@@ -122,7 +125,7 @@ const NavBar = ({
               onClick={iconClick}
               color="inherit"
             >
-              <AccountCircle />
+              <img className="img-profile" src={image} alt="profile-avatar" />
             </IconButton>
             <div>
               <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>

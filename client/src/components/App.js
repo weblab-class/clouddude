@@ -58,7 +58,7 @@ const App = () => {
 
   const handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
-    console.log(`Pictured as ${res.profileObj.imageUrl}`);
+    setImage(res.profileObj.imageUrl);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       if (user.message) {
@@ -66,7 +66,6 @@ const App = () => {
       } else {
         setUserId(user._id);
         setName(user.name);
-        setImage(user.picture);
         // post("/api/initsocket", { socketid: socket.id });
       }
     });
@@ -122,6 +121,7 @@ const App = () => {
         levelsPlayed={levelsPlayed}
         invalidAlert={invalidAlert}
         setInvalidAlert={setInvalidAlert}
+        image={image}
       />
       <div className="App-body">
         <Router>

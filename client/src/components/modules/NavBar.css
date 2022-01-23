@@ -45,3 +45,9 @@
 .invalid {
   color: var(--red);
 }
+
+.img-profile {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
