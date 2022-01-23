@@ -128,18 +128,12 @@ router.get("/levels", (req, res) => {
     if (req.query.userName.length !== 0) {
       actualQuery.creator = { $regex: req.query.userName, $options: "i" };
     }
-    if (Number(req.query.difficulty) !== 100) {
-      actualQuery.difficulty = {
-        $gte: Number(req.query.difficulty) - 10,
-        $lte: Number(req.query.difficulty) + 10,
-      };
+    if (Number(req.query.difficulty) !== 0) {
+      actualQuery.difficulty = Number(req.query.difficulty);
     }
 
-    if (Number(req.query.funness) !== 100) {
-      actualQuery.funness = {
-        $gte: Number(req.query.funness) - 10,
-        $lte: Number(req.query.funness) + 10,
-      };
+    if (Number(req.query.funness) !== 0) {
+      actualQuery.funness = Number(req.query.funness);
     }
 
     Level.find(actualQuery, (err, levels) => {

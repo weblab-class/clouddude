@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet";
 import SearchIcon from "@material-ui/icons/Search";
 import Slider from "@material-ui/core/Slider";
+import StarRatings from "react-star-ratings";
 
 import { get } from "../../utilities";
 
@@ -16,8 +17,8 @@ import "./Repository.css";
 const Repository = ({ setActiveLevel }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const [levelDifficulty, setLevelDifficulty] = useState(100);
-  const [levelFunness, setLevelFunness] = useState(100);
+  const [levelDifficulty, setLevelDifficulty] = useState(0);
+  const [levelFunness, setLevelFunness] = useState(0);
   const [levelName, setLevelName] = useState("");
   const [creatorName, setCreatorName] = useState("");
   const [sortBy, setSortBy] = useState("");
@@ -52,6 +53,8 @@ const Repository = ({ setActiveLevel }) => {
     };
     get("/api/levels", query).then((res) => {
       setLevels(res);
+      setLevelFunness(0);
+      setLevelDifficulty(0);
     });
   };
 
@@ -137,7 +140,17 @@ const Repository = ({ setActiveLevel }) => {
 
             <Form.Group className="mb-3" controlId="difficulty">
               <Form.Label>Difficulty</Form.Label>
-              <Slider
+
+              <StarRatings
+                rating={levelDifficulty}
+                starRatedColor="blue"
+                changeRating={(newRating) => setLevelDifficulty(newRating)}
+                numberOfStars={5}
+                name="difficulty-filter"
+                starDimension="20px"
+                starSpacing="8px"
+              />
+              {/* <Slider
                 onChange={(event, value) => setLevelDifficulty(Number(value))}
                 value={levelDifficulty}
                 aria-valuetext="difficulty"
@@ -157,12 +170,21 @@ const Repository = ({ setActiveLevel }) => {
                   },
                 ]}
                 valueLabelDisplay="on"
-              />
+              /> */}
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="funness">
               <Form.Label>Funness</Form.Label>
-              <Slider
+              <StarRatings
+                rating={levelFunness}
+                starRatedColor="blue"
+                changeRating={(newRating) => setLevelFunness(newRating)}
+                numberOfStars={5}
+                name="funness-filter"
+                starDimension="20px"
+                starSpacing="8px"
+              />
+              {/* <Slider
                 onChange={(event, value) => setLevelFunness(Number(value))}
                 value={levelFunness}
                 aria-valuetext="funness"
@@ -182,7 +204,7 @@ const Repository = ({ setActiveLevel }) => {
                   },
                 ]}
                 valueLabelDisplay="on"
-              />
+              /> */}
             </Form.Group>
           </Form>
         </Modal.Body>
