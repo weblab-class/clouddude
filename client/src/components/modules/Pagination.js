@@ -23,19 +23,6 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
   return (
     <>
       <div className="Repository-container">
-        {currentLevels.map((level) => {
-          return (
-            <div className="Repository-item" key={uuidv4()}>
-              <SingleLevel
-                className="Repository-item"
-                level={level}
-                setActiveLevel={setActiveLevel}
-              />
-            </div>
-          );
-        })}
-      </div>
-      <div className="paging-menu">
         <ReactPaginate
           nextLabel="Next"
           onPageChange={handlePageClick}
@@ -56,6 +43,19 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
           activeClassName="active"
           renderOnZeroPageCount={null}
         />
+      </div>
+      <div className="Repository-container">
+        {currentLevels.map((level) => {
+          return (
+            <div className="Repository-item" key={uuidv4()}>
+              <SingleLevel
+                className="Repository-item"
+                level={level}
+                setActiveLevel={setActiveLevel}
+              />
+            </div>
+          );
+        })}
       </div>
     </>
   );
