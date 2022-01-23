@@ -85,7 +85,29 @@ router.get("/levels", (req, res) => {
         res.send(levels);
       });
     } else if (sorting === "name") {
-      Level.aggregate([{ $sort: { name: 1 } }]).then((levels) => {
+      // Level.aggregate([{ $sort: { name: 1 } }]).then((levels) => {
+      //   res.send(levels);
+      // });
+
+      Level.aggregate([
+        {
+          $project: {
+            name: 1,
+            platforms: 1,
+            coins: 1,
+            obstacles: 1,
+            creator: 1,
+            description: 1,
+            start: 1,
+            exit: 1,
+            funness: 1,
+            difficulty: 1,
+            gravity: 1,
+            insensitive: { $toLower: "$name" },
+          },
+        },
+        { $sort: { insensitive: 1 } },
+      ]).then((levels) => {
         res.send(levels);
       });
     } else {

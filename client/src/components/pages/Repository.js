@@ -76,7 +76,7 @@ const Repository = ({ setActiveLevel }) => {
         <p />
         <p className="or">or</p>
         <div>
-          <h3>Sort By:</h3>
+          <h4>Sort By:</h4>
           <Form>
             <div key="inline-radio" className="mb-3">
               <Form.Check
