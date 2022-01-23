@@ -729,6 +729,9 @@ const Game = ({
   }, [gridPoint]);
 
   function update() {
+    //
+    console.log("x: ", player.x, " y: ", player.y);
+
     // Responsively updates screen size
     responsivelyResize();
 
@@ -800,7 +803,7 @@ const Game = ({
 
     // Handles players falling out of the map
 
-    if (player.y > 900) {
+    if (player.y > 900 || player.y < -600 || player.x < -500 || player.x > 2100) {
       gameOver();
     }
   }
