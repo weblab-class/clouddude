@@ -125,7 +125,7 @@ const NavBar = ({
               onClick={iconClick}
               color="inherit"
             >
-              <img className="img-profile" src={image} alt="profile-avatar" />
+              <img className="img-profile" src={localStorage.getItem("imageurl")} alt="profile-avatar" />
             </IconButton>
             <div>
               <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
