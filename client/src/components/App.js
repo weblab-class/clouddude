@@ -26,6 +26,8 @@ const App = () => {
   const [name, setName] = useState("User");
   const [image, setImage] = useState(undefined);
   const [userState, setUser] = useState(undefined);
+  const [levelDifficulty, setLevelDifficulty] = useState(0);
+  const [levelFunness, setLevelFunness] = useState(0);
   const [invalidAlert, setInvalidAlert] = useState(false);
   const [activeLevel, setActiveLevel] = useState({
     creator: undefined,
@@ -158,6 +160,10 @@ const App = () => {
             levelsPlayed={levelsPlayed}
             activeLevel={activeLevel}
             userState={userState}
+            levelDifficulty={levelDifficulty}
+            setLevelDifficulty={setLevelDifficulty}
+            levelFunness={levelFunness}
+            setLevelFunness={setLevelFunness}
             userId={userId}
             path="/play"
           />

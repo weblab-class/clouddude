@@ -46,26 +46,32 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-// posting a new level
-router.post("/level", auth.ensureLoggedIn, (req, res) => {
-  const newLevel = new Level({
-    creator: req.body.creator,
-    name: req.body.name,
-    description: req.body.description,
-    start: req.body.start,
-    exit: req.body.exit,
-    platforms: req.body.platforms,
-    coins: req.body.coins,
-    obstacles: req.body.obstacles,
-    gravity: req.body.gravity,
-    funness: Number(req.body.funness),
-    difficulty: Number(req.body.difficulty),
-  });
+// posting or updating a new level
+router.post("/level", (req, res) => {
+  console.log("req.body", req.body);
+  if (req.body.message === "update") {
+    console.log("getting here");
+    // need to update difficulty and funness levels
+  } else {
+    const newLevel = new Level({
+      creator: req.body.creator,
+      name: req.body.name,
+      description: req.body.description,
+      start: req.body.start,
+      exit: req.body.exit,
+      platforms: req.body.platforms,
+      coins: req.body.coins,
+      obstacles: req.body.obstacles,
+      gravity: req.body.gravity,
+      funness: Number(req.body.funness),
+      difficulty: Number(req.body.difficulty),
+    });
 
-  newLevel.save().then((level) => {
-    console.log("level from backend: ", level);
-    res.send(level);
-  });
+    newLevel.save().then((level) => {
+      console.log("level from backend: ", level);
+      res.send(level);
+    });
+  }
 });
 
 // getting all or filtered levels
