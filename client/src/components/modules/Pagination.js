@@ -52,6 +52,7 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
                 className="Repository-item"
                 level={level}
                 setActiveLevel={setActiveLevel}
+                index={uuidv4()}
               />
             </div>
           );

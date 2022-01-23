@@ -1,19 +1,39 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import StarRatings from "react-star-ratings";
 import { Link } from "@reach/router";
 
 import "../../utilities.css";
 import "./SingleLevel.css";
 
-const SingleLevel = ({ level, setActiveLevel }) => {
+const SingleLevel = ({ level, setActiveLevel, index }) => {
   return (
     <>
       <Card style={{ width: "18rem" }}>
-        <Card.Img
-          variant="top"
-          src="https://upload.wikimedia.org/wikipedia/commons/6/68/Cliff_2D_Game_Platformer_Ground_Game_Asset.png"
-        />
+        <Card.Img variant="top" src={`https://picsum.photos/500/300?random=${index}`} />
+        <center>
+          <div>
+            <StarRatings
+              rating={level.difficulty}
+              starRatedColor="red"
+              numberOfStars={5}
+              name="difficulty-rating"
+              starDimension="20px"
+              starSpacing="3px"
+            />
+          </div>
+          <div>
+            <StarRatings
+              rating={level.funness}
+              starRatedColor="green"
+              numberOfStars={5}
+              name="funness-rating"
+              starDimension="20px"
+              starSpacing="3px"
+            />
+          </div>
+        </center>
         <Card.Body>
           <Card.Title>{level.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{level.creator}</Card.Subtitle>

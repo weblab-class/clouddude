@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet";
 import SearchIcon from "@material-ui/icons/Search";
-import Slider from "@material-ui/core/Slider";
 import StarRatings from "react-star-ratings";
 
 import { get } from "../../utilities";
