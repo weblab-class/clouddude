@@ -22,6 +22,7 @@ const Game = ({
   // Global configuration constants
   let gameWon = false;
   let isOver = false;
+  let jumpFlag = true;
 
   // Global control variables
   let game;
@@ -29,11 +30,13 @@ const Game = ({
   let player;
   let spinners;
   let spiders;
+  let worms;
+  let fireballs;
   let door;
   let config;
   let resizeTimeout;
   let jump;
-  let jumpFlag = true;
+  let timer;
 
   let gameOverText;
   let gameOverCaption;
@@ -127,7 +130,7 @@ const Game = ({
         default: "arcade",
         arcade: {
           gravity: { y: 600 },
-          debug: false,
+          debug: true,
         },
       },
       scale: {
@@ -179,6 +182,14 @@ const Game = ({
     this.load.spritesheet("spider", "ygw0v8x3lqa9s7v/spider.png?dl=0", {
       frameWidth: 46,
       frameHeight: 34,
+    });
+    this.load.spritesheet("worm", "7z3nau7x9glwkpv/worm.png?dl=0", {
+      frameWidth: 18,
+      frameHeight: 50,
+    });
+    this.load.spritesheet("fireball", "ga1ure11kqhx4l8/fireballTiny.png?dl=0", {
+      frameWidth: 25,
+      frameHeight: 25,
     });
 
     this.load.audio("jump", "7oi01wjujjamkry/jump.wav?raw=1");
@@ -265,6 +276,30 @@ const Game = ({
       repeat: 0,
     });
 
+    // Initialize worm animation
+    this.anims.create({
+      key: "wormWiggle",
+      frames: this.anims.generateFrameNumbers("worm", { start: 0, end: 1 }),
+      frameRate: 8,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "wormDie",
+      frames: this.anims.generateFrameNumbers("worm", {
+        frames: [0, 3, 0, 3, 0, 3, 0, 2],
+      }),
+      frameRate: 12,
+      repeat: 0,
+    });
+
+    this.anims.create({
+      key: "fire",
+      frames: this.anims.generateFrameNumbers("fireball", { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
     // Initialize coin animation
     this.anims.create({
       key: "spin",
@@ -324,6 +359,8 @@ const Game = ({
     const spikes = this.physics.add.staticGroup();
     spinners = this.add.group();
     spiders = this.add.group();
+    worms = this.add.group();
+    fireballs = this.add.group();
 
     for (const obstacle of getActiveLevel().obstacles) {
       if (obstacle.type === "spike") {
@@ -344,8 +381,43 @@ const Game = ({
         spider.setVelocityX(100);
         spider.anims.play("spiderWalk");
         spiders.add(spider);
+      } else if (obstacle.type === "worm") {
+        const worm = this.physics.add.sprite(obstacle.x, obstacle.y, "worm");
+        worm.anims.play("wormWiggle");
+        worm.body.setMass(9000);
+        worms.add(worm);
       }
     }
+
+    // Handles worm control
+    const fireWorms = () => {
+      Phaser.Actions.Call(worms.getChildren(), (worm) => {
+        if (
+          Phaser.Math.Distance.Between(player.x, player.y, worm.x, worm.y) < 600 &&
+          worm.body.enable
+        ) {
+          const fireball = this.physics.add.sprite(worm.x, worm.y, "fireball");
+          fireballs.add(fireball);
+          fireball.anims.play("fire");
+          fireball.body.setAllowGravity(false);
+          fireball.body.setCircle(10, 4, 4);
+          this.physics.moveToObject(fireball, player, 400);
+          later(5000).then((fireball) => {
+            if (fireball) {
+              fireballs.killAndHide(fireball);
+              fireballs.remove(fireball);
+            }
+          });
+        }
+      });
+    };
+
+    this.triggerTimer = this.time.addEvent({
+      callback: fireWorms,
+      callbackScope: this,
+      delay: 1500, // 1000 = 1 second
+      loop: true,
+    });
 
     // Create Game Over Text
     gameOverText = this.add.text(800, 300, "Level Failed", {
@@ -589,6 +661,53 @@ const Game = ({
       this
     );
 
+    this.physics.add.collider(worms, platforms);
+    this.physics.add.collider(worms, locks);
+    this.physics.add.collider(
+      worms,
+      falling,
+      function (worm, fallingCollider) {
+        later(300).then(() => {
+          fallingCollider.body.enable = false;
+          this.tweens.add({
+            targets: fallingCollider,
+            y: fallingCollider.y + 100,
+            alpha: 0,
+            duration: 1300,
+            ease: "Cubic.easeOut",
+            callbackScope: this,
+            onComplete() {
+              falling.killAndHide(fallingCollider);
+              falling.remove(fallingCollider);
+            },
+          });
+        });
+      },
+      null,
+      this
+    );
+
+    const fireballCollision = (fireball, object) => {
+      fireball.body.enable = false;
+      this.tweens.add({
+        targets: fireball,
+        alpha: 0,
+        duration: 500,
+        ease: "Cubic.easeOut",
+        callbackScope: this,
+        onComplete() {
+          fireballs.killAndHide(fireball);
+          fireballs.remove(fireball);
+        },
+      });
+    };
+
+    this.physics.add.collider(fireballs, platforms, fireballCollision, null, this);
+    this.physics.add.collider(fireballs, locks, fireballCollision, null, this);
+    this.physics.add.collider(fireballs, falling, fireballCollision, null, this);
+    this.physics.add.collider(fireballs, spikes, fireballCollision, null, this);
+    this.physics.add.collider(fireballs, spinners, fireballCollision, null, this);
+
     // Handle key collisions
     this.physics.add.overlap(
       player,
@@ -690,6 +809,22 @@ const Game = ({
       this
     );
 
+    this.physics.add.collider(
+      worms,
+      spikes,
+      (worm, spike) => {
+        worm.disableBody(false, false);
+        this.sound.play("damage");
+        worm.anims.play("wormDie");
+        later(1000).then(() => {
+          worms.killAndHide(worm);
+          worms.remove(worm);
+        });
+      },
+      null,
+      this
+    );
+
     // Handle spinner collisions
     this.physics.add.overlap(
       player,
@@ -726,6 +861,22 @@ const Game = ({
         later(2000).then(() => {
           spiders.killAndHide(spider);
           spiders.remove(spider);
+        });
+      },
+      null,
+      this
+    );
+    this.physics.add.overlap(
+      worms,
+      spinners,
+      (worm, spinner) => {
+        this.sound.play("damage");
+        worm.disableBody(false, false);
+        worm.setVelocityX(0);
+        worm.anims.play("wormDie");
+        later(1000).then(() => {
+          worms.killAndHide(worm);
+          worms.remove(worm);
         });
       },
       null,
@@ -770,6 +921,44 @@ const Game = ({
       this
     );
 
+    // Handles worm collisions
+    this.physics.add.collider(
+      player,
+      worms,
+      function (player, worm) {
+        if (worm.body.touching.up) {
+          this.sound.play("damage");
+          player.setVelocityY(-200);
+          worm.disableBody(false, false);
+          worm.setVelocityX(0);
+          worm.anims.play("wormDie");
+          later(1000).then(() => {
+            worms.killAndHide(worm);
+            worms.remove(worm);
+          });
+        } else if (isOver === false) {
+          this.sound.play("damage");
+          isOver = true;
+          player.disableBody(false, false);
+          player.setTintFill(0xff0000);
+          this.tweens.add({
+            targets: player,
+            y: player.y - 100,
+            angle: -90,
+            alpha: 0,
+            duration: 800,
+            ease: "Cubic.easeOut",
+            callbackScope: this,
+            onComplete() {
+              gameOver();
+            },
+          });
+        }
+      },
+      null,
+      this
+    );
+
     // Handle coin collection
     this.physics.add.overlap(
       player,
@@ -788,6 +977,51 @@ const Game = ({
             coins.killAndHide(coin);
             coins.remove(coin);
           },
+        });
+      },
+      null,
+      this
+    );
+
+    // Handle fireball collisons
+    this.physics.add.overlap(
+      player,
+      fireballs,
+      function (player, fireball) {
+        player.disableBody(false, false);
+        fireballCollision(fireball, player);
+        this.sound.play("damage");
+        isOver = true;
+        player.setTintFill(0xff0000);
+        this.tweens.add({
+          targets: player,
+          y: player.y - 100,
+          angle: -90,
+          alpha: 0,
+          duration: 800,
+          ease: "Cubic.easeOut",
+          callbackScope: this,
+          onComplete() {
+            gameOver();
+          },
+        });
+      },
+      null,
+      this
+    );
+
+    this.physics.add.overlap(
+      spiders,
+      fireballs,
+      (spider, fireball) => {
+        fireballCollision(fireball, spider);
+        this.sound.play("damage");
+        spider.disableBody(false, false);
+        spider.setVelocityX(0);
+        spider.anims.play("spiderDie");
+        later(2000).then(() => {
+          spiders.killAndHide(spider);
+          spiders.remove(spider);
         });
       },
       null,
@@ -895,12 +1129,12 @@ const Game = ({
     if (gameWon === true) {
       gameWonText.visible = true;
       gameWonCaption.visible = true;
-      if (isEditing) {
-        gameOverText.visible = true;
-        gameOverCaption.visible = true;
-      } else {
+      if (!isEditing) {
         setUpdateLevelsWon(true);
       }
+    } else {
+      gameOverText.visible = true;
+      gameOverCaption.visible = true;
     }
   }
 

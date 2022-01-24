@@ -135,6 +135,11 @@ const LevelEditor = ({
           ...levelData,
           obstacles: [...levelData.obstacles, { ...gridPoint, type: "spider" }],
         });
+      } else if (currentTool === "worm" && !objectInSpot) {
+        setLevelData({
+          ...levelData,
+          obstacles: [...levelData.obstacles, { ...gridPoint, type: "worm" }],
+        });
       } else if (currentTool === "lock" && !objectInSpot) {
         setLevelData({
           ...levelData,
