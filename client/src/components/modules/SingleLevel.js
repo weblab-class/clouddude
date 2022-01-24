@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import StarRatings from "react-star-ratings";
+import ReactTooltip from "react-tooltip";
 import { Link } from "@reach/router";
 
 import "../../utilities.css";
@@ -13,7 +14,8 @@ const SingleLevel = ({ level, setActiveLevel, index }) => {
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={`https://picsum.photos/500/300?random=${index}`} />
         <center>
-          <div>
+          <div data-tip="Difficulty">
+            <ReactTooltip type="info" />
             <StarRatings
               rating={level.difficulty}
               starRatedColor="red"
@@ -23,7 +25,8 @@ const SingleLevel = ({ level, setActiveLevel, index }) => {
               starSpacing="3px"
             />
           </div>
-          <div>
+          <div data-tip="Funness">
+            <ReactTooltip type="info" />
             <StarRatings
               rating={level.funness}
               starRatedColor="green"

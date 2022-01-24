@@ -17,6 +17,7 @@ const Game = ({
 }) => {
   const [gridPoint, setGridPoint] = useState({ x: undefined, y: undefined });
   const [test, setTest] = useState(0);
+  const [updateLevelsWon, setUpdateLevelsWon] = useState(false);
 
   // Global configuration constants
   let gameWon = false;
@@ -86,6 +87,16 @@ const Game = ({
       setLevelsPlayed(user.levelsPlayed);
     });
   }, []);
+
+  // increment levels won
+  useEffect(() => {
+    if (updateLevelsWon) {
+      const body = { user: { levelsWon, _id: userId } };
+      post("/api/profile", body).then((user) => {
+        setLevelsWon(user.levelsWon);
+      });
+    }
+  }, [updateLevelsWon]);
 
   function reloadGame() {
     // If game is already created, restart it
@@ -884,16 +895,12 @@ const Game = ({
     if (gameWon === true) {
       gameWonText.visible = true;
       gameWonCaption.visible = true;
-
-      if (!isEditing) {
-        const body = { user: { levelsWon, _id: userId } };
-        post("/api/profile", body).then((user) => {
-          setLevelsWon(user.levelsWon);
-        });
+      if (isEditing) {
+        gameOverText.visible = true;
+        gameOverCaption.visible = true;
+      } else {
+        setUpdateLevelsWon(true);
       }
-    } else {
-      gameOverText.visible = true;
-      gameOverCaption.visible = true;
     }
   }
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import ReactTooltip from "react-tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -86,7 +86,8 @@ const NavBar = ({
     <div id="document-page">
       <nav className="NavBar-container">
         <div className="NavBar-linkContainer u-inlineBlock">
-          <Link to="/" className="NavBar-link">
+          <ReactTooltip type="success" />
+          <Link data-tip="CloudDude" to="/" className="NavBar-link">
             <img src="https://i.imgur.com/XTd5pLu.png" width="40" height="40" alt="Platformer" />
           </Link>
           <Link to="/about/" className="NavBar-link">
@@ -125,7 +126,11 @@ const NavBar = ({
               onClick={iconClick}
               color="inherit"
             >
-              <img className="img-profile" src={image} alt="profile-avatar" />
+              <img
+                className="img-profile"
+                src={localStorage.getItem("imageurl")}
+                alt="profile-avatar"
+              />
             </IconButton>
             <div>
               <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
