@@ -86,8 +86,8 @@ const EditorSidebar = ({
         <EditTool
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
-          name="spider"
-          img="https://i.imgur.com/6vm977B.png"
+          name="worm"
+          img="https://www.dl.dropboxusercontent.com/s/3p3ksj2qncpvn85/singleWorm.png?dl=0"
         />
         <EditTool
           setCurrentTool={setCurrentTool}
