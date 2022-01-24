@@ -74,6 +74,9 @@ const LevelData = ({
                     ...levelData,
                     gravity: { x: (Number(value) / 100) * 10000, y: levelData.gravity.y },
                   });
+                  if (message !== "Design Your Level!") {
+                    setMessage("Design Your Level!");
+                  }
                 }}
                 onChangeCommitted={(event, value) => {
                   setLevelData({
@@ -122,6 +125,9 @@ const LevelData = ({
                     ...levelData,
                     gravity: { x: levelData.gravity.x, y: (Number(value) / 100) * 600 },
                   });
+                  if (message !== "Design Your Level!") {
+                    setMessage("Design Your Level!");
+                  }
                 }}
                 onChangeCommitted={(event, value) => {
                   setLevelData({

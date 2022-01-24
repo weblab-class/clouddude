@@ -23,6 +23,7 @@
 .LevelData-button:visited {
   background-color: var(--primary--dim--dim) !important;
   border: 1.5px solid var(--primary--dim--dim) !important;
+  outline: none !important;
   font-weight: bold !important;
 }
 

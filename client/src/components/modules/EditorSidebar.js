@@ -26,6 +26,12 @@ const EditorSidebar = ({
         <EditTool
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
+          name="delete"
+          img="https://i.imgur.com/sX8VgWy.png"
+        />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
           name="start"
           img="https://i.imgur.com/lfAyDl6.png"
         />
@@ -44,8 +50,8 @@ const EditorSidebar = ({
         <EditTool
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
-          name="coin"
-          img="https://i.imgur.com/eTNmgCf.png"
+          name="falling"
+          img="https://i.imgur.com/jh2X6dc.png"
         />
         <EditTool
           setCurrentTool={setCurrentTool}
@@ -56,14 +62,20 @@ const EditorSidebar = ({
         <EditTool
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
-          name="falling"
-          img="https://i.imgur.com/jh2X6dc.png"
+          name="coin"
+          img="https://i.imgur.com/eTNmgCf.png"
         />
         <EditTool
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
-          name="delete"
-          img="https://i.imgur.com/sX8VgWy.png"
+          name="lock"
+          img="https://www.dl.dropboxusercontent.com/s/hchmqqeq35o0hlk/lock.png?dl=0"
+        />
+        <EditTool
+          setCurrentTool={setCurrentTool}
+          currentTool={currentTool}
+          name="key"
+          img="https://www.dl.dropboxusercontent.com/s/a9t5307kthiyhli/smallKey.png?dl=0"
         />
         <EditTool
           setCurrentTool={setCurrentTool}
@@ -82,18 +94,6 @@ const EditorSidebar = ({
           currentTool={currentTool}
           name="spider"
           img="https://i.imgur.com/6vm977B.png"
-        />
-        <EditTool
-          setCurrentTool={setCurrentTool}
-          currentTool={currentTool}
-          name="lock"
-          img="https://www.dl.dropboxusercontent.com/s/hchmqqeq35o0hlk/lock.png?dl=0"
-        />
-        <EditTool
-          setCurrentTool={setCurrentTool}
-          currentTool={currentTool}
-          name="key"
-          img="https://www.dl.dropboxusercontent.com/s/a9t5307kthiyhli/smallKey.png?dl=0"
         />
       </div>
       <LevelData
