@@ -135,6 +135,16 @@ const LevelEditor = ({
           ...levelData,
           obstacles: [...levelData.obstacles, { ...gridPoint, type: "spider" }],
         });
+      } else if (currentTool === "lock" && !objectInSpot) {
+        setLevelData({
+          ...levelData,
+          platforms: [...levelData.platforms, { ...gridPoint, type: "lock" }],
+        });
+      } else if (currentTool === "key" && !objectInSpot) {
+        setLevelData({
+          ...levelData,
+          coins: [...levelData.coins, { ...gridPoint, type: "key" }],
+        });
       } else if (currentTool === "delete") {
         const levelDataCopy = { ...levelData };
 

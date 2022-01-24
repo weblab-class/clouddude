@@ -86,14 +86,14 @@ const EditorSidebar = ({
         <EditTool
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
-          name="spider"
-          img="https://i.imgur.com/6vm977B.png"
+          name="lock"
+          img="https://www.dl.dropboxusercontent.com/s/hchmqqeq35o0hlk/lock.png?dl=0"
         />
         <EditTool
           setCurrentTool={setCurrentTool}
           currentTool={currentTool}
-          name="spider"
-          img="https://i.imgur.com/6vm977B.png"
+          name="key"
+          img="https://www.dl.dropboxusercontent.com/s/a9t5307kthiyhli/smallKey.png?dl=0"
         />
       </div>
       <LevelData

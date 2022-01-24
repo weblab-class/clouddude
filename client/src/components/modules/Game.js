@@ -146,6 +146,9 @@ const Game = ({
     this.load.image("spike", "7a8tzts1xzvl4v3/spikes.png?dl=0");
     this.load.image("grid", "hidf43mavg0i8xt/gridSquare.png?dl=0");
     this.load.image("falling", "4m7buvvtqk7z4ks/Falling.png?dl=0");
+    this.load.image("lock", "hchmqqeq35o0hlk/lock.png?dl=0");
+    this.load.image("key", "a9t5307kthiyhli/smallKey.png?dl=0");
+
     this.load.spritesheet("coin", "lka0ez1lu8ui3dd/coin.png?dl=0", {
       frameWidth: 50,
       frameHeight: 50,
@@ -170,6 +173,8 @@ const Game = ({
     this.load.audio("jump", "7oi01wjujjamkry/jump.wav?raw=1");
     this.load.audio("coin", "maqua4unxcmsc3b/coin.wav?raw=1");
     this.load.audio("damage", "paeeehazuv0jun8/stomp.wav?raw=1");
+    this.load.audio("key", "hpw3u6n0bgw939b/key.wav?raw=1");
+    this.load.audio("unlock", "j0mhvm09of2wi4n/unlock.wav?raw=1");
 
     // Use the below for adding local files:
     // import test from "../../../dist/images/Block_Blue.png";
@@ -269,18 +274,24 @@ const Game = ({
     // Create platforms
     const platforms = this.physics.add.staticGroup();
     const falling = this.physics.add.staticGroup();
+    const locks = this.add.group();
 
     for (const platform of getActiveLevel().platforms) {
       if (platform.type === "grass") {
         platforms.create(platform.x, platform.y, "grass");
-      }
-      if (platform.type === "falling") {
+      } else if (platform.type === "falling") {
         falling.create(platform.x, platform.y, "falling");
+      } else if (platform.type === "lock") {
+        const newLock = this.physics.add.sprite(platform.x, platform.y, "lock");
+        newLock.setImmovable(true);
+        newLock.body.setAllowGravity(false);
+        locks.add(newLock, true);
       }
     }
 
     // Create coins
     const coins = this.add.group();
+    const keys = this.add.group();
 
     for (const coin of getActiveLevel().coins) {
       if (coin.type === "spinCoin") {
@@ -290,6 +301,11 @@ const Game = ({
         newCoin.body.setAllowGravity(false);
         newCoin.body.setCircle(20, 5, 5);
         coins.add(newCoin);
+      } else if (coin.type === "key") {
+        const newKey = this.physics.add.sprite(coin.x, coin.y, "key");
+        newKey.setImmovable(true);
+        newKey.body.setAllowGravity(false);
+        keys.add(newKey);
       }
     }
 
@@ -484,6 +500,7 @@ const Game = ({
 
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
+    this.physics.add.collider(player, locks);
     this.physics.add.collider(
       player,
       falling,
@@ -509,6 +526,7 @@ const Game = ({
     );
 
     this.physics.add.collider(spiders, platforms);
+    this.physics.add.collider(spiders, locks);
     this.physics.add.collider(
       spiders,
       falling,
@@ -534,6 +552,7 @@ const Game = ({
     );
 
     this.physics.add.collider(spinners, platforms);
+    this.physics.add.collider(spinners, locks);
     this.physics.add.collider(spinners, spinners);
     this.physics.add.collider(
       spinners,
@@ -553,6 +572,53 @@ const Game = ({
               falling.remove(fallingCollider);
             },
           });
+        });
+      },
+      null,
+      this
+    );
+
+    // Handle key collisions
+    this.physics.add.overlap(
+      player,
+      keys,
+      function (player, key) {
+        key.disableBody(false, false);
+        this.sound.play("key");
+        this.tweens.add({
+          targets: key,
+          y: key.y - 100,
+          alpha: 0,
+          duration: 800,
+          ease: "Cubic.easeOut",
+          callbackScope: this,
+          onComplete() {
+            keys.killAndHide(key);
+            keys.remove(key);
+
+            let unlockFlag = true;
+            Phaser.Actions.Call(keys.getChildren(), (key) => {
+              unlockFlag = false;
+            });
+
+            if (unlockFlag) {
+              this.sound.play("unlock");
+              Phaser.Actions.Call(locks.getChildren(), (lock) => {
+                lock.disableBody(false, false);
+                this.tweens.add({
+                  targets: lock,
+                  y: lock.y - 100,
+                  alpha: 0,
+                  duration: 800,
+                  ease: "Cubic.easeOut",
+                  callbackScope: this,
+                  onComplete() {
+                    locks.killAndHide(lock);
+                  },
+                });
+              });
+            }
+          },
         });
       },
       null,
@@ -729,9 +795,6 @@ const Game = ({
   }, [gridPoint]);
 
   function update() {
-    //
-    console.log("x: ", player.x, " y: ", player.y);
-
     // Responsively updates screen size
     responsivelyResize();
 
