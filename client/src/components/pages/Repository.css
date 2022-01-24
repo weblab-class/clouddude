@@ -54,3 +54,12 @@
 .or {
   margin-left: 5vw;
 }
+
+.sorting-label {
+  color: darkblue;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.valid {
+  border: 1px solid red;
+}

@@ -36,7 +36,7 @@ const PlayInfo = ({
         <h4>Difficulty:</h4>
         <StarRatings
           rating={levelDifficulty}
-          starRatedColor="blue"
+          starRatedColor="red"
           changeRating={(newRating) => setLevelDifficulty(newRating)}
           numberOfStars={5}
           name="difficulty"
@@ -49,7 +49,7 @@ const PlayInfo = ({
         <h4>Funness:</h4>
         <StarRatings
           rating={levelFunness}
-          starRatedColor="blue"
+          starRatedColor="green"
           changeRating={(newRating) => setLevelFunness(newRating)}
           numberOfStars={5}
           name="funness"
@@ -61,7 +61,7 @@ const PlayInfo = ({
       <button type="submit" onClick={handleUpdate} className="btn btn-secondary">
         Submit Rating
       </button>
-      <p>{userMessage}</p>
+      <p className="text-danger">{userMessage}</p>
     </div>
   );
 };

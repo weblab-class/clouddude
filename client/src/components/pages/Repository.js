@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet";
 import SearchIcon from "@material-ui/icons/Search";
 import StarRatings from "react-star-ratings";
+import ReactTooltip from "react-tooltip";
 
 import { get } from "../../utilities";
 
@@ -78,10 +79,12 @@ const Repository = ({ setActiveLevel }) => {
         <p />
         <p className="or">or</p>
         <div>
-          <h4>Sort By:</h4>
+          <h4 className="sorting-label">Sort By:</h4>
           <Form>
             <div key="inline-radio" className="mb-3">
+              <ReactTooltip type="info" />
               <Form.Check
+                data-tip="Sort by name(A-Z)"
                 onClick={() => setSortBy("name")}
                 inline
                 label="Name"
@@ -89,16 +92,20 @@ const Repository = ({ setActiveLevel }) => {
                 type="radio"
                 id="inline-radio-1"
               />
+              <ReactTooltip type="info" />
               <Form.Check
                 inline
+                data-tip="Sort by difficulty(Low-High)"
                 label="Difficulty"
                 name="group1"
                 type="radio"
                 id="inline-radio-2"
                 onClick={() => setSortBy("difficulty")}
               />
+              <ReactTooltip type="info" />
               <Form.Check
                 onClick={() => setSortBy("funness")}
+                data-tip="Sort by funness(High-Low) | Funness = Fun Rating"
                 inline
                 label="Funness"
                 name="group1"
@@ -114,7 +121,7 @@ const Repository = ({ setActiveLevel }) => {
           <Modal.Title>Search</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>You can filter a level by difficulty score, name, etc.</p>
+          <p className="text-info">You can filter a level by difficulty score, name, etc.</p>
 
           <Form>
             <Form.Group className="mb-3" controlId="name">
@@ -139,88 +146,45 @@ const Repository = ({ setActiveLevel }) => {
 
             <Form.Group className="mb-3" controlId="difficulty">
               <Form.Label>Difficulty</Form.Label>
-
+              {"   "}
               <StarRatings
                 rating={levelDifficulty}
-                starRatedColor="blue"
+                starRatedColor="red"
                 changeRating={(newRating) => setLevelDifficulty(newRating)}
                 numberOfStars={5}
                 name="difficulty-filter"
                 starDimension="20px"
                 starSpacing="8px"
               />
-              {/* <Slider
-                onChange={(event, value) => setLevelDifficulty(Number(value))}
-                value={levelDifficulty}
-                aria-valuetext="difficulty"
-                color="primary"
-                marks={[
-                  {
-                    value: 0,
-                    label: "0",
-                  },
-                  {
-                    value: 50,
-                    label: "50",
-                  },
-                  {
-                    value: 100,
-                    label: "N/A",
-                  },
-                ]}
-                valueLabelDisplay="on"
-              /> */}
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="funness">
               <Form.Label>Funness</Form.Label>
+              {"   "}
               <StarRatings
                 rating={levelFunness}
-                starRatedColor="blue"
+                starRatedColor="green"
                 changeRating={(newRating) => setLevelFunness(newRating)}
                 numberOfStars={5}
                 name="funness-filter"
                 starDimension="20px"
                 starSpacing="8px"
               />
-              {/* <Slider
-                onChange={(event, value) => setLevelFunness(Number(value))}
-                value={levelFunness}
-                aria-valuetext="funness"
-                color="primary"
-                marks={[
-                  {
-                    value: 0,
-                    label: "0",
-                  },
-                  {
-                    value: 50,
-                    label: "50",
-                  },
-                  {
-                    value: 100,
-                    label: "N/A",
-                  },
-                ]}
-                valueLabelDisplay="on"
-              /> */}
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button
             variant="secondary"
-            className="Repository-button"
             onClick={() => setShowModal(false)}
           >
             Close
           </Button>
-          <Button variant="primary" className="Repository-button" onClick={filter}>
+          <Button className="Repository-button" onClick={filter}>
             Search
           </Button>
         </Modal.Footer>
       </Modal>
-
       <Pagination itemsPerPage={4} levels={levels} setActiveLevel={setActiveLevel} />
     </div>
   );
