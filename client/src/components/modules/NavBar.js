@@ -136,12 +136,14 @@ const NavBar = ({
               <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
                 <MenuItem onClick={handleProfile}>My Profile</MenuItem>
                 <MenuItem onClick={() => setMenuOpen(false)}>
-                  <GoogleLogout
-                    clientId={GOOGLE_CLIENT_ID}
-                    buttonText="Logout"
-                    onLogoutSuccess={handleLogout}
-                    onFailure={(err) => console.log(err)}
-                  />
+                  <div className="google-button">
+                    <GoogleLogout
+                      clientId={GOOGLE_CLIENT_ID}
+                      buttonText="Logout"
+                      onLogoutSuccess={handleLogout}
+                      onFailure={(err) => console.log(err)}
+                    />
+                  </div>
                 </MenuItem>
               </Menu>
             </div>
@@ -166,15 +168,21 @@ const NavBar = ({
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="difficulty">
-                      <Form.Label>Published Levels: {publishedLevels}</Form.Label>
+                      <Form.Label>
+                        <b>Published Levels:</b> {publishedLevels}
+                      </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
-                      <Form.Label>Levels Won: {levelsWon}</Form.Label>
+                      <Form.Label>
+                        <b>Levels Won:</b> {levelsWon}
+                      </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
-                      <Form.Label>Levels Played: {levelsPlayed}</Form.Label>
+                      <Form.Label>
+                        <b>Levels Played:</b> {levelsPlayed}
+                      </Form.Label>
                     </Form.Group>
                   </Form>
                 </Modal.Body>
@@ -191,12 +199,14 @@ const NavBar = ({
           </div>
         ) : (
           <div className="login">
-            <GoogleLogin
-              clientId={GOOGLE_CLIENT_ID}
-              buttonText="Login"
-              onSuccess={handleLogin}
-              onFailure={(err) => console.log(err)}
-            />
+            <div className="google-button">
+              <GoogleLogin
+                clientId={GOOGLE_CLIENT_ID}
+                buttonText="Login"
+                onSuccess={handleLogin}
+                onFailure={(err) => console.log(err)}
+              />
+            </div>
           </div>
         )}
       </nav>

@@ -51,3 +51,8 @@
   height: 20px;
   border-radius: 50%;
 }
+
+.google-button {
+  overflow:hidden;
+  border-radius: 30px;
+  }
