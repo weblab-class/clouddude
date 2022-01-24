@@ -21,9 +21,9 @@
 .LevelData-button:active,
 .LevelData-button:focus,
 .LevelData-button:visited {
-  background-color: var(--primary--dim--dim);
-  border: 1.5px solid var(--primary--dim--dim);
-  font-weight: bold;
+  background-color: var(--primary--dim--dim) !important;
+  border: 1.5px solid var(--primary--dim--dim) !important;
+  font-weight: bold !important;
 }
 
 .LevelData-sliderContainer {
@@ -34,4 +34,8 @@
 
 .LevelData-slider {
   width: 35%;
+}
+
+.MuiSlider-root {
+  color: var(--primary--dim--dim) !important;
 }

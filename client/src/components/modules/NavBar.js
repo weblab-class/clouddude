@@ -130,10 +130,12 @@ const NavBar = ({
                 className="img-profile"
                 src={localStorage.getItem("imageurl")}
                 alt="profile-avatar"
+                height="35"
+                width="35"
               />
             </IconButton>
             <div>
-              <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
+              <Menu className="NavBar-profileMenu" anchorEl={anchorEl} open={menuOpen} keepMounted>
                 <MenuItem onClick={handleProfile}>My Profile</MenuItem>
                 <MenuItem onClick={() => setMenuOpen(false)}>
                   <div className="google-button">

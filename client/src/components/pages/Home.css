@@ -63,8 +63,8 @@
 .Home-button:active,
 .Home-button:focus,
 .Home-button:visited {
-  background-color: var(--primary--dim);
-  border: 1.5px solid var(--primary);
+  background-color: var(--primary--dim) !important;
+  border: 1.5px solid var(--primary) !important;
 }
 
 #home-content {

@@ -1,7 +1,7 @@
 .LevelEditor-container {
   display: flex;
   flex-flow: row nowrap;
-  min-height: 83vh;
+  min-height: 84vh;
 }
 
 .LevelEditor-sidebar {

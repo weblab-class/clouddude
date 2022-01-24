@@ -68,7 +68,14 @@ const LevelData = ({
               <Form.Label>X-Gravity</Form.Label>
               <Slider
                 className="LevelData-sliderbar"
+                step={10}
                 onChange={(event, value) => {
+                  setLevelData({
+                    ...levelData,
+                    gravity: { x: (Number(value) / 100) * 10000, y: levelData.gravity.y },
+                  });
+                }}
+                onChangeCommitted={(event, value) => {
                   setLevelData({
                     ...levelData,
                     gravity: { x: (Number(value) / 100) * 10000, y: levelData.gravity.y },
@@ -92,13 +99,16 @@ const LevelData = ({
                     );
                   }, 50);
                 }}
-                aria-valuetext="difficulty"
+                aria-valuetext="x-gravity"
                 min={-200}
                 max={200}
                 value={Math.round((levelData.gravity.x / 10000) * 100)}
                 color="primary"
                 marks={[]}
-                valueLabelDisplay="off"
+                valueLabelDisplay="auto"
+                components={{
+                  ValueLabel,
+                }}
               />
             </Form.Group>
 
@@ -106,7 +116,14 @@ const LevelData = ({
               <Form.Label>Y-Gravity</Form.Label>
               <Slider
                 className="LevelData-sliderbar"
+                step={10}
                 onChange={(event, value) => {
+                  setLevelData({
+                    ...levelData,
+                    gravity: { x: levelData.gravity.x, y: (Number(value) / 100) * 600 },
+                  });
+                }}
+                onChangeCommitted={(event, value) => {
                   setLevelData({
                     ...levelData,
                     gravity: { x: levelData.gravity.x, y: (Number(value) / 100) * 600 },
@@ -130,13 +147,16 @@ const LevelData = ({
                     );
                   }, 50);
                 }}
-                aria-valuetext="funnes"
+                aria-valuetext="y-gravity"
                 min={-200}
                 max={200}
                 value={Math.round((levelData.gravity.y / 600) * 100)}
-                color="primary"
+                color="red"
                 marks={[]}
-                valueLabelDisplay="off"
+                valueLabelDisplay="auto"
+                components={{
+                  ValueLabel,
+                }}
               />
             </Form.Group>
           </div>
@@ -183,6 +203,7 @@ const LevelData = ({
               platforms: [],
               coins: [],
               obstacles: [],
+              gravity: { x: 0, y: 600 },
             });
             setMessage("Level Cleared!");
             setTimeout(() => {
@@ -213,3 +234,11 @@ const LevelData = ({
 };
 
 export default LevelData;
+
+function ValueLabel({ children, value }) {
+  return (
+    <Tooltip enterTouchDelay={0} placement="top" title={value}>
+      {children}
+    </Tooltip>
+  );
+}

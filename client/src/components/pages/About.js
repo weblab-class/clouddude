@@ -8,15 +8,16 @@ const About = () => {
   document.body.style.overflow = "auto";
 
   return (
-    <div className="main">
+    <div className="About-container">
       <Helmet>
         <title>About</title>
       </Helmet>
-      <h2 className="main-idea">
-        The Cloudverse is damaged and only CloudDude can fix it! Help CloudDude navigate the
-        ever-expanding Cloudverse through a vast collection of user-created levels and use your
-        imagination to create your own levels to help him repair it.
-      </h2>
+      <h2 className="main-idea">The Cloudverse is damaged and only CloudDude can fix it!</h2>
+      <h3>
+        Help CloudDude navigate the ever-expanding Cloudverse through a vast collection of
+        user-created levels and use your imagination to create your own levels to help him repair
+        it.
+      </h3>
 
       <p>CloudDude consists of several key features: </p>
 
