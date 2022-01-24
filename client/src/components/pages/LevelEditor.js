@@ -161,7 +161,7 @@ const LevelEditor = ({
     },
     [currentTool, levelData, message]
   );
-  document.body.style.overflow = "auto";
+  document.body.style.overflow = "hidden";
   return (
     <div className="LevelEditor-container">
       <Helmet>

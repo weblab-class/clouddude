@@ -103,7 +103,7 @@ const Game = ({
     if (game) {
       game.destroy();
       const canvas = document.getElementsByTagName("canvas");
-      if (canvas !== undefined) {
+      if (canvas[0] !== undefined) {
         canvas[0].remove();
       }
     }

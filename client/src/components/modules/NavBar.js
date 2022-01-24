@@ -130,6 +130,8 @@ const NavBar = ({
                 className="img-profile"
                 src={localStorage.getItem("imageurl")}
                 alt="profile-avatar"
+                height="35"
+                width="35"
               />
             </IconButton>
             <div>
