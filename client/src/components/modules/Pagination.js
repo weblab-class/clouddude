@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import SingleLevel from "./SingleLevel";
 
+import "./Pagination.css";
+
 const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
   const [currentLevels, setCurrentLevels] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -24,12 +26,12 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
     <>
       <div className="Repository-container">
         <ReactPaginate
-          nextLabel="Next"
+          nextLabel="Next →"
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
           pageCount={pageCount}
-          previousLabel="Previous"
+          previousLabel="← Previous"
           pageClassName="page-item"
           pageLinkClassName="page-link"
           previousClassName="page-item"
@@ -39,8 +41,9 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
           breakLabel="..."
           breakClassName="page-item"
           breakLinkClassName="page-link"
-          containerClassName="pagination"
+          containerClassName="custom-pagination"
           activeClassName="active"
+          disableClassName="disable"
           renderOnZeroPageCount={null}
         />
       </div>
