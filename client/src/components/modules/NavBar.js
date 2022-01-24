@@ -135,7 +135,7 @@ const NavBar = ({
               />
             </IconButton>
             <div>
-              <Menu anchorEl={anchorEl} open={menuOpen} keepMounted>
+              <Menu className="NavBar-profileMenu" anchorEl={anchorEl} open={menuOpen} keepMounted>
                 <MenuItem onClick={handleProfile}>My Profile</MenuItem>
                 <MenuItem onClick={() => setMenuOpen(false)}>
                   <div className="google-button">

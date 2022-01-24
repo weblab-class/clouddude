@@ -57,3 +57,7 @@
   overflow: hidden;
   border-radius: 30px;
 }
+
+.NavBar-profileMenu {
+  background-color: var(--primary--dim--dim);
+}
