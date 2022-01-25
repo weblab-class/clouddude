@@ -4,46 +4,64 @@
 }
 
 .Repository-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-  align-content: center;
-  margin: var(--l);
-  gap: var(--l);
+  margin: 0;
+  padding: var(--l);
+  background-color: var(--primary--dim);
 }
 
-.Repository-item {
-  flex: 1;
+.Repository-heading {
+  color: var(--white);
+}
+
+.Repository-navigation {
+  background-color: var(--primary);
+  border-radius: 20px;
+  padding: var(--l);
+  align-items: center;
+}
+
+.Repositry-sorting {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: var(--m);
+  color: var(--white);
+  font-weight: bold;
+}
+
+.Repository-form {
+  align-self: center;
+}
+
+.Repository-sortingTools {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: var(--m);
+  align-self: center;
+  padding-top: 1vh;
 }
 
 .button {
   border-radius: 20px;
 }
-.main-container {
-  padding: 50px 50px 50px 50px;
-}
-
 .Repository-button,
-.Repository-button:hover,
 .Repository-button:active,
 .Repository-button:focus,
 .Repository-button:visited {
-  background-color: var(--primary);
-  border: 1.5px solid var(--primary);
+  background-color: var(--primary--dim);
+  border: 1.5px solid var(--primary--dim);
 }
 
-.search {
-  padding: 17px;
-  padding-left: 55px;
-  width: 200px;
-  border: 1px solid #f5f5f5;
-  font-size: 13px;
-  color: gray;
-  border-radius: 25px;
-  background: url("https://png.pngtree.com/background/20210710/original/pngtree-blue-old-paper-texture-background-picture-image_979755.jpg");
-  background-repeat: repeat;
-  background-position: center;
-  outline: 0;
+.Repository-button:hover {
+  background-color: var(--primary--dim);
+  border: 1.5px solid var(--primary--dim);
+  margin-left: auto;
+  opacity: 80%;
+}
+
+.Repository-searchButton {
+  margin-left: auto;
+  max-height: 40px;
+  font-weight: bold;
 }
 
 .filtering {
@@ -53,11 +71,6 @@
 
 .or {
   margin-left: 5vw;
-}
-
-.sorting-label {
-  color: darkblue;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .valid {

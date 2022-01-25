@@ -18,8 +18,9 @@ const Play = ({
   levelsPlayed,
   setLevelsPlayed,
 }) => {
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow = "auto";
   return (
+    <>
       <div className="Play-container">
         <Helmet>
           <title>Play!</title>
@@ -43,6 +44,7 @@ const Play = ({
           activeLevel={activeLevel}
         />
       </div>
+    </>
   );
 };
 

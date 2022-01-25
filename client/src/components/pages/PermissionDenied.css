@@ -1,6 +1,7 @@
 .main-container {
   background-color: var(--primary--dim);
   min-height: 84vh;
+  padding: var(--m);
 }
 
 .main-error {

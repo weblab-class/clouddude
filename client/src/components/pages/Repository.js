@@ -60,62 +60,11 @@ const Repository = ({ setActiveLevel }) => {
 
   document.body.style.overflow = "auto";
   return (
-    <div className="main-container">
+    <div className="Repository-container">
       <Helmet>
         <title>Level Repository</title>
       </Helmet>
-      <h3 className="Repository-title">Level Repository</h3>
-      <div>
-        <div className="input-group">
-          <button
-            onClick={() => setShowModal(true)}
-            type="button"
-            className="button btn btn-primary Repository-button"
-          >
-            <SearchIcon />
-            Search for a Level
-          </button>
-        </div>
-        <p />
-        <p className="or">or</p>
-        <div>
-          <h4 className="sorting-label">Sort By:</h4>
-          <Form>
-            <div key="inline-radio" className="mb-3">
-              <ReactTooltip type="info" />
-              <Form.Check
-                data-tip="Sort by name(A-Z)"
-                onClick={() => setSortBy("name")}
-                inline
-                label="Name"
-                name="group1"
-                type="radio"
-                id="inline-radio-1"
-              />
-              <ReactTooltip type="info" />
-              <Form.Check
-                inline
-                data-tip="Sort by difficulty(Low-High)"
-                label="Difficulty"
-                name="group1"
-                type="radio"
-                id="inline-radio-2"
-                onClick={() => setSortBy("difficulty")}
-              />
-              <ReactTooltip type="info" />
-              <Form.Check
-                onClick={() => setSortBy("funness")}
-                data-tip="Sort by funness(High-Low) | Funness = Fun Rating"
-                inline
-                label="Funness"
-                name="group1"
-                type="radio"
-                id="inline-radio-3"
-              />
-            </div>
-          </Form>
-        </div>
-      </div>
+
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header>
           <Modal.Title>Search</Modal.Title>
@@ -182,7 +131,62 @@ const Repository = ({ setActiveLevel }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Pagination itemsPerPage={4} levels={levels} setActiveLevel={setActiveLevel} />
+      <div className="Repository-navigation">
+        <h2 className="Repository-title">Level Repository</h2>
+        <div className="Repositry-sorting">
+          <div className="Repository-sortingTools">
+            <p className="sorting-label">Sort By:</p>
+            <Form className="Repository-form">
+              <div key="inline-radio" className="mb-3">
+                <ReactTooltip type="info" />
+                <Form.Check
+                  data-tip="Sort by name(A-Z)"
+                  onClick={() => setSortBy("name")}
+                  inline
+                  label="Name"
+                  name="group1"
+                  type="radio"
+                  id="inline-radio-1"
+                />
+                <ReactTooltip type="info" />
+                <Form.Check
+                  inline
+                  data-tip="Sort by difficulty(Low-High)"
+                  label="Difficulty"
+                  name="group1"
+                  type="radio"
+                  id="inline-radio-2"
+                  onClick={() => setSortBy("difficulty")}
+                />
+                <ReactTooltip type="info" />
+                <Form.Check
+                  onClick={() => setSortBy("funness")}
+                  data-tip="Sort by funness(High-Low) | Funness = Fun Rating"
+                  inline
+                  label="Funness"
+                  name="group1"
+                  type="radio"
+                  id="inline-radio-3"
+                />
+              </div>
+            </Form>
+          </div>
+          <button
+            onClick={() => setShowModal(true)}
+            type="button"
+            className="button btn btn-primary Repository-searchButton Repository-button"
+          >
+            <SearchIcon />
+            Search for a Level
+          </button>
+        </div>
+        <Pagination
+          className="Repository-levels"
+          itemsPerPage={4}
+          levels={levels}
+          setActiveLevel={setActiveLevel}
+        />
+      </div>
     </div>
   );
 };

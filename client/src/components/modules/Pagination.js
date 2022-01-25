@@ -23,31 +23,8 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
   };
 
   return (
-    <>
-      <div className="Repository-container">
-        <ReactPaginate
-          nextLabel="Next →"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={pageCount}
-          previousLabel="← Previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="custom-pagination"
-          activeClassName="active"
-          disableClassName="disable"
-          renderOnZeroPageCount={null}
-        />
-      </div>
-      <div className="Repository-container">
+    <div className="Pagination-container">
+      <div className="Pagination-content">
         {currentLevels.map((level) => {
           return (
             <div className="Repository-item" key={uuidv4()}>
@@ -61,7 +38,28 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
           );
         })}
       </div>
-    </>
+      <ReactPaginate
+        nextLabel="Next →"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="← Previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item next"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="custom-pagination"
+        activeClassName="active"
+        disableClassName="disable"
+        renderOnZeroPageCount={null}
+      />
+    </div>
   );
 };
 

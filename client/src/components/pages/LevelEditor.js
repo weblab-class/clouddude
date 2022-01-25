@@ -172,6 +172,7 @@ const LevelEditor = ({
       <Helmet>
         <title>Level Designer</title>
       </Helmet>
+
       <div className="LevelEditor-sidebar">
         <EditorSidebar
           currentTool={currentTool}
