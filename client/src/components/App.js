@@ -61,11 +61,9 @@ const App = () => {
 
   useEffect(() => {
     if (userId) {
-      console.log("user id", userId);
       const body = { _id: userId };
       get("/api/user", body).then((user) => {
         if (user) {
-          console.log("user", user);
           setName(user.name);
           setLevelsWon(user.levelsWon);
           setLevelsPlayed(user.levelsPlayed);

@@ -170,12 +170,8 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
 
 // getting user information
 router.get("/user", auth.ensureLoggedIn, (req, res) => {
-  console.log("getting to endpoint");
-
   User.find({ _id: req.query._id }, (err, newUser) => {
-    console.log("newUser", newUser);
     if (newUser[0]) {
-      console.log("getting user", newUser[0]);
       res.send(newUser[0]);
     }
   });

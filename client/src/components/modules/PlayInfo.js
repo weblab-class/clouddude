@@ -29,8 +29,6 @@ const PlayInfo = ({
     }
 
     get("/api/filterlevel/", getBody).then((levelInfo) => {
-      console.log("getting from backend: ", levelInfo);
-
       const previousFunnes = levelInfo.funness;
       const previousDifficulty = levelInfo.difficulty;
       const previousnumRatings = levelInfo.numRatings;
