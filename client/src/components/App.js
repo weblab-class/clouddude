@@ -59,6 +59,22 @@ const App = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (userId) {
+      console.log("user id", userId);
+      const body = { _id: userId };
+      get("/api/user", body).then((user) => {
+        if (user) {
+          console.log("user", user);
+          setName(user.name);
+          setLevelsWon(user.levelsWon);
+          setLevelsPlayed(user.levelsPlayed);
+          setPublishedLevels(user.levelsPublished);
+        }
+      });
+    }
+  }, [userId]);
+
   const handleLogin = (res) => {
     setImage(res.profileObj.imageUrl);
     localStorage.setItem("imageurl", res.profileObj.imageUrl);
@@ -125,6 +141,8 @@ const App = () => {
         invalidAlert={invalidAlert}
         setInvalidAlert={setInvalidAlert}
         image={image}
+        name={name}
+        setName={setName}
       />
       <div className="App-body">
         <Router>

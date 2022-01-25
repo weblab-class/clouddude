@@ -30,13 +30,13 @@ const NavBar = ({
   setLevelsPlayed,
   invalidAlert,
   setInvalidAlert,
-  image,
+  name,
+  setName,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [profileModal, setProfileModal] = useState(false);
   const [newName, setNewName] = useState("");
-  const [userName, setUserName] = useState("");
   const [showPlatformHelp, setShowPlatformHelp] = useState(false);
   const [showEditorHelp, setShowEditorHelp] = useState(false);
   const handlePlatformHelpClose = () => setShowPlatformHelp(false);
@@ -72,15 +72,15 @@ const NavBar = ({
     setProfileModal(false);
     const body = { user: { name: newName, _id: userId } };
     post("/api/user", body).then((user) => {
-      setUserName(user.name);
+      setName(user.name);
     });
+    setNewName("");
   };
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
-        setUserName(user.name);
-        setNewName(user.name);
+        setName(name);
         setLevelsWon(user.levelsWon);
         setPublishedLevels(user.levelsPublished);
         setLevelsPlayed(user.levelsPlayed);
@@ -161,7 +161,7 @@ const NavBar = ({
                       onClick={handleEditorHelpShow}
                     />
                   );
-                } else if (location.pathname === "/play/") {
+                } if (location.pathname === "/play/") {
                   return (
                     <img
                       src="https://i.imgur.com/ttgVSoN.png"
@@ -208,7 +208,7 @@ const NavBar = ({
               <Modal show={profileModal} onHide={() => setProfileModal(false)}>
                 <Modal.Header>
                   <Modal.Title>
-                    {userName}
+                    {name}
                     's Profile
                   </Modal.Title>
                 </Modal.Header>
@@ -226,19 +226,25 @@ const NavBar = ({
 
                     <Form.Group className="mb-3" controlId="difficulty">
                       <Form.Label>
-                        <b>Published Levels:</b> {publishedLevels}
+                        <b>Published Levels:</b>
+{' '}
+{publishedLevels}
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        <b>Levels Won:</b> {levelsWon}
+                        <b>Levels Won:</b>
+{' '}
+{levelsWon}
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        <b>Levels Played:</b> {levelsPlayed}
+                        <b>Levels Played:</b>
+{' '}
+{levelsPlayed}
                       </Form.Label>
                     </Form.Group>
                   </Form>
