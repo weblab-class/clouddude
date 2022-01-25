@@ -14,6 +14,16 @@ window.addEventListener(
   false
 );
 
+// Listens for mouse inputs
+document.body.onmousedown = () => {
+  console.log("down");
+  Key.onKeydown({ keyCode: 1 });
+};
+
+document.body.onmouseup = () => {
+  Key.onKeyup({ keyCode: 1 });
+};
+
 // Structure logging currently pressed keys
 const Key = {
   // Set of currently pressed keys
@@ -29,6 +39,7 @@ const Key = {
   D: 68,
   W: 87,
   S: 83,
+  MOUSE: 1,
 
   // Checks if keyCode is currently pressed
   isDown(keyCode) {

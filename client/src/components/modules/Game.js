@@ -130,7 +130,7 @@ const Game = ({
         default: "arcade",
         arcade: {
           gravity: { y: 600 },
-          debug: true,
+          debug: false,
         },
       },
       scale: {
@@ -506,6 +506,18 @@ const Game = ({
           isOver = false;
           gameWon = false;
         }, 15);
+      });
+
+      // Enables drag editing
+      this.input.on("gameobjectover", (pointer, currentlyOver) => {
+        if (Key.isDown(Key.MOUSE)) {
+          setGridPoint({ x: currentlyOver.x, y: currentlyOver.y });
+          setTimeout(() => {
+            this.scene.restart();
+            isOver = false;
+            gameWon = false;
+          }, 15);
+        }
       });
 
       /*
