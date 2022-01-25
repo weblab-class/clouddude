@@ -126,6 +126,7 @@ router.get("/levels", (req, res) => {
             difficulty: 1,
             gravity: 1,
             insensitive: { $toLower: "$name" },
+            numRatings: 1
           },
         },
         { $sort: { insensitive: 1 } },
