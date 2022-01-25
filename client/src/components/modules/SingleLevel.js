@@ -8,9 +8,7 @@ import { Link } from "@reach/router";
 import "../../utilities.css";
 import "./SingleLevel.css";
 
-const SingleLevel = ({
-  level, setActiveLevel, index, setLevelID
-}) => {
+const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
   const handleSubmit = (thisLevel) => {
     setActiveLevel(thisLevel);
     // setLevelID(thisLevel._id);
@@ -18,9 +16,8 @@ const SingleLevel = ({
 
   return (
     <>
-      {console.log("level from SingleLevel.js", level._id)}
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={`https://picsum.photos/500/300?random=${index}`} />
+        <Card.Img variant="top" src={image} />
         <center>
           <div data-tip="Difficulty">
             <ReactTooltip type="info" />

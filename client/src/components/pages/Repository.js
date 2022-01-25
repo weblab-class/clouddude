@@ -22,13 +22,19 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
   const [levelName, setLevelName] = useState("");
   const [creatorName, setCreatorName] = useState("");
   const [sortBy, setSortBy] = useState("");
-
+  const [images, setImages] = useState([]);
   const [levels, setLevels] = useState([]);
 
-  // in the beginning, get all levels
+  // in the beginning, get all levels and images
   useEffect(() => {
     const query = { type: "all" };
     get("/api/levels", query).then((levelObjects) => {
+      let allImages = [];
+      for (let i = 0; i < 40; i++) {
+        const image = `https://picsum.photos/500/300?random=${i}`;
+        allImages = [...allImages, image];
+      }
+      setImages(allImages);
       setLevels(levelObjects);
     });
   }, []);
@@ -182,7 +188,13 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Pagination itemsPerPage={4} levels={levels} setActiveLevel={setActiveLevel} setLevelID={setLevelID} />
+      <Pagination
+        itemsPerPage={4}
+        levels={levels}
+        setActiveLevel={setActiveLevel}
+        setLevelID={setLevelID}
+        images={images}
+      />
     </div>
   );
 };
