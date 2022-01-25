@@ -18,6 +18,8 @@ CloudDude is created in January 2022 by:
 - Henry Heiberger, an MIT 2024 from Brandon, South Dakota studying Electrical Engineering and Computer Science
 - Harry Heiberger, an MIT 2024 from Brandon, South Dakota studying Electrical Engineering and Computer Science
 
-This project was made possible thanks to the React, Express, Mongoose Phaser, Three.js, Bootstrap, Reach Router, and Helmet libraries.
+**_Credits..._**
 
-Game media provided with an open license courtesy of https://opengameart.org/. Random level photos curtesy of https://picsum.photos/
+This project was made possible thanks to the React, Node.js, Express, MongoDB, Mongoose Phaser, Three.js, Bootstrap, Reach Router, Material UI, Nodemon,react-paginate, react-star-ratings, react-tooltip,uuid, and Helmet frameworks/libraries.
+
+Game media provided with an open license courtesy of https://opengameart.org/. Random level photos courtesy of https://picsum.photos/
