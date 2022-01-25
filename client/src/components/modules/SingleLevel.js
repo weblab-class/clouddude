@@ -11,13 +11,14 @@ import "./SingleLevel.css";
 const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
   return (
     <>
+      {console.log(level)}
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={image} />
         <center>
           <div data-tip="Difficulty">
             <ReactTooltip type="info" />
             <StarRatings
-              rating={level.difficulty}
+              rating={Math.round(level.difficulty) / level.numRatings}
               starRatedColor="red"
               numberOfStars={5}
               name="difficulty-rating"
@@ -28,7 +29,7 @@ const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
           <div data-tip="Funness">
             <ReactTooltip type="info" />
             <StarRatings
-              rating={level.funness}
+              rating={Math.round(level.funness) / level.numRatings}
               starRatedColor="green"
               numberOfStars={5}
               name="funness-rating"
