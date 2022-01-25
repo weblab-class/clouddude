@@ -35,7 +35,15 @@
 .login {
   margin-left: auto;
   margin-right: var(--l);
-  justify-content: top;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: var(--m);
+}
+
+.NavBar-helpButton:hover {
+  opacity: 65%;
 }
 
 .profile {

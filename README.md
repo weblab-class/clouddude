@@ -20,6 +20,6 @@ CloudDude is created in January 2022 by:
 
 **_Credits..._**
 
-This project was made possible thanks to the React, Node.js, Express, MongoDB, Mongoose Phaser, Three.js, Bootstrap, Reach Router, Material UI, Nodemon,react-paginate, react-star-ratings, react-tooltip,uuid, and Helmet frameworks/libraries.
+This project was made possible thanks to the React, Node.js, Express, MongoDB, Mongoose Phaser, Three.js, React-Bootstrap, Reach Router, Material UI, Nodemon, react-paginate, react-star-ratings, react-tooltip, uuid, and Helmet frameworks/libraries.
 
 Game media provided with an open license courtesy of https://opengameart.org/. Random level photos courtesy of https://picsum.photos/

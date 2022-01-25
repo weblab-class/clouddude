@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "@reach/router";
+import { Link, Location } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -37,6 +37,12 @@ const NavBar = ({
   const [profileModal, setProfileModal] = useState(false);
   const [newName, setNewName] = useState("");
   const [userName, setUserName] = useState("");
+  const [showPlatformHelp, setShowPlatformHelp] = useState(false);
+  const [showEditorHelp, setShowEditorHelp] = useState(false);
+  const handlePlatformHelpClose = () => setShowPlatformHelp(false);
+  const handlePlatformHelpShow = () => setShowPlatformHelp(true);
+  const handleEditorHelpClose = () => setShowEditorHelp(false);
+  const handleEditorHelpShow = () => setShowEditorHelp(true);
 
   const handleProfile = () => {
     setMenuOpen(false);
@@ -133,8 +139,57 @@ const NavBar = ({
           </Modal.Footer>
         </Modal>
 
+        <Modal show={showPlatformHelp} onHide={handlePlatformHelpClose} size="lg" centered>
+          <Modal.Header>
+            <Modal.Title>Exploring the Cloudverse</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handlePlatformHelpClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal show={showEditorHelp} onHide={handleEditorHelpClose} size="lg" centered>
+          <Modal.Header>
+            <Modal.Title>Expanding the Cloudverse</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleEditorHelpClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         {userId ? (
           <div className="login">
+            <Location>
+              {({ location }) => {
+                if (location.pathname === "/leveleditor/") {
+                  return (
+                    <img
+                      src="https://i.imgur.com/ttgVSoN.png"
+                      width="37"
+                      height="37"
+                      className="NavBar-helpButton"
+                      onClick={handleEditorHelpShow}
+                    />
+                  );
+                } else if (location.pathname === "/play/") {
+                  return (
+                    <img
+                      src="https://i.imgur.com/ttgVSoN.png"
+                      width="37"
+                      height="37"
+                      className="NavBar-helpButton"
+                      onClick={handlePlatformHelpShow}
+                    />
+                  );
+                }
+              }}
+            </Location>
             <IconButton
               edge="end"
               aria-label="current user"
@@ -217,6 +272,21 @@ const NavBar = ({
           </div>
         ) : (
           <div className="login">
+            <Location>
+              {({ location }) => {
+                if (location.pathname === "/play/") {
+                  return (
+                    <img
+                      src="https://i.imgur.com/ttgVSoN.png"
+                      width="40"
+                      height="40"
+                      className="NavBar-helpButton"
+                      onClick={handlePlatformHelpShow}
+                    />
+                  );
+                }
+              }}
+            </Location>
             <div className="google-button">
               <GoogleLogin
                 clientId={GOOGLE_CLIENT_ID}
