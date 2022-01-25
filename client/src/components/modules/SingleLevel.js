@@ -18,7 +18,7 @@ const SingleLevel = ({ level, setActiveLevel, index }) => {
           <div data-tip="Difficulty">
             <ReactTooltip type="info" />
             <StarRatings
-              rating={1}
+              rating={level.difficulty}
               starRatedColor="red"
               numberOfStars={5}
               name="difficulty-rating"
@@ -29,7 +29,7 @@ const SingleLevel = ({ level, setActiveLevel, index }) => {
           <div data-tip="Funness">
             <ReactTooltip type="info" />
             <StarRatings
-              rating={5}
+              rating={level.funness}
               starRatedColor="green"
               numberOfStars={5}
               name="funness-rating"
