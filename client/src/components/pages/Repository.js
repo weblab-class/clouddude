@@ -41,16 +41,13 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
   }, []);
 
   useEffect(() => {
-    console.log("running here");
     let allImages = [];
     for (let i = 0; i < 100; i++) {
       const index = Math.floor(Math.random() * 100);
       const image = `https://picsum.photos/500/300?random=${index}`;
       allImages = [...allImages, image];
     }
-    console.log("images", images);
     setImages(allImages);
-    console.log("images", images);
     setIsFiltering(false);
   }, [isFiltering]);
 
