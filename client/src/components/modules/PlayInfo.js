@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 import { post, get } from "../../utilities";
+import "./PlayInfo.css";
 
 const PlayInfo = ({
   levelDifficulty,
@@ -61,37 +62,54 @@ const PlayInfo = ({
   };
 
   return (
-    <div>
-      <div>
-        <h4>Difficulty:</h4>
-        <StarRatings
-          rating={levelDifficulty}
-          starRatedColor="red"
-          changeRating={(newRating) => setLevelDifficulty(newRating)}
-          numberOfStars={5}
-          name="difficulty"
-          starDimension="20px"
-          starSpacing="8px"
-        />
+    <div className="PlayInfo-container">
+      <div className="PlayInfo-gameInfo">
+        <div className="PlayInfo-tile">
+          <h4 className="PlayInfo-headerText">Name: </h4>
+          <div className="PlayInfo-infoText">{activeLevel.name}</div>
+        </div>
+        <div className="PlayInfo-tile">
+          <h4 className="PlayInfo-headerText">Description: </h4>
+          <div className="PlayInfo-infoText">{activeLevel.description}</div>
+        </div>
+        <div className="PlayInfo-tile">
+          <h4 className="PlayInfo-headerText">Creator: </h4>
+          <div className="PlayInfo-infoText">{activeLevel.creator}</div>
+        </div>
       </div>
-      <p />
-      <div>
-        <h4>Funness:</h4>
-        <StarRatings
-          rating={levelFunness}
-          starRatedColor="green"
-          changeRating={(newRating) => setLevelFunness(newRating)}
-          numberOfStars={5}
-          name="funness"
-          starDimension="20px"
-          starSpacing="8px"
-        />
+      <div className="PlayInfo-ratings">
+        <div>
+          <h4>Difficulty:</h4>
+          <StarRatings
+            rating={levelDifficulty}
+            starRatedColor="red"
+            changeRating={(newRating) => setLevelDifficulty(newRating)}
+            numberOfStars={5}
+            name="difficulty"
+            starDimension="20px"
+            starSpacing="8px"
+          />
+        </div>
+        <p />
+        <div>
+          <h4>Funness:</h4>
+          <StarRatings
+            rating={levelFunness}
+            starRatedColor="green"
+            starHoverColor="green"
+            changeRating={(newRating) => setLevelFunness(newRating)}
+            numberOfStars={5}
+            name="funness"
+            starDimension="20px"
+            starSpacing="8px"
+          />
+        </div>
+        <p />
+        <button type="submit" onClick={handleUpdate} className="btn btn-secondary PlayInfo-button">
+          Submit Rating
+        </button>
+        <p className="Play">{userMessage}</p>
       </div>
-      <p />
-      <button type="submit" onClick={handleUpdate} className="btn btn-secondary">
-        Submit Rating
-      </button>
-      <p className="text-danger">{userMessage}</p>
     </div>
   );
 };

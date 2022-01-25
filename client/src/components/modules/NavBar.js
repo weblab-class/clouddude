@@ -93,7 +93,7 @@ const NavBar = ({
       <nav className="NavBar-container">
         <div className="NavBar-linkContainer u-inlineBlock">
           <ReactTooltip type="success" />
-          <Link data-tip="CloudDude" to="/" className="NavBar-link">
+          <Link to="/" className="NavBar-link">
             <img src="https://i.imgur.com/XTd5pLu.png" width="40" height="40" alt="Platformer" />
           </Link>
           <Link to="/about/" className="NavBar-link">
@@ -161,7 +161,8 @@ const NavBar = ({
                       onClick={handleEditorHelpShow}
                     />
                   );
-                } if (location.pathname === "/play/") {
+                }
+                if (location.pathname === "/play/") {
                   return (
                     <img
                       src="https://i.imgur.com/ttgVSoN.png"
@@ -225,25 +226,19 @@ const NavBar = ({
 
                     <Form.Group className="mb-3" controlId="difficulty">
                       <Form.Label>
-                        <b>Published Levels:</b>
-{' '}
-{publishedLevels}
+                        <b>Published Levels:</b> {publishedLevels}
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        <b>Levels Won:</b>
-{' '}
-{levelsWon}
+                        <b>Levels Won:</b> {levelsWon}
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        <b>Levels Played:</b>
-{' '}
-{levelsPlayed}
+                        <b>Levels Played:</b> {levelsPlayed}
                       </Form.Label>
                     </Form.Group>
                   </Form>

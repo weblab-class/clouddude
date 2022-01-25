@@ -2,6 +2,7 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: var(--s);
+  min-height: 84vh;
 }

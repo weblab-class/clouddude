@@ -1,12 +1,12 @@
 .Game-container {
   flex: 4;
   margin: var(--m);
-  justify-self: center;
   align-self: center;
   display: flex;
   align-content: center;
   justify-content: center;
   max-height: 100vh;
+  max-width: 80%;
 }
 
 canvas {
