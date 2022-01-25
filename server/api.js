@@ -51,9 +51,15 @@ router.post("/level", (req, res) => {
   if (req.body.message === "update") {
     Level.updateOne(
       { _id: req.body.levelId },
-      { $set: { difficulty: req.body.levelDifficulty, funness: req.body.levelFunness } },
+      {
+        $set: {
+          difficulty: req.body.levelDifficulty,
+          funness: req.body.levelFunness,
+          numRatings: req.body.levelRatings,
+        },
+      },
       () => {
-        res.send({ message: "updating funness and difficulty" });
+        res.send({ message: "updating averaged funness and difficulty and numRatings" });
       }
     );
   } else {
@@ -69,6 +75,7 @@ router.post("/level", (req, res) => {
       gravity: req.body.gravity,
       funness: Number(req.body.funness),
       difficulty: Number(req.body.difficulty),
+      numRatings: 0,
     });
 
     newLevel.save().then((level) => {
@@ -159,6 +166,20 @@ router.get("/user", auth.ensureLoggedIn, (req, res) => {
     console.log("user info from backend: ", newUser);
     if (newUser[0]) {
       res.send(newUser[0]);
+    }
+  });
+});
+
+// getting level number of ratings and current user ratings for difficulty and funness
+router.get("/filterlevel", (req, res) => {
+  Level.find({ _id: req.query._id }, (err, level) => {
+    console.log("level info from backend: ", level);
+    if (level[0]) {
+      res.send({
+        numRatings: level[0].numRatings,
+        difficulty: level[0].difficulty,
+        funness: level[0].funness,
+      });
     }
   });
 });

@@ -27,6 +27,7 @@ const LevelSchema = new mongoose.Schema({
   gravity: { x: Number, y: Number },
   funness: Number,
   difficulty: Number,
+  numRatings: Number,
 });
 
 // compile model from schema

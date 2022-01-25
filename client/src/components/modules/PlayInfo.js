@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
-import { post } from "../../utilities";
+import { post, get } from "../../utilities";
 
 const PlayInfo = ({
   levelDifficulty,
@@ -8,6 +8,7 @@ const PlayInfo = ({
   levelFunness,
   setLevelFunness,
   activeLevel,
+  levelID
 }) => {
   const [userMessage, setUserMessage] = useState("");
 
@@ -16,17 +17,35 @@ const PlayInfo = ({
   }, []);
 
   const handleUpdate = () => {
-    const levelId = activeLevel._id;
-    const body = {
-      message: "update",
-      levelDifficulty,
-      levelFunness,
-      levelId,
-    };
-    post("/api/level", body).then(() => {
-      setUserMessage("Thanks for the feedback!");
-      setLevelDifficulty(0);
-      setLevelFunness(0);
+    console.log("activeLevel", activeLevel);
+    // const levelId = activeLevel._id;
+    const getBody = { _id: levelID };
+
+    get("/api/filterlevel/", getBody).then((levelInfo) => {
+      console.log("getting from backend: ", levelInfo);
+
+      const previousFunnes = levelInfo.funness;
+      const previousDifficulty = levelInfo.difficulty;
+      const previousnumRatings = levelInfo.numRatings;
+
+      const newNumRatings = previousnumRatings + 1;
+      const newLevelDifficulty = (levelDifficulty + previousDifficulty) / newNumRatings;
+      const newLevelFunness = (levelFunness + previousFunnes) / newNumRatings;
+
+      const Postbody = {
+        message: "update",
+        levelDifficulty: newLevelDifficulty,
+        levelFunness: newLevelFunness,
+        levelRatings: newNumRatings,
+        levelId: levelID,
+      };
+
+      console.log("posting to backend: ", Postbody);
+      post("/api/level", Postbody).then(() => {
+        setUserMessage("Thanks for the feedback!");
+        setLevelDifficulty(0);
+        setLevelFunness(0);
+      });
     });
   };
 

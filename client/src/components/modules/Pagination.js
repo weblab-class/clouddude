@@ -6,7 +6,7 @@ import SingleLevel from "./SingleLevel";
 
 import "./Pagination.css";
 
-const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
+const Pagination = ({ itemsPerPage, levels, setActiveLevel, setLevelID }) => {
   const [currentLevels, setCurrentLevels] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -56,6 +56,7 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
                 level={level}
                 setActiveLevel={setActiveLevel}
                 index={uuidv4()}
+                setLevelID={setLevelID}
               />
             </div>
           );

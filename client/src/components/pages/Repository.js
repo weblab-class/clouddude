@@ -14,7 +14,7 @@ import Pagination from "../modules/Pagination";
 import "../../utilities.css";
 import "./Repository.css";
 
-const Repository = ({ setActiveLevel }) => {
+const Repository = ({ setActiveLevel, setLevelID }) => {
   const [showModal, setShowModal] = useState(false);
 
   const [levelDifficulty, setLevelDifficulty] = useState(0);
@@ -182,7 +182,7 @@ const Repository = ({ setActiveLevel }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Pagination itemsPerPage={4} levels={levels} setActiveLevel={setActiveLevel} />
+      <Pagination itemsPerPage={4} levels={levels} setActiveLevel={setActiveLevel} setLevelID={setLevelID} />
     </div>
   );
 };
