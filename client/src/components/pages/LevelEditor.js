@@ -56,9 +56,6 @@ const LevelEditor = ({
   // Updates level based on Canvas click
   const editLevel = useCallback(
     (gridPoint) => {
-      console.log(gridPoint);
-      console.log(currentTool);
-
       // Resets message
       if (message !== "Design Your Level!") {
         setMessage("Design Your Level!");

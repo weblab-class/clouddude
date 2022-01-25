@@ -49,7 +49,7 @@ mongoose
     useUnifiedTopology: true,
     dbName: databaseName,
   })
-  .then(() => console.log("Connected to MongoDB"))
+  .then(() => {})
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
 
 // create a new express server
@@ -109,6 +109,4 @@ const serverHost = process.env.YOUR_HOST || "0.0.0.0";
 const server = http.Server(app);
 // socketManager.init(server); Uncomment this if we need sockets
 
-server.listen(port, serverHost, () => {
-  console.log(`Server running on port: ${port}`);
-});
+server.listen(port, serverHost, () => {});

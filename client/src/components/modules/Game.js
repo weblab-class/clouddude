@@ -562,9 +562,7 @@ const Game = ({
       }, 100);
     };
 
-    window.onscroll = function () {
-      console.log("scroll 1");
-    };
+    window.onscroll = function () {};
 
     window.onscroll = () => {
       clearTimeout(resizeTimeout);
@@ -1152,17 +1150,6 @@ const Game = ({
       gameOverCaption.visible = true;
     }
   }
-
-  /*
-  // Update click listener for current tool
-  useEffect(() => {
-    console.log(test);
-    savedInput.on("gameobjectdown", clickCallback);
-    return () => {
-      savedInput.off("gameobjectdown", clickCallback);
-    };
-  }, [currentTool, editLevel]);
-  */
 
   return (
     <div id="game-container" className="Game-container">
