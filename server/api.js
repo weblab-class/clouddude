@@ -49,8 +49,18 @@ router.post("/initsocket", (req, res) => {
 // posting or updating a new level
 router.post("/level", (req, res) => {
   if (req.body.message === "update") {
+    let requestQuery;
+    if (req.body.levelId) {
+      requestQuery = { _id: req.body.levelId };
+    } else {
+      requestQuery = {
+        name: req.body.name,
+        numRatings: req.body.numRatings,
+        creator: req.body.creator,
+      };
+    }
     Level.updateOne(
-      { _id: req.body.levelId },
+      requestQuery,
       {
         $set: {
           difficulty: req.body.levelDifficulty,
@@ -172,7 +182,17 @@ router.get("/user", auth.ensureLoggedIn, (req, res) => {
 
 // getting level number of ratings and current user ratings for difficulty and funness
 router.get("/filterlevel", (req, res) => {
-  Level.find({ _id: req.query._id }, (err, level) => {
+  let requestQuery;
+  if (req.query._id) {
+    requestQuery = { _id: req.query._id };
+  } else {
+    requestQuery = {
+      name: req.query.name,
+      numRatings: req.query.numRatings,
+      creator: req.query.creator,
+    };
+  }
+  Level.find(requestQuery, (err, level) => {
     console.log("level info from backend: ", level);
     if (level[0]) {
       res.send({

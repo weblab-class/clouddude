@@ -13,7 +13,7 @@ const SingleLevel = ({
 }) => {
   const handleSubmit = (thisLevel) => {
     setActiveLevel(thisLevel);
-    setLevelID(thisLevel._id);
+    // setLevelID(thisLevel._id);
   };
 
   return (
