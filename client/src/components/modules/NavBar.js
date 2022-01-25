@@ -77,16 +77,16 @@ const NavBar = ({
     setNewName("");
   };
 
-  useEffect(() => {
-    get("/api/whoami").then((user) => {
-      if (user._id) {
-        setName(name);
-        setLevelsWon(user.levelsWon);
-        setPublishedLevels(user.levelsPublished);
-        setLevelsPlayed(user.levelsPlayed);
-      }
-    });
-  }, [userId]);
+  // useEffect(() => {
+  //   get("/api/whoami").then((user) => {
+  //     if (user._id) {
+  //       setName(name);
+  //       setLevelsWon(user.levelsWon);
+  //       setPublishedLevels(user.levelsPublished);
+  //       setLevelsPlayed(user.levelsPlayed);
+  //     }
+  //   });
+  // }, [userId]);
 
   return (
     <div id="document-page">
@@ -215,11 +215,10 @@ const NavBar = ({
                 <Modal.Body>
                   <Form>
                     <Form.Group className="mb-3" controlId="name">
-                      <Form.Label>Name</Form.Label>
                       <Form.Control
                         onChange={(event) => setNewName(event.target.value)}
                         type="text"
-                        placeholder="Edit Name"
+                        placeholder="Edit Name Here"
                         value={newName}
                       />
                     </Form.Group>

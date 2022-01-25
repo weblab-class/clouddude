@@ -23,7 +23,7 @@ import PermissionDenied from "./pages/PermissionDenied";
  */
 const App = () => {
   const [userId, setUserId] = useState(undefined);
-  const [name, setName] = useState("User");
+  const [name, setName] = useState("");
   const [image, setImage] = useState(undefined);
   const [userState, setUser] = useState(undefined);
   const [levelDifficulty, setLevelDifficulty] = useState(0);
@@ -85,7 +85,6 @@ const App = () => {
       } else {
         setUserId(user._id);
         setName(user.name);
-        // post("/api/initsocket", { socketid: socket.id });
       }
     });
   };
