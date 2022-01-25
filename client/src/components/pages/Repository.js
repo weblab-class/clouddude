@@ -24,13 +24,14 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
   const [sortBy, setSortBy] = useState("");
   const [images, setImages] = useState([]);
   const [levels, setLevels] = useState([]);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   // in the beginning, get all levels and images
   useEffect(() => {
     const query = { type: "all" };
     get("/api/levels", query).then((levelObjects) => {
       let allImages = [];
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 100; i++) {
         const image = `https://picsum.photos/500/300?random=${i}`;
         allImages = [...allImages, image];
       }
@@ -39,11 +40,23 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
     });
   }, []);
 
+  useEffect(() => {
+    let allImages = [];
+    for (let i = 0; i < 100; i++) {
+      const index = Math.floor(Math.random() * 100);
+      const image = `https://picsum.photos/500/300?random=${index}`;
+      allImages = [...allImages, image];
+    }
+    setImages(allImages);
+    setIsFiltering(false);
+  }, [isFiltering]);
+
   // sorting by name, difficulty, and funness
   useEffect(() => {
     const query = { type: "sort", sortBy };
     get("/api/levels", query).then((levelObjects) => {
       setLevels(levelObjects);
+      setIsFiltering(true);
     });
   }, [sortBy]);
 
@@ -59,6 +72,7 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
     };
     get("/api/levels", query).then((res) => {
       setLevels(res);
+      setIsFiltering(true);
       setLevelFunness(0);
       setLevelDifficulty(0);
     });

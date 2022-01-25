@@ -85,10 +85,12 @@ const Game = ({
 
   // increment levels played
   useEffect(() => {
-    const body = { user: { levelsPlayed, _id: userId } };
-    post("/api/profile", body).then((user) => {
-      setLevelsPlayed(user.levelsPlayed);
-    });
+    if (!isEditing) {
+      const body = { user: { levelsPlayed, _id: userId } };
+      post("/api/profile", body).then((user) => {
+        setLevelsPlayed(user.levelsPlayed);
+      });
+    }
   }, []);
 
   // increment levels won
@@ -1123,17 +1125,6 @@ const Game = ({
       gameOverCaption.visible = true;
     }
   }
-
-  /*
-  // Update click listener for current tool
-  useEffect(() => {
-    console.log(test);
-    savedInput.on("gameobjectdown", clickCallback);
-    return () => {
-      savedInput.off("gameobjectdown", clickCallback);
-    };
-  }, [currentTool, editLevel]);
-  */
 
   return (
     <div id="game-container" className="Game-container">

@@ -35,8 +35,8 @@ const PlayInfo = ({
       const previousnumRatings = levelInfo.numRatings;
 
       const newNumRatings = previousnumRatings + 1;
-      const newLevelDifficulty = Math.round((levelDifficulty + previousDifficulty) / newNumRatings);
-      const newLevelFunness = Math.round((levelFunness + previousFunnes) / newNumRatings);
+      const newLevelDifficulty = Math.round((levelDifficulty + previousDifficulty));
+      const newLevelFunness = Math.round((levelFunness + previousFunnes));
 
       let Postbody;
       if (levelID) {
@@ -52,7 +52,7 @@ const PlayInfo = ({
           creator: activeLevel.creator,
         };
       }
-
+      console.log(Postbody);
       post("/api/level", Postbody).then(() => {
         setUserMessage("Thanks for the feedback!");
         setLevelDifficulty(0);

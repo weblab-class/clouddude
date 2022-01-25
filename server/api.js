@@ -190,7 +190,6 @@ router.get("/filterlevel", (req, res) => {
     };
   }
   Level.find(requestQuery, (err, level) => {
-    console.log("level info from backend: ", level);
     if (level[0]) {
       res.send({
         numRatings: level[0].numRatings,
