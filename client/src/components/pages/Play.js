@@ -17,6 +17,7 @@ const Play = ({
   userId,
   levelsPlayed,
   setLevelsPlayed,
+  levelID
 }) => {
   document.body.style.overflow = "auto";
   return (
@@ -42,6 +43,7 @@ const Play = ({
           levelFunness={levelFunness}
           setLevelFunness={setLevelFunness}
           activeLevel={activeLevel}
+          levelID={levelID}
         />
       </div>
     </>

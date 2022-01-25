@@ -8,11 +8,16 @@ import { Link } from "@reach/router";
 import "../../utilities.css";
 import "./SingleLevel.css";
 
-const SingleLevel = ({ level, setActiveLevel, index }) => {
+const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
+  const handleSubmit = (thisLevel) => {
+    setActiveLevel(thisLevel);
+    // setLevelID(thisLevel._id);
+  };
+
   return (
     <>
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={`https://picsum.photos/500/300?random=${index}`} />
+        <Card.Img variant="top" src={image} />
         <center>
           <div data-tip="Difficulty">
             <ReactTooltip type="info" />
@@ -42,11 +47,7 @@ const SingleLevel = ({ level, setActiveLevel, index }) => {
           <Card.Subtitle className="mb-2 text-muted">{level.creator}</Card.Subtitle>
           <Card.Text>{level.description}</Card.Text>
           <Link to="/play/">
-            <Button
-              onClick={() => setActiveLevel(level)}
-              className="Repository-button"
-              variant="primary"
-            >
+            <Button onClick={handleSubmit(level)} className="Repository-button" variant="primary">
               Play
             </Button>
           </Link>

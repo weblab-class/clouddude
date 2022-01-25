@@ -29,6 +29,7 @@ const App = () => {
   const [levelDifficulty, setLevelDifficulty] = useState(0);
   const [levelFunness, setLevelFunness] = useState(0);
   const [invalidAlert, setInvalidAlert] = useState(false);
+  const [levelID, setLevelID] = useState(undefined);
   const [activeLevel, setActiveLevel] = useState({
     creator: undefined,
     name: "",
@@ -40,6 +41,7 @@ const App = () => {
     obstacles: [],
     funness: 0,
     difficulty: 0,
+    numRatings: 0,
   });
 
   const [publishedLevels, setPublishedLevels] = useState(0);
@@ -144,6 +146,7 @@ const App = () => {
             userState={userState}
             activeLevel={activeLevel}
             setActiveLevel={setActiveLevel}
+            setLevelID={setLevelID}
           />
           <About
             className="App-About"
@@ -167,6 +170,7 @@ const App = () => {
             levelFunness={levelFunness}
             setLevelFunness={setLevelFunness}
             userId={userId}
+            levelID={levelID}
             path="/play"
           />
           <Home

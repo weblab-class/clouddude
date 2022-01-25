@@ -36,6 +36,7 @@ const LevelEditor = ({
     gravity: { x: 0, y: 600 },
     funness: 0,
     difficulty: 0,
+    numRatings: 0,
   });
 
   // Update creator on user change

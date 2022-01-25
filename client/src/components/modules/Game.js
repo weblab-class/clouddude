@@ -130,7 +130,7 @@ const Game = ({
         default: "arcade",
         arcade: {
           gravity: { y: 600 },
-          debug: true,
+          debug: false,
         },
       },
       scale: {
@@ -197,6 +197,7 @@ const Game = ({
     this.load.audio("damage", "paeeehazuv0jun8/stomp.wav?raw=1");
     this.load.audio("key", "hpw3u6n0bgw939b/key.wav?raw=1");
     this.load.audio("unlock", "j0mhvm09of2wi4n/unlock.wav?raw=1");
+    this.load.audio("fireball", "lqam1knjy6rlo7m/fireball.mp3?raw=1");
 
     // Use the below for adding local files:
     // import test from "../../../dist/images/Block_Blue.png";
@@ -399,6 +400,7 @@ const Game = ({
           const fireball = this.physics.add.sprite(worm.x, worm.y, "fireball");
           fireballs.add(fireball);
           fireball.anims.play("fire");
+          this.sound.play("fireball");
           fireball.body.setAllowGravity(false);
           fireball.body.setCircle(10, 4, 4);
           this.physics.moveToObject(fireball, player, 400);
@@ -506,6 +508,18 @@ const Game = ({
           isOver = false;
           gameWon = false;
         }, 15);
+      });
+
+      // Enables drag editing
+      this.input.on("gameobjectover", (pointer, currentlyOver) => {
+        if (Key.isDown(Key.MOUSE)) {
+          setGridPoint({ x: currentlyOver.x, y: currentlyOver.y });
+          setTimeout(() => {
+            this.scene.restart();
+            isOver = false;
+            gameWon = false;
+          }, 15);
+        }
       });
 
       /*

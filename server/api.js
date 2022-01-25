@@ -49,11 +49,27 @@ router.post("/initsocket", (req, res) => {
 // posting or updating a new level
 router.post("/level", (req, res) => {
   if (req.body.message === "update") {
+    let requestQuery;
+    if (req.body.levelId) {
+      requestQuery = { _id: req.body.levelId };
+    } else {
+      requestQuery = {
+        name: req.body.name,
+        numRatings: req.body.numRatings,
+        creator: req.body.creator,
+      };
+    }
     Level.updateOne(
-      { _id: req.body.levelId },
-      { $set: { difficulty: req.body.levelDifficulty, funness: req.body.levelFunness } },
+      requestQuery,
+      {
+        $set: {
+          difficulty: req.body.levelDifficulty,
+          funness: req.body.levelFunness,
+          numRatings: req.body.levelRatings,
+        },
+      },
       () => {
-        res.send({ message: "updating funness and difficulty" });
+        res.send({ message: "updating averaged funness and difficulty and numRatings" });
       }
     );
   } else {
@@ -69,6 +85,7 @@ router.post("/level", (req, res) => {
       gravity: req.body.gravity,
       funness: Number(req.body.funness),
       difficulty: Number(req.body.difficulty),
+      numRatings: 0,
     });
 
     newLevel.save().then((level) => {
@@ -159,6 +176,30 @@ router.get("/user", auth.ensureLoggedIn, (req, res) => {
     console.log("user info from backend: ", newUser);
     if (newUser[0]) {
       res.send(newUser[0]);
+    }
+  });
+});
+
+// getting level number of ratings and current user ratings for difficulty and funness
+router.get("/filterlevel", (req, res) => {
+  let requestQuery;
+  if (req.query._id) {
+    requestQuery = { _id: req.query._id };
+  } else {
+    requestQuery = {
+      name: req.query.name,
+      numRatings: req.query.numRatings,
+      creator: req.query.creator,
+    };
+  }
+  Level.find(requestQuery, (err, level) => {
+    console.log("level info from backend: ", level);
+    if (level[0]) {
+      res.send({
+        numRatings: level[0].numRatings,
+        difficulty: level[0].difficulty,
+        funness: level[0].funness,
+      });
     }
   });
 });

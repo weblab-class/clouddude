@@ -41,6 +41,7 @@ const LevelData = ({
         coins: [],
         obstacles: [],
         gravity: { x: 0, y: 600 },
+        numRatings: 0
       });
       await navigate("/play");
     }
@@ -210,6 +211,7 @@ const LevelData = ({
               coins: [],
               obstacles: [],
               gravity: { x: 0, y: 600 },
+              numRatings: 0
             });
             setMessage("Level Cleared!");
             setTimeout(() => {

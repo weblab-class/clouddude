@@ -6,7 +6,7 @@ import SingleLevel from "./SingleLevel";
 
 import "./Pagination.css";
 
-const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
+const Pagination = ({ itemsPerPage, levels, setActiveLevel, setLevelID, images }) => {
   const [currentLevels, setCurrentLevels] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -32,7 +32,8 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel }) => {
                 className="Repository-item"
                 level={level}
                 setActiveLevel={setActiveLevel}
-                index={uuidv4()}
+                setLevelID={setLevelID}
+                image={images[Math.floor(Math.random() * 10)]}
               />
             </div>
           );
