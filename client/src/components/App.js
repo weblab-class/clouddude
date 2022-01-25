@@ -60,7 +60,6 @@ const App = () => {
   }, []);
 
   const handleLogin = (res) => {
-    console.log(`Logged in as ${res.profileObj.name}`);
     setImage(res.profileObj.imageUrl);
     localStorage.setItem("imageurl", res.profileObj.imageUrl);
     const userToken = res.tokenObj.id_token;

@@ -565,7 +565,6 @@ const Game = ({
     };
 
     window.onscroll = () => {
-      console.log("test");
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         // Reload game on resize

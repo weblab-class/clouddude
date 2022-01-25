@@ -41,24 +41,18 @@ const LevelData = ({
         coins: [],
         obstacles: [],
         gravity: { x: 0, y: 600 },
-        numRatings: 0
+        numRatings: 0,
       });
       await navigate("/play");
     }
 
-    post("/api/level", levelData).then((level) => {
-      console.log("level from frontend", level);
-    });
+    post("/api/level", levelData).then((level) => {});
 
     const body = { user: { levelsPublished: publishedLevels, _id: userId } };
     post("/api/profile", body).then((user) => {
       setPublishedLevels(user.levelsPublished);
     });
   });
-
-  useEffect(() => {
-    console.log(levelData);
-  }, [levelData]);
 
   return (
     <div className="LevelData-container">
@@ -211,7 +205,7 @@ const LevelData = ({
               coins: [],
               obstacles: [],
               gravity: { x: 0, y: 600 },
-              numRatings: 0
+              numRatings: 0,
             });
             setMessage("Level Cleared!");
             setTimeout(() => {

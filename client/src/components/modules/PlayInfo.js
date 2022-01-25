@@ -17,7 +17,6 @@ const PlayInfo = ({
   }, []);
 
   const handleUpdate = () => {
-    console.log("activeLevel", activeLevel);
     let getBody;
     if (levelID) {
       getBody = { _id: levelID };
@@ -55,7 +54,6 @@ const PlayInfo = ({
         };
       }
 
-      console.log("posting to backend: ", Postbody);
       post("/api/level", Postbody).then(() => {
         setUserMessage("Thanks for the feedback!");
         setLevelDifficulty(0);

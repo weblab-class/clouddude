@@ -16,7 +16,6 @@ window.addEventListener(
 
 // Listens for mouse inputs
 document.body.onmousedown = () => {
-  console.log("down");
   Key.onKeydown({ keyCode: 1 });
 };
 

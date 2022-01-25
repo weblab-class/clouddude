@@ -89,7 +89,6 @@ router.post("/level", (req, res) => {
     });
 
     newLevel.save().then((level) => {
-      console.log("level from backend: ", level);
       res.send(level);
     });
   }
@@ -173,7 +172,6 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
 // getting user information
 router.get("/user", auth.ensureLoggedIn, (req, res) => {
   User.find({ _id: req.query._id }, (err, newUser) => {
-    console.log("user info from backend: ", newUser);
     if (newUser[0]) {
       res.send(newUser[0]);
     }
