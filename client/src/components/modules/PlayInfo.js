@@ -29,8 +29,8 @@ const PlayInfo = ({
       const previousnumRatings = levelInfo.numRatings;
 
       const newNumRatings = previousnumRatings + 1;
-      const newLevelDifficulty = (levelDifficulty + previousDifficulty) / newNumRatings;
-      const newLevelFunness = (levelFunness + previousFunnes) / newNumRatings;
+      const newLevelDifficulty = Math.round((levelDifficulty + previousDifficulty) / newNumRatings);
+      const newLevelFunness = Math.round((levelFunness + previousFunnes) / newNumRatings);
 
       const Postbody = {
         message: "update",
