@@ -35,8 +35,8 @@ const PlayInfo = ({
       const previousnumRatings = levelInfo.numRatings;
 
       const newNumRatings = previousnumRatings + 1;
-      const newLevelDifficulty = Math.round((levelDifficulty + previousDifficulty));
-      const newLevelFunness = Math.round((levelFunness + previousFunnes));
+      const newLevelDifficulty = Math.round(levelDifficulty + previousDifficulty);
+      const newLevelFunness = Math.round(levelFunness + previousFunnes);
 
       let Postbody;
       if (levelID) {
@@ -108,7 +108,7 @@ const PlayInfo = ({
         <button type="submit" onClick={handleUpdate} className="btn btn-secondary PlayInfo-button">
           Submit Rating
         </button>
-        <p className="Play">{userMessage}</p>
+        <p className="PlayInfo-userMessage">{userMessage}</p>
       </div>
     </div>
   );

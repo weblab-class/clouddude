@@ -49,3 +49,7 @@
   opacity: 80%;
   font-weight: bold;
 }
+
+.PlayInfo-userMessage {
+  margin-top: var(--m);
+}
