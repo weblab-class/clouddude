@@ -181,8 +181,6 @@ router.get("/user", auth.ensureLoggedIn, (req, res) => {
 });
 
 // getting level number of ratings and current user ratings for difficulty and funness
-//      getBody = { name: activeLevel.name, numRatings: activeLevel.numRatings };
-
 router.get("/filterlevel", (req, res) => {
   let requestQuery;
   if (req.query._id) {

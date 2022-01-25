@@ -54,13 +54,6 @@ const PlayInfo = ({
           creator: activeLevel.creator,
         };
       }
-      // const Postbody = {
-      //   message: "update",
-      //   levelDifficulty: newLevelDifficulty,
-      //   levelFunness: newLevelFunness,
-      //   levelRatings: newNumRatings,
-      //   levelId: levelID,
-      // };
 
       console.log("posting to backend: ", Postbody);
       post("/api/level", Postbody).then(() => {
