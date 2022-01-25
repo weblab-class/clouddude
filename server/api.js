@@ -153,6 +153,16 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
+// getting user information
+router.get("/user", auth.ensureLoggedIn, (req, res) => {
+  User.find({ _id: req.query._id }, (err, newUser) => {
+    console.log("user info from backend: ", newUser);
+    if (newUser[0]) {
+      res.send(newUser[0]);
+    }
+  });
+});
+
 // changing user profile(either number of published levels, levels won, or levels played)
 router.post("/profile", (req, res) => {
   if (typeof req.body.user.levelsPublished !== "undefined") {

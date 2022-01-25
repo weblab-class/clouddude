@@ -41,6 +41,7 @@ const App = () => {
     funness: 0,
     difficulty: 0,
   });
+
   const [publishedLevels, setPublishedLevels] = useState(0);
   const [levelsWon, setLevelsWon] = useState(0);
   const [levelsPlayed, setLevelsPlayed] = useState(0);
@@ -59,7 +60,7 @@ const App = () => {
   const handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
     setImage(res.profileObj.imageUrl);
-    localStorage.setItem('imageurl', res.profileObj.imageUrl);
+    localStorage.setItem("imageurl", res.profileObj.imageUrl);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       if (user.message) {

@@ -82,6 +82,22 @@ const NavBar = ({
     });
   }, [userId]);
 
+  // setInterval(() => {
+  //   if (userId) {
+  //     const body = { _id: userId };
+  //     get("/api/user", body).then((user) => {
+  //       console.log("user from frontend", user);
+  //       if (user._id) {
+  //         console.log("user from frontend inner", user[0]);
+  //         setUserName(user.name);
+  //         setNewName(user.name);
+  //         setLevelsWon(user.levelsWon);
+  //         setPublishedLevels(user.levelsPublished);
+  //         setLevelsPlayed(user.levelsPlayed);
+  //       }
+  //     });
+  //   }
+  // }, 5000);
   return (
     <div id="document-page">
       <nav className="NavBar-container">
