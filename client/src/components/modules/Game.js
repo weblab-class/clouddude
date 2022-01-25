@@ -85,10 +85,12 @@ const Game = ({
 
   // increment levels played
   useEffect(() => {
-    const body = { user: { levelsPlayed, _id: userId } };
-    post("/api/profile", body).then((user) => {
-      setLevelsPlayed(user.levelsPlayed);
-    });
+    if (!isEditing) {
+      const body = { user: { levelsPlayed, _id: userId } };
+      post("/api/profile", body).then((user) => {
+        setLevelsPlayed(user.levelsPlayed);
+      });
+    }
   }, []);
 
   // increment levels won
