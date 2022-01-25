@@ -18,8 +18,16 @@ const PlayInfo = ({
 
   const handleUpdate = () => {
     console.log("activeLevel", activeLevel);
-    // const levelId = activeLevel._id;
-    const getBody = { _id: levelID };
+    let getBody;
+    if (levelID) {
+      getBody = { _id: levelID };
+    } else {
+      getBody = {
+        name: activeLevel.name,
+        numRatings: activeLevel.numRatings,
+        creator: activeLevel.creator,
+      };
+    }
 
     get("/api/filterlevel/", getBody).then((levelInfo) => {
       console.log("getting from backend: ", levelInfo);
@@ -32,13 +40,27 @@ const PlayInfo = ({
       const newLevelDifficulty = Math.round((levelDifficulty + previousDifficulty) / newNumRatings);
       const newLevelFunness = Math.round((levelFunness + previousFunnes) / newNumRatings);
 
-      const Postbody = {
-        message: "update",
-        levelDifficulty: newLevelDifficulty,
-        levelFunness: newLevelFunness,
-        levelRatings: newNumRatings,
-        levelId: levelID,
-      };
+      let Postbody;
+      if (levelID) {
+        Postbody = { _id: levelID };
+      } else {
+        Postbody = {
+          message: "update",
+          levelDifficulty: newLevelDifficulty,
+          levelFunness: newLevelFunness,
+          levelRatings: newNumRatings,
+          name: activeLevel.name,
+          numRatings: activeLevel.numRatings,
+          creator: activeLevel.creator,
+        };
+      }
+      // const Postbody = {
+      //   message: "update",
+      //   levelDifficulty: newLevelDifficulty,
+      //   levelFunness: newLevelFunness,
+      //   levelRatings: newNumRatings,
+      //   levelId: levelID,
+      // };
 
       console.log("posting to backend: ", Postbody);
       post("/api/level", Postbody).then(() => {
