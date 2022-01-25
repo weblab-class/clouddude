@@ -60,20 +60,20 @@ const Game = ({
   };
 
   const getActiveLevel = () => {
-    if (document.getElementById("currentLevelHolder") !== undefined) {
+    if (document.getElementById("currentLevelHolder") !== null) {
       return document.getElementById("currentLevelHolder").value;
     }
     return undefined;
   };
 
   useEffect(() => {
-    if (document.getElementById("currentToolHolder") !== undefined) {
+    if (document.getElementById("currentToolHolder") !== null) {
       document.getElementById("currentToolHolder").value = currentTool;
     }
   }, [currentTool]);
 
   useEffect(() => {
-    if (document.getElementById("currentLevelHolder") !== undefined) {
+    if (document.getElementById("currentLevelHolder") !== null) {
       document.getElementById("currentLevelHolder").value = activeLevel;
     }
   }, [activeLevel]);
@@ -210,7 +210,9 @@ const Game = ({
   function create() {
     // Create restart function
     const restart = () => {
-      this.scene.restart();
+      if (getActiveLevel() !== undefined) {
+        this.scene.restart();
+      }
     };
 
     // Create background
@@ -531,40 +533,9 @@ const Game = ({
 
     // Enables responsive resizing
     window.onresize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        // Reload game on resize
-        reloadGame();
-        restart();
-
-        later(200).then(() => {
-          setTimeout(() => {
-            document.dispatchEvent(
-              new KeyboardEvent("keydown", {
-                key: "r",
-                keyCode: 82,
-                bubbles: true,
-              })
-            );
-          }, 15);
-          setTimeout(() => {
-            document.dispatchEvent(
-              new KeyboardEvent("keyup", {
-                key: "r",
-                keyCode: 82,
-                bubbles: true,
-              })
-            );
-          }, 50);
-        });
-      }, 100);
-    };
-
-    window.onscroll = function () {
-      console.log("scroll 1");
-    };
-
-    window.onscroll = () => {
+      if (getActiveLevel() === undefined) {
+        return;
+      }
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         // Reload game on resize
@@ -1085,9 +1056,11 @@ const Game = ({
     }
 
     if (Key.isDown(Key.R)) {
-      this.scene.restart();
-      gameWon = false;
-      isOver = false;
+      if (getActiveLevel() !== undefined) {
+        this.scene.restart();
+        gameWon = false;
+        isOver = false;
+      }
     }
 
     // Handles spinner control
