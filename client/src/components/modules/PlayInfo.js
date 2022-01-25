@@ -8,7 +8,7 @@ const PlayInfo = ({
   levelFunness,
   setLevelFunness,
   activeLevel,
-  levelID
+  levelID,
 }) => {
   const [userMessage, setUserMessage] = useState("");
 
