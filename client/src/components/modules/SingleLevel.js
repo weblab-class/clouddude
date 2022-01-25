@@ -9,11 +9,6 @@ import "../../utilities.css";
 import "./SingleLevel.css";
 
 const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
-  const handleSubmit = (thisLevel) => {
-    setActiveLevel(thisLevel);
-    // setLevelID(thisLevel._id);
-  };
-
   return (
     <>
       <Card style={{ width: "18rem" }}>
@@ -47,7 +42,11 @@ const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
           <Card.Subtitle className="mb-2 text-muted">{level.creator}</Card.Subtitle>
           <Card.Text>{level.description}</Card.Text>
           <Link to="/play/">
-            <Button onClick={handleSubmit(level)} className="Repository-button" variant="primary">
+            <Button
+              onClick={() => setActiveLevel(level)}
+              className="Repository-button"
+              variant="primary"
+            >
               Play
             </Button>
           </Link>
