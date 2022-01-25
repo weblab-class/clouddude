@@ -178,7 +178,7 @@ const Home = () => {
             </Link>
             <p />
             <p />
-            <h2 className="subtitle">Help CloudDude repair and navigate the Cloudverse!</h2>
+            {/*<h2 className="subtitle">Help CloudDude repair and navigate the Cloudverse!</h2>*/}
           </center>
         </div>
       </div>

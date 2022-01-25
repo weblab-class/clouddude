@@ -12,56 +12,47 @@ const About = () => {
       <Helmet>
         <title>About</title>
       </Helmet>
-      <h2 className="main-idea">The Cloudverse is damaged and only CloudDude can fix it!</h2>
-      <h3>
-        Help CloudDude navigate the ever-expanding Cloudverse through a vast collection of
-        user-created levels and use your imagination to create your own levels to help him repair
-        it.
-      </h3>
+      <div className="About-header">
+        <h2 className="About-heading">
+          The Cloudverse is shrinking and only CloudDude can fix it!
+        </h2>
+        <h3 className="About-subheading">
+          Help CloudDude explore the ever-expanding Cloudverse through a vast collection of
+          user-created levels or harness your imagination to create your own levels to help him
+          expand it.
+        </h3>
+      </div>
+      <div className="About-content">
+        <h3 className="About-heading">How to CloudDude?</h3>
 
-      <p>CloudDude consists of several key features: </p>
-
-      <ul>
-        <li>
-          <span className="u-bold">Level</span>: This consists of a collection of obstacles and
-          platforms that the user must navigate through to reach a goal. The level design consists
-          of choosing the locations of various objects. The canvas on which a level is edited and
-          designed is a grid. A level specifically is defined by attributes such as, but not limited
-          to, name, obstacle locations, start location, end location, platform locations, and coin
-          locations. These levels are created and imaged by YOU, the user! Furthermore, you as the
-          architect of this level can select how fun you think the level is in addition to giving it
-          a name plus other attributes! To get started with creating your own level, try out the{" "}
-          <a className="link" href="https://clouddude.herokuapp.com/leveleditor/">
-            level editor
-          </a>
-          !{" "}
-        </li>
-        <li>
-          <span className="u-bold">Cloudverse</span>: The Cloudverse is a vast repository of levels
-          created by other users. In other words, you can not only create new levels of the
-          Platformer, but also share what you have created with the community at large FOR FREE
-          INSTANTLY! You will be able to filter through the levels by their difficulty, a funness
-          score, and also by their name. To check out the levels created by people like you, try out{" "}
-          <a className="link" href="https://clouddude.herokuapp.com/repository/">
-            Levels Repository
-          </a>
-          !
-        </li>
-
-        <li>
-          <span className="u-bold">User Profile:</span> To utilize Platformer is to have fun.
-          Therefore, you can simply log in via your Google Account and start to create or play
-          different levels of the Platformer. You can also check out how many levels you have
-          created thus far in our system in addition to how many you have won! Feel free to
-          customize your name as well!{" "}
-          <a className="link" href="/">
-            Get started today!
-          </a>
-          <p />
-          <p />
-          <h3 className="main-idea">Why CloudDude?</h3>
+        <ul>
+          <li>
+            <span className="u-bold About-listItem">Explore the Cloudverse</span>: The level
+            repository is the gateway to the Cloudverse, opening the door to a vast repository of
+            levels created and shared by other users, just like you! Through it, you can help
+            CloudDude navigate through a limitless supply of unique and imaginative worlds,
+            filtering by user-voted metrics such as level difficulty and funness. In short, the
+            Cloudverse is a gateway to unlimited fun possibilities
+          </li>
+          <li>
+            <span className="u-bold About-listItem">Expand the Cloudverse</span>: The level designer
+            puts the power in your hands to expand the Cloudverse in whatever way you see fit! Using
+            a simple UI, instant level playback, and Google account integration, it couldn't be
+            easier to bring the levels you picture in your mind into reality! Submitted levels are
+            instantly available on the repository, providing a simple way to share your creations
+            with the world! With numerous unique level obstacles and customizations at your
+            disposal, the only limit is your imagination!
+          </li>
+        </ul>
+      </div>
+      <div className="About-why">
+        <h3 className="About-heading">Why CloudDude?</h3>
+        <div className="About-list">
           <span>
-            <span className="u-bold">Imagination</span> |{" "}
+            <span className="">
+              <strong>Imagination</strong>
+            </span>{" "}
+            |{" "}
           </span>
           <span>Creativity | </span>
           <span>Ideation | </span>
@@ -80,21 +71,9 @@ const About = () => {
           <span>
             <strong>Imagination</strong>
           </span>
-          <div className="main-container-about">
-            <img
-              src="https://c.tenor.com/SnustcCENp4AAAAC/spongebob-squarepants-sad.gif"
-              alt="Sad Spongebob"
-            />
-            <div className="arrow">
-              <ArrowForwardIcon />
-            </div>
-            <img
-              src="https://i0.wp.com/media1.giphy.com/media/3IP8R5HQch7Rm/giphy.gif?zoom=2"
-              alt="Happy Spongebob"
-            />
-          </div>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <div className="About-image"></div>
     </div>
   );
 };

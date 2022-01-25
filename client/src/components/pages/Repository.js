@@ -62,9 +62,9 @@ const Repository = ({ setActiveLevel }) => {
   return (
     <div className="main-container">
       <Helmet>
-        <title>Cloudverse</title>
+        <title>Level Repository</title>
       </Helmet>
-      <h3 className="Repository-title">Cloudverse</h3>
+      <h3 className="Repository-title">Level Repository</h3>
       <div>
         <div className="input-group">
           <button
@@ -174,10 +174,7 @@ const Repository = ({ setActiveLevel }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowModal(false)}
-          >
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
             Close
           </Button>
           <Button className="Repository-button" onClick={filter}>

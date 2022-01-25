@@ -34,13 +34,13 @@
 
 @keyframes mainTitle {
   0% {
-    color: var(--primary);
+    color: var(--primary--dim--dim);
   }
   50% {
     color: white;
   }
   100% {
-    color: var(--primary);
+    color: var(--primary--dim--dim);
   }
 }
 
