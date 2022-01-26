@@ -72,7 +72,10 @@
   min-width: 500px;
 }
 
-Menu .modalButton {
+.modalButton,
+.modalButton:focus,
+.modalButton:active,
+.modalButton:visited {
   background-color: var(--primary--dim--dim);
   border: none;
 }

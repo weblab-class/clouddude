@@ -145,7 +145,11 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+          <Button
+            className="Repository-button"
+            variant="secondary"
+            onClick={() => setShowModal(false)}
+          >
             Close
           </Button>
           <Button className="Repository-button" onClick={filter}>

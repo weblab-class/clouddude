@@ -229,7 +229,7 @@ const NavBar = ({
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button className="modalButton" variant="primary" onClick={handleEditorHelpClose}>
+            <Button className="modalButton" variant="primary" onClick={handlePlatformHelpClose}>
               Close
             </Button>
           </Modal.Footer>

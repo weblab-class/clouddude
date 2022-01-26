@@ -7,6 +7,7 @@
   margin: 0;
   padding: var(--l);
   background-color: var(--primary--dim);
+  min-height: 84vh;
 }
 
 .Repository-heading {
@@ -47,14 +48,13 @@
 .Repository-button:active,
 .Repository-button:focus,
 .Repository-button:visited {
-  background-color: var(--primary--dim);
-  border: 1.5px solid var(--primary--dim);
+  background-color: var(--primary--dim) !important;
+  border: 1.5px solid var(--primary--dim) !important;
 }
 
 .Repository-button:hover {
   background-color: var(--primary--dim);
   border: 1.5px solid var(--primary--dim);
-  margin-left: auto;
   opacity: 80%;
 }
 
@@ -67,6 +67,15 @@
   margin-left: auto;
   max-height: 40px;
   font-weight: bold;
+  border: 1.5px solid var(--primary--dim);
+}
+
+.Repository-searchButton:hover {
+  margin-left: auto;
+  max-height: 40px;
+  font-weight: bold;
+  opacity: 80%;
+  border: 1.5px solid var(--primary--dim);
 }
 
 .filtering {

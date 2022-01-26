@@ -67,6 +67,10 @@
   border: 1.5px solid var(--primary) !important;
 }
 
+.Home-button:hover {
+  opacity: 90%;
+}
+
 #home-content {
   position: absolute;
   width: 100%;

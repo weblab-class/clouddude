@@ -12,7 +12,7 @@ const SingleLevel = ({ level, setActiveLevel, image }) => {
   return (
     <>
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={image} />
+        <Card.Img className="CardImage" variant="top" src={image} />
         <center>
           <div data-tip="Difficulty">
             <ReactTooltip type="info" />
