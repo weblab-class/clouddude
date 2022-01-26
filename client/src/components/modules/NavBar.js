@@ -81,7 +81,6 @@ const NavBar = ({
         setNewName("");
       } else {
         const body = { user: { name: newName, _id: userId } };
-        console.log("name changed from frontend", body);
         post("/api/user", body).then((user) => {
           setName(user.name);
         });
