@@ -25,6 +25,7 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
   const [images, setImages] = useState([]);
   const [levels, setLevels] = useState([]);
   const [isFiltering, setIsFiltering] = useState(false);
+  const [isAscending, setIsAscending] = useState(false);
 
   // in the beginning, get all levels and images
   useEffect(() => {
@@ -58,7 +59,7 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
       setLevels(levelObjects);
       setIsFiltering(true);
     });
-  }, [sortBy]);
+  }, [sortBy, isAscending]);
 
   // filter the levels based on user input
   const filter = () => {
@@ -194,6 +195,13 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
                   type="radio"
                   id="inline-radio-3"
                 />
+                <button
+                  onClick={() => setIsAscending(!isAscending)}
+                  type="button"
+                  className="button btn btn-primary Repository-orderButton Repository-button"
+                >
+                  <div className="Repository-orderText">{isAscending ? "🠕" : "🠗"}</div>
+                </button>
               </div>
             </Form>
           </div>
@@ -207,6 +215,8 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
           </button>
         </div>
         <Pagination
+          isAscending={isAscending}
+          setIsAscending={setIsAscending}
           itemsPerPage={4}
           levels={levels}
           setActiveLevel={setActiveLevel}

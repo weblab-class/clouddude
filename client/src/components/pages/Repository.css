@@ -83,6 +83,22 @@
   justify-content: space-between;
 }
 
+.Repository-orderButton,
+.Repository-orderButton:active,
+.Repository-orderButton:hover,
+.Repository-orderButton:focus,
+.Repository-orderButton:visited {
+  background-color: var(--primary) !important;
+  border: 1.5px solid var(--primary) !important;
+  margin-left: 0 !important;
+  margin-top: -0.75rem;
+  max-height: 30px;
+  min-width: 24px;
+  font-weight: bold !important;
+  font-size: 1.7rem !important;
+  padding: 0 !important;
+}
+
 .or {
   margin-left: 5vw;
 }
