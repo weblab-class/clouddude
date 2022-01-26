@@ -228,7 +228,7 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
                   type="button"
                   className="button btn btn-primary Repository-orderButton Repository-button"
                 >
-                  <div className="Repository-orderText">{isAscending ? "↑" : "↓"}</div>
+                  <div className="Repository-orderText">{isAscending ? "▲" : "▼"}</div>
                 </button>
               </div>
             </Form>
