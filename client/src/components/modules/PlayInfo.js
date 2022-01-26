@@ -115,8 +115,8 @@ const PlayInfo = ({
           <h4>Funness:</h4>
           <StarRatings
             rating={levelFunness}
-            starRatedColor="green"
-            starHoverColor="green"
+            starRatedColor="lightgreen"
+            starHoverColor="lightgreen"
             changeRating={(newRating) => setLevelFunness(newRating)}
             numberOfStars={5}
             name="funness"

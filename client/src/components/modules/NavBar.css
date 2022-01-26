@@ -76,21 +76,23 @@
 .modalButton:focus,
 .modalButton:active,
 .modalButton:visited {
-  background-color: var(--primary--dim--dim);
+  background-color: var(--primary--dim);
   border: none;
 }
 
 .modalButton:hover {
   background-color: var(--primary--dim);
+  opacity: 80%;
 }
 
 .NavBar-button {
-  background-color: var(--primary--dim--dim);
+  background-color: var(--primary--dim);
   border: none;
 }
 
 .NavBar-button:hover {
   background-color: var(--primary--dim);
+  opacity: 80%;
 }
 
 .modal-dialog {

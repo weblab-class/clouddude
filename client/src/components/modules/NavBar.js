@@ -182,7 +182,7 @@ const NavBar = ({
                 <div className="modalObstacleRow">
                   <HelpItem
                     name="Delete"
-                    description="Removes previously placed obstacles"
+                    description="Removes placed obstacles"
                     image="https://i.imgur.com/sX8VgWy.png"
                   />
                   <HelpItem
@@ -296,7 +296,7 @@ const NavBar = ({
                 <div className="modalObstacleRow">
                   <HelpItem
                     name="Delete"
-                    description="Removes previously placed obstacles"
+                    description="Removes placed obstacles"
                     image="https://i.imgur.com/sX8VgWy.png"
                   />
                   <HelpItem

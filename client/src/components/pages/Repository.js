@@ -132,6 +132,7 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
               <StarRatings
                 rating={levelDifficulty}
                 starRatedColor="red"
+                starHoverColor="red"
                 changeRating={(newRating) => setLevelDifficulty(newRating)}
                 numberOfStars={5}
                 name="difficulty-filter"
@@ -161,7 +162,8 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
               {"   "}
               <StarRatings
                 rating={levelFunness}
-                starRatedColor="green"
+                starRatedColor="lightgreen"
+                starHoverColor="lightgreen"
                 changeRating={(newRating) => setLevelFunness(newRating)}
                 numberOfStars={5}
                 name="funness-filter"
@@ -195,7 +197,6 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
               <div key="inline-radio" className="mb-3">
                 <ReactTooltip type="info" />
                 <Form.Check
-                  data-tip="Sort by name(A-Z)"
                   onClick={() => setSortBy("name")}
                   inline
                   label="Name"
@@ -206,7 +207,6 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
                 <ReactTooltip type="info" />
                 <Form.Check
                   inline
-                  data-tip="Sort by difficulty(Low-High)"
                   label="Difficulty"
                   name="group1"
                   type="radio"
@@ -216,7 +216,6 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
                 <ReactTooltip type="info" />
                 <Form.Check
                   onClick={() => setSortBy("funness")}
-                  data-tip="Sort by funness(High-Low) | Funness = Fun Rating"
                   inline
                   label="Funness"
                   name="group1"
