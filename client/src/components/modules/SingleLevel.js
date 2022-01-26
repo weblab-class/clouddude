@@ -18,7 +18,11 @@ const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
           <div data-tip="Difficulty">
             <ReactTooltip type="info" />
             <StarRatings
-              rating={Math.round(level.difficulty) / level.numRatings}
+              rating={
+                level.numRatings === 0
+                  ? Math.round(level.difficulty)
+                  : Math.round(level.difficulty) / level.numRatings
+              }
               starRatedColor="red"
               numberOfStars={5}
               name="difficulty-rating"
@@ -45,7 +49,11 @@ const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
           <div data-tip="Funness">
             <ReactTooltip type="info" />
             <StarRatings
-              rating={Math.round(level.funness) / level.numRatings}
+              rating={
+                level.numRatings === 0
+                  ? Math.round(level.funness)
+                  : Math.round(level.funness) / level.numRatings
+              }
               starRatedColor="green"
               numberOfStars={5}
               name="funness-rating"
