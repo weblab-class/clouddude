@@ -40,6 +40,7 @@ const NavBar = ({
   const [newName, setNewName] = useState("");
   const [showPlatformHelp, setShowPlatformHelp] = useState(false);
   const [showEditorHelp, setShowEditorHelp] = useState(false);
+  const [showTaken, setShowTaken] = useState(false);
   const handlePlatformHelpClose = () => setShowPlatformHelp(false);
   const handlePlatformHelpShow = () => setShowPlatformHelp(true);
   const handleEditorHelpClose = () => setShowEditorHelp(false);
@@ -71,11 +72,23 @@ const NavBar = ({
 
   const handleSubmit = () => {
     setProfileModal(false);
-    const body = { user: { name: newName, _id: userId } };
-    post("/api/user", body).then((user) => {
-      setName(user.name);
+
+    const getBody = { name: newName };
+
+    get("/api/user", getBody).then((testUser) => {
+      console.log("name not changed from frontend");
+      if (testUser.bad) {
+        setShowTaken(true);
+        setNewName("");
+      } else {
+        const body = { user: { name: newName, _id: userId } };
+        console.log("name changed from frontend", body);
+        post("/api/user", body).then((user) => {
+          setName(user.name);
+        });
+        setNewName("");
+      }
     });
-    setNewName("");
   };
 
   // useEffect(() => {
@@ -107,18 +120,29 @@ const NavBar = ({
             Design
           </Link>
         </div>
-
         <Modal show={invalidAlert}>
           <Modal.Header>
             <Modal.Title>
               <div className="invalid">Invalid Username</div>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            Your username already exists! Please log in with a different account.
-          </Modal.Body>
+          <Modal.Body>This username already exists! Please use a different username!</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => setInvalidAlert(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal show={showTaken}>
+          <Modal.Header>
+            <Modal.Title>
+              <div className="invalid">Invalid Username</div>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Your username already exists! Please try a different username!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowTaken(false)}>
               Close
             </Button>
           </Modal.Footer>
@@ -234,7 +258,6 @@ const NavBar = ({
             </Button>
           </Modal.Footer>
         </Modal>
-
         <Modal
           className="modal"
           show={showEditorHelp}
@@ -349,7 +372,6 @@ const NavBar = ({
             </Button>
           </Modal.Footer>
         </Modal>
-
         {userId ? (
           <div className="login">
             <Location>

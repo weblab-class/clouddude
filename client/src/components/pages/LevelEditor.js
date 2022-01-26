@@ -14,6 +14,7 @@ const LevelEditor = ({
   setPublishedLevels,
   userId,
   setActiveLevel,
+  name
 }) => {
   // Maintains tool currently selected in editor
   const [currentTool, setCurrentTool] = useState("none");
@@ -43,10 +44,10 @@ const LevelEditor = ({
 
   // Update creator on user change
   useEffect(() => {
-    get("/api/whoami").then((user) => {
-      setLevelData({ ...levelData, creator: user.name });
+    get("/api/whoami").then(() => {
+      setLevelData({ ...levelData, creator: name });
     });
-  }, [userState]);
+  }, [userState, name]);
 
   // Update message on tool switch
   useEffect(() => {
