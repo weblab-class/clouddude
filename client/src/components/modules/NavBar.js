@@ -76,11 +76,13 @@ const NavBar = ({
     const getBody = { name: newName };
 
     get("/api/user", getBody).then((testUser) => {
+      console.log("name not changed from frontend");
       if (testUser.bad) {
         setShowTaken(true);
         setNewName("");
       } else {
         const body = { user: { name: newName, _id: userId } };
+        console.log("name changed from frontend", body);
         post("/api/user", body).then((user) => {
           setName(user.name);
         });
@@ -124,9 +126,7 @@ const NavBar = ({
               <div className="invalid">Invalid Username</div>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            This username already exists! Please use a different username!
-          </Modal.Body>
+          <Modal.Body>This username already exists! Please use a different username!</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => setInvalidAlert(false)}>
               Close

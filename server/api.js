@@ -225,16 +225,18 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
 
 // getting user information
 router.get("/user", auth.ensureLoggedIn, (req, res) => {
-  if (req.query.name) {
-    User.find({ name: req.query.name }, (err, newUser) => {
-      if (newUser[0]) {
-        res.send({ bad: "user already exists!" });
-      }
-    });
-  } else {
+  if (req.query._id) {
     User.find({ _id: req.query._id }, (err, newUser) => {
       if (newUser[0]) {
         res.send(newUser[0]);
+      }
+    });
+  } else {
+    User.find({ name: req.query.name }, (err, newUser) => {
+      if (newUser[0]) {
+        res.send({ bad: "user already exists!" });
+      } else {
+        res.send({ good: "user does not exist!" });
       }
     });
   }
