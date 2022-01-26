@@ -65,6 +65,7 @@
 .Home-button:visited {
   background-color: var(--primary--dim) !important;
   border: 1.5px solid var(--primary) !important;
+  font-weight: bold;
 }
 
 .Home-button:hover {
