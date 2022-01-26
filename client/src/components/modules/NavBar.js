@@ -125,7 +125,7 @@ const NavBar = ({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Your username already exists! Please log in with a different account.
+            This username already exists! Please use a different username!
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => setInvalidAlert(false)}>
