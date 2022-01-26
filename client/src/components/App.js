@@ -43,6 +43,8 @@ const App = () => {
     funness: 0,
     difficulty: 0,
     numRatings: 0,
+    avgFunness: 0,
+    avgDifficulty: 0,
   });
 
   const [publishedLevels, setPublishedLevels] = useState(0);

@@ -38,6 +38,9 @@ const PlayInfo = ({
       const newLevelDifficulty = Math.round(levelDifficulty + previousDifficulty);
       const newLevelFunness = Math.round(levelFunness + previousFunnes);
 
+      const newAvgDifficulty = Math.round(newLevelDifficulty / newNumRatings);
+      const newAvgFunness = Math.round(newLevelFunness / newNumRatings);
+
       let Postbody;
       if (levelID) {
         Postbody = { _id: levelID };
@@ -49,6 +52,8 @@ const PlayInfo = ({
           levelRatings: newNumRatings,
           name: activeLevel.name,
           numRatings: activeLevel.numRatings,
+          avgDifficulty: newAvgDifficulty,
+          avgFunness: newAvgFunness,
           creator: activeLevel.creator,
         };
       }

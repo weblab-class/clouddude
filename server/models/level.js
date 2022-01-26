@@ -28,6 +28,8 @@ const LevelSchema = new mongoose.Schema({
   funness: Number,
   difficulty: Number,
   numRatings: Number,
+  avgFunness: Number,
+  avgDifficulty: Number,
 });
 
 // compile model from schema

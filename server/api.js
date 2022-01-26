@@ -66,6 +66,8 @@ router.post("/level", (req, res) => {
           difficulty: req.body.levelDifficulty,
           funness: req.body.levelFunness,
           numRatings: req.body.levelRatings,
+          avgDifficulty: req.body.avgDifficulty,
+          avgFunness: req.body.avgFunness,
         },
       },
       () => {
@@ -86,6 +88,8 @@ router.post("/level", (req, res) => {
       funness: Number(req.body.funness),
       difficulty: Number(req.body.difficulty),
       numRatings: 0,
+      avgFunness: 0,
+      avgDifficulty: 0,
     });
 
     newLevel.save().then((level) => {
@@ -196,11 +200,11 @@ router.get("/levels", (req, res) => {
       actualQuery.creator = { $regex: req.query.userName, $options: "i" };
     }
     if (Number(req.query.difficulty) !== 0) {
-      actualQuery.difficulty = Number(req.query.difficulty);
+      actualQuery.avgDifficulty = Number(req.query.difficulty);
     }
 
     if (Number(req.query.funness) !== 0) {
-      actualQuery.funness = Number(req.query.funness);
+      actualQuery.avgFunness = Number(req.query.funness);
     }
 
     Level.find(actualQuery, (err, levels) => {
