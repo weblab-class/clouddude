@@ -6,10 +6,19 @@ import SingleLevel from "./SingleLevel";
 
 import "./Pagination.css";
 
-const Pagination = ({ itemsPerPage, levels, setActiveLevel, setLevelID, images }) => {
+const Pagination = ({
+  itemsPerPage,
+  levels,
+  setActiveLevel,
+  setLevelID,
+  images,
+  itemOffset,
+  setItemOffset,
+  page,
+  setPage,
+}) => {
   const [currentLevels, setCurrentLevels] = useState([]);
   const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -19,6 +28,7 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel, setLevelID, images }
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % levels.length;
+    setPage(event.selected);
     setItemOffset(newOffset);
   };
 
@@ -59,6 +69,7 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel, setLevelID, images }
         activeClassName="active"
         disableClassName="disable"
         renderOnZeroPageCount={null}
+        forcePage={page}
       />
     </div>
   );

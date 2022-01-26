@@ -26,6 +26,8 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
   const [levels, setLevels] = useState([]);
   const [isFiltering, setIsFiltering] = useState(false);
   const [isAscending, setIsAscending] = useState(false);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [page, setPage] = useState(0);
 
   // in the beginning, get all levels
   useEffect(() => {
@@ -74,6 +76,8 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
   // filter the levels based on user input
   const filter = () => {
     setShowModal(false);
+    setItemOffset(0);
+    setPage(0);
     const query = {
       name: levelName,
       userName: creatorName,
@@ -249,6 +253,10 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
           setActiveLevel={setActiveLevel}
           setLevelID={setLevelID}
           images={images}
+          itemOffset={itemOffset}
+          setItemOffset={setItemOffset}
+          page={page}
+          setPage={setPage}
         />
       </div>
     </div>
