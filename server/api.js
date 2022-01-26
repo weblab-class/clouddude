@@ -107,7 +107,32 @@ router.get("/levels", (req, res) => {
   } else if (req.query.type === "sort") {
     const sorting = req.query.sortBy;
     if (sorting === "funness") {
-      Level.aggregate([{ $sort: { funness: -1 } }]).then((levels) => {
+      Level.aggregate([
+        {
+          $project: {
+            name: 1,
+            platforms: 1,
+            coins: 1,
+            obstacles: 1,
+            creator: 1,
+            description: 1,
+            start: 1,
+            exit: 1,
+            funness: 1,
+            difficulty: 1,
+            gravity: 1,
+            ratio: {
+              $cond: [
+                { $eq: ["$numRatings", 0] },
+                "$funness",
+                { $divide: ["$funness", "$numRatings"] },
+              ],
+            },
+            numRatings: 1,
+          },
+        },
+        { $sort: { ratio: -1 } },
+      ]).then((levels) => {
         res.send(levels);
       });
     } else if (sorting === "name") {
@@ -126,7 +151,7 @@ router.get("/levels", (req, res) => {
             difficulty: 1,
             gravity: 1,
             insensitive: { $toLower: "$name" },
-            numRatings: 1
+            numRatings: 1,
           },
         },
         { $sort: { insensitive: 1 } },
@@ -134,7 +159,32 @@ router.get("/levels", (req, res) => {
         res.send(levels);
       });
     } else {
-      Level.aggregate([{ $sort: { difficulty: 1 } }]).then((levels) => {
+      Level.aggregate([
+        {
+          $project: {
+            name: 1,
+            platforms: 1,
+            coins: 1,
+            obstacles: 1,
+            creator: 1,
+            description: 1,
+            start: 1,
+            exit: 1,
+            funness: 1,
+            difficulty: 1,
+            gravity: 1,
+            ratio: {
+              $cond: [
+                { $eq: ["$numRatings", 0] },
+                "$difficulty",
+                { $divide: ["$difficulty", "$numRatings"] },
+              ],
+            },
+            numRatings: 1,
+          },
+        },
+        { $sort: { ratio: 1 } },
+      ]).then((levels) => {
         res.send(levels);
       });
     }
