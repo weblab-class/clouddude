@@ -14,7 +14,7 @@ import Pagination from "../modules/Pagination";
 import "../../utilities.css";
 import "./Repository.css";
 
-const Repository = ({ setActiveLevel, setLevelID }) => {
+const Repository = ({ setActiveLevel, setLevelID, name }) => {
   const [showModal, setShowModal] = useState(false);
 
   const [levelDifficulty, setLevelDifficulty] = useState(0);
@@ -26,20 +26,21 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
   const [levels, setLevels] = useState([]);
   const [isFiltering, setIsFiltering] = useState(false);
 
-  // in the beginning, get all levels and images
+  // in the beginning, get all levels
   useEffect(() => {
     const query = { type: "all" };
     get("/api/levels", query).then((levelObjects) => {
-      let allImages = [];
-      for (let i = 0; i < 100; i++) {
-        const image = `https://picsum.photos/500/300?random=${i}`;
-        allImages = [...allImages, image];
-      }
-      setImages(allImages);
+      // let allImages = [];
+      // for (let i = 0; i < 100; i++) {
+      //   const image = `https://picsum.photos/500/300?random=${i}`;
+      //   allImages = [...allImages, image];
+      // }
+      // setImages(allImages);
       setLevels(levelObjects);
     });
-  }, []);
+  }, [name]);
 
+  // in the beginning, get all images
   useEffect(() => {
     let allImages = [];
     for (let i = 0; i < 100; i++) {

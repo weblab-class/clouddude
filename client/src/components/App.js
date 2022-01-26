@@ -115,6 +115,7 @@ const App = () => {
       userState={userState}
       publishedLevels={publishedLevels}
       setPublishedLevels={setPublishedLevels}
+      name={name}
     />
   );
 
@@ -164,6 +165,7 @@ const App = () => {
             activeLevel={activeLevel}
             setActiveLevel={setActiveLevel}
             setLevelID={setLevelID}
+            name={name}
           />
           <About
             className="App-About"
