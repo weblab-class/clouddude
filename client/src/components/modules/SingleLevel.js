@@ -8,7 +8,7 @@ import { Link } from "@reach/router";
 import "../../utilities.css";
 import "./SingleLevel.css";
 
-const SingleLevel = ({ level, setActiveLevel, setLevelID, image }) => {
+const SingleLevel = ({ level, setActiveLevel, image }) => {
   return (
     <>
       <Card style={{ width: "18rem" }}>
