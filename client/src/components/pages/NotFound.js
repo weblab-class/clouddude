@@ -9,10 +9,10 @@ const NotFound = () => {
       <Helmet>
         <title>404 Error</title>
       </Helmet>
-      <center>
-        <h1>404 Not Found</h1>
-        <p>The page you requested couldn't be found.</p>
-      </center>
+      <div className="NotFound-wrapper">
+        <h1 className="main-error">404 Not Found</h1>
+        <p className="err-message">The page you requested couldn't be found.</p>
+      </div>
     </div>
   );
 };

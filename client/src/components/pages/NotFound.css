@@ -1,11 +1,25 @@
 .NotFound-container {
   background-color: var(--primary--dim);
-  padding: var(--m);
-  min-height: 83vh;
-  color: var(--white);
-  font-weight: bold;
-  display: flex;
+  min-height: 84vh;
+  padding: var(--l);
+}
+
+.NotFound-wrapper {
+  background-color: var(--primary);
+  padding: var(--l);
+  border-radius: 20px;
   text-align: center;
-  justify-content: center;
+  display: flex;
+  flex-flow: column nowrap;
   align-content: center;
+  justify-content: center;
+}
+
+.main-error {
+  color: var(--white);
+}
+
+.err-message {
+  color: var(--grey);
+  font-weight: bold;
 }

@@ -1,7 +1,18 @@
 .main-container {
   background-color: var(--primary--dim);
   min-height: 84vh;
-  padding: var(--m);
+  padding: var(--l);
+}
+
+.PermissionDenied-wrapper {
+  background-color: var(--primary);
+  padding: var(--l);
+  border-radius: 20px;
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: center;
+  justify-content: center;
 }
 
 .main-error {
