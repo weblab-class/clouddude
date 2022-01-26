@@ -37,6 +37,8 @@ const LevelEditor = ({
     funness: 0,
     difficulty: 0,
     numRatings: 0,
+    avgFunness: 0,
+    avgDifficulty: 0,
   });
 
   // Update creator on user change

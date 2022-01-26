@@ -43,6 +43,8 @@ const LevelData = ({
         obstacles: [],
         gravity: { x: 0, y: 600 },
         numRatings: 0,
+        avgFunness: 0,
+        avgDifficulty: 0,
       });
       await navigate("/play");
     }
@@ -207,6 +209,8 @@ const LevelData = ({
               obstacles: [],
               gravity: { x: 0, y: 600 },
               numRatings: 0,
+              avgFunness: 0,
+              avgDifficulty: 0,
             });
             setMessage("Level Cleared!");
             setTimeout(() => {
