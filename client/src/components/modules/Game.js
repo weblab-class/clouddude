@@ -37,6 +37,7 @@ const Game = ({
   let resizeTimeout;
   let jump;
   let timer;
+  let currentLocation;
 
   let gameOverText;
   let gameOverCaption;
@@ -104,6 +105,9 @@ const Game = ({
   }, [updateLevelsWon]);
 
   function reloadGame() {
+    // Sets current location
+    currentLocation = location.href.split("/").slice(-2, -1)[0];
+
     // If game is already created, restart it
     if (game) {
       game.destroy();
@@ -213,6 +217,7 @@ const Game = ({
     // Create restart function
     const restart = () => {
       if (getActiveLevel() !== undefined) {
+        game.sound.stopAll();
         this.scene.restart();
       }
     };
@@ -508,6 +513,7 @@ const Game = ({
       this.input.on("gameobjectdown", (pointer, gameObject) => {
         setGridPoint({ x: gameObject.x, y: gameObject.y });
         setTimeout(() => {
+          game.sound.stopAll();
           this.scene.restart();
           isOver = false;
           gameWon = false;
@@ -517,12 +523,14 @@ const Game = ({
       // Enables drag editing
       this.input.on("gameobjectover", (pointer, currentlyOver) => {
         if (Key.isDown(Key.MOUSE)) {
+          game.sound.stopAll();
           setGridPoint({ x: currentlyOver.x, y: currentlyOver.y });
           setTimeout(() => {
+            game.sound.stopAll();
             this.scene.restart();
             isOver = false;
             gameWon = false;
-          }, 15);
+          }, 100);
         }
       });
 
@@ -1026,6 +1034,12 @@ const Game = ({
   }, [gridPoint]);
 
   function update() {
+    // Removes game if page is left
+    if (location.href.split("/").slice(-2, -1)[0] !== currentLocation) {
+      game.sound.stopAll();
+      game.destroy();
+    }
+
     // Responsively updates screen size
     responsivelyResize();
 
@@ -1059,6 +1073,7 @@ const Game = ({
 
     if (Key.isDown(Key.R)) {
       if (getActiveLevel() !== undefined) {
+        game.sound.stopAll();
         this.scene.restart();
         gameWon = false;
         isOver = false;
