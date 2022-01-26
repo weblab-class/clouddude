@@ -172,6 +172,16 @@ const NavBar = ({
                 door. Along the way, he'll face a variety of friends and foes, all with their own
                 unique characteristics. To help CloudDude navigate this universe of infinite
                 possibilities, remember the following controls:
+                <ul>
+                  <li>
+                    {" "}
+                    <span className="u-bold">Movement:</span> WASD or Arrow Keys
+                  </li>
+                  <li>
+                    {" "}
+                    <span className="u-bold">Restart:</span> R
+                  </li>
+                </ul>
               </div>
             </div>
             <div className="modalSectionContainer">
