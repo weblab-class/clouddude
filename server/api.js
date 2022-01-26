@@ -225,11 +225,19 @@ router.post("/user", auth.ensureLoggedIn, (req, res) => {
 
 // getting user information
 router.get("/user", auth.ensureLoggedIn, (req, res) => {
-  User.find({ _id: req.query._id }, (err, newUser) => {
-    if (newUser[0]) {
-      res.send(newUser[0]);
-    }
-  });
+  if (req.query.name) {
+    User.find({ name: req.query.name }, (err, newUser) => {
+      if (newUser[0]) {
+        res.send({ bad: "user already exists!" });
+      }
+    });
+  } else {
+    User.find({ _id: req.query._id }, (err, newUser) => {
+      if (newUser[0]) {
+        res.send(newUser[0]);
+      }
+    });
+  }
 });
 
 // getting level number of ratings and current user ratings for difficulty and funness
