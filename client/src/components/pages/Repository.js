@@ -21,7 +21,7 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
   const [levelFunness, setLevelFunness] = useState(0);
   const [levelName, setLevelName] = useState("");
   const [creatorName, setCreatorName] = useState("");
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("name");
   const [images, setImages] = useState([]);
   const [levels, setLevels] = useState([]);
   const [isFiltering, setIsFiltering] = useState(false);
@@ -55,7 +55,16 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
 
   // sorting by name, difficulty, and funness
   useEffect(() => {
-    const query = { type: "sort", sortBy };
+    let upOrDown;
+    if (isAscending === true) {
+      upOrDown = 1;
+    } else if (isAscending === false) {
+      upOrDown = -1;
+    } else {
+      upOrDown = 1;
+    }
+
+    const query = { type: "sort", sortBy, isAscending: upOrDown };
     get("/api/levels", query).then((levelObjects) => {
       setLevels(levelObjects);
       setIsFiltering(true);
