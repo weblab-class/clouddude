@@ -422,35 +422,40 @@ const NavBar = ({
                       <Form.Control
                         onChange={(event) => setNewName(event.target.value)}
                         type="text"
-                        placeholder="Edit Name Here"
+                        placeholder="Change Username"
                         value={newName}
                       />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="difficulty">
                       <Form.Label>
-                        <b>Published Levels:</b> {publishedLevels}
+                        <b className="NavBar-LevelInfo">Published Levels: </b>
+                        <b>{publishedLevels}</b>
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        <b>Levels Won:</b> {levelsWon}
+                        <b className="NavBar-LevelInfo">Levels Won: </b> <b>{levelsWon}</b>
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        <b>Levels Played:</b> {levelsPlayed}
+                        <b className="NavBar-LevelInfo">Levels Played: </b> <b>{levelsPlayed}</b>
                       </Form.Label>
                     </Form.Group>
                   </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={() => setProfileModal(false)}>
+                  <Button
+                    className="NavBar-button"
+                    variant="secondary"
+                    onClick={() => setProfileModal(false)}
+                  >
                     Close
                   </Button>
-                  <Button variant="primary" onClick={handleSubmit}>
+                  <Button className="NavBar-button" variant="primary" onClick={handleSubmit}>
                     Save
                   </Button>
                 </Modal.Footer>

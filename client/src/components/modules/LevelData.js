@@ -23,12 +23,12 @@ const LevelData = ({
 }) => {
   //Posts the level on submission and updates the number of published levels
   const addLevel = useCallback(async () => {
-    if (levelData.name === "") {
+    if (levelData.name === "" || levelData.name === "No Level Selected") {
       setMessage("Name is Required");
       return;
       c;
     }
-    if (levelData.description === "") {
+    if (levelData.description === "" || levelData.description === "N/A") {
       setMessage("Description is Required");
       return;
     } else {

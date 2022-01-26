@@ -58,6 +58,11 @@
   opacity: 80%;
 }
 
+.Repository-textLabel {
+  font-weight: bold;
+  margin-right: var(--m);
+}
+
 .Repository-searchButton {
   margin-left: auto;
   max-height: 40px;

@@ -72,12 +72,21 @@
   min-width: 500px;
 }
 
-.modalButton {
+Menu .modalButton {
   background-color: var(--primary--dim--dim);
   border: none;
 }
 
 .modalButton:hover {
+  background-color: var(--primary--dim);
+}
+
+.NavBar-button {
+  background-color: var(--primary--dim--dim);
+  border: none;
+}
+
+.NavBar-button:hover {
   background-color: var(--primary--dim);
 }
 
@@ -109,4 +118,8 @@
   justify-content: center;
   align-items: center;
   padding-right: 0px;
+}
+
+.NavBar-LevelInfo {
+  font-weight: bold;
 }

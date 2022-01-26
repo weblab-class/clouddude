@@ -90,11 +90,13 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
           <Modal.Title>Search</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="text-info">You can filter a level by difficulty score, name, etc.</p>
+          <p className="Repository-textLabel">
+            Filter the levels by name, creator, difficulty, or funness!
+          </p>
 
           <Form>
             <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Level Name</Form.Label>
+              <Form.Label className="Repository-textLabel">Level Name</Form.Label>
               <Form.Control
                 onChange={(event) => setLevelName(event.target.value)}
                 type="text"
@@ -104,7 +106,7 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Creator Name</Form.Label>
+              <Form.Label className="Repository-textLabel">Creator Name</Form.Label>
               <Form.Control
                 onChange={(event) => setCreatorName(event.target.value)}
                 type="text"
@@ -114,7 +116,7 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="difficulty">
-              <Form.Label>Difficulty</Form.Label>
+              <Form.Label className="Repository-textLabel">Difficulty</Form.Label>
               {"   "}
               <StarRatings
                 rating={levelDifficulty}
@@ -128,7 +130,7 @@ const Repository = ({ setActiveLevel, setLevelID }) => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="funness">
-              <Form.Label>Funness</Form.Label>
+              <Form.Label className="Repository-textLabel">Funness</Form.Label>
               {"   "}
               <StarRatings
                 rating={levelFunness}
