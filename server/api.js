@@ -135,7 +135,7 @@ router.get("/levels", (req, res) => {
             numRatings: 1,
           },
         },
-        { $sort: { ratio: -1 } },
+        { $sort: { ratio: Number(req.query.isAscending) } },
       ]).then((levels) => {
         res.send(levels);
       });
@@ -158,7 +158,7 @@ router.get("/levels", (req, res) => {
             numRatings: 1,
           },
         },
-        { $sort: { insensitive: 1 } },
+        { $sort: { insensitive: Number(req.query.isAscending) } },
       ]).then((levels) => {
         res.send(levels);
       });
@@ -187,7 +187,7 @@ router.get("/levels", (req, res) => {
             numRatings: 1,
           },
         },
-        { $sort: { ratio: 1 } },
+        { $sort: { ratio: Number(req.query.isAscending) } },
       ]).then((levels) => {
         res.send(levels);
       });
