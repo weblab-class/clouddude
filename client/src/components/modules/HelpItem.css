@@ -1,0 +1,22 @@
+.helpItemContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-left: var(--s);
+  padding-right: var(--s);
+  width: 33%;
+  height: 7rem;
+}
+
+.helpItemInfoContainer {
+  margin-left: var(--m);
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+.helpItemImage {
+  width: 33%;
+  height: 70%;
+}

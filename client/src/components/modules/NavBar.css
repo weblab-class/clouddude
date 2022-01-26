@@ -65,3 +65,48 @@
   overflow: hidden;
   border-radius: 30px;
 }
+
+.modal .modal-content {
+  background-color: var(--primary);
+  color: #fff;
+  min-width: 500px;
+}
+
+.modalButton {
+  background-color: var(--primary--dim--dim);
+  border: none;
+}
+
+.modalButton:hover {
+  background-color: var(--primary--dim);
+}
+
+.modal-dialog {
+  min-width: 600px;
+}
+
+.modalHeader {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.modal-title {
+  font-size: 1.875rem;
+}
+
+.modalSectionTitle {
+  margin-bottom: var(--s);
+}
+
+#obstacleTitle {
+  margin-bottom: 0;
+  margin-top: var(--m);
+}
+
+.modalObstacleRow {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0px;
+}

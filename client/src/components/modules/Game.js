@@ -560,40 +560,6 @@ const Game = ({
       }, 100);
     };
 
-    window.onscroll = function () {
-      console.log("scroll 1");
-    };
-
-    window.onscroll = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        // Reload game on resize
-        reloadGame();
-        restart();
-
-        later(200).then(() => {
-          setTimeout(() => {
-            document.dispatchEvent(
-              new KeyboardEvent("keydown", {
-                key: "r",
-                keyCode: 82,
-                bubbles: true,
-              })
-            );
-          }, 15);
-          setTimeout(() => {
-            document.dispatchEvent(
-              new KeyboardEvent("keyup", {
-                key: "r",
-                keyCode: 82,
-                bubbles: true,
-              })
-            );
-          }, 50);
-        });
-      }, 100);
-    };
-
     // Handle platform collisions
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(player, locks);

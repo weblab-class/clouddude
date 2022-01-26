@@ -18,8 +18,7 @@ const About = () => {
         </h2>
         <h3 className="About-subheading">
           Help CloudDude explore the ever-expanding Cloudverse through a vast collection of
-          user-created levels or harness your imagination to create your own levels to help him
-          expand it.
+          user-created levels or harness your imagination to create your own.
         </h3>
       </div>
       <div className="About-content">
@@ -32,7 +31,7 @@ const About = () => {
             levels created and shared by other users, just like you! Through it, you can help
             CloudDude navigate through a limitless supply of unique and imaginative worlds,
             filtering by user-voted metrics such as level difficulty and funness. In short, the
-            Cloudverse is a gateway to unlimited fun possibilities
+            Cloudverse is a gateway to unlimited fun possibilities!
           </li>
           <li>
             <span className="u-bold About-listItem">Expand the Cloudverse</span>: The level designer
@@ -73,7 +72,7 @@ const About = () => {
           </span>
         </div>
       </div>
-      <div className="About-image"></div>
+      <div className="About-image" />
     </div>
   );
 };

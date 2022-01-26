@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import HelpItem from "./HelpItem";
 
 import "./NavBar.css";
 import { post, get } from "../../utilities";
@@ -123,25 +124,227 @@ const NavBar = ({
           </Modal.Footer>
         </Modal>
 
-        <Modal show={showPlatformHelp} onHide={handlePlatformHelpClose} size="lg" centered>
-          <Modal.Header>
-            <Modal.Title>Exploring the Cloudverse</Modal.Title>
+        <Modal
+          className="modal"
+          show={showPlatformHelp}
+          onHide={handlePlatformHelpClose}
+          size="lg"
+          centered
+        >
+          <Modal.Header className="modalHeader">
+            <Modal.Title className="h2">Exploring the Cloudverse</Modal.Title>
+            <div className="modalSectionBody">
+              The level repository is the gateway to the Cloudverse, opening the door to a vast
+              repository of levels created and shared by other users, just like you! Through it, you
+              can help CloudDude navigate through a limitless supply of unique and imaginative
+              worlds, filtering by user-voted metrics such as level difficulty and funness. In
+              short, the Cloudverse is a gateway to unlimited fun possibilities!
+            </div>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Body className="modalContainer">
+            <div className="modalSectionContainer">
+              <div className="modalSectionTitle u-bold h4">Controls:</div>
+              <div className="modalSectionBody">
+                {" "}
+                When exploring the Cloudverse, CloudDude's main objective is to get to the exit
+                door. Along the way, he'll face a variety of friends and foes, all with their own
+                unique characteristics. To help CloudDude navigate this universe of infinite
+                possibilities, remember the following controls:
+              </div>
+            </div>
+            <div className="modalSectionContainer">
+              <div id="obstacleTitle" className="modalSectionTitle u-bold h4">
+                Level Obstacles:
+              </div>
+              <div className="modalSectionBody">
+                <div className="modalObstacleRow">
+                  <HelpItem
+                    name="Delete"
+                    description="Removes previously placed obstacles"
+                    image="https://i.imgur.com/sX8VgWy.png"
+                  />
+                  <HelpItem
+                    name="Start"
+                    description="Where the adventure begins"
+                    image="https://i.imgur.com/lfAyDl6.png"
+                  />
+                  <HelpItem
+                    name="Exit"
+                    description="CloudDude's only goal"
+                    image="https://i.imgur.com/tTmmxis.png"
+                  />
+                </div>
+                <div className="modalObstacleRow">
+                  <HelpItem
+                    name="Platform"
+                    description="Basic platform for standing"
+                    image="https://dl.dropboxusercontent.com/s/8430hxmrkdolsuo/grass.png?dl=0"
+                  />
+                  <HelpItem
+                    name="Falling Platform"
+                    description="Collapses when touched"
+                    image="https://i.imgur.com/jh2X6dc.png"
+                  />
+                  <HelpItem
+                    name="Spike"
+                    description="Dangerous spikey thing"
+                    image="https://dl.dropboxusercontent.com/s/7a8tzts1xzvl4v3/spikes.png?dl=0"
+                  />
+                </div>
+                <div className="modalObstacleRow">
+                  <HelpItem
+                    name="Coin"
+                    description="Shiny spinning collectable"
+                    image="https://i.imgur.com/eTNmgCf.png"
+                  />
+                  <HelpItem
+                    name="Lock"
+                    description="Collect all keys to remove"
+                    image="https://www.dl.dropboxusercontent.com/s/hchmqqeq35o0hlk/lock.png?dl=0"
+                  />
+                  <HelpItem
+                    name="Key"
+                    description="Unlocks locked things"
+                    image="https://www.dl.dropboxusercontent.com/s/a9t5307kthiyhli/smallKey.png?dl=0"
+                  />
+                </div>
+                <div className="modalObstacleRow">
+                  <HelpItem
+                    name="Spinner"
+                    description="Spinny spikey thing that moves"
+                    image="https://i.imgur.com/sUdhdbm.png"
+                  />
+                  <HelpItem
+                    name="Fire Worm"
+                    description="Worm that spits fire"
+                    image="https://www.dl.dropboxusercontent.com/s/3p3ksj2qncpvn85/singleWorm.png?dl=0"
+                  />
+                  <HelpItem
+                    name="Spider"
+                    description="Walking spider of doom"
+                    image="https://i.imgur.com/6vm977B.png"
+                  />
+                </div>
+              </div>
+            </div>
+          </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handlePlatformHelpClose}>
+            <Button className="modalButton" variant="primary" onClick={handleEditorHelpClose}>
               Close
             </Button>
           </Modal.Footer>
         </Modal>
 
-        <Modal show={showEditorHelp} onHide={handleEditorHelpClose} size="lg" centered>
-          <Modal.Header>
-            <Modal.Title>Expanding the Cloudverse</Modal.Title>
+        <Modal
+          className="modal"
+          show={showEditorHelp}
+          onHide={handleEditorHelpClose}
+          size="lg"
+          centered
+        >
+          <Modal.Header className="modalHeader">
+            <Modal.Title className="h2">Expanding the Cloudverse</Modal.Title>
+            <div className="modalSectionBody">
+              The level designer puts the power in your hands to expand the Cloudverse in whatever
+              way you see fit! Using a simple UI, instant level playback, and Google account
+              integration, it couldn't be easier to bring the levels you picture in your mind into
+              reality! Submitted levels are instantly available on the repository, providing a
+              simple way to share your creations with the world! With numerous unique level
+              obstacles and customizations at your disposal, the only limit is your imagination!
+            </div>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Body className="modalContainer">
+            <div className="modalSectionContainer">
+              <div className="modalSectionTitle u-bold h4">Controls:</div>
+              <div className="modalSectionBody">
+                {" "}
+                To get started, simply select one of the many obstacles from the left sidebar and
+                add it to the scene by dragging or clicking across the grid. CloudDude's world will
+                update automatically, allowing you to control CloudDude in your new creation using
+                the same controls as any other level in the Cloudverse. The level can then be
+                modified in real-time, giving you truly limitless control. Once finished, just add a
+                name and description for your creation and click save to make your creation
+                instantly available to other players worldwide!
+              </div>
+            </div>
+            <div className="modalSectionContainer">
+              <div id="obstacleTitle" className="modalSectionTitle u-bold h4">
+                Level Obstacles:
+              </div>
+              <div className="modalSectionBody">
+                <div className="modalObstacleRow">
+                  <HelpItem
+                    name="Delete"
+                    description="Removes previously placed obstacles"
+                    image="https://i.imgur.com/sX8VgWy.png"
+                  />
+                  <HelpItem
+                    name="Start"
+                    description="Where the adventure begins"
+                    image="https://i.imgur.com/lfAyDl6.png"
+                  />
+                  <HelpItem
+                    name="Exit"
+                    description="CloudDude's only goal"
+                    image="https://i.imgur.com/tTmmxis.png"
+                  />
+                </div>
+                <div className="modalObstacleRow">
+                  <HelpItem
+                    name="Platform"
+                    description="Basic platform for standing"
+                    image="https://dl.dropboxusercontent.com/s/8430hxmrkdolsuo/grass.png?dl=0"
+                  />
+                  <HelpItem
+                    name="Falling Platform"
+                    description="Collapses when touched"
+                    image="https://i.imgur.com/jh2X6dc.png"
+                  />
+                  <HelpItem
+                    name="Spike"
+                    description="Dangerous spikey thing"
+                    image="https://dl.dropboxusercontent.com/s/7a8tzts1xzvl4v3/spikes.png?dl=0"
+                  />
+                </div>
+                <div className="modalObstacleRow">
+                  <HelpItem
+                    name="Coin"
+                    description="Shiny spinning collectable"
+                    image="https://i.imgur.com/eTNmgCf.png"
+                  />
+                  <HelpItem
+                    name="Lock"
+                    description="Collect all keys to remove"
+                    image="https://www.dl.dropboxusercontent.com/s/hchmqqeq35o0hlk/lock.png?dl=0"
+                  />
+                  <HelpItem
+                    name="Key"
+                    description="Unlocks locked things"
+                    image="https://www.dl.dropboxusercontent.com/s/a9t5307kthiyhli/smallKey.png?dl=0"
+                  />
+                </div>
+                <div className="modalObstacleRow">
+                  <HelpItem
+                    name="Spinner"
+                    description="Spinny spikey thing that moves"
+                    image="https://i.imgur.com/sUdhdbm.png"
+                  />
+                  <HelpItem
+                    name="Fire Worm"
+                    description="Worm that spits fire"
+                    image="https://www.dl.dropboxusercontent.com/s/3p3ksj2qncpvn85/singleWorm.png?dl=0"
+                  />
+                  <HelpItem
+                    name="Spider"
+                    description="Walking spider of doom"
+                    image="https://i.imgur.com/6vm977B.png"
+                  />
+                </div>
+              </div>
+            </div>
+          </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleEditorHelpClose}>
+            <Button className="modalButton" variant="primary" onClick={handleEditorHelpClose}>
               Close
             </Button>
           </Modal.Footer>
@@ -161,7 +364,8 @@ const NavBar = ({
                       onClick={handleEditorHelpShow}
                     />
                   );
-                } if (location.pathname === "/play/") {
+                }
+                if (location.pathname === "/play/") {
                   return (
                     <img
                       src="https://i.imgur.com/ttgVSoN.png"
@@ -225,25 +429,19 @@ const NavBar = ({
 
                     <Form.Group className="mb-3" controlId="difficulty">
                       <Form.Label>
-                        <b>Published Levels:</b>
-{' '}
-{publishedLevels}
+                        <b>Published Levels:</b> {publishedLevels}
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        <b>Levels Won:</b>
-{' '}
-{levelsWon}
+                        <b>Levels Won:</b> {levelsWon}
                       </Form.Label>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="funness">
                       <Form.Label>
-                        <b>Levels Played:</b>
-{' '}
-{levelsPlayed}
+                        <b>Levels Played:</b> {levelsPlayed}
                       </Form.Label>
                     </Form.Group>
                   </Form>
