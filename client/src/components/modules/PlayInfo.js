@@ -57,7 +57,6 @@ const PlayInfo = ({
           creator: activeLevel.creator,
         };
       }
-      console.log(Postbody);
       post("/api/level", Postbody).then(() => {
         setUserMessage("Thanks for the feedback!");
         setLevelDifficulty(0);

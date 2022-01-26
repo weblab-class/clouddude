@@ -76,7 +76,6 @@ const NavBar = ({
     const getBody = { name: newName };
 
     get("/api/user", getBody).then((testUser) => {
-      console.log("name not changed from frontend");
       if (testUser.bad) {
         setShowTaken(true);
         setNewName("");
