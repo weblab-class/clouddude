@@ -25,7 +25,7 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel, setLevelID, images }
   return (
     <div className="Pagination-container">
       <div className="Pagination-content">
-        {currentLevels.map((level) => {
+        {currentLevels.map((level, index) => {
           return (
             <div className="Repository-item" key={uuidv4()}>
               <SingleLevel
@@ -33,7 +33,7 @@ const Pagination = ({ itemsPerPage, levels, setActiveLevel, setLevelID, images }
                 level={level}
                 setActiveLevel={setActiveLevel}
                 setLevelID={setLevelID}
-                image={images[Math.floor(Math.random() * 10)]}
+                image={images[index + itemOffset]}
               />
             </div>
           );

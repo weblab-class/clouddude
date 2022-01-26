@@ -1,0 +1,55 @@
+.PlayInfo-container {
+  background-color: var(--primary);
+  border-radius: 20px;
+  padding: var(--l);
+  margin-right: var(--l);
+  margin-left: var(--m);
+  margin-top: var(--l);
+  margin-bottom: var(--l);
+  color: var(--white);
+  font-weight: bold;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.PlayInfo-gameInfo {
+  margin-bottom: var(--m);
+}
+
+.PlayInfo-ratings {
+}
+
+.PlayInfo-headerText {
+  margin-bottom: 0;
+}
+
+.PlayInfo-infoText {
+  font-weight: normal;
+}
+
+.PlayInfo-tile {
+  margin-bottom: var(--m);
+}
+
+.PlayInfo-button,
+.PlayInfo-button:active,
+.PlayInfo-button:focus,
+.PlayInfo-button:visited {
+  background-color: var(--primary--dim);
+  border: 1.5px solid var(--primary--dim);
+  font-weight: bold;
+}
+
+.PlayInfo-button:hover {
+  background-color: var(--primary--dim);
+  border: 1.5px solid var(--primary--dim);
+  margin-left: auto;
+  opacity: 80%;
+  font-weight: bold;
+}
+
+.PlayInfo-userMessage {
+  margin-top: var(--m);
+}

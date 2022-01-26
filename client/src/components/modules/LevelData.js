@@ -26,6 +26,7 @@ const LevelData = ({
     if (levelData.name === "") {
       setMessage("Name is Required");
       return;
+      c;
     }
     if (levelData.description === "") {
       setMessage("Description is Required");

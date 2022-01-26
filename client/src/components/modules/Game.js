@@ -60,20 +60,20 @@ const Game = ({
   };
 
   const getActiveLevel = () => {
-    if (document.getElementById("currentLevelHolder") !== undefined) {
+    if (document.getElementById("currentLevelHolder") !== null) {
       return document.getElementById("currentLevelHolder").value;
     }
     return undefined;
   };
 
   useEffect(() => {
-    if (document.getElementById("currentToolHolder") !== undefined) {
+    if (document.getElementById("currentToolHolder") !== null) {
       document.getElementById("currentToolHolder").value = currentTool;
     }
   }, [currentTool]);
 
   useEffect(() => {
-    if (document.getElementById("currentLevelHolder") !== undefined) {
+    if (document.getElementById("currentLevelHolder") !== null) {
       document.getElementById("currentLevelHolder").value = activeLevel;
     }
   }, [activeLevel]);
@@ -85,10 +85,12 @@ const Game = ({
 
   // increment levels played
   useEffect(() => {
-    const body = { user: { levelsPlayed, _id: userId } };
-    post("/api/profile", body).then((user) => {
-      setLevelsPlayed(user.levelsPlayed);
-    });
+    if (!isEditing) {
+      const body = { user: { levelsPlayed, _id: userId } };
+      post("/api/profile", body).then((user) => {
+        setLevelsPlayed(user.levelsPlayed);
+      });
+    }
   }, []);
 
   // increment levels won
@@ -210,7 +212,9 @@ const Game = ({
   function create() {
     // Create restart function
     const restart = () => {
-      this.scene.restart();
+      if (getActiveLevel() !== undefined) {
+        this.scene.restart();
+      }
     };
 
     // Create background
@@ -531,6 +535,9 @@ const Game = ({
 
     // Enables responsive resizing
     window.onresize = () => {
+      if (getActiveLevel() === undefined) {
+        return;
+      }
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         // Reload game on resize
@@ -1051,9 +1058,11 @@ const Game = ({
     }
 
     if (Key.isDown(Key.R)) {
-      this.scene.restart();
-      gameWon = false;
-      isOver = false;
+      if (getActiveLevel() !== undefined) {
+        this.scene.restart();
+        gameWon = false;
+        isOver = false;
+      }
     }
 
     // Handles spinner control
@@ -1116,17 +1125,6 @@ const Game = ({
       gameOverCaption.visible = true;
     }
   }
-
-  /*
-  // Update click listener for current tool
-  useEffect(() => {
-    console.log(test);
-    savedInput.on("gameobjectdown", clickCallback);
-    return () => {
-      savedInput.off("gameobjectdown", clickCallback);
-    };
-  }, [currentTool, editLevel]);
-  */
 
   return (
     <div id="game-container" className="Game-container">

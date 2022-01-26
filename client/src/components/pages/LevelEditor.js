@@ -25,9 +25,9 @@ const LevelEditor = ({
 
   // Initialize empty level
   const [levelData, setLevelData] = useState({
-    creator: undefined,
-    name: "",
-    description: "",
+    creator: "N/A",
+    name: "No Level Selected",
+    description: "N/A",
     start: { x: 25, y: 25 },
     exit: { x: 1575, y: 875 },
     platforms: [],
@@ -56,9 +56,6 @@ const LevelEditor = ({
   // Updates level based on Canvas click
   const editLevel = useCallback(
     (gridPoint) => {
-      console.log(gridPoint);
-      console.log(currentTool);
-
       // Resets message
       if (message !== "Design Your Level!") {
         setMessage("Design Your Level!");

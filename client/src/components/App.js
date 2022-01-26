@@ -31,11 +31,12 @@ const App = () => {
   const [invalidAlert, setInvalidAlert] = useState(false);
   const [levelID, setLevelID] = useState(undefined);
   const [activeLevel, setActiveLevel] = useState({
-    creator: undefined,
-    name: "",
-    description: "",
+    creator: "N/A",
+    name: "No Level Selected",
+    description: "N/A",
     start: { x: 25, y: 25 },
     exit: { x: 1575, y: 875 },
+    gravity: { x: 0, y: 600 },
     platforms: [],
     coins: [],
     obstacles: [],

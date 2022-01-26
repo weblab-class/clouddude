@@ -17,36 +17,35 @@ const Play = ({
   userId,
   levelsPlayed,
   setLevelsPlayed,
-  levelID
+  levelID,
 }) => {
   document.body.style.overflow = "auto";
   return (
-    <>
-      <div className="Play-container">
-        <Helmet>
-          <title>Play!</title>
-        </Helmet>
-        <Game
-          className="Play-game"
-          activeLevel={activeLevel}
-          isEditing={false}
-          userState={userState}
-          levelsWon={levelsWon}
-          setLevelsWon={setLevelsWon}
-          levelsPlayed={levelsPlayed}
-          setLevelsPlayed={setLevelsPlayed}
-          userId={userId}
-        />
-        <PlayInfo
-          levelDifficulty={levelDifficulty}
-          setLevelDifficulty={setLevelDifficulty}
-          levelFunness={levelFunness}
-          setLevelFunness={setLevelFunness}
-          activeLevel={activeLevel}
-          levelID={levelID}
-        />
-      </div>
-    </>
+    <div className="Play-container">
+      <Helmet>
+        <title>Play!</title>
+      </Helmet>
+      <Game
+        className="Play-game"
+        activeLevel={activeLevel}
+        isEditing={false}
+        userState={userState}
+        levelsWon={levelsWon}
+        setLevelsWon={setLevelsWon}
+        levelsPlayed={levelsPlayed}
+        setLevelsPlayed={setLevelsPlayed}
+        userId={userId}
+      />
+      <PlayInfo
+        className="Play-Information"
+        levelDifficulty={levelDifficulty}
+        setLevelDifficulty={setLevelDifficulty}
+        levelFunness={levelFunness}
+        setLevelFunness={setLevelFunness}
+        activeLevel={activeLevel}
+        levelID={levelID}
+      />
+    </div>
   );
 };
 
