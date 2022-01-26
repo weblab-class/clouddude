@@ -13,3 +13,7 @@
   align-content: center;
   justify-content: center;
 }
+
+.Footer-expander {
+  min-height: 10vh;
+}
