@@ -1,24 +1,27 @@
 # **CloudDude**
 
-`CloudDude is a web game where users can create and share levels with obstacles and platforms with the goal of getting from point A and point B.`
+**The Cloudverse is shrinking and only CloudDude can fix it!**
 
-The game consists of several key features:
+In CloudDude, users help CloudDude explore and expand the Cloudverse.  Using the level repository, users can navigate through an ever-expanding collection of user-submitted levels and rate them based on their difficulty and funness, or, using the Level Designer, they can harness their imagination to create and publish their very own.  With numerous different obstacles and customizations at their disposal, they never know what they may find or create!
 
-- _Level_: This consists of a collection of obstacles and platforms that the user must navigate through to reach a goal. The level design consists of choosing the locations of various objects. The canvas on which a level is edited and designed is a grid. A level specifically is defined by attributes such as, but not limited to, name, obstacle locations, start location, end location, platform locations, and coin locations. These levels are created and imaged by YOU, the user! Furthermore, you as the architect of this level can select how fun you think the level is in addition to giving it a name plus other attributes!
-- _Repository of Levels_: This is a collection of levels that are created by other users. In other words, you can not only create new levels of the platformer, but also share what you have created with the community at large FOR FREE INSTANTLY! You will be able to filter through the levels by their difficulty, a funness score, and also by their name.
-- _User Profile_: To utilize CloudDude is to have fun. Therefore, you can simply log in via your Google Account and start to create or play different levels of the platformer. You can also check out how many levels you have created thus far in our system in addition to how many you have won! Feel free to customize your name as well!
+**[Play Now](https://clouddude.herokuapp.com/)**
 
-**_CloudDude Provides..._**
+# How to CloudDude?
+
+- **Explore the Cloudverse:** The level repository is the gateway to the Cloudverse, opening the door to a vast repository of levels created and shared by other users, just like you! Through it, you can help CloudDude navigate through a limitless supply of unique and imaginative worlds, filtering by user-voted metrics such as level difficulty and funness. In short, the Cloudverse is a gateway to unlimited fun possibilities!
+- **Expand the Cloudverse:** The level designer puts the power in your hands to expand the Cloudverse in whatever way you see fit! Using a simple UI, instant level playback, and Google account integration, it couldn't be easier to bring the levels you picture in your mind into reality! Submitted levels are instantly available on the repository, providing a simple way to share your creations with the world! With numerous unique level obstacles and customizations at your disposal, the only limit is your imagination!
+
+# CloudDude Provides...
 
 _Imagination_ | Creativity | Ideation | Game Design | Decision Making | Fun | Awareness | Intelligence | Originality | Inspiration | Artistry | Ingenuity | Insight | Inventiveness | Novelty | _Imagination_
 
-CloudDude is created in January 2022 by:
+# CloudDude was created in January 2022 by:
 
-- Ashar Farooq, an MIT 2023 from Long Island, New York studying Computer Science, Economics, and Data Science
+- Ashar Farooq, an MIT 2023 from Long Island, New York studying Computer Science, Economics, and Data Science, 
 - Henry Heiberger, an MIT 2024 from Brandon, South Dakota studying Electrical Engineering and Computer Science
 - Harry Heiberger, an MIT 2024 from Brandon, South Dakota studying Electrical Engineering and Computer Science
 
-**_Credits..._**
+# Credits...
 
 This project was made possible thanks to the React, Node.js, Express, MongoDB, Mongoose, Phaser, Three.js, React-Bootstrap, Reach Router, Material UI, Nodemon, react-paginate, react-star-ratings, react-tooltip, uuid, and Helmet frameworks/libraries.
 
