@@ -9,8 +9,6 @@ import ReactTooltip from "react-tooltip";
 
 import { get } from "../../utilities";
 
-import Pagination from "../modules/Pagination";
-
 import "../../utilities.css";
 import "./Repository.css";
 
@@ -245,19 +243,6 @@ const Repository = ({ setActiveLevel, setLevelID, name }) => {
             Search for a Level
           </button>
         </div>
-        <Pagination
-          isAscending={isAscending}
-          setIsAscending={setIsAscending}
-          itemsPerPage={4}
-          levels={levels}
-          setActiveLevel={setActiveLevel}
-          setLevelID={setLevelID}
-          images={images}
-          itemOffset={itemOffset}
-          setItemOffset={setItemOffset}
-          page={page}
-          setPage={setPage}
-        />
       </div>
     </div>
   );

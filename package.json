@@ -34,7 +34,6 @@
     "mdbreact": "^5.2.0",
     "mongoose": "^5.11.9",
     "nodemon": "^2.0.6",
-    "phaser": "^3.55.2",
     "react": "^16.14.0",
     "react-bootstrap": "^2.1.0",
     "react-dom": "^16.14.0",

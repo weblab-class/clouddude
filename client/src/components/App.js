@@ -3,9 +3,7 @@ import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound";
 import Skeleton from "./pages/Skeleton";
 import About from "./pages/About";
-import Play from "./pages/Play";
 import Home from "./pages/Home";
-import LevelEditor from "./pages/LevelEditor";
 import Repository from "./pages/Repository";
 import NavBar from "./modules/NavBar";
 import Footer from "./modules/Footer";
@@ -104,29 +102,9 @@ const App = () => {
       userState={userState}
     />
   );
-  const editor = (
-    <LevelEditor
-      className="App-LevelEditor"
-      path="/leveleditor"
-      handleLogin={handleLogin}
-      handleLogout={handleLogout}
-      userId={userId}
-      setActiveLevel={setActiveLevel}
-      userState={userState}
-      publishedLevels={publishedLevels}
-      setPublishedLevels={setPublishedLevels}
-      name={name}
-    />
-  );
 
   return (
     <div className="App-Site">
-      <audio autoPlay loop>
-        <source
-          src="https://www.dropbox.com/s/ud0p5cxdlolnk39/backgroundMusic.mp3?raw=1"
-          type="audio/wav"
-        />
-      </audio>
       <NavBar
         className="App-Navbar"
         handleLogin={handleLogin}
@@ -154,19 +132,7 @@ const App = () => {
             userId={userId}
             userState={userState}
           />
-          {userId ? editor : denied}
-          <Repository
-            className="App-Repository"
-            path="/repository"
-            handleLogin={handleLogin}
-            handleLogout={handleLogout}
-            userId={userId}
-            userState={userState}
-            activeLevel={activeLevel}
-            setActiveLevel={setActiveLevel}
-            setLevelID={setLevelID}
-            name={name}
-          />
+          {userId ? NotFound : NotFound}
           <About
             className="App-About"
             path="/about"
@@ -174,23 +140,6 @@ const App = () => {
             handleLogout={handleLogout}
             userId={userId}
             userState={userState}
-          />
-
-          <Play
-            className="App-Game"
-            levelsWon={levelsWon}
-            setLevelsWon={setLevelsWon}
-            setLevelsPlayed={setLevelsPlayed}
-            levelsPlayed={levelsPlayed}
-            activeLevel={activeLevel}
-            userState={userState}
-            levelDifficulty={levelDifficulty}
-            setLevelDifficulty={setLevelDifficulty}
-            levelFunness={levelFunness}
-            setLevelFunness={setLevelFunness}
-            userId={userId}
-            levelID={levelID}
-            path="/play"
           />
           <Home
             className="App-Home"
